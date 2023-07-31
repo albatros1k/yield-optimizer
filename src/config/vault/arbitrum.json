@@ -1,0 +1,33 @@
+[
+  {
+    "id": "sushi-arb-weth-arb-2",
+    "name": "ARB-ETH LP V2",
+    "token": "ARB-ETH LP V2",
+    "tokenAddress": "0xBF6CBb1F40a542aF50839CaD01b0dc1747F11e18",
+    "tokenDecimals": 18,
+    "tokenProviderId": "sushi",
+    "tokenAmmId": "arbitrum-sushi",
+    "earnedToken": "vlkSushiARB-ETHV2",
+    "earnedTokenAddress": "0x05f693AfC4b33892f948bF7FE33817b63235734A",
+    "earnContractAddress": "0x05f693AfC4b33892f948bF7FE33817b63235734A",
+    "oracle": "lps",
+    "oracleId": "sushi-arb-weth-arb-2",
+    "status": "active",
+    "platformId": "sushi",
+    "assets": ["ARB", "ETH"],
+    "risks": [
+      "COMPLEXITY_LOW",
+      "BATTLE_TESTED",
+      "IL_HIGH",
+      "MCAP_LARGE",
+      "AUDIT",
+      "CONTRACTS_VERIFIED"
+    ],
+    "strategyTypeId": "lp",
+    "buyTokenUrl": "https://www.sushi.com/swap?fromCurrency=0x82aF49447D8a07e3bd95BD0d56f35241523fBab1&fromChainId=42161&toCurrency=0x912CE59144191C1204E64559FE8253a0e49E6548&toChainId=42161",
+    "addLiquidityUrl": "https://www.sushi.com/earn/42161:0xBF6CBb1F40a542aF50839CaD01b0dc1747F11e18/add",
+    "removeLiquidityUrl": "https://www.sushi.com/earn/42161:0xBF6CBb1F40a542aF50839CaD01b0dc1747F11e18/remove",
+    "network": "arbitrum",
+    "createdAt": 1689923572
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "id": "zksync-velocore",
+    "name": "Velocore",
+    "type": "solidly",
+    "routerAddress": "0x46dbd39e26a56778d88507d7aEC6967108C0BD36",
+    "factoryAddress": "0xE140EaC2bB748c8F456719a457F26636617Bb0E9",
+    "pairInitHash": "0x010008376467d85cad8b83235a46a7543598e783b3308e9989f6fa6cc265c8b2",
+    "minimumLiquidity": "1000",
+    "swapFeeNumerator": "3",
+    "swapFeeDenominator": "10000",
+    "getAmountOutMode": "getAmountOut"
+  },
+  {
+    "id": "zksync-vesync",
+    "name": "veSync",
+    "type": "solidly",
+    "routerAddress": "0x6C31035D62541ceba2Ac587ea09891d1645D6D07",
+    "factoryAddress": "0x529Bd7Fc43285B96f1e8d5158626d1F15bb8A834",
+    "pairInitHash": "0x702a8864b77ff0a23ddd623adf6c8792c30e1f75b49f680307129ac30559f6b3",
+    "minimumLiquidity": "1000",
+    "swapFeeNumerator": "3",
+    "swapFeeDenominator": "10000",
+    "getAmountOutMode": "getAmountOut"
+  }
+]
