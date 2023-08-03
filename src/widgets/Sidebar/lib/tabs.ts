@@ -15,14 +15,26 @@ export enum Tabs {
   MARKET = 'Market',
 }
 
+export enum LinksTo {
+  DISCOVER = '/',
+  DASHBOARD = '/dashboard',
+  PROTOCOLS = '/protocols',
+  STRATEGIES = '/strategies',
+  REWARDS = '/rewards',
+  DEBT = '/debts',
+  SWAP = '/swap',
+  ANALYTICS = '/analytics',
+  MARKET = '/market',
+}
+
 export const tabs: TabInfo[] = [
-  { name: Tabs.DISCOVER, icon: house, to: '' },
-  { name: Tabs.DASHBOARD, icon: house, to: '' },
-  { name: Tabs.PROTOCOLS, icon: grid, to: '' },
-  { name: Tabs.STRATEGIES, icon: strategies, to: '' },
-  { name: Tabs.REWARDS, icon: star, to: '' },
-  { name: Tabs.DEBT, icon: speed, to: '' },
-  { name: Tabs.SWAP, icon: swap, to: '' },
-  { name: Tabs.ANALYTICS, icon: analytics, to: '' },
-  { name: Tabs.MARKET, icon: market, to: '' },
+  { name: Tabs.DISCOVER, icon: star, to: LinksTo.DISCOVER },
+  { name: Tabs.DASHBOARD, icon: house, to: LinksTo.DASHBOARD },
+  { name: Tabs.PROTOCOLS, icon: grid, to: LinksTo.PROTOCOLS },
+  { name: Tabs.STRATEGIES, icon: strategies, to: LinksTo.STRATEGIES },
+  { name: Tabs.REWARDS, icon: star, to: LinksTo.REWARDS },
+  { name: Tabs.DEBT, icon: speed, to: LinksTo.DEBT },
+  { name: Tabs.SWAP, icon: swap, to: LinksTo.SWAP },
+  { name: Tabs.ANALYTICS, icon: analytics, to: LinksTo.ANALYTICS },
+  { name: Tabs.MARKET, icon: market, to: LinksTo.MARKET },
 ];

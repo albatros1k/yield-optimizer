@@ -1,7 +1,7 @@
-import { Tabs } from '../lib/tabs';
+import { LinksTo, Tabs } from '../lib/tabs';
 
 export interface TabInfo {
   name: Tabs;
   icon: JSX.Element;
-  to: string;
+  to: LinksTo;
 }

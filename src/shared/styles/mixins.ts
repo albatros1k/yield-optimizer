@@ -2,21 +2,8 @@ import { css } from 'styled-components';
 
 import { IBlock, IFlex, IGrid } from './types';
 
-import gradient from '../../images/gradient.png';
-
 export const body = css`
-  background: ${({ theme: { colors } }) => colors.bgColor};
-  &:after {
-    content: '';
-    position: fixed;
-    height: 100%;
-    width: 100%;
-    background-image: url(${gradient});
-    background-size: cover;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-  }
+  background: #0f1727;
 `;
 
 export const flexProps = css<IFlex>`
