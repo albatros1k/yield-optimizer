@@ -1,0 +1,48 @@
+type AlignType = 'space-between' | 'center' | 'flex-start' | 'flex-end' | 'stretch';
+
+type PositionType = 'static' | 'relative' | 'absolute' | 'fixed' | 'sticky';
+
+type TextDirection = 'left' | 'center' | 'right';
+
+type WrapType = 'wrap' | 'nowrap';
+
+export type SizeType = string | number;
+
+export interface IFlex {
+  align?: AlignType;
+  justify?: AlignType;
+  flexWrap?: WrapType;
+}
+
+export interface IBlock {
+  w?: SizeType;
+  h?: SizeType;
+  p?: SizeType;
+  m?: SizeType;
+  overflowHidden?: boolean;
+  auto?: boolean;
+  pos?: PositionType;
+  minH?: string;
+  pointer?: boolean;
+  maxW?: string;
+  bg?: string;
+  ta?: TextDirection;
+  dotted?: boolean;
+  children?: any;
+  opacity?: number;
+  isHoverAble?: boolean;
+  br?: number;
+}
+
+export interface IGrid {
+  colGap: string;
+  rowGap: string;
+  colTemplate?: string;
+  rowTemplate: string;
+  align?: AlignType;
+}
+
+export interface IGridItem {
+  colStart: number;
+  colEnd: number;
+}

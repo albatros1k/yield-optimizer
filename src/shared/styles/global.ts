@@ -1,0 +1,31 @@
+import { createGlobalStyle } from 'styled-components';
+
+import { body } from './mixins';
+
+export const GlobalStyles = createGlobalStyle`
+html {
+	scroll-behavior: smooth;
+}
+body {
+  ${body};
+}
+* {
+	font-family: PT Sans;
+	font-weight: normal;
+  margin: 0;
+  padding: 0;
+  outline:0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+input,
+button,
+textarea,
+select {
+  margin: 0;
+  font: inherit;
+}
+a {
+  text-decoration:none;
+}
+`;
