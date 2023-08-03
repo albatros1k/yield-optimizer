@@ -129,7 +129,7 @@ export const mainTheme: ITheme = {
     alterText: '#80829E',
     alterBg: '#00000033',
     textColor: '#FFFFFF',
-    accentMain: 'linear-gradient(47deg, #F76716 0%, #F75316 100%)',
+    accentMain: '#F75D16',
     accentSecondary: 'linear-gradient(215deg, #34D399 0%, #10B981 100%)',
     subAccentMain: '#625DF6',
     subAccentSecondary: '#34E8A6',
