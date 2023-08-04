@@ -1,17 +1,16 @@
 import { createGlobalStyle } from 'styled-components';
 
-import { body } from './mixins';
-
 export const GlobalStyles = createGlobalStyle`
 html {
 	scroll-behavior: smooth;
 }
 body {
-  ${body};
+  background: #0f1727;
 }
 * {
 	font-family: PT Sans;
 	font-weight: normal;
+  color: ${({ theme: { colors } }) => colors.textColor};
   margin: 0;
   padding: 0;
   outline:0;

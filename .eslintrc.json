@@ -36,6 +36,7 @@
     "import/no-named-as-default": 0,
     "no-restricted-syntax": "off",
     "@typescript-eslint/no-empty-interface": "off",
+    "react/display-name": "off",
     "@typescript-eslint/no-unused-vars": [
       "error",
       {
@@ -48,7 +49,6 @@
         "allowReferrer": true
       }
     ],
-    "react/display-name": "warn",
     "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
     "react/no-children-prop": "off",

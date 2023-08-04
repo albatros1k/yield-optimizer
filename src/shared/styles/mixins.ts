@@ -2,10 +2,6 @@ import { css } from 'styled-components';
 
 import { IBlock, IFlex, IGrid } from './types';
 
-export const body = css`
-  background: #0f1727;
-`;
-
 export const flexProps = css<IFlex>`
   display: flex;
   align-items: ${({ align = 'flex-start' }) => align};

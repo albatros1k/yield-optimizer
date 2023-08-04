@@ -1,0 +1,77 @@
+import { FC, memo } from 'react';
+import { useTheme } from 'styled-components';
+
+import { icons } from '../../../shared/Icons';
+import { Button } from '../../../shared/ui/Buttons';
+import { CircleImage } from '../../../shared/ui/Images';
+import { Block, Row } from '../../../shared/ui/Containers';
+import { Caption, SubTitle } from '../../../shared/ui/Typography';
+
+import { IconContainer } from '../../../widgets/Sidebar/ui/styled';
+
+import { formatAddressShort } from '../../../helpers/format';
+
+import {
+  selectCurrentChainId,
+  selectWalletAddressIfKnown,
+} from '../../../features/data/selectors/wallet';
+
+import { useAppSelector } from '../../../store';
+import { useBlockies, useToggle } from '../../../helpers/hooks';
+import { getNetworkSrc } from '../../../helpers/networkSrc';
+import { ACCOUNT_CENTER_WIDTH, AVATAR_SIZE } from '../lib/constants';
+
+import { AccountMenu } from './AccountMenu';
+
+export const AccountCenter: FC = memo(() => {
+  const walletAddress = useAppSelector(selectWalletAddressIfKnown);
+  const currentChainId = useAppSelector(selectCurrentChainId);
+
+  const [open, toggleOpen] = useToggle();
+  const blockiesIcon: string = useBlockies();
+
+  const {
+    colors: { subAccentMain },
+  } = useTheme();
+
+  return (
+    <Block pos="relative">
+      <Button
+        bg="transparent"
+        borderColor={subAccentMain}
+        w={`${ACCOUNT_CENTER_WIDTH}px`}
+        h="46px"
+        p="0 16px"
+        onClick={toggleOpen}
+      >
+        <Row w="100%" h="100%" align="center" justify="space-between">
+          <Row align="center">
+            <CircleImage
+              m="0 12px 0 0"
+              w={`${AVATAR_SIZE}px`}
+              h={`${AVATAR_SIZE}px`}
+              src={blockiesIcon}
+            />
+            <SubTitle>{formatAddressShort(walletAddress)}</SubTitle>
+          </Row>
+          <Row>
+            <IconContainer h="26px" m="0 10px 0 0" p="0 8px">
+              <CircleImage
+                src={getNetworkSrc(currentChainId)}
+                alt={currentChainId}
+                w="10px"
+                h="10px"
+                m="0 4px 0 0"
+              />
+              <Caption>{currentChainId.charAt(0).toUpperCase() + currentChainId.slice(1)}</Caption>
+            </IconContainer>
+            <IconContainer w="26px" h="26px" tf={open ? 'rotate(0.5turn)' : ''}>
+              {icons.arrow}
+            </IconContainer>
+          </Row>
+        </Row>
+      </Button>
+      <AccountMenu {...{ open, toggleOpen }} />
+    </Block>
+  );
+});

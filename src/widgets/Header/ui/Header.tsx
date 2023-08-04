@@ -7,6 +7,7 @@ import { Row } from '../../../shared/ui/Containers';
 import logo from '../../../images/odysea-logos/odysea.svg';
 
 import { Airdrop } from '../../../new-features/Airdrop';
+import { WalletConnection } from '../../../new-features/WalletConnection';
 
 import { HeaderWrapper } from './styled';
 
@@ -20,6 +21,7 @@ export const Header: FC = () => {
       </Row>
       <Row w="calc(100% - 220px)" justify="flex-end" p="40px">
         <Airdrop />
+        <WalletConnection />
       </Row>
     </HeaderWrapper>
   );
