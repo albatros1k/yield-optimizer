@@ -5,7 +5,7 @@ import { icons } from '../../../shared/Icons';
 import { Button } from '../../../shared/ui/Buttons';
 import { CircleImage } from '../../../shared/ui/Images';
 import { Block, Row } from '../../../shared/ui/Containers';
-import { Caption, SubTitle } from '../../../shared/ui/Typography';
+import { Caption, H4 } from '../../../shared/ui/Typography';
 
 import { IconContainer } from '../../../widgets/Sidebar/ui/styled';
 
@@ -52,7 +52,7 @@ export const AccountCenter: FC = memo(() => {
               h={`${AVATAR_SIZE}px`}
               src={blockiesIcon}
             />
-            <SubTitle>{formatAddressShort(walletAddress)}</SubTitle>
+            <H4>{formatAddressShort(walletAddress)}</H4>
           </Row>
           <Row>
             <IconContainer h="26px" m="0 10px 0 0" p="0 8px">
