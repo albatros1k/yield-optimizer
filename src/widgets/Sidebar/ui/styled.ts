@@ -6,7 +6,7 @@ import { block, center, flexProps } from '../../../shared/styles/mixins';
 
 export const Aside = styled.aside`
   width: ${({ theme: { sizes } }) => sizes.DESKTOP.sidebar.width}px;
-  padding: 40px;
+  padding: 20px 40px;
 `;
 
 const svgStyles = css<{ ishouse?: number }>`

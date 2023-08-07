@@ -19,9 +19,11 @@ export const Header: FC = () => {
           <Logo src={logo} />
         </NavLink>
       </Row>
-      <Row w="calc(100% - 220px)" justify="flex-end" p="40px">
-        <Airdrop />
-        <WalletConnection />
+      <Row justify="center" style={{ flex: 1 }}>
+        <Row w="100%" maxW="1180px" justify="flex-end">
+          <Airdrop />
+          <WalletConnection />
+        </Row>
       </Row>
     </HeaderWrapper>
   );

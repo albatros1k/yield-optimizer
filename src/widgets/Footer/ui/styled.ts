@@ -3,9 +3,7 @@ import styled from 'styled-components';
 export const FooterWrapper = styled.footer`
   height: 110px;
   width: 100%;
-  background-color: black;
+  background-color: ${({ theme: { colors } }) => colors.alterBg};
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: ${({ theme: { sizes } }) => `0 40px 0 ${sizes.DESKTOP.sidebar.width}px`};
+  padding: 0 40px 0 0;
 `;

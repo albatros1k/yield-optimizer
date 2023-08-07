@@ -5,4 +5,5 @@ export const HeaderWrapper = styled.header`
   height: 90px;
   display: flex;
   align-items: center;
+  padding: 0 40px 0 0;
 `;
