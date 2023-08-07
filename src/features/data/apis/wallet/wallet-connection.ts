@@ -15,8 +15,7 @@ import type { WalletInit } from '@web3-onboard/common';
 import { createEIP1193Provider } from '@web3-onboard/common';
 import { customInjectedWallets } from './custom-injected-wallets';
 import { createWeb3Instance } from '../../../../helpers/web3';
-import appIcon from '../../../../images/bifi-logos/header-logo-notext.svg';
-import appLogo from '../../../../images/bifi-logos/header-logo.svg';
+import appIcon from '../../../../images/odysea-logos/odysea.svg';
 import { getNetworkSrc } from '../../../../helpers/networkSrc';
 import type { provider } from 'web3-core';
 import { featureFlag_walletConnectChainId } from '../../utils/feature-flags';
@@ -136,13 +135,13 @@ export class WalletConnectionApi implements IWalletConnectionApi {
         '--w3o-border-radius': '8px',
       },
       appMetadata: {
-        name: 'Beefy',
+        name: 'Odysea',
         icon: appIcon,
-        logo: appLogo,
+        logo: appIcon,
         description:
-          'Beefy is a Decentralized, Multichain Yield Optimizer that allows its users to earn compound interest on their crypto holdings. Beefy earns you the highest APYs with safety and efficiency in mind.',
-        gettingStartedGuide: 'https://docs.beefy.finance/',
-        explore: 'https://beefy.com/',
+          'Odysea is a Decentralized, Multichain Yield Optimizer that allows its users to earn compound interest on their crypto holdings. Beefy earns you the highest APYs with safety and efficiency in mind.',
+        // gettingStartedGuide: 'https://docs.beefy.finance/',
+        // explore: 'https://beefy.com/',
       },
       chains: this.options.chains.map(chain => ({
         id: numberToHex(chain.networkChainId),
