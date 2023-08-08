@@ -12,7 +12,7 @@ import { Block, Card, Column, Row, SvgContainer } from '../../../shared/ui/Conta
 import { selectVaultById } from '../../../features/data/selectors/vaults';
 import { selectVaultsByTvl } from '../../../features/data/selectors/tvl';
 import { selectPlatformById } from '../../../features/data/selectors/platforms';
-import { ApyTag, DailyTag } from '../../../new-features/Tags';
+import { ApyTag, DailyTag, Tvl } from '../../../new-features/Tags';
 
 import { useAppSelector } from '../../../store';
 
@@ -80,22 +80,12 @@ export const Vault: FC<VaultProps> = ({ vaultId }) => {
             <SubTitle>{platform.name}</SubTitle>
           </Card>
         </Row>
-
         <Row m="12px 0">
           <ApyTag vaultId={vaultId} margin="0 10px 0 0" />
           <DailyTag vaultId={vaultId} />
         </Row>
-
-        <Card bg={bgColor} w="fit-content" p="8px 10px">
-          <Row>
-            <SubTitle color={alterText} m="0 6px 0 0">
-              TVL:
-            </SubTitle>
-            <SubTitle>$13,492,302</SubTitle>
-          </Row>
-        </Card>
+        <Tvl vaultId={vaultId} />
       </Block>
-
       <Block p="27px 19px 30px">
         <Row>
           <Column>
@@ -104,7 +94,6 @@ export const Vault: FC<VaultProps> = ({ vaultId }) => {
           </Column>
         </Row>
       </Block>
-
       <Line color={bgColor} />
       <Row w="100%" p="14px 20px" justify="space-between">
         <ButtonText color={alterText}>Vault Details</ButtonText>
