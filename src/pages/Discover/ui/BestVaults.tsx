@@ -1,16 +1,39 @@
-import { FC, Fragment } from 'react';
+import { FC, Fragment, memo, useMemo } from 'react';
 import { useTheme } from 'styled-components';
+import { capitalize } from 'lodash-es';
+// import { Link } from 'react-router-dom';
 
-import { ButtonText, DataTitle, H2, H3, SubTitle } from '../../../shared/ui/Typography';
-import { Block, Card, Column, Row, SvgContainer } from '../../../shared/ui/Containers';
 import { icons } from '../../../shared/Icons';
 import { Line } from '../../../shared/ui/Spacer';
+import { CircleImage } from '../../../shared/ui/Images';
+import { ButtonText, H2, H3, SubTitle } from '../../../shared/ui/Typography';
+import { Block, Card, Column, Row, SvgContainer } from '../../../shared/ui/Containers';
+
+import { selectVaultById } from '../../../features/data/selectors/vaults';
+import { selectVaultsByTvl } from '../../../features/data/selectors/tvl';
+import { selectPlatformById } from '../../../features/data/selectors/platforms';
+import { ApyTag, DailyTag } from '../../../new-features/Tags';
+
+import { useAppSelector } from '../../../store';
+
+import { getNetworkSrc } from '../../../helpers/networkSrc';
+import { punctuationWrap } from '../../../helpers/string';
 
 const { question, arrow } = icons;
 
 interface BestVaultsProps {}
 
-export const BestVaults: FC<BestVaultsProps> = () => {
+export const BestVaults: FC<BestVaultsProps> = memo(() => {
+  const vaultsByTvl = useAppSelector(selectVaultsByTvl);
+
+  const bestVaults = useMemo<JSX.Element[]>(
+    () =>
+      Object.entries(vaultsByTvl)
+        .sort((a, b) => Number(b[1].tvl) - Number(a[1].tvl))
+        .map(([vaultId]) => <Vault key={vaultId} vaultId={vaultId} />),
+    [vaultsByTvl]
+  );
+
   return (
     <Fragment>
       <Row align="center" m="0 0 32px">
@@ -18,49 +41,51 @@ export const BestVaults: FC<BestVaultsProps> = () => {
         {question}
       </Row>
       <Row w="100%" justify="space-between">
-        <Vault />
-        <Vault />
-        <Vault />
+        {bestVaults}
       </Row>
     </Fragment>
   );
-};
+});
 
-export const Vault: FC = () => {
+interface VaultProps {
+  vaultId: string;
+}
+
+export const Vault: FC<VaultProps> = ({ vaultId }) => {
+  const vault = useAppSelector(state => selectVaultById(state, vaultId));
+  const platform = useAppSelector(state => selectPlatformById(state, vault.platformId));
+
   const {
-    colors: { textColor, alterText, subAccentSecondary, bgColor },
+    colors: { alterText, bgColor },
   } = useTheme();
 
   return (
+    // <Link to={`/vault/${vaultId}`}>
     <Card w="calc(33% - 13px)" overflowHidden pointer>
       <Block w="100%" p="20px" bg="linear-gradient(191deg, #222446 0%, #272845 100%)">
         <Row>
           <Card bg={bgColor} w="fit-content" p="8px 10px" m="0 10px 0 0">
-            <SubTitle>Polygon</SubTitle>
+            <Row align="center">
+              <CircleImage
+                src={getNetworkSrc(vault.chainId)}
+                alt={vault.chainId}
+                w="10px"
+                h="10px"
+                m="0 4px 0 0"
+              />
+              <SubTitle>{capitalize(vault.chainId)}</SubTitle>
+            </Row>
           </Card>
           <Card bg={bgColor} w="fit-content" p="8px 10px">
-            <SubTitle>Balancer</SubTitle>
+            <SubTitle>{platform.name}</SubTitle>
           </Card>
         </Row>
 
         <Row m="12px 0">
-          <Card opacity={0.9} bg={textColor} w="fit-content" p="8px 10px" m="0 10px 0 0">
-            <Row>
-              <SubTitle color={alterText} m="0 6px 0 0">
-                Est. APY:
-              </SubTitle>
-              <DataTitle color={subAccentSecondary}>+3.49%</DataTitle>
-            </Row>
-          </Card>
-          <Card opacity={0.9} bg={textColor} w="fit-content" p="8px 10px">
-            <Row>
-              <SubTitle color={alterText} m="0 6px 0 0">
-                Daily:
-              </SubTitle>
-              <DataTitle color={subAccentSecondary}>+0.02%</DataTitle>
-            </Row>
-          </Card>
+          <ApyTag vaultId={vaultId} margin="0 10px 0 0" />
+          <DailyTag vaultId={vaultId} />
         </Row>
+
         <Card bg={bgColor} w="fit-content" p="8px 10px">
           <Row>
             <SubTitle color={alterText} m="0 6px 0 0">
@@ -74,7 +99,7 @@ export const Vault: FC = () => {
       <Block p="27px 19px 30px">
         <Row>
           <Column>
-            <H3 m="0 0 4px">MaticX / bbaWMATIC</H3>
+            <H3 m="0 0 4px">{punctuationWrap(vault.name)}</H3>
             <SubTitle color={alterText}>48% / 52%</SubTitle>
           </Column>
         </Row>
@@ -88,5 +113,6 @@ export const Vault: FC = () => {
         </SvgContainer>
       </Row>
     </Card>
+    // </Link>
   );
 };

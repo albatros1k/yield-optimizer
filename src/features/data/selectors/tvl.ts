@@ -8,3 +8,5 @@ export const selectVaultTvl = (state: BeefyState, vaultId: VaultEntity['id']) =>
 export const selectTotalTvl = (state: BeefyState) => state.biz.tvl.totalTvl;
 
 export const selectTvlByChain = (state: BeefyState) => state.biz.tvl.byChaindId;
+
+export const selectVaultsByTvl = (state: BeefyState) => state.biz.tvl.byVaultId;

@@ -1,5 +1,6 @@
 import { FC, memo } from 'react';
 import { useTheme } from 'styled-components';
+import { capitalize } from 'lodash-es';
 
 import { icons } from '../../../shared/Icons';
 import { Button } from '../../../shared/ui/Buttons';
@@ -63,7 +64,7 @@ export const AccountCenter: FC = memo(() => {
                 h="10px"
                 m="0 4px 0 0"
               />
-              <Caption>{currentChainId.charAt(0).toUpperCase() + currentChainId.slice(1)}</Caption>
+              <Caption>{capitalize(currentChainId)}</Caption>
             </IconContainer>
             <IconContainer w="26px" h="26px" tf={open ? 'rotate(0.5turn)' : ''}>
               {icons.arrow}
