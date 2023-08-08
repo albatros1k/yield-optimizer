@@ -27,3 +27,16 @@ export const Button = styled.button<IBlock & { borderColor?: string }>`
     color: ${({ theme: { colors } }) => colors.alterText};
   }
 `;
+
+export const ChainBtn = styled(Button)<{ selected: boolean }>`
+  ${({ selected }) =>
+    !selected &&
+    `
+      & .bg {
+      fill: #2e324c;
+    }
+      & .fg {
+      fill: #1b1e31;
+    }
+  `}
+`;
