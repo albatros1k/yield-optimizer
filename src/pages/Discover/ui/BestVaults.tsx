@@ -19,7 +19,14 @@ export const BestVaults = memo(() => {
       Object.entries(vaultsByTvl)
         .sort((a, b) => Number(b[1].tvl) - Number(a[1].tvl))
         .slice(0, 3)
-        .map(([vaultId]) => <Vault key={vaultId} vaultId={vaultId} />),
+        .map(([vaultId], index) => {
+          const color = [
+            'linear-gradient(191deg, #222446 0%, #272845 100%)',
+            'linear-gradient(191deg, #463322 0%, #452727 100%)',
+            'linear-gradient(191deg, #39393F 0%, #38383C 100%);',
+          ][index];
+          return <Vault key={vaultId} vaultId={vaultId} color={color} />;
+        }),
     [vaultsByTvl]
   );
 

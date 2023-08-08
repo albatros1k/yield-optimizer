@@ -27,9 +27,10 @@ const { arrow } = icons;
 
 interface VaultProps {
   vaultId: string;
+  color: string;
 }
 
-export const Vault: FC<VaultProps> = memo(({ vaultId }) => {
+export const Vault: FC<VaultProps> = memo(({ vaultId, color }) => {
   const vault = useAppSelector(state => selectVaultById(state, vaultId));
   const platform = useAppSelector(state => selectPlatformById(state, vault.platformId));
   const breakdown = useAppSelector(state =>
@@ -53,7 +54,7 @@ export const Vault: FC<VaultProps> = memo(({ vaultId }) => {
 
   return (
     <Card w="calc(33% - 13px)" overflowHidden pointer onClick={goToDetails}>
-      <Block w="100%" p="20px" bg="linear-gradient(191deg, #222446 0%, #272845 100%)">
+      <Block w="100%" p="20px" bg={color}>
         <Row>
           <Card bg={bgColor} w="fit-content" p="8px 10px" m="0 10px 0 0">
             <Row align="center">
