@@ -28,7 +28,7 @@ export const ToggleButton = memo<ToggleButtonProps & { selected: boolean }>(func
   );
 });
 
-interface ToggleButtonsProps {
+export interface ToggleButtonsProps {
   value: string;
   options: Record<string, string>;
   onChange: (value: string) => void;
