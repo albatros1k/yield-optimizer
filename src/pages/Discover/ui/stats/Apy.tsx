@@ -5,13 +5,15 @@ import { useAppSelector } from '../../../../store';
 import { selectVaultInfo } from '../../../../new-features/Tags/selectors/selectVoteInfo';
 import { PRE_STAKE, QUESTIONS } from '../../../../new-features/Tags/lib/const';
 import { formattedTotalApy } from '../../../../helpers/format';
-import { Main } from '../../../../shared/ui/Typography';
+import { H1, Main } from '../../../../shared/ui/Typography';
 
 interface TvlProps {
   vaultId: string;
+  typography?: typeof H1;
+  margin?: string;
 }
 
-export const Apy = memo<TvlProps>(({ vaultId }) => {
+export const Apy = memo<TvlProps>(({ vaultId, typography, margin }) => {
   const { isLoaded, haveValues, values, isBoosted, isPrestake } = useAppSelector(state =>
     selectVaultInfo(state, vaultId)
   );
@@ -32,9 +34,14 @@ export const Apy = memo<TvlProps>(({ vaultId }) => {
         : formatted.totalApy,
     [haveValues, formatted, isBoosted, isPrestake]
   );
+
+  const Typography = typography || Main;
+
   return (
     <>
-      <Main color={subAccentSecondary}>{!isLoaded ? '...' : value}</Main>
+      <Typography m={margin} color={subAccentSecondary}>
+        {!isLoaded ? '...' : value}
+      </Typography>
     </>
   );
 });

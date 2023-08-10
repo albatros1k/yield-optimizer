@@ -4,15 +4,17 @@ import { useTheme } from 'styled-components';
 import { PRE_STAKE, QUESTIONS } from '../../../../new-features/Tags/lib/const';
 import { selectVaultInfo } from '../../../../new-features/Tags/selectors/selectVoteInfo';
 import { formattedTotalApy } from '../../../../helpers/format';
-import { Main } from '../../../../shared/ui/Typography';
+import { H1, Main } from '../../../../shared/ui/Typography';
 
 import { useAppSelector } from '../../../../store';
 
 interface DailyProps {
   vaultId: string;
+  typography?: typeof H1;
+  margin?: string;
 }
 
-export const Daily = memo<DailyProps>(({ vaultId }) => {
+export const Daily = memo<DailyProps>(({ vaultId, typography, margin }) => {
   const { isLoaded, haveValues, values, isBoosted, isPrestake, shouldShowInterest } =
     useAppSelector(state => selectVaultInfo(state, vaultId));
 
@@ -33,9 +35,14 @@ export const Daily = memo<DailyProps>(({ vaultId }) => {
   const {
     colors: { subAccentSecondary },
   } = useTheme();
+
+  const Typography = typography || Main;
+
   return (
     <>
-      <Main color={subAccentSecondary}>{!isLoaded ? '...' : shouldShowInterest ? value : '-'}</Main>
+      <Typography m={margin} color={subAccentSecondary}>
+        {!isLoaded ? '...' : shouldShowInterest ? value : '-'}
+      </Typography>
     </>
   );
 });

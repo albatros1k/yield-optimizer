@@ -29,6 +29,7 @@ import { ReactComponent as ChartArrow } from '../../images/nav-icons/arrow-chart
 import { ReactComponent as Check } from '../../images/nav-icons/check.svg';
 import { ReactComponent as Info } from '../../images/nav-icons/info.svg';
 import { ReactComponent as SmallCalendar } from '../../images/nav-icons/small-calendar.svg';
+import { ReactComponent as Bell } from '../../images/nav-icons/bell.svg';
 
 type IconName =
   | 'grid'
@@ -61,7 +62,8 @@ type IconName =
   | 'check'
   | 'info'
   | 'strategies'
-  | 'smallCalendar';
+  | 'smallCalendar'
+  | 'bell';
 
 export const icons: Record<IconName, JSX.Element> = {
   grid: <Grid />,
@@ -95,4 +97,5 @@ export const icons: Record<IconName, JSX.Element> = {
   info: <Info />,
   strategies: <Strategies />,
   smallCalendar: <SmallCalendar />,
+  bell: <Bell />,
 };

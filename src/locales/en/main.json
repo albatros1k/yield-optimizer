@@ -398,7 +398,7 @@
   "Bridge-Button-1": "Bridge BIFI to {{network}}",
   "Multichain-Error": "Something was wrong, please check your transaction Multichain Explorer",
   "Meta-Title-Template": "{{title}} - Beefy",
-  "Meta-Default-Title": "Beefy",
+  "Meta-Default-Title": "Odysea",
   "Meta-Default-Description": "The Multichain Yield Optimizer",
   "Meta-Vault-Title": "{{vault}} vault on {{chain}}",
   "Meta-Vault-Title-Gov": "{{vault}} on {{chain}}",
