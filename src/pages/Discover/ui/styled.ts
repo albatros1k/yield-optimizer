@@ -1,4 +1,5 @@
 import { styled } from 'styled-components';
+import { Row } from '../../../shared/ui/Containers';
 
 export const SwitcherContainer = styled.div`
   display: grid;
@@ -20,4 +21,19 @@ export const Slider = styled.div<{ index: number }>`
   border-radius: 6px;
   width: calc(100% / 3);
   height: 100%;
+`;
+
+export const AnimatedRow = styled(Row)`
+  > div,
+  p {
+    transition: all 0.3s ease 0s;
+  }
+
+  &:hover > div {
+    transform: translateX(5px);
+  }
+
+  &:hover > p {
+    color: ${({ theme: { colors } }) => colors.textColor};
+  }
 `;

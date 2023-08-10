@@ -3,12 +3,13 @@ import { useTheme } from 'styled-components';
 
 import { icons } from '../../../shared/Icons';
 import { Main } from '../../../shared/ui/Typography';
-import { Grid, Row, SvgContainer } from '../../../shared/ui/Containers';
+import { Grid, SvgContainer } from '../../../shared/ui/Containers';
 
 import { Tvl } from './stats/Tvl';
 import { Apy } from './stats/Apy';
 import { Daily } from './stats/Daily';
 import { SafetyScore } from './stats/SafetyScore';
+import { AnimatedRow } from './styled';
 
 const { arrow } = icons;
 
@@ -26,14 +27,14 @@ export const VaultStats = memo<{ vaultId: string }>(({ vaultId }) => {
       <Daily vaultId={vaultId} />
       <Tvl vaultId={vaultId} />
       <SafetyScore vaultId={vaultId} />
-      <Row align="center">
+      <AnimatedRow align="center" pointer>
         <Main color={colors.alterText} m="0 20px 0 0">
           Vault Details
         </Main>
         <SvgContainer tf="rotate(-0.25turn)" size={14} stroke={colors.alterText} strokeWidth={2}>
           {arrow}
         </SvgContainer>
-      </Row>
+      </AnimatedRow>
     </Grid>
   );
 });

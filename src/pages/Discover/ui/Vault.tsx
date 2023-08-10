@@ -1,5 +1,5 @@
 import { FC, memo, useMemo } from 'react';
-import { useTheme } from 'styled-components';
+import { styled, useTheme } from 'styled-components';
 import { capitalize } from 'lodash-es';
 import { useHistory } from 'react-router';
 
@@ -22,6 +22,14 @@ import { punctuationWrap } from '../../../helpers/string';
 import { formatPercent } from '../../../helpers/format';
 
 import { AssetsImage } from '../../../components/AssetsImage';
+import { AnimatedRow } from './styled';
+
+export const HoveredCard = styled(Card)`
+  transition: all 0.3s ease 0s;
+  &:hover {
+    transform: scale(1.02);
+  }
+`;
 
 const { arrow } = icons;
 
@@ -53,7 +61,7 @@ export const Vault: FC<VaultProps> = memo(({ vaultId, color }) => {
   const goToDetails = (): void => history.push(`/vault/${vaultId}`);
 
   return (
-    <Card w="calc(33% - 13px)" overflowHidden pointer onClick={goToDetails}>
+    <HoveredCard w="calc(33% - 13px)" overflowHidden pointer>
       <Block w="100%" p="20px" bg={color}>
         <Row>
           <Card bg={bgColor} w="fit-content" p="8px 10px" m="0 10px 0 0">
@@ -88,12 +96,12 @@ export const Vault: FC<VaultProps> = memo(({ vaultId, color }) => {
         </Row>
       </Block>
       <Line color={bgColor} />
-      <Row w="100%" p="14px 20px" justify="space-between">
+      <AnimatedRow w="100%" p="14px 20px" justify="space-between" onClick={goToDetails}>
         <ButtonText color={alterText}>Vault Details</ButtonText>
         <SvgContainer stroke={alterText} tf="rotate(-0.25turn)">
           {arrow}
         </SvgContainer>
-      </Row>
-    </Card>
+      </AnimatedRow>
+    </HoveredCard>
   );
 });
