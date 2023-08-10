@@ -16,7 +16,7 @@ export const Footer = () => {
       <div style={{ width: 220 }} />
       <Row justify="center" style={{ flex: 1 }}>
         <Column w="100%" maxW="1180px" justify="center" h="100%">
-          <H4 m="0 0 11px">MRLN. All rights reserved © 2023.</H4>
+          <H4 m="0 0 11px">Odysea. All rights reserved © 2023.</H4>
           <Row w="100%" justify="space-between">
             <Row>
               <SubTitle color={alterHelp} m="0 32px 0 0">
@@ -25,7 +25,7 @@ export const Footer = () => {
               <SubTitle color={alterHelp}>Terms & Conditions</SubTitle>
             </Row>
             <Row align="center">
-              <SubTitle m="0 5px 0 0">About Merlin</SubTitle>
+              <SubTitle m="0 5px 0 0">About Odysea</SubTitle>
               <SvgContainer size={9} stroke={alterText}>
                 {externalLink}
               </SvgContainer>

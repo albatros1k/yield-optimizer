@@ -32,6 +32,7 @@ export interface IBlock {
   opacity?: number;
   isHoverAble?: boolean;
   br?: number;
+  us?: 'auto' | 'none';
 }
 
 export interface IGrid {

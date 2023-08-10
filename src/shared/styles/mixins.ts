@@ -23,6 +23,7 @@ export const block = css<IBlock>`
   opacity: ${({ opacity = 1 }) => opacity};
   min-height: ${({ minH = '0' }) => minH};
   border-radius: ${({ br = 0 }) => `${br}px`};
+  user-select: ${({ us = 'auto' }) => us};
   ${({ pointer = false }) => pointer && `cursor:pointer;*{cursor:pointer}`}
 `;
 

@@ -5,6 +5,7 @@ import { Spacer } from '../../../shared/ui/Spacer';
 
 import { Filters } from './Filters';
 import { VaultList } from './VaultList';
+import { SortHeading } from './SortHeading';
 
 export const AllVaults = () => {
   return (
@@ -12,6 +13,7 @@ export const AllVaults = () => {
       <H2 m="0 0 32px">All Vaults & Strategies</H2>
       <Filters />
       <Spacer space={32} />
+      <SortHeading />
       <VaultList />
     </Fragment>
   );
