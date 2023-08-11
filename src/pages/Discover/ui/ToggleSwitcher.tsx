@@ -1,4 +1,5 @@
 import { memo, useCallback, useMemo, useState } from 'react';
+import { useTheme } from 'styled-components';
 
 import { Row } from '../../../shared/ui/Containers';
 import { Main } from '../../../shared/ui/Typography';
@@ -9,6 +10,7 @@ import { ToggleButtonsProps } from './ToggleButtons';
 export const TripleSwitcher = memo<ToggleButtonsProps>(
   ({ value, options, onChange, untoggleValue }) => {
     const [index, setIndex] = useState<number>(0);
+    const { colors } = useTheme();
 
     const optionsList = useMemo(
       () => Object.entries(options).map(([value, label]) => ({ value, label })),
@@ -16,7 +18,7 @@ export const TripleSwitcher = memo<ToggleButtonsProps>(
     );
 
     const handleClick = useCallback(
-      newValue => {
+      (newValue: string) => {
         if (untoggleValue) {
           onChange(newValue === value ? untoggleValue : newValue);
         } else {
@@ -34,10 +36,10 @@ export const TripleSwitcher = memo<ToggleButtonsProps>(
             handleClick(optionValue);
             setIndex(i);
           };
-
+          const selected = value === optionValue;
           return (
             <Row key={optionValue} onClick={onClick} justify="center" pointer style={{ zIndex: 1 }}>
-              <Main>{label}</Main>
+              <Main color={selected ? colors.textColor : colors.alterText}>{label}</Main>
             </Row>
           );
         })}

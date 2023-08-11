@@ -8,7 +8,9 @@ import { selectIsVaultPreStakedOrBoosted } from '../../../features/data/selector
 import { useAppSelector } from '../../../store';
 import { Grid } from '../../../shared/ui/Containers';
 import { H3 } from '../../../shared/ui/Typography';
+
 import { About } from './About';
+import { HistoricalRate } from './HistoricalRate';
 
 type VaultContentProps = PropsWithChildren<{
   vaultId: VaultEntity['id'];
@@ -26,8 +28,9 @@ export const VaultContent = memo<VaultContentProps>(({ vaultId }) => {
   return (
     <Fragment>
       <H3 m="0 0 24px">Vault Details</H3>
-      <Grid w="100%" colTemplate="repeat(2,1fr)" rowTemplate="none" colGap="20px" rowGap="20px">
+      <Grid w="100%" colTemplate="repeat(2,1fr)" rowTemplate="393px" colGap="20px" rowGap="20px">
         {!isGovVault(vault) ? <About vaultId={vaultId} /> : null}
+        {!isGovVault(vault) ? <HistoricalRate vaultId={vaultId} /> : null}
       </Grid>
     </Fragment>
   );

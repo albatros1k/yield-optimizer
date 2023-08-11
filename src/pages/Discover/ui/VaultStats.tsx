@@ -10,11 +10,16 @@ import { Apy } from './stats/Apy';
 import { Daily } from './stats/Daily';
 import { SafetyScore } from './stats/SafetyScore';
 import { AnimatedRow } from './styled';
+import { useHistory } from 'react-router';
 
 const { arrow } = icons;
 
 export const VaultStats = memo<{ vaultId: string }>(({ vaultId }) => {
   const { colors } = useTheme();
+  const history = useHistory();
+
+  const goToDetails = (): void => history.push(`/vault/${vaultId}`);
+
   return (
     <Grid
       colTemplate="repeat(5, minmax(0, 1fr))"
@@ -27,7 +32,7 @@ export const VaultStats = memo<{ vaultId: string }>(({ vaultId }) => {
       <Daily vaultId={vaultId} />
       <Tvl vaultId={vaultId} />
       <SafetyScore vaultId={vaultId} />
-      <AnimatedRow align="center" pointer>
+      <AnimatedRow align="center" pointer onClick={goToDetails}>
         <Main color={colors.alterText} m="0 20px 0 0">
           Vault Details
         </Main>
