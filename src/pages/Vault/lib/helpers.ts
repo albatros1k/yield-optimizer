@@ -16,3 +16,15 @@ export const createGradient = (ctx: CanvasRenderingContext2D, area: IChartArea, 
 
   return gradient;
 };
+
+export function timestampToFormattedDate(unixTimestamp: number): string {
+  const date = new Date(unixTimestamp * 1000);
+
+  const options: Intl.DateTimeFormatOptions = {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  };
+
+  return date.toLocaleDateString(undefined, options);
+}
