@@ -63,7 +63,7 @@ export const Chart = memo<ChartProps>(({ vaultId, oracleId, stat }) => {
     selectHistoricalBucketIsLoaded(state, stat, vaultId, oracleId, bucket)
   );
 
-  const { min, max, data } = useChartData(stat, vaultId, oracleId, bucket);
+  const { min, data } = useChartData(stat, vaultId, oracleId, bucket);
 
   const yTickFormatter = useMemo(() => {
     return stat === 'apy'
@@ -135,7 +135,6 @@ export const Chart = memo<ChartProps>(({ vaultId, oracleId, stat }) => {
               },
               scales: {
                 y: {
-                  max: max,
                   min: min,
                   stacked: false,
                   grid: {
