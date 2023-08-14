@@ -30,6 +30,8 @@ import { ReactComponent as Check } from '../../images/nav-icons/check.svg';
 import { ReactComponent as Info } from '../../images/nav-icons/info.svg';
 import { ReactComponent as SmallCalendar } from '../../images/nav-icons/small-calendar.svg';
 import { ReactComponent as Bell } from '../../images/nav-icons/bell.svg';
+import { ReactComponent as Report } from '../../images/nav-icons/report.svg';
+import { ReactComponent as Unpeg } from '../../images/nav-icons/unpeg.svg';
 
 type IconName =
   | 'grid'
@@ -63,7 +65,9 @@ type IconName =
   | 'info'
   | 'strategies'
   | 'smallCalendar'
-  | 'bell';
+  | 'bell'
+  | 'report'
+  | 'unpeg';
 
 export const icons: Record<IconName, JSX.Element> = {
   grid: <Grid />,
@@ -98,4 +102,6 @@ export const icons: Record<IconName, JSX.Element> = {
   strategies: <Strategies />,
   smallCalendar: <SmallCalendar />,
   bell: <Bell />,
+  report: <Report />,
+  unpeg: <Unpeg />,
 };

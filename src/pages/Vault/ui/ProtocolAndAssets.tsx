@@ -1,4 +1,5 @@
 import { memo } from 'react';
+import { useTheme } from 'styled-components';
 
 import { Block, Card } from '../../../shared/ui/Containers';
 import { H3 } from '../../../shared/ui/Typography';
@@ -16,10 +17,11 @@ interface ProtocolAndAssetsProps {
 
 export const ProtocolAndAssets = memo<ProtocolAndAssetsProps>(({ vaultId }) => {
   const vault = useAppSelector(state => selectVaultById(state, vaultId));
+  const { colors } = useTheme();
 
   return (
     <Card p="25px">
-      <H3 m="0 0 24px">{`Vault's Protocol & Asset`}</H3>
+      <H3 m="0 0 24px" color={colors.alterText}>{`Vault's Protocol & Asset`}</H3>
       <Block>
         {vault.assetIds.map((tokenId, index, { length }) => (
           <TokenCard

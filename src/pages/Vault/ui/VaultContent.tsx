@@ -12,6 +12,7 @@ import { H3 } from '../../../shared/ui/Typography';
 import { About } from './About';
 import { HistoricalRate } from './HistoricalRate';
 import { ProtocolAndAssets } from './ProtocolAndAssets';
+import { Risks } from './Risks';
 
 type VaultContentProps = PropsWithChildren<{
   vaultId: VaultEntity['id'];
@@ -33,6 +34,7 @@ export const VaultContent = memo<VaultContentProps>(({ vaultId }) => {
         {!isGovVault(vault) ? <About vaultId={vaultId} /> : null}
         {!isGovVault(vault) ? <HistoricalRate vaultId={vaultId} /> : null}
         <ProtocolAndAssets vaultId={vaultId} />
+        <Risks />
       </Grid>
     </Fragment>
   );
