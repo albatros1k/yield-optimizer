@@ -52,7 +52,7 @@ export const dots = css`
   text-overflow: ellipsis;
 `;
 
-interface ScrollProps {
+export interface ScrollProps {
   trackColor?: string;
   barWidth?: number;
   barHeight?: number;
