@@ -29,7 +29,9 @@ export const TokenSelectButton = memo(() => {
   return (
     <Row align="center">
       <TokensImage size={30} tokens={selectedTokens} />
-      <H1 m="0 12px 0 6px">{selectedTokens[0].symbol}</H1>
+      <H1 m="0 12px 0 6px" dotted>
+        {selectedTokens[0].symbol}
+      </H1>
       {multipleOptions ? (
         <Card onClick={handleClick} w="26px" h="26px" bg={colors.alterHelp} pointer>
           <Row w="100%" h="100%" justify="center" align="center">
