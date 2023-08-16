@@ -6,6 +6,7 @@ import { Grid } from '../../../shared/ui/Containers';
 import { VaultEntity } from '../../../features/data/entities/vault';
 
 import { Transact } from './Transact';
+import { AboutStrategy } from './AboutStrategy';
 
 interface ManagementProps {
   vaultId: VaultEntity['id'];
@@ -17,6 +18,7 @@ export const Management = memo<ManagementProps>(({ vaultId }) => {
       <H3 m="0 0 24px">Manage Position</H3>
       <Grid w="100%" colTemplate="repeat(2, 1fr)" rowTemplate="none" colGap="20px" rowGap="0">
         <Transact vaultId={vaultId} />
+        <AboutStrategy vaultId={vaultId} />
       </Grid>
     </Fragment>
   );
