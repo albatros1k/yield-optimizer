@@ -27,7 +27,7 @@ export const TokenSelectButton = memo(() => {
   }, [dispatch]);
 
   return (
-    <Row align="center">
+    <Row align="center" justify="flex-end">
       <TokensImage size={30} tokens={selectedTokens} />
       <H1 m="0 12px 0 6px" dotted>
         {selectedTokens[0].symbol}

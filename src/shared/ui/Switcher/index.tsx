@@ -1,8 +1,9 @@
 import { memo, useCallback } from 'react';
 import { styled, useTheme } from 'styled-components';
 
-import { Grid, Row } from '../Containers';
+import { Circle, Grid, Row } from '../Containers';
 import { Main } from '../Typography';
+import { SmallLoader } from '../Loaders';
 
 export const SwitcherContainer = styled(Grid)`
   width: 100%;
@@ -73,3 +74,47 @@ export const TabSwitcher = memo<SwitcherProps>(({ selected, options, onChange })
     </SwitcherContainer>
   );
 });
+
+const SwitcherBlock = styled.div<{ isActive: boolean; disabled: boolean }>`
+  pointer-events: ${({ disabled }) => (disabled ? 'none' : 'auto')};
+  display: flex;
+  position: relative;
+  width: 28px;
+  height: 14px;
+  border: 1px solid
+    ${({ isActive, theme: { colors } }) => (isActive ? colors.subAccentMain : colors.alterHelp)};
+  border-radius: 7px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+  background: ${({ isActive }) => (isActive ? 'rgba(98, 93, 246, 0.15)' : 'transparent')};
+`;
+
+const CircleSlider = styled(Circle)<{ turned: boolean }>`
+  position: absolute;
+  width: 11px;
+  height: 11px;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  background: ${({ turned, theme: { colors } }) =>
+    turned ? colors.subAccentMain : colors.alterHelp};
+  top: 0.5px;
+  left: ${({ turned }) => (turned ? '14.5px' : '0.5px')};
+`;
+
+interface ToggleSwitcherProps {
+  value: boolean;
+  onChange: () => void;
+  disabled?: boolean;
+  loading?: boolean;
+}
+
+export const ToggleSwitcher = memo<ToggleSwitcherProps>(
+  ({ value, onChange, disabled, loading }) => {
+    if (loading) return <SmallLoader size={20} />;
+    return (
+      <SwitcherBlock onClick={onChange} isActive={value} disabled={!!disabled}>
+        <CircleSlider turned={value} />
+      </SwitcherBlock>
+    );
+  }
+);
