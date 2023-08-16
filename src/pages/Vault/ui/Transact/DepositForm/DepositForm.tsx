@@ -11,23 +11,33 @@ import { selectVaultById } from '../../../../../features/data/selectors/vaults';
 
 import { SmallLoader } from '../../../../../shared/ui/Loaders';
 import { Grid, Row } from '../../../../../shared/ui/Containers';
+import { Spacer } from '../../../../../shared/ui/Spacer';
 
 import { errorToString } from '../../../../../helpers/format';
 
 import { TokenSelectButton } from '../TokenSelectButton';
 import { DepositTokenAmountInput } from '../DepositTokenAmountInput';
 import { DepositHeading } from './DepositHeading';
+import { VaultFees } from '../VaultFees';
+
 import { ActionTable } from './styled';
+import { DepositActions } from '../DepositActions';
 
 export const DepositForm = memo(() => {
   return (
-    <ActionTable>
-      <DepositHeading />
-      <Grid w="100%" colTemplate="repeat(2,1fr)" colGap="10px" rowGap="0" rowTemplate="none">
-        <DepositTokenAmountInput />
-        <TokenSelectButton />
-      </Grid>
-    </ActionTable>
+    <Fragment>
+      <ActionTable>
+        <DepositHeading />
+        <Grid w="100%" colTemplate="repeat(2,1fr)" colGap="10px" rowGap="0" rowTemplate="none">
+          <DepositTokenAmountInput />
+          <TokenSelectButton />
+        </Grid>
+      </ActionTable>
+      <Spacer space={16} />
+      <VaultFees />
+      <Spacer space={36} />
+      <DepositActions />
+    </Fragment>
   );
 });
 
