@@ -30,8 +30,9 @@ import {
 import { useAppDispatch, useAppSelector } from '../../../store';
 
 import { createGradient, timestampToFormattedDate } from '../lib/helpers';
-import { Block } from '../../../shared/ui/Containers';
+import { Block, Row } from '../../../shared/ui/Containers';
 import { formatPercent, formatUsd } from '../../../helpers/format';
+import { SmallLoader } from '../../../shared/ui/Loaders';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Filler);
 
@@ -160,7 +161,9 @@ export const Chart = memo<ChartProps>(({ vaultId, oracleId, stat }) => {
           />
         </Block>
       ) : (
-        <div>Loading...</div>
+        <Row w="100%" h="284px" align="center" justify="center">
+          <SmallLoader size={40} />
+        </Row>
       )}
     </Fragment>
   );
