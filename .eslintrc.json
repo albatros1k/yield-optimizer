@@ -37,6 +37,7 @@
     "no-restricted-syntax": "off",
     "@typescript-eslint/no-empty-interface": "off",
     "react/display-name": "off",
+    " @typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/no-unused-vars": [
       "error",
       {

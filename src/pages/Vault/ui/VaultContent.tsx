@@ -7,12 +7,14 @@ import { useAppSelector } from '../../../store';
 import { Grid } from '../../../shared/ui/Containers';
 import { H3 } from '../../../shared/ui/Typography';
 import { BackBlock } from '../../../shared/ui/BackBlock';
+import { Spacer } from '../../../shared/ui/Spacer';
 
 import { About } from './About';
 import { HistoricalRate } from './HistoricalRate';
 import { ProtocolAndAssets } from './ProtocolAndAssets';
 import { Risks } from './Risks';
 import { Management } from './Management';
+import { Other } from './Other';
 
 type VaultContentProps = PropsWithChildren<{
   vaultId: VaultEntity['id'];
@@ -39,6 +41,8 @@ export const VaultContent = memo<VaultContentProps>(({ vaultId }) => {
         <Risks />
       </Grid>
       <Management vaultId={vaultId} />
+      <Spacer />
+      <Other />
     </Fragment>
   );
 });
