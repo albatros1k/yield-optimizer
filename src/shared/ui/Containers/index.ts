@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 
-import { block, flexProps, gridProps, transition } from '../../styles/mixins';
+import { ScrollProps, block, flexProps, gridProps, scroll, transition } from '../../styles/mixins';
 import { IBlock, IFlex, IGrid, IGridItem } from '../../styles/types';
 import { growDown } from '../../styles/animations';
 
@@ -135,4 +135,10 @@ export const PositionGrid = styled(Grid)`
   &:hover {
     background: ${({ theme: { colors } }) => colors.additionalBg};
   }
+`;
+
+export const ScrollContainer = styled.div<ScrollProps & { h: string }>`
+  ${scroll};
+  overflow-y: scroll;
+  height: ${({ h }) => h};
 `;
