@@ -1,7 +1,9 @@
 import { styled } from 'styled-components';
 
-export const RiskContainer = styled.div`
+import { Column } from '../../../shared/ui/Containers';
+
+export const RiskContainer = styled(Column)<{ mb?: string }>`
   & > div:not(:last-child) {
-    margin-bottom: 20px;
+    margin-bottom: ${({ mb = '20px' }) => mb};
   }
 `;

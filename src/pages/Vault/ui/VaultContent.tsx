@@ -42,7 +42,7 @@ export const VaultContent = memo<VaultContentProps>(({ vaultId }) => {
       </Grid>
       <Management vaultId={vaultId} />
       <Spacer />
-      <Other />
+      <Other vaultId={vaultId} />
     </Fragment>
   );
 });
