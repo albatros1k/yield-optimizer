@@ -1,7 +1,12 @@
-import { styled } from 'styled-components';
+import { styled, useTheme } from 'styled-components';
+import { FC } from 'react';
 
 import { IBlock } from '../../styles/types';
 import { block, center, transition } from '../../styles/mixins';
+
+import { Row, SvgContainer } from '../Containers';
+import { SubTitle } from '../Typography';
+import { icons } from '../../Icons';
 
 export const Button = styled.button<IBlock & { borderColor?: string }>`
   ${block}
@@ -40,3 +45,62 @@ export const ChainBtn = styled(Button)<{ selected: boolean }>`
     }
   `}
 `;
+
+export const ExpandButtonContainer = styled.button<
+  IBlock & { isOpen: boolean; w?: string; h?: string }
+>`
+  ${block}
+  ${center}
+  width: ${({ w = '200px' }) => w};
+  height: ${({ h = '32px' }) => h};
+  border-radius: 6px;
+  background: ${({ isOpen, theme: { colors } }) =>
+    isOpen ? `${colors.alterText}1A` : `${colors.subAccentMain}1A`};
+  outline: none;
+  border: none;
+  padding: 0 12px;
+  user-select: none;
+  cursor: pointer;
+  * {
+    cursor: pointer;
+  }
+`;
+
+interface ExpandButtonProps {
+  onClick?: () => void;
+  isOpen: boolean;
+  text?: string;
+  w?: string;
+  m?: string;
+  h?: string;
+}
+
+export const ExpandButton: FC<ExpandButtonProps> = ({
+  onClick,
+  isOpen,
+  text,
+  w,
+  m = '0 0 0 30px',
+  h,
+}) => {
+  const {
+    colors: { subAccentMain, alterText },
+  } = useTheme();
+
+  return (
+    <ExpandButtonContainer w={w} h={h} onClick={onClick} isOpen={isOpen} m={m}>
+      <Row w="100%" align="center" justify="space-between">
+        <SubTitle color={isOpen ? alterText : subAccentMain} dotted>
+          {text}
+        </SubTitle>
+        <SvgContainer
+          tf={isOpen ? 'rotate(-180deg)' : 'rotate(0deg)'}
+          size={13}
+          stroke={isOpen ? alterText : subAccentMain}
+        >
+          {icons.arrow}
+        </SvgContainer>
+      </Row>
+    </ExpandButtonContainer>
+  );
+};

@@ -1,3 +1,8 @@
+import { SyntheticEvent } from 'react';
+import { capitalize } from 'lodash-es';
+
+import altIcon from '../images/nav-icons/no-icon.svg';
+
 export const parseProtocolName = <T extends string>(protocol: T): T => {
   const parts = protocol.split('__');
   if (parts.length > 0) {
@@ -12,6 +17,11 @@ export const removeSpecialSymbol = <T extends string>(str: T): T =>
 export function numberWithCommas(x: number): string {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
+
+export const parseProtocol = <T extends string>(str: T): string => {
+  const id: string[] = str.split('_').filter(word => word);
+  return id.map(word => capitalize(word)).join(' ');
+};
 
 export function definePlus(
   value: number,
@@ -36,3 +46,8 @@ export function definePlus(
     return `$${numberWithCommas(fixedNumber)}`;
   }
 }
+
+export const onImageError = (e: SyntheticEvent<HTMLImageElement, Event>) => {
+  e.currentTarget.onerror = null;
+  e.currentTarget.src = altIcon;
+};

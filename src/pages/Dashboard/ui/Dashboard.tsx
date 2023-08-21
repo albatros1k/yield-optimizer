@@ -9,6 +9,7 @@ import { selectWalletAddress } from '../../../features/data/selectors/wallet';
 
 import { MainInfo } from './MainInfo';
 import { Skeleton } from './Skeleton';
+import { Assets } from './Assets';
 
 const Dashboard = () => {
   const walletAddress = useAppSelector(selectWalletAddress);
@@ -23,7 +24,13 @@ const Dashboard = () => {
     <Fragment>
       <MainInfo />
       <Spacer space={42} />
-      {!isInitialLoaded || isLoading ? <Skeleton /> : <Fragment></Fragment>}
+      {!isInitialLoaded || isLoading ? (
+        <Skeleton />
+      ) : (
+        <Fragment>
+          <Assets />
+        </Fragment>
+      )}
     </Fragment>
   );
 };
