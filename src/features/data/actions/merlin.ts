@@ -14,8 +14,8 @@ import { CurrentRate } from '../apis/merlin/types/rate';
 import { IUserTokenProtocolOverview } from '../apis/merlin/types/overview';
 import { parseProtocolName, removeSpecialSymbol } from '../../../helpers/merlinHelpers';
 
-export const getDataReducer = createAsyncThunk<any, string, { rejectValue: string }>(
-  'data/getAllData',
+export const getMerlinReducer = createAsyncThunk<any, string, { rejectValue: string }>(
+  'data/getMerlinData',
   async (userWallet: string, thunkAPI) => {
     try {
       const allData = await Promise.all([

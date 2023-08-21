@@ -6,7 +6,7 @@ import { ITokenOverview } from '../apis/merlin/types/overview';
 import { IActivePosition, IEntryPrice, IPoolInfo } from '../apis/merlin/types/poolInfo';
 import { IPortfolio } from '../apis/merlin/types/portfolio';
 
-import { getDataReducer } from '../actions/merlin';
+import { getMerlinReducer } from '../actions/merlin';
 
 export interface IAddressMap {
   symbol: string;
@@ -97,7 +97,7 @@ export const merlinSlice = createSlice({
     resetDataReducer: () => initialState,
   },
   extraReducers: builder => {
-    builder.addCase(getDataReducer.fulfilled, (state, { payload }) => {
+    builder.addCase(getMerlinReducer.fulfilled, (state, { payload }) => {
       const {
         userTokenOverviews,
         poolInfo,
@@ -127,10 +127,10 @@ export const merlinSlice = createSlice({
       state.isLoading = false;
       state.isInitialLoaded = true;
     });
-    builder.addCase(getDataReducer.pending, state => {
+    builder.addCase(getMerlinReducer.pending, state => {
       state.isLoading = true;
     });
-    builder.addCase(getDataReducer.rejected, (state, { payload }) => {
+    builder.addCase(getMerlinReducer.rejected, (state, { payload }) => {
       state.isLoading = false;
       state.error = payload;
     });
