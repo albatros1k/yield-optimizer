@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { Logo } from '../../../shared/ui/Images';
 import { Row } from '../../../shared/ui/Containers';
+import { Image } from '../../../shared/ui/Images';
 
-import logo from '../../../images/odysea-logos/odysea.svg';
+import logo from '../../../images/odysea-logos/odysea.png';
 
 import { Airdrop } from '../../../new-features/Airdrop';
 import { WalletConnection } from '../../../new-features/WalletConnection';
@@ -16,7 +16,7 @@ export const Header: FC = () => {
     <HeaderWrapper>
       <Row w="220px" p="0 27px">
         <NavLink to="/">
-          <Logo src={logo} />
+          <Image src={logo} w="100%" h="100%" />
         </NavLink>
       </Row>
       <Row justify="center" style={{ flex: 1 }}>

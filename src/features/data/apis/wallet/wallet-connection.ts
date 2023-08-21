@@ -15,7 +15,7 @@ import type { WalletInit } from '@web3-onboard/common';
 import { createEIP1193Provider } from '@web3-onboard/common';
 import { customInjectedWallets } from './custom-injected-wallets';
 import { createWeb3Instance } from '../../../../helpers/web3';
-import appIcon from '../../../../images/odysea-logos/odysea.svg';
+import appIcon from '../../../../images/odysea-logos/odysea.png';
 import { getNetworkSrc } from '../../../../helpers/networkSrc';
 import type { provider } from 'web3-core';
 import { featureFlag_walletConnectChainId } from '../../utils/feature-flags';
