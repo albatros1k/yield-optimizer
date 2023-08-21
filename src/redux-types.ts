@@ -36,6 +36,7 @@ import type { ResolverState } from './features/data/reducers/wallet/resolver-typ
 import type { BridgesState } from './features/data/reducers/bridges';
 import type { MigrationState } from './features/data/reducers/wallet/migration';
 import type { TooltipsState } from './features/data/reducers/tooltips';
+import type { MerlinState } from './features/data/reducers/merlin';
 
 export interface BeefyState {
   entities: {
@@ -81,6 +82,7 @@ export interface BeefyState {
     savedVaults: SavedVaultsState;
     tooltips: TooltipsState;
   };
+  merlin: MerlinState;
 }
 
 export type BeefyStore = EnhancedStore<

@@ -7,6 +7,7 @@ import { TechLoader } from '../../../components/TechLoader';
 
 import { DiscoverAsync as Discover } from '../../../pages/Discover';
 import { VaultDetailsAsync as Vault } from '../../../pages/Vault';
+import { DashboardAsync as Dashboard } from '../../../pages/Dashboard';
 
 export const Content = () => {
   return (
@@ -19,6 +20,9 @@ export const Content = () => {
             </Route>
             <Route strict sensitive exact path={['/:network/vault/:id', '/vault/:id']}>
               <Vault />
+            </Route>
+            <Route path="/dashboard">
+              <Dashboard />
             </Route>
             <Route>
               <div>Not Found</div>

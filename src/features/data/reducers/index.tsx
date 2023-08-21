@@ -39,6 +39,7 @@ import { resolverReducer } from './wallet/resolver';
 import { bridgesSlice } from './bridges';
 import { migrationSlice } from './wallet/migration';
 import { tooltipsSlice } from './tooltips';
+import { merlinReducer } from './merlin';
 
 const entitiesReducer = combineReducers<BeefyState['entities']>({
   chains: chainsSlice.reducer,
@@ -99,4 +100,5 @@ export const rootReducer = combineReducers<BeefyState>({
   biz: bizReducer,
   user: userReducer,
   ui: uiReducer,
+  merlin: merlinReducer,
 });
