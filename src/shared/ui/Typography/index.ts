@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { block, dots } from '../../styles/mixins';
 import { IBlock } from '../../styles/types';
 
-export const Title = styled.h1<{ dotted?: boolean }>`
+export const Title = styled.h1<IBlock & { dotted?: boolean }>`
   ${block}
   color: ${({ color, theme: { colors } }) => color || colors.textColor};
   font-weight: ${({ theme: { fonts } }) => fonts.title.fontWeight};
