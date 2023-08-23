@@ -1,4 +1,4 @@
-import { FC, memo } from 'react';
+import { memo } from 'react';
 import { useTheme } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '../../../store';
@@ -21,7 +21,11 @@ import { IconContainer } from '../../../widgets/Sidebar/ui/styled';
 
 const { wallet, arrow } = icons;
 
-export const Connector: FC = memo(() => {
+interface ConnectorProps {
+  isWelcome?: boolean;
+}
+
+export const Connector = memo<ConnectorProps>(({ isWelcome }) => {
   const walletPending = useAppSelector(selectIsWalletPending);
   const walletAddress = useAppSelector(selectWalletAddressIfKnown);
   const resolverStatus = useResolveAddress(walletAddress);
@@ -38,28 +42,33 @@ export const Connector: FC = memo(() => {
 
   return (
     <Button
-      h="46px"
-      w={`${ACCOUNT_CENTER_WIDTH}px`}
+      h={isWelcome ? '50px' : '46px'}
+      w={isWelcome ? '380px' : `${ACCOUNT_CENTER_WIDTH}px`}
       borderColor={accentMain}
       p="0 16px"
       onClick={handleWalletConnect}
     >
       <Row w="100%" h="100%" align="center" justify="space-between">
-        <Row align="center">
-          {walletPending ? (
-            <SmallLoader size={AVATAR_SIZE} m="0 12px 0 0" />
-          ) : (
-            <Circle
-              align="center"
-              justify="center"
-              bg={alterBg}
-              w={`${AVATAR_SIZE}px`}
-              h={`${AVATAR_SIZE}px`}
-              m="0 12px 0 0"
-            >
-              {wallet}
-            </Circle>
+        <Row align="center" justify={!isWelcome ? 'flex-start' : 'center'} w="100%">
+          {isWelcome ? null : (
+            <>
+              {walletPending ? (
+                <SmallLoader size={AVATAR_SIZE} m="0 12px 0 0" />
+              ) : (
+                <Circle
+                  align="center"
+                  justify="center"
+                  bg={alterBg}
+                  w={`${AVATAR_SIZE}px`}
+                  h={`${AVATAR_SIZE}px`}
+                  m="0 12px 0 0"
+                >
+                  {wallet}
+                </Circle>
+              )}
+            </>
           )}
+
           <SubTitle>
             {walletAddress
               ? isFulfilledStatus(resolverStatus)
@@ -68,9 +77,11 @@ export const Connector: FC = memo(() => {
               : t('Network-ConnectWallet')}
           </SubTitle>
         </Row>
-        <IconContainer w="26px" h="26px" tf="rotate(0.75turn)">
-          {arrow}
-        </IconContainer>
+        {isWelcome ? null : (
+          <IconContainer w="26px" h="26px" tf="rotate(0.75turn)">
+            {arrow}
+          </IconContainer>
+        )}
       </Row>
     </Button>
   );
