@@ -6,7 +6,6 @@ import { ContentWrapper } from './styled';
 import { useAppSelector } from '../../../store';
 
 import { Column } from '../../../shared/ui/Containers';
-import { TechLoader } from '../../../components/TechLoader';
 import { selectWalletAddressIfKnown } from '../../../features/data/selectors/wallet';
 
 import { DiscoverAsync as Discover } from '../../../pages/Discover';
@@ -16,6 +15,8 @@ import { RewardsAsync as Rewards } from '../../../pages/Rewards';
 import { DebtAsync as Debts } from '../../../pages/Debt';
 import { WelcomeAsync as Welcome } from '../../../pages/Welcome';
 import { SwapAsync as Swap } from '../../../pages/Swap';
+import { Loader } from '../../../shared/ui/Loaders';
+import { NotFoundAsync as NotFound } from '../../../pages/NotFound';
 
 export const Content = () => {
   const walletAddress = useAppSelector(selectWalletAddressIfKnown);
@@ -23,7 +24,7 @@ export const Content = () => {
   return (
     <ContentWrapper>
       <Column maxW="1180px" w="100%">
-        <Suspense fallback={<TechLoader />}>
+        <Suspense fallback={<Loader />}>
           <Switch>
             <Route exact path="/">
               <Discover />
@@ -38,7 +39,7 @@ export const Content = () => {
               <Swap />
             </Route>
             <Route>
-              <div>Not Found</div>
+              <NotFound />
             </Route>
           </Switch>
         </Suspense>
