@@ -40,7 +40,7 @@ export const ApyBreakdown = memo<ApyBreakdownProps>(({ isModalOpen, closeModal, 
         {Object.entries(formatted)
           .reverse()
           .map(([key, value], index, { length }) => (
-            <Row key={key} justify="space-between" w="100%" align="center" m="10px">
+            <Row key={key} justify="space-between" w="100%" align="center" m="0 0 10px">
               <Main color={length - index === 1 ? colors.textColor : colors.alterText}>
                 {LABELS[key] || key}
               </Main>
