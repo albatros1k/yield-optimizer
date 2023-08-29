@@ -1,5 +1,6 @@
 import { FC, memo } from 'react';
 import { useTheme } from 'styled-components';
+import millify from 'millify';
 
 import { icons } from '../../../../shared/Icons';
 import { Button } from '../../../../shared/ui/Buttons';
@@ -7,7 +8,6 @@ import { Row, SvgContainer } from '../../../../shared/ui/Containers';
 import { SubTitle } from '../../../../shared/ui/Typography';
 
 import { useColor } from '../../../../helpers/hooks';
-import { definePlus } from '../../../../helpers/merlinHelpers';
 
 interface PnlProps {
   pnl: number;
@@ -22,13 +22,15 @@ export const Pnl: FC<PnlProps> = memo(({ pnl }) => {
   const { chartArrow } = icons;
 
   return (
-    <Button w="180px" h="29px" p="0 10px" bg={`${defineColor(pnl)}10`}>
+    <Button w="180px" h="29px" p="0 10px" bg={`${defineColor(pnl)}10`} overflowHidden>
       <Row align="center" justify="space-between" w="100%">
         <Row>
           <SubTitle m="0 5px 0 0" color={alterText}>
             P&L:
           </SubTitle>
-          <SubTitle color={defineColor(pnl)}>{definePlus(pnl)}</SubTitle>
+          <SubTitle color={defineColor(pnl)}>
+            {pnl > 0 ? `+$${millify(pnl)}` : pnl < 0 ? `-$${millify(pnl * -1)}` : 0}
+          </SubTitle>
         </Row>
         <SvgContainer size={15} tf={`rotate(${pnl > 0 ? 0 : 0.25}turn)`} stroke={defineColor(pnl)}>
           {chartArrow}

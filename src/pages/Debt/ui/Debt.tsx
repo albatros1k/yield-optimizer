@@ -87,7 +87,7 @@ const Debt: FC = () => {
           map[protocolName] = {
             protocolName,
             borrowed,
-            logo: `https://valk-merlin.s3.amazonaws.com/protocol-icons/protocol-icons/${
+            logo: `https://valk-merlin.s3.amazonaws.com/protocol-icons/${
               protocolId || protocolName.toLowerCase()
             }.png`,
             chain,

@@ -94,8 +94,8 @@ export const DeBankProtocol = memo<DebankProtocolProps>(
     );
 
     return (
-      <Block m="0 0 24px">
-        <ExpandedCardHeader open={open} p="12px 24px 12px 24px" onClick={onOpen}>
+      <Block m="0 0 24px" w="100%">
+        <ExpandedCardHeader open={open} p="12px 24px 12px 24px" onClick={onOpen} w="100%">
           <Grid rowGap="0" colGap="2%" rowTemplate="34px" colTemplate={gridColumnPattern}>
             <Row align="center">
               <SquareImage

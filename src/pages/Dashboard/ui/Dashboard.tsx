@@ -27,8 +27,8 @@ const Dashboard = () => {
   const goToWallet = () => dispatch(getMerlinReducer(pasted));
 
   useEffect(() => {
-    dispatch(getMerlinReducer(walletAddress));
-  }, [walletAddress, dispatch]);
+    if (!isInitialLoaded) dispatch(getMerlinReducer(walletAddress));
+  }, [walletAddress, dispatch, isInitialLoaded]);
 
   return (
     <Fragment>

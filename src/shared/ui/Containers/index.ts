@@ -116,6 +116,7 @@ export const ExpandedCardHeader = styled(Card)<{ open: boolean }>`
   ${transition}
   border-radius: ${({ open }) => (open ? '6px 6px 0 0' : '6px')};
   background: ${({ theme: { colors } }) => colors.additionalBg};
+  width: 100%;
 `;
 
 export const ExpandedCardContent = styled(Card)<{ open: boolean }>`
