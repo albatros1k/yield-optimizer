@@ -7,7 +7,13 @@ import { ITokenBalance } from './types/tokenBalance';
 import { CurrentRate } from './types/rate';
 import { MarketPairPayload, PairsResponse } from './types/pair';
 import { ITokenData } from './types/tokenData';
-import { ITrendingPool, TrendingPoolAttribute } from '../../entities/market';
+import {
+  IPoolsListResponse,
+  ISupportedNetwork,
+  ISupportedProtocol,
+  ITrendingPool,
+  TrendingPoolAttribute,
+} from '../../entities/market';
 
 export const merlinInstance = axios.create({
   baseURL: import.meta.env.VITE_API_URL || 'https://v-wallet-graph.cf',
@@ -111,6 +117,41 @@ export class MerlinApi {
       )
       .then(r => r.data)
       .catch((e: AxiosError) => e.message);
+
+    return result;
+  }
+
+  static async getPools(search: object) {
+    const result = await merlinInstance
+      .get<IPoolsListResponse | string>('api/merlin/pool-analysis-v2/pools/data/daily/list', {
+        params: { ...search },
+      })
+      .then(r => r.data)
+      .catch((e: AxiosError) => e.message);
+
+    return result;
+  }
+
+  static async getSupportedChains() {
+    const result = await merlinInstance
+      .get<ISupportedNetwork[]>('api/merlin/pool-analysis-v2/pools/info/networks')
+      .then(r => r.data)
+      .catch((e: AxiosError) => {
+        console.log(e.message);
+        return [] as ISupportedNetwork[];
+      });
+
+    return result;
+  }
+
+  static async getSupportedPoolProtocols() {
+    const result = await merlinInstance
+      .get<ISupportedProtocol[]>('api/merlin/pool-analysis-v2/pools/info/protocols')
+      .then(r => r.data)
+      .catch((e: AxiosError) => {
+        console.log(e.message);
+        return [] as ISupportedProtocol[];
+      });
 
     return result;
   }
