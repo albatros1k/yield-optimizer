@@ -17,6 +17,7 @@ import { WelcomeAsync as Welcome } from '../../../pages/Welcome';
 import { SwapAsync as Swap } from '../../../pages/Swap';
 import { Loader } from '../../../shared/ui/Loaders';
 import { NotFoundAsync as NotFound } from '../../../pages/NotFound';
+import { MarketAsync as Market } from '../../../pages/Market';
 
 export const Content = () => {
   const walletAddress = useAppSelector(selectWalletAddressIfKnown);
@@ -37,6 +38,9 @@ export const Content = () => {
             <Route path="/debts">{walletAddress ? <Debts /> : <Welcome />}</Route>
             <Route path="/swap">
               <Swap />
+            </Route>
+            <Route path="/market">
+              <Market />
             </Route>
             <Route>
               <NotFound />

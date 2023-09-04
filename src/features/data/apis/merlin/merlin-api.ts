@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
 import { IOverviewResponse } from './types/overview';
 import { IPoolInfoResponse } from './types/poolInfo';
@@ -7,6 +7,7 @@ import { ITokenBalance } from './types/tokenBalance';
 import { CurrentRate } from './types/rate';
 import { MarketPairPayload, PairsResponse } from './types/pair';
 import { ITokenData } from './types/tokenData';
+import { ITrendingPool, TrendingPoolAttribute } from '../../entities/market';
 
 export const merlinInstance = axios.create({
   baseURL: import.meta.env.VITE_API_URL || 'https://v-wallet-graph.cf',
@@ -93,5 +94,24 @@ export class MerlinApi {
     });
 
     return filtered;
+  }
+
+  static async getTrendingPools(
+    attribute?: TrendingPoolAttribute,
+    tvl: string | undefined = undefined
+  ) {
+    const result = await merlinInstance
+      .get<ITrendingPool[] | string>(
+        `api/merlin/pool-analysis-v2/pools/data/daily/trending/apy${
+          attribute ? `/${attribute}` : ''
+        }`,
+        {
+          params: tvl && +tvl ? { tvl } : null,
+        }
+      )
+      .then(r => r.data)
+      .catch((e: AxiosError) => e.message);
+
+    return result;
   }
 }
