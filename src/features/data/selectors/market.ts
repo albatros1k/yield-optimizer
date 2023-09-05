@@ -7,6 +7,8 @@ export const selectProtocolNameMap = (state: BeefyState) => {
 
 export const selectTendingPools = (state: BeefyState) => state.market.trendingPools;
 
+export const selectMarket = (state: BeefyState) => state.market;
+
 export const selectSupportedLoading = createSelector(
   (state: BeefyState) => state.market,
   ({ supportedNetworks, supportedProtocols }) => {

@@ -18,6 +18,7 @@ import { SwapAsync as Swap } from '../../../pages/Swap';
 import { Loader } from '../../../shared/ui/Loaders';
 import { NotFoundAsync as NotFound } from '../../../pages/NotFound';
 import { MarketAsync as Market } from '../../../pages/Market';
+import { MarketPoolsAsync as MarketPools } from '../../../pages/MarketPools';
 
 export const Content = () => {
   const walletAddress = useAppSelector(selectWalletAddressIfKnown);
@@ -39,8 +40,17 @@ export const Content = () => {
             <Route path="/swap">
               <Swap />
             </Route>
-            <Route path="/market">
+            <Route exact path="/market">
               <Market />
+            </Route>
+            <Route path="/market/pools">
+              <MarketPools />
+            </Route>
+            <Route path="/market/pool/:pair">
+              <>Pool pair</>
+            </Route>
+            <Route path="/market/pool/:pair/:poolId">
+              <>Pair poolId</>
             </Route>
             <Route>
               <NotFound />
