@@ -1,5 +1,6 @@
 import { Suspense, useEffect } from 'react';
 import { HelmetProvider } from 'react-helmet-async';
+import { CompatRouter } from 'react-router-dom-v5-compat';
 
 import { Header } from './widgets/Header';
 import { Sidebar } from './widgets/Sidebar';
@@ -28,18 +29,20 @@ export const NewApp = () => {
     <Suspense fallback={<FullscreenTechLoader />}>
       <HelmetProvider>
         <Router>
-          <ScrollToTop />
-          <DefaultMeta />
-          <Redirects />
-          <GlobalStyles />
-          <Wrapper>
-            <Header />
-            <Main>
-              <Sidebar />
-              <Content />
-            </Main>
-            <Footer />
-          </Wrapper>
+          <CompatRouter>
+            <ScrollToTop />
+            <DefaultMeta />
+            <Redirects />
+            <GlobalStyles />
+            <Wrapper>
+              <Header />
+              <Main>
+                <Sidebar />
+                <Content />
+              </Main>
+              <Footer />
+            </Wrapper>
+          </CompatRouter>
         </Router>
       </HelmetProvider>
     </Suspense>
