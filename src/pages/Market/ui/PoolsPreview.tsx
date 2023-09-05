@@ -1,6 +1,6 @@
 import { FC, Fragment, memo, useEffect, useState } from 'react';
 import { useTheme } from 'styled-components';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 
 import { OrderEnum } from '../../../shared/types';
 import { Button } from '../../../shared/ui/Buttons';
@@ -49,7 +49,7 @@ export const PoolsPreview = memo(() => {
 
   const { colors } = useTheme();
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const is_asc: boolean = query.sort === OrderEnum.DESC;
 
@@ -67,7 +67,7 @@ export const PoolsPreview = memo(() => {
     ));
 
   const onNavigateToPools = (): void =>
-    history.push({
+    navigate({
       pathname: `/market/pools`,
       search: `?${queryString}`,
     });

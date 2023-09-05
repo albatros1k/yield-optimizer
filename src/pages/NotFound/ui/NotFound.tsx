@@ -1,6 +1,6 @@
 import { memo } from 'react';
-import { useHistory } from 'react-router';
 import { useTheme } from 'styled-components';
+import { useNavigate } from 'react-router';
 
 import { Card, Column, SvgContainer } from '../../../shared/ui/Containers';
 import { Image } from '../../../shared/ui/Images';
@@ -12,10 +12,9 @@ import notFound from '../../../images/404.png';
 
 const NotFound = memo(() => {
   const { colors } = useTheme();
+  const navigate = useNavigate();
 
-  const history = useHistory();
-
-  const goBack = () => history.goBack();
+  const goBack = () => navigate(-1);
 
   return (
     <Card w="100%" h="600px" pos="relative">

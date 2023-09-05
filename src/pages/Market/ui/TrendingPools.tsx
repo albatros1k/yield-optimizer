@@ -1,5 +1,5 @@
 import { memo, Fragment, useState, useEffect } from 'react';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 import { useTheme } from 'styled-components';
 
 import { awsLink } from '../../../shared/lib/aws';
@@ -40,9 +40,7 @@ export const TrendingPools = memo(() => {
 
   const { colors } = useTheme();
   const defineColor = useColor();
-  const history = useHistory();
-
-  console.log(setTvlFilter);
+  const navigate = useNavigate();
 
   const pools = data[bestType];
 
@@ -52,7 +50,7 @@ export const TrendingPools = memo(() => {
       setBestType(nextType);
 
   const onNavigateToPool = (poolName: string, poolId: string) => (): void =>
-    history.push(`/market/pool/${poolName}/${poolId}`);
+    navigate(`/market/pool/${poolName}/${poolId}`);
 
   useEffect(() => {
     dispatch(getTrendingPools({ tvl: tvlFilter }));

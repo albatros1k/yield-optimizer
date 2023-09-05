@@ -1,6 +1,6 @@
 import { FC, useEffect, useMemo } from 'react';
 import { useTheme } from 'styled-components';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 
 import { selectWalletAddress } from '../../../features/data/selectors/wallet';
 import { selectMerlinInfo } from '../../../features/data/selectors/merlin';
@@ -30,7 +30,7 @@ const Rewards: FC = () => {
   const {
     colors: { alterHelp, alterText },
   } = useTheme();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const { backarrow } = icons;
 
@@ -120,7 +120,7 @@ const Rewards: FC = () => {
     if (!isInitialLoaded && walletAddress) dispatch(getMerlinReducer(walletAddress));
   }, [walletAddress, dispatch, isInitialLoaded]);
 
-  const onRedirect = (): void => history.push('/dashboard');
+  const onRedirect = (): void => navigate('/dashboard');
 
   const renderProtocols = (): JSX.Element[] =>
     unclaimedRewards.map((rewardsPosition, index) => (

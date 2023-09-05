@@ -1,7 +1,7 @@
 import { Container, Hidden, makeStyles } from '@material-ui/core';
 import type { PropsWithChildren } from 'react';
-import React, { lazy, memo } from 'react';
-import { Redirect, useParams } from 'react-router';
+import { lazy, memo } from 'react';
+import { Navigate, useParams } from 'react-router';
 import { styles } from './styles';
 import { StrategyCard } from './components/StrategyCard';
 import { SafetyCard } from './components/SafetyCard';
@@ -59,7 +59,7 @@ const VaultNotFound = memo<VaultNotFoundProps>(function VaultNotFound({ id }) {
   const maybeVaultId = useAppSelector(state => selectVaultIdIgnoreCase(state, id));
 
   if (maybeVaultId !== undefined) {
-    return <Redirect to={`/vault/${maybeVaultId}`} />;
+    return <Navigate to={`/vault/${maybeVaultId}`} />;
   }
 
   return <PageNotFound />;

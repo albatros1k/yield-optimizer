@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 import { useTheme } from 'styled-components';
 
 import { Card, Row, SvgContainer } from '../Containers';
@@ -15,9 +15,9 @@ export const BackBlock = memo<BackBlockProps>(({ backText }) => {
     colors: { alterText },
   } = useTheme();
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
-  const goBack = (): void => history.goBack();
+  const goBack = (): void => navigate(-1);
 
   return (
     <Card p="20px 24px" w="100%">

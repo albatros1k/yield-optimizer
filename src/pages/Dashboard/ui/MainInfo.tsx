@@ -1,6 +1,6 @@
 import { memo, useMemo } from 'react';
 import { truncate } from 'lodash-es';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 import { useTheme } from 'styled-components';
 
 import { Button } from '../../../shared/ui/Buttons';
@@ -26,7 +26,7 @@ export const MainInfo = memo(() => {
     isInitialLoaded,
   } = useAppSelector(selectMerlinInfo);
 
-  const history = useHistory();
+  const navigate = useNavigate();
   const blockiesIcon = useBlockies();
 
   const {
@@ -57,7 +57,7 @@ export const MainInfo = memo(() => {
 
   const numberOfAssets = userBalances.length;
 
-  const goToRewardsPage = () => history.push('/rewards');
+  const goToRewardsPage = () => navigate('/rewards');
 
   return (
     <Card w="100%">

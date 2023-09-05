@@ -1,10 +1,10 @@
 import { memo, useEffect } from 'react';
 import { REDIRECTS } from '../../config/redirects';
-import { matchPath, useHistory, useLocation } from 'react-router-dom';
+import { matchPath, useLocation, useNavigate } from 'react-router';
 import { routerMode } from '../Router';
 
 export const Redirects = memo(function Redirects() {
-  const history = useHistory();
+  const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
@@ -17,7 +17,7 @@ export const Redirects = memo(function Redirects() {
     ) {
       const pathname = window.location.hash.substring(1);
       window.location.hash = '';
-      history.push(pathname);
+      navigate(pathname);
       return;
     }
 
@@ -33,11 +33,11 @@ export const Redirects = memo(function Redirects() {
                 (url, replacement) => url.replace(`:${replacement[0]}`, replacement[1]),
                 to
               );
-        history.push(redirectTo);
+        navigate(redirectTo);
         return;
       }
     }
-  }, [location, history]);
+  }, [location, navigate]);
 
   return null;
 });

@@ -1,6 +1,6 @@
 import { memo } from 'react';
-import { useHistory } from 'react-router';
 import { useTheme } from 'styled-components';
+import { useNavigate } from 'react-router';
 
 import { icons } from '../../../shared/Icons';
 import { CircleImage } from '../../../shared/ui/Images';
@@ -44,12 +44,12 @@ export const PoolsPreviewRow = memo<PoolsPreviewRowProps>(
       colors: { alterText, subAccentMain },
     } = useTheme();
 
-    const history = useHistory();
+    const navigate = useNavigate();
     const defineColor = useColor();
     const protocolsNameMap = useAppSelector(selectProtocolNameMap);
 
     const onNavigateToPool = (): void =>
-      history.push(`/market/pool/${name}`, { state: { sourcePage } });
+      navigate(`/market/pool/${name}`, { state: { sourcePage } });
 
     const iconSize = 20;
 

@@ -1,6 +1,6 @@
 import { FC, useEffect, useMemo } from 'react';
 import { useTheme } from 'styled-components';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 
 import { selectWalletAddress } from '../../../features/data/selectors/wallet';
 import { selectMerlinInfo } from '../../../features/data/selectors/merlin';
@@ -113,9 +113,9 @@ const Debt: FC = () => {
   const {
     colors: { alterHelp, alterText },
   } = useTheme();
-  const history = useHistory();
+  const navigate = useNavigate();
 
-  const onRedirect = (): void => history.push('/dashboard');
+  const onRedirect = (): void => navigate('/dashboard');
 
   const renderProtocols = (): JSX.Element[] =>
     debtPositions.map((debtPosition, index) => (
