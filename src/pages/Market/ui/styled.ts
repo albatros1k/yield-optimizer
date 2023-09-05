@@ -59,9 +59,8 @@ export const Table = styled.table`
 `;
 
 export const TypeButton = styled(Card)<{ isActive: boolean }>`
-  background-color: ${({ isActive, theme }) => (isActive ? theme.colors.textColor : 'transparent')};
-  border-color: ${({ isActive, theme }) =>
-    isActive ? theme.colors.subAccentMain : theme.colors.alterHelp};
+  border: 1px solid
+    ${({ isActive, theme }) => (isActive ? theme.colors.subAccentMain : theme.colors.alterHelp)};
   * {
     cursor: pointer;
   }

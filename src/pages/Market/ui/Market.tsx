@@ -1,10 +1,12 @@
 import { memo, Fragment, useEffect } from 'react';
 
-import { PoolsPreview } from './PoolsPreview';
 import { useAppDispatch, useAppSelector } from '../../../store';
 
 import { getSupportedNetworksAndProtocols } from '../../../features/data/actions/protocols-networks';
 import { selectSupportedLoading } from '../../../features/data/selectors/market';
+
+import { PoolsPreview } from './PoolsPreview';
+import { TrendingPools } from './TrendingPools';
 
 const Market = memo(() => {
   const dispatch = useAppDispatch();
@@ -15,9 +17,9 @@ const Market = memo(() => {
     if (!loaded) dispatch(getSupportedNetworksAndProtocols());
   }, [dispatch, loaded]);
 
-  if (!loaded) return <>Loading...</>;
   return (
     <Fragment>
+      <TrendingPools />
       <PoolsPreview />
     </Fragment>
   );

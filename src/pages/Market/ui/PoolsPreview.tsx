@@ -11,6 +11,7 @@ import { Block, Card, Row } from '../../../shared/ui/Containers';
 
 import { kpiKey } from '../../../features/data/entities/market';
 import { MerlinApi } from '../../../features/data/apis/merlin/merlin-api';
+import { selectSupportedLoading } from '../../../features/data/selectors/market';
 
 import { queryString } from '../lib/consts';
 import { PoolsPreviewState } from '../types/poolPreview';
@@ -19,8 +20,10 @@ import { numberWithCommas } from '../../../helpers/merlinHelpers';
 import { PoolsPreviewSkellet } from './Skeleton';
 import { PoolsPreviewRow } from './PoolsPreviewRow';
 import { Table } from './styled';
+import { useAppSelector } from '../../../store';
 
 export const PoolsPreview = memo(() => {
+  const loaded = useAppSelector(selectSupportedLoading);
   const [
     {
       data,
@@ -88,7 +91,7 @@ export const PoolsPreview = memo(() => {
       </H3>
       {errorMessage ? (
         <SubTitle color={colors.red}>{errorMessage}</SubTitle>
-      ) : loading ? (
+      ) : loading || !loaded ? (
         <PoolsPreviewSkellet />
       ) : (
         <Card w="100%">
