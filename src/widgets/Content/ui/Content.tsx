@@ -6,6 +6,8 @@ import { ContentWrapper } from './styled';
 import { useAppSelector } from '../../../store';
 
 import { Column } from '../../../shared/ui/Containers';
+import { Loader } from '../../../shared/ui/Loaders';
+
 import { selectWalletAddressIfKnown } from '../../../features/data/selectors/wallet';
 
 import { DiscoverAsync as Discover } from '../../../pages/Discover';
@@ -15,10 +17,11 @@ import { RewardsAsync as Rewards } from '../../../pages/Rewards';
 import { DebtAsync as Debts } from '../../../pages/Debt';
 import { WelcomeAsync as Welcome } from '../../../pages/Welcome';
 import { SwapAsync as Swap } from '../../../pages/Swap';
-import { Loader } from '../../../shared/ui/Loaders';
 import { NotFoundAsync as NotFound } from '../../../pages/NotFound';
 import { MarketAsync as Market } from '../../../pages/Market';
 import { MarketPoolsAsync as MarketPools } from '../../../pages/MarketPools';
+import { MarketPoolAsync as MarketPool } from '../../../pages/MarketPool';
+import { MarketPoolProtocolAsync as MarketPoolProtocol } from '../../../pages/MarketPoolProtocol';
 
 export const Content = () => {
   const walletAddress = useAppSelector(selectWalletAddressIfKnown);
@@ -47,10 +50,10 @@ export const Content = () => {
               <MarketPools />
             </Route>
             <Route path="/market/pool/:pair">
-              <>Pool pair</>
+              <MarketPool />
             </Route>
             <Route path="/market/pool/:pair/:poolId">
-              <>Pair poolId</>
+              <MarketPoolProtocol />
             </Route>
             <Route>
               <NotFound />
