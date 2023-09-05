@@ -20,6 +20,7 @@ import { NoInfo } from '../../../shared/ui/NoInfo';
 
 import { DebtRewardSkeleton } from '../../Rewards/ui/Skeleton';
 import { DebtProtocol } from './DebtProtocol';
+import { awsLink } from '../../../shared/lib/aws';
 
 const Debt: FC = () => {
   const walletAddress = useAppSelector(selectWalletAddress);
@@ -87,9 +88,7 @@ const Debt: FC = () => {
           map[protocolName] = {
             protocolName,
             borrowed,
-            logo: `https://valk-merlin.s3.amazonaws.com/protocol-icons/${
-              protocolId || protocolName.toLowerCase()
-            }.png`,
+            logo: `${awsLink}/protocol-icons/${protocolId || protocolName.toLowerCase()}.png`,
             chain,
             totalDebt,
             protocol,

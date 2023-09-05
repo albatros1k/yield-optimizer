@@ -16,6 +16,7 @@ import { definePlus, onImageError } from '../../../helpers/merlinHelpers';
 import { useAppSelector } from '../../../store';
 import { sourcePage } from '../types/poolPreview';
 import { TooltipCell } from '../../../widgets/TooltipCell';
+import { awsLink } from '../../../shared/lib/aws';
 
 interface PoolsPreviewRowProps {
   pool: IPoolPreview;
@@ -58,7 +59,7 @@ export const PoolsPreviewRow = memo<PoolsPreviewRowProps>(
         return (
           <Block key={protocol + index} pos="relative" m={index ? '0 0 0 -8px' : '0'} p="3px 0 0">
             <CircleImage
-              src={`https://valk-merlin.s3.amazonaws.com/protocol-icons/${protocolsNameMap[protocol]}.png`}
+              src={`${awsLink}/protocol-icons/${protocolsNameMap[protocol]}.png`}
               alt={protocol}
               onError={onImageError}
               w={`${iconSize}px`}
@@ -73,7 +74,7 @@ export const PoolsPreviewRow = memo<PoolsPreviewRowProps>(
       return tokenIds.map((address, index: number) => (
         <Block key={address + index} pos="relative" m={index ? '0 0 0 -8px' : '0'} p="3px 0 0">
           <CircleImage
-            src={`https://valk-merlin.s3.amazonaws.com/token-icons-small/${address}.png`}
+            src={`${awsLink}/token-icons-small/${address}.png`}
             alt={address}
             onError={onImageError}
             w={`${iconSize}px`}

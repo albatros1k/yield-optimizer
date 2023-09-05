@@ -20,6 +20,7 @@ import { testedProtocolList } from '../const';
 
 import { RewardsProtocol } from './RewardsProtocol';
 import { DebtRewardSkeleton } from './Skeleton';
+import { awsLink } from '../../../shared/lib/aws';
 
 const Rewards: FC = () => {
   const walletAddress = useAppSelector(selectWalletAddress);
@@ -96,10 +97,7 @@ const Rewards: FC = () => {
             protocolName,
             reward,
             logo:
-              logo ||
-              `https://valk-merlin.s3.amazonaws.com/protocol-icons/${
-                protocolId || protocolName.toLowerCase()
-              }.png`,
+              logo || `${awsLink}/protocol-icons/${protocolId || protocolName.toLowerCase()}.png`,
             chain,
             totalRewards,
             protocol,

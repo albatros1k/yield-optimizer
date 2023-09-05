@@ -3,6 +3,7 @@ import { createSelector } from '@reduxjs/toolkit';
 import { BeefyState } from '../../../redux-types';
 import { IPlatform, MerlinState } from '../reducers/merlin';
 import { parseProtocolName } from '../../../helpers/merlinHelpers';
+import { awsLink } from '../../../shared/lib/aws';
 
 export const selectMerlinInfo = (state: BeefyState): MerlinState => {
   return state.merlin;
@@ -56,10 +57,7 @@ export const getAllPlatforms = createSelector(
           withPnl: true,
           totalNet: suppliedUSDTotal - borrowedUSDTotal,
           logo_url:
-            logo ||
-            `https://valk-merlin.s3.amazonaws.com/protocol-icons/${
-              protocolId || parsedProtocol.toLowerCase()
-            }.png`,
+            logo || `${awsLink}/protocol-icons/${protocolId || parsedProtocol.toLowerCase()}.png`,
         };
       }
 
