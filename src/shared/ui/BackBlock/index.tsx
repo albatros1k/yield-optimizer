@@ -8,9 +8,10 @@ import { icons } from '../../Icons';
 
 interface BackBlockProps {
   backText: string;
+  onBack?: () => void;
 }
 
-export const BackBlock = memo<BackBlockProps>(({ backText }) => {
+export const BackBlock = memo<BackBlockProps>(({ backText, onBack }) => {
   const {
     colors: { alterText },
   } = useTheme();
@@ -29,7 +30,7 @@ export const BackBlock = memo<BackBlockProps>(({ backText }) => {
           p="0 17px"
           color={alterText}
           m="0 20px 0 0"
-          onClick={goBack}
+          onClick={onBack || goBack}
         >
           <SvgContainer size={10} m="0 6px 0 0">
             {icons.backarrow}

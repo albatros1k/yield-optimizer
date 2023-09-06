@@ -10,6 +10,7 @@ import { ITokenData } from './types/tokenData';
 import {
   IHistoricalData,
   IPairDetailsResponse,
+  IPoolProtocolPreview,
   IPoolsListResponse,
   ISupportedNetwork,
   ISupportedProtocol,
@@ -179,6 +180,17 @@ export class MerlinApi {
             end,
           },
         }
+      )
+      .then(r => r.data)
+      .catch((e: AxiosError) => e.message);
+
+    return result;
+  }
+
+  static async getPairProtocolDetails(pair: string, poolId: string) {
+    const result = await merlinInstance
+      .get<IPoolProtocolPreview | string>(
+        `api/merlin/pool-analysis-v2/pools/data/daily/list/${pair}/${poolId}`
       )
       .then(r => r.data)
       .catch((e: AxiosError) => e.message);
