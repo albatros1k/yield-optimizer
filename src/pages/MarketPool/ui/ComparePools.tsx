@@ -119,7 +119,7 @@ export const ComparePools = memo(() => {
         <SubTitle color={red}>{errorMessage}</SubTitle>
       ) : (
         <Fragment>
-          <Card m="0 0 40px" p="25px 30px 35px">
+          <Card m="0 0 40px" p="25px 30px 35px" w="100%">
             {ableToCompare ? (
               <Column w="100%" m="0 0 12px">
                 <SubTitle m="0 0 22px">Select protocols to compare</SubTitle>

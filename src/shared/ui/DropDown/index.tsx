@@ -1,4 +1,4 @@
-import { memo, useState } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction, memo, useState } from 'react';
 import { styled, useTheme } from 'styled-components';
 
 import { icons } from '../../Icons';
@@ -9,6 +9,12 @@ import { Block, Card, Row, SvgContainer } from '../Containers';
 
 import { growDown } from '../../styles/animations';
 import { transition } from '../../styles/mixins';
+import { useAppSelector } from '../../../store';
+import { selectMarket } from '../../../features/data/selectors/market';
+import { allValuesKey } from '../../../pages/Market/lib/consts';
+import { CircleImage } from '../Images';
+import { awsLink } from '../../lib/aws';
+import { onImageError } from '../../../helpers/merlinHelpers';
 
 export const ListItem = styled(Row)<{ horizontalPadding: number }>`
   ${transition}
@@ -32,6 +38,20 @@ export const ListItem = styled(Row)<{ horizontalPadding: number }>`
     &::after {
       display: none;
     }
+  }
+`;
+
+export const TransparentInput = styled.input<{ w?: string }>`
+  height: 50px;
+  width: ${({ w = 'calc(100% - 38px)' }) => w};
+  border: none;
+  background: transparent;
+  color: ${({ theme }) => theme.colors.alterText};
+  font-size: ${({ theme: { fonts } }) => fonts.subtitle.size + 'px'};
+  cursor: text !important;
+  margin-left: auto;
+  &::placeholder {
+    color: ${({ theme }) => theme.colors.alterText};
   }
 `;
 
@@ -197,6 +217,163 @@ export const DropDown = memo<DropDownProps>(
           pos="absolute"
           open={open && !loading}
         >
+          {renderValues()}
+        </MenuContainer>
+      </Block>
+    );
+  }
+);
+
+//only for chains and protocols selector
+interface ChainsProtocolsSelectorProps {
+  label: string;
+  valuesMap: { [key: string]: string };
+  value: string[];
+  onChange: (newValue: string[]) => void;
+  isProtocols?: boolean;
+  disabled?: boolean;
+  m?: string;
+  h?: number;
+  w?: number;
+  allValuesSpecificKey?: string;
+}
+
+export const ChainsProtocolsSelector = memo<ChainsProtocolsSelectorProps>(
+  ({
+    m,
+    h = 50,
+    w = 210,
+    valuesMap,
+    value,
+    disabled,
+    onChange,
+    isProtocols,
+    allValuesSpecificKey,
+  }) => {
+    const [open, setOpen] = useState<boolean>(false);
+    const [keyword, setKeyword] = useState<string>('');
+    const { colors } = useTheme();
+    const {
+      supportedNetworks: { slugMap: networksSlugMap },
+      supportedProtocols: { slugMap: protocolsSlugMap },
+    } = useAppSelector(selectMarket);
+
+    const onChangeField =
+      (setState: Dispatch<SetStateAction<string>>) =>
+      (e: ChangeEvent<HTMLInputElement>): void =>
+        setState(e.target.value);
+
+    const onChangeKeyword = onChangeField(setKeyword);
+
+    const onClearSearch = (): void => setKeyword('');
+
+    const onChangeOpen = (val: boolean) => (): void => setOpen(val);
+
+    const onSelect = (key: string) => (): void => {
+      if (key === allValuesKey || key === allValuesSpecificKey) {
+        onChange([]);
+        return;
+      }
+      const nextValue = [...value];
+      const index = nextValue.indexOf(key);
+      if (index === -1) nextValue.push(key);
+      else nextValue.splice(index, 1);
+      onChange(nextValue);
+    };
+
+    const renderValues = (): JSX.Element[] => {
+      return Object.entries(valuesMap)
+        .filter(([_, val]: [string, string]) =>
+          val.toLowerCase().includes(keyword.toLowerCase().trim())
+        )
+        .map(([key, val]: [string, string], i: number) => {
+          const showIcon = key !== allValuesKey;
+
+          return (
+            <ListItem
+              horizontalPadding={20}
+              pos="relative"
+              key={key + val + i}
+              align="center"
+              p="0 20px"
+              h="50px"
+              w="100%"
+              pointer={true}
+              onClick={onSelect(val)}
+              justify="flex-start"
+            >
+              {showIcon ? (
+                <CircleImage
+                  w="16px"
+                  h="16px"
+                  m="0 6px 0 0"
+                  src={`${awsLink}/${isProtocols ? 'protocol-icons' : 'chain-icons'}/${val}.png`}
+                  onError={onImageError}
+                  alt="protocol"
+                />
+              ) : null}
+              <SubTitle maxW={`calc(100% - ${showIcon ? 44 : 22}px)`} dotted={true} m="0 auto 0 0">
+                {key !== allValuesKey ? key : val}
+              </SubTitle>
+              <RadioButton
+                is_active={(!value.length && key === allValuesKey) || value.includes(val)}
+              />
+            </ListItem>
+          );
+        });
+    };
+
+    return (
+      <Block
+        pos="relative"
+        m={m}
+        h={`${h}px`}
+        w={`${w}px`}
+        onMouseEnter={disabled ? undefined : onChangeOpen(true)}
+        onMouseLeave={onChangeOpen(false)}
+      >
+        <DropDownContainer
+          z_index={open ? 1002 : undefined}
+          pos="relative"
+          is_menu_open={open}
+          h="100%"
+          p="10px 15px 10px 20px"
+          w="100%"
+          align="center"
+          pointer={true}
+        >
+          <SubTitle
+            color={disabled ? colors.alterText : colors.textColor}
+            dotted={true}
+            w={disabled ? '100%' : 'calc(100% - 30px)'}
+          >
+            {value.map(el => (isProtocols ? protocolsSlugMap : networksSlugMap)[el]).join(', ') ||
+              valuesMap[allValuesKey]}
+          </SubTitle>
+          {disabled ? null : (
+            <SvgContainer stroke={open ? colors.subAccentMain : colors.alterText}>
+              {icons.arrow}
+            </SvgContainer>
+          )}
+        </DropDownContainer>
+        <MenuContainer w="100%" top={h - 8} left={0} p="6px 0 0" pos="absolute" open={open}>
+          <ListItem
+            horizontalPadding={20}
+            pos="relative"
+            align="center"
+            p="0 20px"
+            h="50px"
+            w="100%"
+            justify="space-between"
+          >
+            {icons.search}
+            <TransparentInput placeholder="Search" value={keyword} onChange={onChangeKeyword} />
+            <Block onClick={onClearSearch} pointer w="16px" h="16px">
+              <SvgContainer size={16} stroke={keyword ? colors.red : 'transparent'}>
+                {icons.x}
+              </SvgContainer>
+            </Block>
+          </ListItem>
           {renderValues()}
         </MenuContainer>
       </Block>
