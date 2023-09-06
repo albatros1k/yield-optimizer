@@ -8,6 +8,8 @@ import { CurrentRate } from './types/rate';
 import { MarketPairPayload, PairsResponse } from './types/pair';
 import { ITokenData } from './types/tokenData';
 import {
+  IHistoricalData,
+  IPairDetailsResponse,
   IPoolsListResponse,
   ISupportedNetwork,
   ISupportedProtocol,
@@ -102,6 +104,17 @@ export class MerlinApi {
     return filtered;
   }
 
+  static async getPairDetails(pair: string) {
+    const result = await merlinInstance
+      .get<IPairDetailsResponse | string>(
+        `api/merlin/pool-analysis-v2/pools/data/daily/list/${pair}`
+      )
+      .then(r => r.data)
+      .catch((e: AxiosError) => e.message);
+
+    return result;
+  }
+
   static async getTrendingPools(
     attribute?: TrendingPoolAttribute,
     tvl: string | undefined = undefined
@@ -152,6 +165,23 @@ export class MerlinApi {
         console.log(e.message);
         return [] as ISupportedProtocol[];
       });
+
+    return result;
+  }
+
+  static async getHistoricalData(pair: string, poolId: string, start: string, end: string) {
+    const result = await merlinInstance
+      .get<IHistoricalData[] | IHistoricalData | string>(
+        `api/merlin/pool-analysis-v2/pools/data/historical/${pair}${poolId && `/${poolId}`}`,
+        {
+          params: {
+            start,
+            end,
+          },
+        }
+      )
+      .then(r => r.data)
+      .catch((e: AxiosError) => e.message);
 
     return result;
   }

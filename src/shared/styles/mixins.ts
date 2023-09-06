@@ -52,6 +52,48 @@ export const dots = css`
   text-overflow: ellipsis;
 `;
 
+export const hoverIcon = css<{ borderColor?: string }>`
+  &:hover {
+    > svg {
+      * {
+        ${transition}
+        stroke: ${({ borderColor, theme: { colors } }) => borderColor || colors.subAccentMain};
+      }
+    }
+    > .spin-container {
+      > svg {
+        * {
+          ${transition}
+          stroke: ${({ borderColor, theme: { colors } }) => borderColor || colors.subAccentMain};
+        }
+      }
+    }
+  }
+`;
+
+export const disableButton = css`
+  &:disabled {
+    background-color: ${({ theme: { colors } }) => colors.alterText};
+    border-color: ${({ theme: { colors } }) => colors.alterHelp};
+    > svg {
+      * {
+        ${transition}
+        stroke: ${({ theme: { colors } }) => colors.alterText};
+      }
+    }
+  }
+`;
+
+export const clickEffect = css<{ borderColor?: string }>`
+  ${transition}
+  background-position: center;
+  &:hover {
+    background: ${({ theme: { colors } }) => colors.alterHelp};
+    border-color: ${({ borderColor, theme: { colors } }) => borderColor || colors.subAccentMain};
+    color: ${({ borderColor, theme: { colors } }) => borderColor || colors.subAccentMain};
+  }
+`;
+
 export interface ScrollProps {
   trackColor?: string;
   barWidth?: number;

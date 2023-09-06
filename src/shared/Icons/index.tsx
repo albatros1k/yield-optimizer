@@ -32,6 +32,7 @@ import { ReactComponent as SmallCalendar } from '../../images/nav-icons/small-ca
 import { ReactComponent as Bell } from '../../images/nav-icons/bell.svg';
 import { ReactComponent as Report } from '../../images/nav-icons/report.svg';
 import { ReactComponent as Unpeg } from '../../images/nav-icons/unpeg.svg';
+import { ReactComponent as Maximize } from '../../images/nav-icons/maximize.svg';
 
 type IconName =
   | 'grid'
@@ -67,7 +68,8 @@ type IconName =
   | 'smallCalendar'
   | 'bell'
   | 'report'
-  | 'unpeg';
+  | 'unpeg'
+  | 'maximize';
 
 export const icons: Record<IconName, JSX.Element> = {
   grid: <Grid />,
@@ -104,4 +106,5 @@ export const icons: Record<IconName, JSX.Element> = {
   bell: <Bell />,
   report: <Report />,
   unpeg: <Unpeg />,
+  maximize: <Maximize />,
 };

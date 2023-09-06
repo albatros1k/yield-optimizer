@@ -2,11 +2,19 @@ import { styled, useTheme } from 'styled-components';
 import { FC, MouseEventHandler } from 'react';
 
 import { IBlock } from '../../styles/types';
-import { block, center, transition } from '../../styles/mixins';
+import {
+  block,
+  center,
+  clickEffect,
+  disableButton,
+  hoverIcon,
+  transition,
+} from '../../styles/mixins';
 
 import { Row, SvgContainer } from '../Containers';
 import { SubTitle } from '../Typography';
 import { icons } from '../../Icons';
+import { LoadingSpinner, SpinContainer } from '../Loaders';
 
 export const Button = styled.button<IBlock & { borderColor?: string }>`
   ${block}
@@ -143,5 +151,64 @@ export const RadioButton: FC<RadioButtonProps> = ({ is_active, cb }) => {
     >
       <CircleIn pointer w={size / 2 + 'px'} h={size / 2 + 'px'} is_active={is_active} />
     </CircleOut>
+  );
+};
+
+interface ButtonInterface extends IBlock {
+  children: JSX.Element | JSX.Element[];
+  fs?: number;
+  borderColor?: string;
+  isIconRotate?: boolean;
+  br?: number;
+}
+
+export const SquareContainer = styled.button<ButtonInterface>`
+  ${block}
+  ${clickEffect}
+  ${center}
+  ${hoverIcon}
+  ${disableButton}
+  height: ${({ h = '40px' }) => h};
+  width: ${({ w = '40px' }) => w};
+  border-radius: ${({ br = 4 }) => `${br}px`};
+  cursor: pointer;
+  background-color: transparent;
+  border: 1px solid ${({ theme: { colors } }) => colors.alterHelp};
+`;
+
+interface SquareButtonProps {
+  icon: JSX.Element;
+  onClick: MouseEventHandler;
+  w?: string;
+  h?: string;
+  m?: string;
+  iconColor?: string;
+  disabled?: boolean;
+  loading?: boolean;
+  isOrdinaryLoadingIcon?: boolean;
+}
+
+export const SquareButton: FC<SquareButtonProps> = ({
+  icon,
+  onClick,
+  w,
+  h,
+  m,
+  disabled,
+  loading = false,
+  isOrdinaryLoadingIcon = false,
+}) => {
+  const IconComponent = icon;
+
+  return (
+    <SquareContainer {...{ onClick, w, h, m, disabled }}>
+      {loading ? (
+        <SpinContainer h="28px" m="auto" align="center" className="spin-container">
+          {isOrdinaryLoadingIcon ? { IconComponent } : <LoadingSpinner />}
+        </SpinContainer>
+      ) : (
+        <>{IconComponent}</>
+      )}
+    </SquareContainer>
   );
 };
