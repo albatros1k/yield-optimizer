@@ -59,6 +59,11 @@ export const SmallLoader = styled.div<{ size: number; m?: string }>`
   margin: ${({ m = 0 }) => m};
 `;
 
+export const SpinContainer = styled(Row)<{ left?: number }>`
+  animation: ${spin} 2s infinite linear;
+  left: ${({ left }) => `${left || 0}px`};
+`;
+
 export const LoadingSpinner = styled.div`
   color: official;
   display: inline-block;

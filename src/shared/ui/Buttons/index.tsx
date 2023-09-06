@@ -1,12 +1,20 @@
 import { styled, useTheme } from 'styled-components';
-import { FC } from 'react';
+import { FC, MouseEventHandler } from 'react';
 
 import { IBlock } from '../../styles/types';
-import { block, center, transition } from '../../styles/mixins';
+import {
+  block,
+  center,
+  clickEffect,
+  disableButton,
+  hoverIcon,
+  transition,
+} from '../../styles/mixins';
 
 import { Row, SvgContainer } from '../Containers';
 import { SubTitle } from '../Typography';
 import { icons } from '../../Icons';
+import { LoadingSpinner, SpinContainer } from '../Loaders';
 
 export const Button = styled.button<IBlock & { borderColor?: string }>`
   ${block}
@@ -102,5 +110,105 @@ export const ExpandButton: FC<ExpandButtonProps> = ({
         </SvgContainer>
       </Row>
     </ExpandButtonContainer>
+  );
+};
+
+export const CircleOut = styled(Row)<{ is_active: boolean }>`
+  ${transition}
+  border-radius: 50%;
+  border: 1px solid
+    ${({ is_active, theme: { colors } }) => (is_active ? colors.subAccentMain : colors.alterHelp)};
+`;
+
+export const CircleIn = styled(Row)<{ is_active: boolean }>`
+  ${transition}
+  border-radius: 50%;
+  background-color: ${({ is_active, theme: { colors } }) =>
+    is_active ? colors.subAccentMain : 'transparent'};
+`;
+
+interface RadioButtonProps {
+  is_active: boolean;
+  cb?: MouseEventHandler;
+}
+
+export const RadioButton: FC<RadioButtonProps> = ({ is_active, cb }) => {
+  const {
+    fonts: {
+      main: { size },
+    },
+  } = useTheme();
+
+  return (
+    <CircleOut
+      pointer
+      w={size + 'px'}
+      h={size + 'px'}
+      is_active={is_active}
+      onClick={cb}
+      align="center"
+      justify="center"
+    >
+      <CircleIn pointer w={size / 2 + 'px'} h={size / 2 + 'px'} is_active={is_active} />
+    </CircleOut>
+  );
+};
+
+interface ButtonInterface extends IBlock {
+  children: JSX.Element | JSX.Element[];
+  fs?: number;
+  borderColor?: string;
+  isIconRotate?: boolean;
+  br?: number;
+}
+
+export const SquareContainer = styled.button<ButtonInterface>`
+  ${block}
+  ${clickEffect}
+  ${center}
+  ${hoverIcon}
+  ${disableButton}
+  height: ${({ h = '40px' }) => h};
+  width: ${({ w = '40px' }) => w};
+  border-radius: ${({ br = 4 }) => `${br}px`};
+  cursor: pointer;
+  background-color: transparent;
+  border: 1px solid ${({ theme: { colors } }) => colors.alterHelp};
+`;
+
+interface SquareButtonProps {
+  icon: JSX.Element;
+  onClick: MouseEventHandler;
+  w?: string;
+  h?: string;
+  m?: string;
+  iconColor?: string;
+  disabled?: boolean;
+  loading?: boolean;
+  isOrdinaryLoadingIcon?: boolean;
+}
+
+export const SquareButton: FC<SquareButtonProps> = ({
+  icon,
+  onClick,
+  w,
+  h,
+  m,
+  disabled,
+  loading = false,
+  isOrdinaryLoadingIcon = false,
+}) => {
+  const IconComponent = icon;
+
+  return (
+    <SquareContainer {...{ onClick, w, h, m, disabled }}>
+      {loading ? (
+        <SpinContainer h="28px" m="auto" align="center" className="spin-container">
+          {isOrdinaryLoadingIcon ? { IconComponent } : <LoadingSpinner />}
+        </SpinContainer>
+      ) : (
+        <>{IconComponent}</>
+      )}
+    </SquareContainer>
   );
 };

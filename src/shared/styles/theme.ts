@@ -42,10 +42,31 @@ interface FontProperties {
   fontFamily: Fonts;
 }
 
+enum ChartColors {
+  chartAddBlue,
+  chartDarkBlue,
+  chartPurple,
+  chartPink,
+  chartRed,
+  chartOrange,
+  chartAddOrange,
+  chartDarkYellow,
+  chartYellow,
+  chartGreen,
+  chartAddGreen,
+}
+
+type chartColorsKeys = keyof typeof ChartColors;
+
+type ChartColorsType = {
+  [key in chartColorsKeys]: string;
+};
+
 interface IShared {
   fonts: Record<FontType, FontProperties>;
   sizes: Record<Devices, DeviceSize>;
   zIndexes: Record<Parts, number>;
+  chartColors: ChartColorsType;
 }
 
 interface ColorsProperties {
@@ -118,6 +139,19 @@ export const shared: IShared = {
   fonts,
   sizes,
   zIndexes,
+  chartColors: {
+    chartAddBlue: '#3F8DD8',
+    chartDarkBlue: '#3D5ABD',
+    chartPurple: '#A45FC3',
+    chartPink: '#E84992',
+    chartRed: '#EA5343',
+    chartOrange: '#F4904A',
+    chartAddOrange: '#F2B054',
+    chartDarkYellow: '#FFDD58',
+    chartYellow: '#FDF053',
+    chartGreen: '#9ED05B',
+    chartAddGreen: '#7BCB60',
+  },
 };
 
 export const mainTheme: ITheme = {

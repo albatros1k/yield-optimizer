@@ -40,6 +40,9 @@ import { bridgesSlice } from './bridges';
 import { migrationSlice } from './wallet/migration';
 import { tooltipsSlice } from './tooltips';
 import { merlinReducer } from './merlin';
+import { supportedNetworksSlice } from './supportedNetworks';
+import { supportedProtocolsSlice } from './supportedProtocols';
+import { trendingPoolSlice } from './trendingPools';
 
 const entitiesReducer = combineReducers<BeefyState['entities']>({
   chains: chainsSlice.reducer,
@@ -95,10 +98,17 @@ const uiReducer = combineReducers<BeefyState['ui']>({
   tooltips: tooltipsSlice.reducer,
 });
 
+const marketReducer = combineReducers<BeefyState['market']>({
+  trendingPools: trendingPoolSlice.reducer,
+  supportedNetworks: supportedNetworksSlice.reducer,
+  supportedProtocols: supportedProtocolsSlice.reducer,
+});
+
 export const rootReducer = combineReducers<BeefyState>({
   entities: entitiesReducer,
   biz: bizReducer,
   user: userReducer,
   ui: uiReducer,
   merlin: merlinReducer,
+  market: marketReducer,
 });

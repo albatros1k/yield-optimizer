@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
 import { IOverviewResponse } from './types/overview';
 import { IPoolInfoResponse } from './types/poolInfo';
@@ -7,6 +7,16 @@ import { ITokenBalance } from './types/tokenBalance';
 import { CurrentRate } from './types/rate';
 import { MarketPairPayload, PairsResponse } from './types/pair';
 import { ITokenData } from './types/tokenData';
+import {
+  IHistoricalData,
+  IPairDetailsResponse,
+  IPoolProtocolPreview,
+  IPoolsListResponse,
+  ISupportedNetwork,
+  ISupportedProtocol,
+  ITrendingPool,
+  TrendingPoolAttribute,
+} from '../../entities/market';
 
 export const merlinInstance = axios.create({
   baseURL: import.meta.env.VITE_API_URL || 'https://v-wallet-graph.cf',
@@ -93,5 +103,98 @@ export class MerlinApi {
     });
 
     return filtered;
+  }
+
+  static async getPairDetails(pair: string) {
+    const result = await merlinInstance
+      .get<IPairDetailsResponse | string>(
+        `api/merlin/pool-analysis-v2/pools/data/daily/list/${pair}`
+      )
+      .then(r => r.data)
+      .catch((e: AxiosError) => e.message);
+
+    return result;
+  }
+
+  static async getTrendingPools(
+    attribute?: TrendingPoolAttribute,
+    tvl: string | undefined = undefined
+  ) {
+    const result = await merlinInstance
+      .get<ITrendingPool[] | string>(
+        `api/merlin/pool-analysis-v2/pools/data/daily/trending/apy${
+          attribute ? `/${attribute}` : ''
+        }`,
+        {
+          params: tvl && +tvl ? { tvl } : null,
+        }
+      )
+      .then(r => r.data)
+      .catch((e: AxiosError) => e.message);
+
+    return result;
+  }
+
+  static async getPools(search: object) {
+    const result = await merlinInstance
+      .get<IPoolsListResponse | string>('api/merlin/pool-analysis-v2/pools/data/daily/list', {
+        params: { ...search },
+      })
+      .then(r => r.data)
+      .catch((e: AxiosError) => e.message);
+
+    return result;
+  }
+
+  static async getSupportedChains() {
+    const result = await merlinInstance
+      .get<ISupportedNetwork[]>('api/merlin/pool-analysis-v2/pools/info/networks')
+      .then(r => r.data)
+      .catch((e: AxiosError) => {
+        console.log(e.message);
+        return [] as ISupportedNetwork[];
+      });
+
+    return result;
+  }
+
+  static async getSupportedPoolProtocols() {
+    const result = await merlinInstance
+      .get<ISupportedProtocol[]>('api/merlin/pool-analysis-v2/pools/info/protocols')
+      .then(r => r.data)
+      .catch((e: AxiosError) => {
+        console.log(e.message);
+        return [] as ISupportedProtocol[];
+      });
+
+    return result;
+  }
+
+  static async getHistoricalData(pair: string, poolId: string, start: string, end: string) {
+    const result = await merlinInstance
+      .get<IHistoricalData[] | IHistoricalData | string>(
+        `api/merlin/pool-analysis-v2/pools/data/historical/${pair}${poolId && `/${poolId}`}`,
+        {
+          params: {
+            start,
+            end,
+          },
+        }
+      )
+      .then(r => r.data)
+      .catch((e: AxiosError) => e.message);
+
+    return result;
+  }
+
+  static async getPairProtocolDetails(pair: string, poolId: string) {
+    const result = await merlinInstance
+      .get<IPoolProtocolPreview | string>(
+        `api/merlin/pool-analysis-v2/pools/data/daily/list/${pair}/${poolId}`
+      )
+      .then(r => r.data)
+      .catch((e: AxiosError) => e.message);
+
+    return result;
   }
 }

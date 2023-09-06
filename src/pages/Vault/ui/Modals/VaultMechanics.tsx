@@ -8,6 +8,7 @@ import { Image } from '../../../../shared/ui/Images';
 
 import { ScrollContainer } from '../Transact/DepositTokenList/styled';
 import { ProtocolSquare } from './styled';
+import { awsLink } from '../../../../shared/lib/aws';
 
 interface VaultMechanicsProps {
   isModalOpen: boolean;
@@ -49,7 +50,7 @@ export const VaultMechanics = memo<VaultMechanicsProps>(({ isModalOpen, closeMod
                 <Image
                   w="14px"
                   h="14px"
-                  src={`https://valk-merlin.s3.amazonaws.com/protocol-icons/${protocolId}.png`}
+                  src={`${awsLink}/protocol-icons/${protocolId}.png`}
                   alt={protocolId}
                 />
               </ProtocolSquare>

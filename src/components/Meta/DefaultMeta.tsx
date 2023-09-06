@@ -22,8 +22,8 @@ export const DefaultMeta = memo(function DefaultMeta() {
       <meta property="og:description" content="The Strategy Builder" />
       <meta property="og:url" content={canonical} />
       <meta property="og:image" content="https://openaccessbucket.s3.amazonaws.com/preview.png" />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
+      <meta property="og:image:width" content="1440" />
+      <meta property="og:image:height" content="900" />
       <meta property="twitter:card" content="summary_large_image" />
       <meta property="twitter:site" content="@beefyfinance" />
       <meta property="twitter:creator" content="@beefyfinance" />

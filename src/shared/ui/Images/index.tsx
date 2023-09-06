@@ -6,6 +6,7 @@ import { block } from '../../styles/mixins';
 import { Circle, Row, SvgContainer } from '../Containers';
 import { onImageError } from '../../../helpers/merlinHelpers';
 import { Main } from '../Typography';
+import { awsLink } from '../../lib/aws';
 
 export const Image = styled.img<IBlock>`
   ${block}
@@ -44,7 +45,7 @@ export const TokenIcon: FC<TokenIconProps> = ({ address, w = '32px', h = '32px',
       m={m}
       w={w}
       h={h}
-      src={`https://valk-merlin.s3.amazonaws.com/token-icons-small/${address.toLowerCase()}.png`}
+      src={`${awsLink}/token-icons-small/${address.toLowerCase()}.png`}
       alt="logo"
       onError={onImageError}
       bg={alterBg}
@@ -86,7 +87,7 @@ export const MultipleTokenIcons: FC<MultipleTokenIconsProps> = ({
           <CircleImage
             w={`${size}px`}
             h={`${size}px`}
-            src={`https://valk-merlin.s3.amazonaws.com/${
+            src={`${awsLink}/${
               isProtocol ? `protocol-icons` : `token-icons-small`
             }/${address.toLowerCase()}.png`}
             alt="logo"
@@ -137,7 +138,7 @@ export const ProtocolIcon: FC<Omit<ProtocolIconProps, 'address'>> = ({
       m={m}
       w={w}
       h={h}
-      src={`https://valk-merlin.s3.amazonaws.com/token-icons-small/protocol-icons/${protocolId}.png`}
+      src={`${awsLink}/token-icons-small/protocol-icons/${protocolId}.png`}
       alt="logo"
       onError={onImageError}
       bg={alterBg}

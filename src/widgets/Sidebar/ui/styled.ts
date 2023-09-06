@@ -1,5 +1,5 @@
-import { NavLink } from 'react-router-dom';
 import styled, { css } from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 import { IBlock, IFlex } from '../../../shared/styles/types';
 import { block, center, flexProps } from '../../../shared/styles/mixins';

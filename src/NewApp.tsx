@@ -11,7 +11,6 @@ import { GlobalStyles } from './shared/styles/global';
 
 import { Router } from './components/Router';
 import { DefaultMeta } from './components/Meta';
-import { Redirects } from './components/Redirects';
 import { ScrollToTop } from './components/ScrollToTop';
 import { FullscreenTechLoader } from './components/TechLoader';
 
@@ -30,7 +29,6 @@ export const NewApp = () => {
         <Router>
           <ScrollToTop />
           <DefaultMeta />
-          <Redirects />
           <GlobalStyles />
           <Wrapper>
             <Header />

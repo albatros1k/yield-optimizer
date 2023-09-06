@@ -37,6 +37,9 @@ import type { BridgesState } from './features/data/reducers/bridges';
 import type { MigrationState } from './features/data/reducers/wallet/migration';
 import type { TooltipsState } from './features/data/reducers/tooltips';
 import type { MerlinState } from './features/data/reducers/merlin';
+import type { TrendingPoolState } from './features/data/reducers/trendingPools';
+import type { SupportedNetworksState } from './features/data/reducers/supportedNetworks';
+import type { SupportedProtocolsState } from './features/data/reducers/supportedProtocols';
 
 export interface BeefyState {
   entities: {
@@ -81,6 +84,11 @@ export interface BeefyState {
     treasury: TreasuryState;
     savedVaults: SavedVaultsState;
     tooltips: TooltipsState;
+  };
+  market: {
+    trendingPools: TrendingPoolState;
+    supportedNetworks: SupportedNetworksState;
+    supportedProtocols: SupportedProtocolsState;
   };
   merlin: MerlinState;
 }

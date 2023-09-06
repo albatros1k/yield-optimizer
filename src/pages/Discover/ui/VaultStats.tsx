@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import { useTheme } from 'styled-components';
+import { useNavigate } from 'react-router';
 
 import { icons } from '../../../shared/Icons';
 import { Main } from '../../../shared/ui/Typography';
@@ -10,15 +11,14 @@ import { Apy } from './stats/Apy';
 import { Daily } from './stats/Daily';
 import { SafetyScore } from './stats/SafetyScore';
 import { AnimatedRow } from './styled';
-import { useHistory } from 'react-router';
 
 const { arrow } = icons;
 
 export const VaultStats = memo<{ vaultId: string }>(({ vaultId }) => {
   const { colors } = useTheme();
-  const history = useHistory();
+  const navigate = useNavigate();
 
-  const goToDetails = (): void => history.push(`/vault/${vaultId}`);
+  const goToDetails = (): void => navigate(`/vault/${vaultId}`);
 
   return (
     <Grid

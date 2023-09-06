@@ -1,7 +1,7 @@
 import { FC, memo, useMemo } from 'react';
 import { styled, useTheme } from 'styled-components';
 import { capitalize } from 'lodash-es';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 
 import { icons } from '../../../shared/Icons';
 import { Line } from '../../../shared/ui/Spacer';
@@ -56,9 +56,9 @@ export const Vault: FC<VaultProps> = memo(({ vaultId, color }) => {
     colors: { alterText, bgColor },
   } = useTheme();
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
-  const goToDetails = (): void => history.push(`/vault/${vaultId}`);
+  const goToDetails = (): void => navigate(`/vault/${vaultId}`);
 
   return (
     <HoveredCard w="calc(33% - 13px)" overflowHidden pointer>

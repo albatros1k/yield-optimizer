@@ -43,7 +43,7 @@ export function definePlus(
       ? `-${isUSD ? '$' : ''}${numberWithCommas(fixedNumber * -1)}${isUSD ? '' : '%'}`
       : 0;
   } else {
-    return `$${numberWithCommas(fixedNumber)}`;
+    return `${isUSD ? '$' : ''}${numberWithCommas(fixedNumber)}${isUSD ? '' : '%'}`;
   }
 }
 

@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 import { useTheme } from 'styled-components';
 
 import { Card, Row, SvgContainer } from '../Containers';
@@ -8,16 +8,17 @@ import { icons } from '../../Icons';
 
 interface BackBlockProps {
   backText: string;
+  onBack?: () => void;
 }
 
-export const BackBlock = memo<BackBlockProps>(({ backText }) => {
+export const BackBlock = memo<BackBlockProps>(({ backText, onBack }) => {
   const {
     colors: { alterText },
   } = useTheme();
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
-  const goBack = (): void => history.goBack();
+  const goBack = (): void => navigate(-1);
 
   return (
     <Card p="20px 24px" w="100%">
@@ -29,7 +30,7 @@ export const BackBlock = memo<BackBlockProps>(({ backText }) => {
           p="0 17px"
           color={alterText}
           m="0 20px 0 0"
-          onClick={goBack}
+          onClick={onBack || goBack}
         >
           <SvgContainer size={10} m="0 6px 0 0">
             {icons.backarrow}
