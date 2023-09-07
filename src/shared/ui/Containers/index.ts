@@ -115,7 +115,7 @@ export const SvgContainer = styled.div<Partial<SvgContainerProps>>`
 export const ExpandedCardHeader = styled(Card)<{ open: boolean }>`
   ${transition}
   border-radius: ${({ open }) => (open ? '6px 6px 0 0' : '6px')};
-  background: ${({ theme: { colors } }) => colors.additionalBg};
+  background: ${({ theme: { colors } }) => colors.alterBg};
   width: 100%;
 `;
 

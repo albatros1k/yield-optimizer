@@ -82,7 +82,7 @@ export const MerlinPosition: FC<MerlinPositionProps> = memo(
           ) : (
             <TokenIcon w="24px" h="24px" address={address} />
           )}
-          <Column w="100%" overflowHidden m="0 0 0 14px">
+          <Column overflowHidden m="0 0 0 14px">
             <Row m="0 0 3px" w="100%" overflowHidden>
               <Main dotted>{isLP ? lpNames : symbol}</Main>
               {Boolean(feeTier) ? (

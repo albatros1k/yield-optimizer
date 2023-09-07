@@ -3,7 +3,7 @@ import { useTheme } from 'styled-components';
 import { capitalize } from 'lodash-es';
 
 import { Line } from '../../../../../../shared/ui/Spacer';
-import { H3, SubTitle } from '../../../../../../shared/ui/Typography';
+import { H3, Main } from '../../../../../../shared/ui/Typography';
 import { Grid, Row } from '../../../../../../shared/ui/Containers';
 
 import { IPortfolioItem } from '../../../../../../features/data/apis/merlin/types/portfolio';
@@ -50,13 +50,13 @@ export const RegularModule: FC<RegularModuleProps> = memo(({ positions, moduleNa
     return titles.map((title, index, { length }) => {
       const isLast = length - index === 1;
       return (
-        <SubTitle
+        <Main
           key={typeof title === 'string' ? title : index}
           color={alterText}
           ta={isLast ? 'right' : 'left'}
         >
           {title}
-        </SubTitle>
+        </Main>
       );
     });
   }, [alterText, hasRewards]);

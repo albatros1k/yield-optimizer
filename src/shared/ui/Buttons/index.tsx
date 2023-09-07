@@ -12,7 +12,7 @@ import {
 } from '../../styles/mixins';
 
 import { Row, SvgContainer } from '../Containers';
-import { SubTitle } from '../Typography';
+import { Main } from '../Typography';
 import { icons } from '../../Icons';
 import { LoadingSpinner, SpinContainer } from '../Loaders';
 
@@ -98,9 +98,9 @@ export const ExpandButton: FC<ExpandButtonProps> = ({
   return (
     <ExpandButtonContainer w={w} h={h} onClick={onClick} isOpen={isOpen} m={m}>
       <Row w="100%" align="center" justify="space-between">
-        <SubTitle color={isOpen ? alterText : subAccentMain} dotted>
+        <Main color={isOpen ? alterText : subAccentMain} dotted>
           {text}
-        </SubTitle>
+        </Main>
         <SvgContainer
           tf={isOpen ? 'rotate(-180deg)' : 'rotate(0deg)'}
           size={13}

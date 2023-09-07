@@ -1,7 +1,7 @@
 import { FC, Fragment, memo, useMemo } from 'react';
 import { useTheme } from 'styled-components';
 
-import { SubTitle } from '../../../../../../shared/ui/Typography';
+import { Main } from '../../../../../../shared/ui/Typography';
 import { Grid } from '../../../../../../shared/ui/Containers';
 import { Line } from '../../../../../../shared/ui/Spacer';
 
@@ -29,13 +29,13 @@ export const RegularModule: FC<RegularModuleProps> = memo(
         moduleTitles.map((title, index, { length }) => {
           const isLast = length - index === 1;
           return (
-            <SubTitle
+            <Main
               key={typeof title === 'string' ? title : index}
               color={alterText}
               ta={isLast ? 'right' : 'left'}
             >
               {title}
-            </SubTitle>
+            </Main>
           );
         }),
       [alterText]

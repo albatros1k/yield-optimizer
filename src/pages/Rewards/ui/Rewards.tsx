@@ -135,7 +135,7 @@ const Rewards: FC = () => {
             onClick={onRedirect}
             borderColor={alterHelp}
             bg="transparent"
-            w="157px"
+            w="180px"
             h="28px"
             m="0 20px 0 0"
             p="0 16px"
