@@ -45,7 +45,7 @@ export const Assets = memo(() => {
         <H2>Your Positions</H2>
       </Grid>
       <Wallet />
-      {!allPlatforms.length ? (
+      {!renderProtocols.length ? (
         <NoPositions
           icon={icons.search}
           heading="No positions found"

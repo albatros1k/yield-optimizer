@@ -61,7 +61,7 @@ export const Vault: FC<VaultProps> = memo(({ vaultId, color }) => {
   const goToDetails = (): void => navigate(`/vault/${vaultId}`);
 
   return (
-    <HoveredCard w="calc(33% - 13px)" overflowHidden pointer>
+    <HoveredCard overflowHidden pointer onClick={goToDetails}>
       <Block w="100%" p="20px" bg={color}>
         <Row>
           <Card bg={bgColor} w="fit-content" p="8px 10px" m="0 10px 0 0">
@@ -96,7 +96,7 @@ export const Vault: FC<VaultProps> = memo(({ vaultId, color }) => {
         </Row>
       </Block>
       <Line color={bgColor} />
-      <AnimatedRow w="100%" p="14px 20px" justify="space-between" onClick={goToDetails}>
+      <AnimatedRow w="100%" p="14px 20px" justify="space-between">
         <ButtonText color={alterText}>Vault Details</ButtonText>
         <SvgContainer stroke={alterText} tf="rotate(-0.25turn)">
           {arrow}

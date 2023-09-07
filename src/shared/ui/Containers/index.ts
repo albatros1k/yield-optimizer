@@ -37,7 +37,7 @@ export const Circle = styled(Row)<IFlexIntersection>`
   border-radius: 50%;
 `;
 
-export const Grid = styled.div<IGridIntersection>`
+export const Grid = styled.div<IGridIntersection & IBlock>`
   ${block}
   ${gridProps}
 `;

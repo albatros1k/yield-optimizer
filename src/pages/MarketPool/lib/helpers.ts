@@ -52,11 +52,11 @@ export const createChartOptions = (
       },
       tooltip: {
         titleFont: {
-          family: 'Outfit,Commissioner',
+          family: 'Space Grotesk',
           size: 14,
         },
         bodyFont: {
-          family: 'Outfit,Commissioner',
+          family: 'Space Grotesk',
           size: 12,
         },
         titleColor: theme.colors.textColor,
@@ -107,7 +107,7 @@ export const createChartOptions = (
           display: displayTicks,
           color: theme.colors.alterText,
           font: {
-            family: 'Outfit,Commissioner',
+            family: 'Space Grotesk',
             size: 14,
           },
           callback: val => `${+val < 0 ? '-' : ''}${definePlus(Math.abs(+val), true)}`,
@@ -130,7 +130,7 @@ export const createChartOptions = (
           maxTicksLimit: 7,
           maxRotation: 0,
           font: {
-            family: 'Outfit,Commissioner',
+            family: 'Space Grotesk',
             size: 14,
           },
         },

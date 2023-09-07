@@ -1,8 +1,6 @@
 import { memo } from 'react';
-import { useTheme } from 'styled-components';
 
 import { Main } from '../../../../../shared/ui/Typography';
-import { Button } from '../../../../../shared/ui/Buttons';
 import { MultipleTokenIcons, TokenIcon } from '../../../../../shared/ui/Images';
 import { GridItem, PositionGrid, Row } from '../../../../../shared/ui/Containers';
 
@@ -32,9 +30,6 @@ export const ClosedPosition = memo<ClosedPositionProps>(
   }) => {
     const { addressMap, poolInfo } = useAppSelector(selectMerlinInfo);
     const defineColor = useColor();
-    const {
-      colors: { subAccentMain },
-    } = useTheme();
 
     const currentPoolInfo = poolInfo.find(({ protocol }) =>
       protocol.includes(`${protocolName}__${moduleName}`)
@@ -101,13 +96,6 @@ export const ClosedPosition = memo<ClosedPositionProps>(
         <Main dotted color={defineColor(totalYieldUSD)}>
           {definePlus(totalYieldUSD)}
         </Main>
-        <GridItem colStart={6} colEnd={9}>
-          <Row justify="flex-end">
-            <Button bg="transparent" h="28px" w="150px" borderColor={subAccentMain}>
-              Manage
-            </Button>
-          </Row>
-        </GridItem>
       </PositionGrid>
     );
   }

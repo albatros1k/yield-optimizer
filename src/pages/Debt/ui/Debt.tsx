@@ -1,6 +1,4 @@
 import { FC, useEffect, useMemo } from 'react';
-import { useTheme } from 'styled-components';
-import { useNavigate } from 'react-router';
 
 import { selectWalletAddress } from '../../../features/data/selectors/wallet';
 import { selectMerlinInfo } from '../../../features/data/selectors/merlin';
@@ -13,9 +11,7 @@ import { IBorrowPosition } from '../types';
 import { parseProtocolName } from '../../../helpers/merlinHelpers';
 
 import { Card, Column, Row } from '../../../shared/ui/Containers';
-import { Button } from '../../../shared/ui/Buttons';
-import { icons } from '../../../shared/Icons';
-import { H2, SubTitle } from '../../../shared/ui/Typography';
+import { H2 } from '../../../shared/ui/Typography';
 import { NoInfo } from '../../../shared/ui/NoInfo';
 
 import { DebtRewardSkeleton } from '../../Rewards/ui/Skeleton';
@@ -26,8 +22,6 @@ const Debt: FC = () => {
   const walletAddress = useAppSelector(selectWalletAddress);
   const { isInitialLoaded, poolInfo, portfolio } = useAppSelector(selectMerlinInfo);
   const dispatch = useAppDispatch();
-
-  const { backarrow } = icons;
 
   const debtPositions = useMemo<IBorrowPosition[]>(() => {
     const deBankPositions: IBorrowPosition[] = portfolio.map(
@@ -110,13 +104,6 @@ const Debt: FC = () => {
     if (!isInitialLoaded && walletAddress) dispatch(getMerlinReducer(walletAddress));
   }, [walletAddress, isInitialLoaded, dispatch]);
 
-  const {
-    colors: { alterHelp, alterText },
-  } = useTheme();
-  const navigate = useNavigate();
-
-  const onRedirect = (): void => navigate('/dashboard');
-
   const renderProtocols = (): JSX.Element[] =>
     debtPositions.map((debtPosition, index) => (
       <DebtProtocol key={debtPosition.protocolName + index} {...{ debtPosition }} />
@@ -126,20 +113,6 @@ const Debt: FC = () => {
     <Column maxW="1180px" w="100%" m="0 auto">
       <Card w="100%" h="70px" m="0 0 24px" p="20px 25px">
         <Row w="100%" h="100%" align="center">
-          <Button
-            onClick={onRedirect}
-            borderColor={alterHelp}
-            bg="transparent"
-            w="180px"
-            h="28px"
-            m="0 20px 0 0"
-            p="0 16px"
-          >
-            {backarrow}
-            <SubTitle m="0 0 0 6px" color={alterText}>
-              Back to Dashboard
-            </SubTitle>
-          </Button>
           <H2>{`Wallet's Debts`}</H2>
         </Row>
       </Card>

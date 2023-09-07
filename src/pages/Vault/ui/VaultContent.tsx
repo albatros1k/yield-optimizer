@@ -30,13 +30,13 @@ export const VaultContent = memo<VaultContentProps>(({ vaultId }) => {
       <Grid
         w="100%"
         colTemplate="repeat(2,1fr)"
-        rowTemplate="393px"
+        rowTemplate="auto"
         colGap="20px"
         rowGap="20px"
         m="0 0 42px"
       >
-        {!isGovVault(vault) ? <About vaultId={vaultId} /> : null}
-        {!isGovVault(vault) ? <HistoricalRate vaultId={vaultId} /> : null}
+        {!isGovVault(vault) ? <About vaultId={vaultId} /> : <div />}
+        {!isGovVault(vault) ? <HistoricalRate vaultId={vaultId} /> : <div />}
         <ProtocolAndAssets vaultId={vaultId} />
         <Risks />
       </Grid>

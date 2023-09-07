@@ -90,7 +90,7 @@ export const Audits = memo<AuditsProps>(({ isModalOpen, closeModal }) => {
                     onClick={() => window.open(report, '_blank', 'noopener,noreferrer')}
                   >
                     <Main color={colors.alterText} m="0 6px 0 0">
-                      Proof
+                      Audit
                     </Main>
                     <SvgContainer stroke={colors.alterText} size={12}>
                       {icons.externalLink}

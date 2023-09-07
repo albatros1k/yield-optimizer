@@ -1,15 +1,12 @@
 import { FC, useEffect, useMemo } from 'react';
-import { useTheme } from 'styled-components';
-import { useNavigate } from 'react-router';
 
 import { selectWalletAddress } from '../../../features/data/selectors/wallet';
 import { selectMerlinInfo } from '../../../features/data/selectors/merlin';
 import { ILPToken } from '../../../features/data/apis/merlin/types/poolInfo';
 import { getMerlinReducer } from '../../../features/data/actions/merlin';
 
-import { Button } from '../../../shared/ui/Buttons';
 import { icons } from '../../../shared/Icons';
-import { H2, SubTitle } from '../../../shared/ui/Typography';
+import { H2 } from '../../../shared/ui/Typography';
 import { Card, Column, Row } from '../../../shared/ui/Containers';
 import { NoInfo } from '../../../shared/ui/NoInfo';
 
@@ -26,13 +23,6 @@ const Rewards: FC = () => {
   const walletAddress = useAppSelector(selectWalletAddress);
   const { isInitialLoaded, poolInfo, portfolio } = useAppSelector(selectMerlinInfo);
   const dispatch = useAppDispatch();
-
-  const {
-    colors: { alterHelp, alterText },
-  } = useTheme();
-  const navigate = useNavigate();
-
-  const { backarrow } = icons;
 
   const unclaimedRewards = useMemo<IRewardPosition[]>(() => {
     const deBankPositions: IRewardPosition[] = portfolio.map(
@@ -120,8 +110,6 @@ const Rewards: FC = () => {
     if (!isInitialLoaded && walletAddress) dispatch(getMerlinReducer(walletAddress));
   }, [walletAddress, dispatch, isInitialLoaded]);
 
-  const onRedirect = (): void => navigate('/dashboard');
-
   const renderProtocols = (): JSX.Element[] =>
     unclaimedRewards.map((rewardsPosition, index) => (
       <RewardsProtocol key={rewardsPosition.protocolName + index} {...{ rewardsPosition }} />
@@ -131,20 +119,6 @@ const Rewards: FC = () => {
     <Column maxW="1180px" w="100%" m="0 auto">
       <Card w="100%" h="70px" m="0 0 24px" p="20px 25px">
         <Row w="100%" h="100%" align="center">
-          <Button
-            onClick={onRedirect}
-            borderColor={alterHelp}
-            bg="transparent"
-            w="180px"
-            h="28px"
-            m="0 20px 0 0"
-            p="0 16px"
-          >
-            {backarrow}
-            <SubTitle m="0 0 0 6px" color={alterText}>
-              Back to Dashboard
-            </SubTitle>
-          </Button>
           <H2>{`Wallet's Rewards`}</H2>
         </Row>
       </Card>

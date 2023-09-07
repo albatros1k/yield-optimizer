@@ -98,5 +98,5 @@ export const ModalLayout = styled(Layout)<{ show: boolean }>`
   opacity: ${({ show }) => (show ? 1 : 0)};
   visibility: ${({ show }) => (show ? 'visible' : 'hidden')};
   transition: all 0.2s ease;
-  background-color: ${({ theme }) => theme.colors.bgColor + '96'};
+  background-color: ${({ theme }) => theme.colors.bgColor};
 `;

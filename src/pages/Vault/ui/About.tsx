@@ -77,7 +77,7 @@ export const About = memo<AboutProps>(({ vaultId }) => {
     chainNativeToken,
   ]);
 
-  const { question, bell } = icons;
+  const { question } = icons;
 
   return (
     <Card w="100%">
@@ -85,16 +85,13 @@ export const About = memo<AboutProps>(({ vaultId }) => {
         <Row align="center" justify="space-between" m="0 0 21px">
           <H3 color={colors.alterText}>About</H3>
           <Row align="center">
-            <Button h="32px" p="6px 14px" bg={colors.subAccentSecondary} m="0 16px 0 0">
+            <Button h="32px" p="6px 14px" bg={colors.subAccentSecondary}>
               <Row align="center">
                 <Main m="0 6px 0 0">Safety Score: {vault.safetyScore}</Main>
                 <SvgContainer stroke={colors.textColor} size={12}>
                   {question}
                 </SvgContainer>
               </Row>
-            </Button>
-            <Button bg={colors.alterHelp} w="32px" h="32px">
-              {bell}
             </Button>
           </Row>
         </Row>
