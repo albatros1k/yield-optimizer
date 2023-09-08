@@ -8,7 +8,7 @@ export const Sidebar = () => {
   const links = useMemo(
     () =>
       tabs.map((tab, index, { length }) => (
-        <Link key={tab.name} {...tab} margin={index < length - 1 ? '0 0 16px' : '0'} />
+        <Link key={tab.name} {...tab} margin={index < length - 1 ? '0 0 32px' : '0'} />
       )),
     []
   );

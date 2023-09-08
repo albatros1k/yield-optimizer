@@ -12,7 +12,11 @@ export const options: IOption[] = [
     caption: 'Compound, AAVE, Uniswap, and more!',
     icon: icons.plate,
   },
-  { title: 'Create Smart Wallet', caption: 'Which will automate your routine', icon: icons.wallet },
+  {
+    title: 'Access to Unique Strategies & Vaults',
+    caption: 'Data-driven strategies & vaults by strategists',
+    icon: icons.list,
+  },
   {
     title: 'See your P&L in real time',
     caption: 'Never miss the moment to update your position',

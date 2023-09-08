@@ -8,7 +8,7 @@ import {
 } from '../../../../../../features/data/apis/merlin/types/overview';
 
 import { Grid, GridItem } from '../../../../../../shared/ui/Containers';
-import { H3, SubTitle } from '../../../../../../shared/ui/Typography';
+import { H3, Main } from '../../../../../../shared/ui/Typography';
 import { Line } from '../../../../../../shared/ui/Spacer';
 
 import { closedModuleTitles, gridColumnPattern } from '../../../../lib/const';
@@ -34,9 +34,9 @@ export const ClosedModule = memo<ClosedModuleProps>(({ moduleName, protocolName,
         const end = index === 1 ? start + 2 : start + 1;
         return (
           <GridItem key={typeof title === 'string' ? title : index} colStart={start} colEnd={end}>
-            <SubTitle dotted color={alterText}>
+            <Main dotted color={alterText}>
               {title}
-            </SubTitle>
+            </Main>
           </GridItem>
         );
       }),

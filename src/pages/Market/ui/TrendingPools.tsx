@@ -60,7 +60,13 @@ export const TrendingPools = memo(() => {
     return pools.slice(2, 7).map(p => {
       const { poolId, name, protocol, network, tokenIds, apy, tvl, rewards } = p;
       return (
-        <Card key={poolId} h="269px" w="calc(20% - 16px)" p="18px 20px 0">
+        <Card
+          key={poolId}
+          h="269px"
+          w="calc(20% - 16px)"
+          p="18px 20px 0"
+          onClick={onNavigateToPool(name, poolId)}
+        >
           <MultipleTokenIcons addresses={tokenIds} size={24} />
           <Main m="14px 0 6px" w="100%" dotted={true}>
             {name.replaceAll('-', '/')}
@@ -96,13 +102,7 @@ export const TrendingPools = memo(() => {
             <SubTitle>{definePlus(rewards, false)}</SubTitle>
           </Row>
           <Line />
-          <Row
-            h="37px"
-            w="100%"
-            align="center"
-            pointer={true}
-            onClick={onNavigateToPool(name, poolId)}
-          >
+          <Row h="37px" w="100%" align="center" pointer={true}>
             <SubTitle
               color={colors.subAccentMain}
               pointer={true}
@@ -125,7 +125,7 @@ export const TrendingPools = memo(() => {
       const { poolId, name, protocol, network, tokenIds, apy, apyBase, apyFarm, tvl, rewards } = p;
 
       return (
-        <Card key={poolId} h="266px" w="calc(50% - 10px)">
+        <Card key={poolId} h="266px" w="calc(50% - 10px)" onClick={onNavigateToPool(name, poolId)}>
           <Row h="100%" w="100%">
             <Column w="220px" h="100%" p="18px 20px 0" justify="flex-start">
               <Row m="0 0 12px" w="100%" align="center">
@@ -152,14 +152,7 @@ export const TrendingPools = memo(() => {
                   {protocol} ({network})
                 </SubTitle>
               </Row>
-              <Row
-                m="auto 0 0"
-                h="52px"
-                w="100%"
-                align="center"
-                pointer={true}
-                onClick={onNavigateToPool(name, poolId)}
-              >
+              <Row m="auto 0 0" h="52px" w="100%" align="center" pointer={true}>
                 <SubTitle
                   color={colors.subAccentMain}
                   pointer={true}

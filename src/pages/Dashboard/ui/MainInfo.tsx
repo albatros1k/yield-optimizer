@@ -6,7 +6,7 @@ import { useTheme } from 'styled-components';
 import { Button } from '../../../shared/ui/Buttons';
 import { SquareImage } from '../../../shared/ui/Images';
 import { definePlus } from '../../../helpers/merlinHelpers';
-import { H1, SubTitle } from '../../../shared/ui/Typography';
+import { H1, Main } from '../../../shared/ui/Typography';
 import { Card, Column, Grid, Row } from '../../../shared/ui/Containers';
 
 import { selectWalletAddress } from '../../../features/data/selectors/wallet';
@@ -66,7 +66,7 @@ export const MainInfo = memo(() => {
           <Row align="center">
             <SquareImage w="24px" h="24px" src={blockiesIcon} m="0 10px 0 0" />
             <Column>
-              <SubTitle>{truncate(walletAddress)}</SubTitle>
+              <Main>{truncate(walletAddress)}</Main>
             </Column>
           </Row>
         </Row>
@@ -82,39 +82,39 @@ export const MainInfo = memo(() => {
         align="flex-start"
       >
         {isInitialLoaded && !numberOfPositions ? (
-          <SubTitle color={alterText}>No Data Available for Connected Wallet</SubTitle>
+          <Main color={alterText}>No Data Available for Connected Wallet</Main>
         ) : (
           <>
             <Column>
-              <SubTitle color={alterText} m="0 0 6px">
+              <Main color={alterText} m="0 0 6px">
                 Net Worth
-              </SubTitle>
+              </Main>
               {isInitialLoaded ? (
                 <>
                   <H1 m="0 0 4px">{definePlus(totalNetWorth, false)}</H1>
-                  <SubTitle color={alterText}>
+                  <Main color={alterText}>
                     {numberOfAssets} asset{numberOfAssets > 1 ? 's' : ''} + {numberOfPositions}{' '}
                     position{numberOfPositions > 1 ? 's' : ''}
-                  </SubTitle>
+                  </Main>
                 </>
               ) : (
                 <TitleSkeleton />
               )}
             </Column>
             <Column>
-              <SubTitle color={alterText} m="0 0 6px">
+              <Main color={alterText} m="0 0 6px">
                 Total P&L
-              </SubTitle>
+              </Main>
               {isInitialLoaded ? (
                 <>
                   <H1 m="0 0 4px" color={defineColor(totalPnl)}>
                     {definePlus(totalPnl)}
                   </H1>
                   <Row>
-                    <SubTitle color={alterText} m="0 3px 0 0">
+                    <Main color={alterText} m="0 3px 0 0">
                       Realized:
-                    </SubTitle>
-                    <SubTitle color={defineColor(realizedPnl)}>{definePlus(realizedPnl)}</SubTitle>
+                    </Main>
+                    <Main color={defineColor(realizedPnl)}>{definePlus(realizedPnl)}</Main>
                   </Row>
                 </>
               ) : (
@@ -122,9 +122,9 @@ export const MainInfo = memo(() => {
               )}
             </Column>
             <Column>
-              <SubTitle color={alterText} m="0 0 6px">
+              <Main color={alterText} m="0 0 6px">
                 Debt
-              </SubTitle>
+              </Main>
               {isInitialLoaded ? (
                 <H1 m="0 0 4px">{definePlus(totalDebt, false)}</H1>
               ) : (
@@ -132,9 +132,9 @@ export const MainInfo = memo(() => {
               )}
             </Column>
             <Column>
-              <SubTitle color={alterText} m="0 0 6px">
+              <Main color={alterText} m="0 0 6px">
                 Rewards
-              </SubTitle>
+              </Main>
               {isInitialLoaded ? (
                 <>
                   <H1 m="0 0 4px">{definePlus(totalRewards, false)}</H1>

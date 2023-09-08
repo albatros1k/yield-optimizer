@@ -18,7 +18,7 @@ import {
   Row,
 } from '../../../../../shared/ui/Containers';
 import { SquareImage } from '../../../../../shared/ui/Images';
-import { H3, SubTitle } from '../../../../../shared/ui/Typography';
+import { H3 } from '../../../../../shared/ui/Typography';
 import { Line } from '../../../../../shared/ui/Spacer';
 
 import { definePlus, onImageError, parseProtocol } from '../../../../../helpers/merlinHelpers';
@@ -110,7 +110,7 @@ export const MerlinProtocol: FC<MerlinProtocolProps> = memo(({ protocolInfo }) =
             <H3>{definePlus(totalNet, false)}</H3>
           </GridItem>
           <Row align="center" justify="flex-end">
-            <SubTitle m="0 12px 0 0">{open ? ContentState.HIDE : ContentState.EXPAND}</SubTitle>
+            <H3 m="0 12px 0 0">{open ? ContentState.HIDE : ContentState.EXPAND}</H3>
             <IconContainer
               w="24px"
               h="24px"

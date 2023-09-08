@@ -1,26 +1,19 @@
-import { FC, useMemo } from 'react';
+import { FC } from 'react';
 import { useTheme } from 'styled-components';
 
-import { Card } from '../../../shared/ui/Containers';
-import { H1, H3, Main, SubTitle } from '../../../shared/ui/Typography';
+import { Card, Row } from '../../../shared/ui/Containers';
+import { ButtonText, H1, H3, Main, SubTitle } from '../../../shared/ui/Typography';
 import { Button } from '../../../shared/ui/Buttons';
 import { JourneyCardInfo } from '../types/journey';
+import { icons } from '../../../shared/Icons';
+import { Image } from '../../../shared/ui/Images';
+
+import cosmos from '../../../images/cosmos.png';
 
 export const DeFiJourney: FC = () => {
   const {
-    colors: { alterText },
+    colors: { alterText, bgColor },
   } = useTheme();
-
-  const cards = useMemo(() => {
-    const cardInfo: JourneyCardInfo[] = [
-      { title: 'Total Investors', value: '45,193', cords: { top: 45, right: 100 } },
-      { title: 'Strateg', value: '38', cords: { top: 45, right: -200 } },
-      { title: 'Total Value Locked', value: '$95,293,201', cords: { top: 135, right: 200 } },
-      { title: 'Daily Volume', value: '$134,051', cords: { top: 135, right: -100 } },
-    ];
-
-    return cardInfo.map(card => <JourneyCard key={card.title} {...card} />);
-  }, []);
 
   return (
     <Card w="100%" p="32px 40px 41px 40px" pos="relative" overflowHidden>
@@ -29,11 +22,16 @@ export const DeFiJourney: FC = () => {
         With Odysea Vaults. Explore, invest, and grow your <br /> assets in the exciting world of
         DeFi.
       </Main>
-      <Button w="240px" h="42px">
-        Create Smart Wallet
+      <Button w="240px" h="42px" bg={bgColor} p="0 18px">
+        <Row w="100%" justify="space-between" align="center">
+          <ButtonText color={alterText}>More Vaults in Progress</ButtonText>
+          {icons.clock}
+        </Row>
       </Button>
-
-      {cards}
+      <Image
+        src={cosmos}
+        style={{ position: 'absolute', top: 0, right: 0, filter: 'brightness(40%)' }}
+      />
     </Card>
   );
 };

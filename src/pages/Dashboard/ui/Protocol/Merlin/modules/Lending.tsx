@@ -9,7 +9,7 @@ import {
 } from '../../../../../../features/data/apis/merlin/types/poolInfo';
 import { LendingHeadings, gridColumnPattern, moduleTitles } from '../../../../lib/const';
 
-import { H3, SubTitle } from '../../../../../../shared/ui/Typography';
+import { H3, Main } from '../../../../../../shared/ui/Typography';
 import { Grid, Row } from '../../../../../../shared/ui/Containers';
 import { Line, Spacer } from '../../../../../../shared/ui/Spacer';
 
@@ -34,13 +34,13 @@ export const Lending = memo<LendingProps>(
         moduleTitles.map((title, index, { length }) => {
           const isLast = length - index === 1;
           return (
-            <SubTitle
+            <Main
               key={typeof title === 'string' ? title : index}
               color={alterText}
               ta={isLast ? 'right' : 'left'}
             >
               {title}
-            </SubTitle>
+            </Main>
           );
         }),
       [alterText]

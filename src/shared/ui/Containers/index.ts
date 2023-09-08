@@ -37,7 +37,7 @@ export const Circle = styled(Row)<IFlexIntersection>`
   border-radius: 50%;
 `;
 
-export const Grid = styled.div<IGridIntersection>`
+export const Grid = styled.div<IGridIntersection & IBlock>`
   ${block}
   ${gridProps}
 `;
@@ -115,7 +115,7 @@ export const SvgContainer = styled.div<Partial<SvgContainerProps>>`
 export const ExpandedCardHeader = styled(Card)<{ open: boolean }>`
   ${transition}
   border-radius: ${({ open }) => (open ? '6px 6px 0 0' : '6px')};
-  background: ${({ theme: { colors } }) => colors.additionalBg};
+  background: ${({ theme: { colors } }) => colors.alterBg};
   width: 100%;
 `;
 
@@ -141,5 +141,5 @@ export const PositionGrid = styled(Grid)`
 export const ScrollContainer = styled.div<ScrollProps & { h: string }>`
   ${scroll};
   overflow-y: scroll;
-  height: ${({ h }) => h};
+  max-height: ${({ h }) => h};
 `;

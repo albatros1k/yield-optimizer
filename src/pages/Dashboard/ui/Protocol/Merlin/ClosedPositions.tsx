@@ -109,6 +109,7 @@ export const ClosedPositions = memo<ClosedPositionsProps>(({ protocolName, hasOp
         <ExpandButton
           isOpen={isShowed}
           onClick={showClosed}
+          w="230px"
           text={
             isShowed
               ? 'Hide  Closed Positions'

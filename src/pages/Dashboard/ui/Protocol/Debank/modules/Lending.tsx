@@ -9,7 +9,7 @@ import {
 
 import { Line, Spacer } from '../../../../../../shared/ui/Spacer';
 import { TokenIcon } from '../../../../../../shared/ui/Images';
-import { H3, Main, SubTitle } from '../../../../../../shared/ui/Typography';
+import { H3, Main } from '../../../../../../shared/ui/Typography';
 import { Grid, GridItem, PositionGrid, Row } from '../../../../../../shared/ui/Containers';
 
 import { LendingHeadings, gridColumnPattern } from '../../../../lib/const';
@@ -41,13 +41,13 @@ export const Lending: FC<LendingProps> = ({ pos: { name, stats, detail } }) => {
     return titles.map((title, index, { length }) => {
       const isLast = length - index === 1;
       return (
-        <SubTitle
+        <Main
           key={typeof title === 'string' ? title : index}
           color={alterText}
           ta={isLast ? 'right' : 'left'}
         >
           {title}
-        </SubTitle>
+        </Main>
       );
     });
   }, [alterText]);

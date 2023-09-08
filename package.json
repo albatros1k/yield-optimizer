@@ -73,7 +73,7 @@
   "scripts": {
     "start": "vite",
     "build": "echo 'DO NOT disable validation on build, fix underlying issue' && yarn validate && tsc && vite build",
-    "build-only": "tsc && vite build",
+    "build-only": "vite build",
     "preview": "vite preview",
     "validate": "ts-node ./scripts/validatePools.ts",
     "creationdate": "ts-node ./scripts/getPoolCreationTimestamp.ts",

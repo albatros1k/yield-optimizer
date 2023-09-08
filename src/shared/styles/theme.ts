@@ -99,7 +99,7 @@ const fonts: Record<FontType, FontProperties> = {
   main: { size: 14, fontWeight: 500, fontFamily: 'Space Grotesk' },
   dataTitle: { size: 12, fontWeight: 700, fontFamily: 'PT Sans' },
   button: { size: 12, fontWeight: 700, fontFamily: 'Space Grotesk' },
-  subtitle: { size: 12, fontWeight: 400, fontFamily: 'PT Sans' },
+  subtitle: { size: 14, fontWeight: 400, fontFamily: 'PT Sans' },
   input: { size: 12, fontWeight: 400, fontFamily: 'PT Sans' },
   caption: { size: 10, fontWeight: 400, fontFamily: 'PT Sans' },
   tag: { size: 8, fontWeight: 700, fontFamily: 'PT Sans' },
