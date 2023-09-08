@@ -33,6 +33,8 @@ import { ReactComponent as Bell } from '../../images/nav-icons/bell.svg';
 import { ReactComponent as Report } from '../../images/nav-icons/report.svg';
 import { ReactComponent as Unpeg } from '../../images/nav-icons/unpeg.svg';
 import { ReactComponent as Maximize } from '../../images/nav-icons/maximize.svg';
+import { ReactComponent as List } from '../../images/nav-icons/list.svg';
+import { ReactComponent as Clock } from '../../images/nav-icons/clock.svg';
 
 type IconName =
   | 'grid'
@@ -69,7 +71,9 @@ type IconName =
   | 'bell'
   | 'report'
   | 'unpeg'
-  | 'maximize';
+  | 'maximize'
+  | 'clock'
+  | 'list';
 
 export const icons: Record<IconName, JSX.Element> = {
   grid: <Grid />,
@@ -107,4 +111,6 @@ export const icons: Record<IconName, JSX.Element> = {
   report: <Report />,
   unpeg: <Unpeg />,
   maximize: <Maximize />,
+  clock: <Clock />,
+  list: <List />,
 };

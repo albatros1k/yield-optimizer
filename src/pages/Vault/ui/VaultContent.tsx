@@ -15,6 +15,7 @@ import { ProtocolAndAssets } from './ProtocolAndAssets';
 import { Risks } from './Risks';
 import { Management } from './Management';
 import { Other } from './Other';
+import { AboutStrategy } from './AboutStrategy';
 
 type VaultContentProps = PropsWithChildren<{
   vaultId: VaultEntity['id'];
@@ -42,7 +43,10 @@ export const VaultContent = memo<VaultContentProps>(({ vaultId }) => {
       </Grid>
       <Management vaultId={vaultId} />
       <Spacer />
-      <Other vaultId={vaultId} />
+      <Grid w="100%" colTemplate="repeat(2, 1fr)" rowTemplate="none" colGap="20px" rowGap="0">
+        <Other vaultId={vaultId} />
+        <AboutStrategy vaultId={vaultId} />
+      </Grid>
     </Fragment>
   );
 });

@@ -16,7 +16,7 @@ interface RiskCardProps {
 const RiskCard: FC<RiskCardProps> = ({ name, desc, icon }) => {
   const { colors } = useTheme();
   return (
-    <Card p="20px 22px" bg={colors.alterBg}>
+    <Card p="20px 22px" bg={colors.alterBg} w="100%">
       <Row>
         <Circle
           w="36px"
@@ -47,13 +47,18 @@ export const Risks = memo(() => {
   const risks: RiskCardProps[] = [
     {
       name: 'Yield Token Volatility',
-      desc: 'The main revenue comes from VELO tokens.',
+      desc: 'The main revenue comes from BAL and AURA tokens',
       icon: report,
     },
     {
       name: 'Unpeg',
-      desc: 'LUSD tokens are partially redeemed for volatile token.',
+      desc: 'auraBAL is not hard-pegged to B-80BAL-20WETH token.',
       icon: unpeg,
+    },
+    {
+      name: 'Negative Funding Fee',
+      desc: 'Historical modelling shows small negative influence (-3% pa) of funding rates',
+      icon: report,
     },
   ];
 

@@ -35,7 +35,7 @@ const ModalOverlay = styled.div`
 const ModalContent = styled.div`
   padding: 20px 23px;
   border-radius: 12px;
-  background: ${({ theme: { colors } }) => colors.alterHelp};
+  background: ${({ theme: { colors } }) => colors.bgGradient};
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
   opacity: 0;
   transform: translateY(-20px);

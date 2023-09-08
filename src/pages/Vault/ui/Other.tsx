@@ -2,7 +2,7 @@ import { Fragment, memo, useCallback, useMemo, useState } from 'react';
 import { useTheme } from 'styled-components';
 
 import { H3, Main } from '../../../shared/ui/Typography';
-import { Card, Row } from '../../../shared/ui/Containers';
+import { Card, Grid } from '../../../shared/ui/Containers';
 import { Button } from '../../../shared/ui/Buttons';
 import { icons } from '../../../shared/Icons';
 
@@ -67,11 +67,11 @@ export const Other = memo<OtherProps>(({ vaultId }) => {
         <H3 color={colors.alterText} m="0 0 24px">
           Other Information
         </H3>
-        <Row>
+        <Grid colTemplate="1fr 1fr" colGap="10px" rowTemplate="auto" rowGap="10px">
           {buttons.map(({ name, onClick }) => (
             <Button
               key={name}
-              w="168px"
+              w="100%"
               h="32px"
               m="0 20px 0 0"
               bg={colors.alterHelp}
@@ -81,7 +81,7 @@ export const Other = memo<OtherProps>(({ vaultId }) => {
               {icons.question}
             </Button>
           ))}
-        </Row>
+        </Grid>
       </Card>
       <VaultMechanics isModalOpen={modals.mechanics} closeModal={() => toggleModal('mechanics')} />
       <Backers isModalOpen={modals.backers} closeModal={() => toggleModal('backers')} />

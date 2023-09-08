@@ -34,7 +34,7 @@ export const ApyTag: FC<TagProps> = memo(({ vaultId, margin }) => {
 
   return (
     <Card opacity={0.9} bg={textColor} w="fit-content" p="8px 10px" m={margin}>
-      <Row>
+      <Row align="center">
         <SubTitle color={alterText} m="0 6px 0 0">
           Est. {label}:
         </SubTitle>

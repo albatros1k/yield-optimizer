@@ -5,12 +5,16 @@ import { icons } from '../../../../../shared/Icons';
 import { SubTitle } from '../../../../../shared/ui/Typography';
 import { Card, Grid, Row, SvgContainer } from '../../../../../shared/ui/Containers';
 
-import { selectTransactVaultId } from '../../../../../features/data/selectors/transact';
+import {
+  selectTransactMode,
+  selectTransactVaultId,
+} from '../../../../../features/data/selectors/transact';
 import {
   selectAreFeesLoaded,
   selectFeesByVaultId,
 } from '../../../../../features/data/selectors/fees';
 import { selectVaultDepositFee } from '../../../../../features/data/selectors/vaults';
+import { TransactMode } from '../../../../../features/data/reducers/wallet/transact-types';
 import { formatPercent } from '../../../../../helpers/format';
 
 import { useAppSelector } from '../../../../../store';
@@ -20,39 +24,73 @@ export const VaultFees = memo(() => {
   const fees = useAppSelector(state => selectFeesByVaultId(state, vaultId));
   const areFeesLoaded = useAppSelector(selectAreFeesLoaded);
   const deposit = useAppSelector(state => selectVaultDepositFee(state, vaultId));
+  const mode = useAppSelector(selectTransactMode);
   const { colors } = useTheme();
 
   return (
     <Card p="18px 24px" bg={colors.alterBg}>
       <Grid colTemplate="1fr" rowTemplate="none" colGap="0" rowGap="16px">
+        {mode === TransactMode.Deposit ? (
+          <Row w="100%" justify="space-between" align="center">
+            <Row align="center">
+              <SubTitle m="0 3px 0 0" color={colors.alterText}>
+                Deposit Fee
+              </SubTitle>
+              <SvgContainer size={12}>{icons.question}</SvgContainer>
+            </Row>
+            <SubTitle>
+              {areFeesLoaded
+                ? fees
+                  ? fees.deposit !== undefined
+                    ? formatPercent(fees.deposit, 2, '0%')
+                    : deposit
+                  : '?'
+                : '-'}
+            </SubTitle>
+          </Row>
+        ) : (
+          <Row w="100%" justify="space-between" align="center">
+            <Row align="center">
+              <SubTitle m="0 3px 0 0" color={colors.alterText}>
+                Withdrawal fee
+              </SubTitle>
+              <SvgContainer size={12}>{icons.question}</SvgContainer>
+            </Row>
+            <SubTitle>
+              {areFeesLoaded ? (fees ? formatPercent(fees.withdraw, 2, '0%') : '?') : '-'}
+            </SubTitle>
+          </Row>
+        )}
+        {mode === TransactMode.Deposit ? (
+          <>
+            <Row w="100%" justify="space-between" align="center">
+              <Row align="center">
+                <SubTitle m="0 3px 0 0" color={colors.alterText}>
+                  Minimum Deposit
+                </SubTitle>
+                <SvgContainer size={12}>{icons.question}</SvgContainer>
+              </Row>
+              <SubTitle>100 USDC</SubTitle>
+            </Row>
+            <Row w="100%" justify="space-between" align="center">
+              <Row align="center">
+                <SubTitle m="0 3px 0 0" color={colors.alterText}>
+                  Maximum Deposit
+                </SubTitle>
+                <SvgContainer size={12}>{icons.question}</SvgContainer>
+              </Row>
+              <SubTitle>50,000 USDC</SubTitle>
+            </Row>
+          </>
+        ) : null}
         <Row w="100%" justify="space-between" align="center">
           <Row align="center">
             <SubTitle m="0 3px 0 0" color={colors.alterText}>
-              Deposit Fee
+              Gas fee (estimated)
             </SubTitle>
             <SvgContainer size={12}>{icons.question}</SvgContainer>
           </Row>
-          <SubTitle>
-            {areFeesLoaded
-              ? fees
-                ? fees.deposit !== undefined
-                  ? formatPercent(fees.deposit, 2, '0%')
-                  : deposit
-                : '?'
-              : '-'}
-          </SubTitle>
-        </Row>
-
-        <Row w="100%" justify="space-between" align="center">
-          <Row align="center">
-            <SubTitle m="0 3px 0 0" color={colors.alterText}>
-              Withdrawal fee
-            </SubTitle>
-            <SvgContainer size={12}>{icons.question}</SvgContainer>
-          </Row>
-          <SubTitle>
-            {areFeesLoaded ? (fees ? formatPercent(fees.withdraw, 2, '0%') : '?') : '-'}
-          </SubTitle>
+          <SubTitle color={colors.alterText}>—</SubTitle>
         </Row>
       </Grid>
     </Card>

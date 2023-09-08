@@ -1,4 +1,4 @@
-import { memo, useMemo } from 'react';
+import { Fragment, memo, useMemo } from 'react';
 import { capitalize } from 'lodash-es';
 import { useTheme } from 'styled-components';
 import { useTranslation } from 'react-i18next';
@@ -24,6 +24,9 @@ import { Tvl } from '../../Discover/ui/stats/Tvl';
 
 import { punctuationWrap } from '../../../helpers/string';
 import { getNetworkSrc } from '../../../helpers/networkSrc';
+import { SafetyScore } from './Modals/SafetyScore';
+import { useToggle } from '../../../helpers/hooks';
+import { totalSafetyScore } from '../lib/safety';
 
 interface AboutProps {
   vaultId: VaultEntity['id'];
@@ -39,6 +42,7 @@ export const About = memo<AboutProps>(({ vaultId }) => {
   const depositTokenProvider = useAppSelector(state =>
     depositToken.providerId ? selectPlatformById(state, depositToken.providerId) : null
   );
+  const [modalOpen, toggleModalOpen] = useToggle();
   const vaultPlatformName = vaultPlatform.name;
   const depositTokenProviderName = depositTokenProvider ? depositTokenProvider.name : null;
   const assets = vault.assetIds;
@@ -80,75 +84,83 @@ export const About = memo<AboutProps>(({ vaultId }) => {
   const { question } = icons;
 
   return (
-    <Card w="100%">
-      <Block p="25px">
-        <Row align="center" justify="space-between" m="0 0 21px">
-          <H3 color={colors.alterText}>About</H3>
-          <Row align="center">
-            <Button h="32px" p="6px 14px" bg={colors.subAccentSecondary}>
-              <Row align="center">
-                <Main m="0 6px 0 0">Safety Score: {vault.safetyScore}</Main>
-                <SvgContainer stroke={colors.textColor} size={12}>
-                  {question}
-                </SvgContainer>
-              </Row>
-            </Button>
+    <Fragment>
+      <Card w="100%">
+        <Block p="25px">
+          <Row align="center" justify="space-between" m="0 0 21px">
+            <H3 color={colors.alterText}>About</H3>
+            <Row align="center">
+              <Button
+                h="32px"
+                p="6px 14px"
+                bg={colors.subAccentSecondary}
+                onClick={toggleModalOpen}
+              >
+                <Row align="center">
+                  <Main m="0 6px 0 0">Safety Score: {totalSafetyScore}</Main>
+                  <SvgContainer stroke={colors.textColor} size={12}>
+                    {question}
+                  </SvgContainer>
+                </Row>
+              </Button>
+            </Row>
           </Row>
-        </Row>
-        <Row align="center" m="0 0 20px">
-          <AssetsImage assetIds={vault.assetIds} size={40} chainId={vault.chainId} />
-          <H1 m="0 0 0 10px">
-            {punctuationWrap(vault.name)} {!isGovVault(vault) ? t('Vault-vault') : ''}
-          </H1>
-        </Row>
-        <Caption color={colors.alterText} m="0 0 6px">
-          Vault Description
-        </Caption>
-        <SubTitle m="0 0 24px">{t(i18nKey, options)}</SubTitle>
-        <Row>
-          <Card bg={colors.alterHelp} w="fit-content" p="5px 8px" m="0 10px 0 0">
-            <Row align="center">
-              <CircleImage
-                src={getNetworkSrc(vault.chainId)}
-                alt={vault.chainId}
-                w="12px"
-                h="12px"
-                m="0 6px 0 0"
-              />
-              <SubTitle>{capitalize(vault.chainId)}</SubTitle>
-            </Row>
-          </Card>
-          <Card bg={colors.alterHelp} w="fit-content" p="5px 8px" m="0 10px 0 0">
-            <SubTitle>{vaultPlatform.name}</SubTitle>
-          </Card>
-        </Row>
-      </Block>
+          <Row align="center" m="0 0 20px">
+            <AssetsImage assetIds={vault.assetIds} size={40} chainId={vault.chainId} />
+            <H1 m="0 0 0 10px">
+              {punctuationWrap(vault.name)} {!isGovVault(vault) ? t('Vault-vault') : ''}
+            </H1>
+          </Row>
+          <Caption color={colors.alterText} m="0 0 6px">
+            Vault Description
+          </Caption>
+          <SubTitle m="0 0 24px">{t(i18nKey, options)}</SubTitle>
+          <Row>
+            <Card bg={colors.alterHelp} w="fit-content" p="5px 8px" m="0 10px 0 0">
+              <Row align="center">
+                <CircleImage
+                  src={getNetworkSrc(vault.chainId)}
+                  alt={vault.chainId}
+                  w="12px"
+                  h="12px"
+                  m="0 6px 0 0"
+                />
+                <SubTitle>{capitalize(vault.chainId)}</SubTitle>
+              </Row>
+            </Card>
+            <Card bg={colors.alterHelp} w="fit-content" p="5px 8px" m="0 10px 0 0">
+              <SubTitle>{vaultPlatform.name}</SubTitle>
+            </Card>
+          </Row>
+        </Block>
 
-      <Block w="100%" p="25px" bg={colors.alterBg}>
-        <Grid w="100%" colTemplate="repeat(3,1fr)" rowTemplate="none" colGap="10px" rowGap="0px">
-          <Column>
-            <Caption color={colors.alterText} m="0 0 6px">
-              Current APY
-            </Caption>
-            <Row align="center">
-              <Apy vaultId={vaultId} typography={H1} margin="0 6px 0 0" />
-              <SvgContainer size={16}>{question}</SvgContainer>
-            </Row>
-          </Column>
-          <Column>
-            <Caption color={colors.alterText} m="0 0 6px">
-              Daily APY
-            </Caption>
-            <Daily vaultId={vaultId} typography={H1} margin="0 6px 0 0" />
-          </Column>
-          <Column>
-            <Caption color={colors.alterText} m="0 0 6px">
-              TVL
-            </Caption>
-            <Tvl vaultId={vaultId} typography={H1} margin="0 6px 0 0" />
-          </Column>
-        </Grid>
-      </Block>
-    </Card>
+        <Block w="100%" p="25px" bg={colors.alterBg}>
+          <Grid w="100%" colTemplate="repeat(3,1fr)" rowTemplate="none" colGap="10px" rowGap="0px">
+            <Column>
+              <Caption color={colors.alterText} m="0 0 6px">
+                Current APY
+              </Caption>
+              <Row align="center">
+                <Apy vaultId={vaultId} typography={H1} margin="0 6px 0 0" />
+                <SvgContainer size={16}>{question}</SvgContainer>
+              </Row>
+            </Column>
+            <Column>
+              <Caption color={colors.alterText} m="0 0 6px">
+                Daily APY
+              </Caption>
+              <Daily vaultId={vaultId} typography={H1} margin="0 6px 0 0" />
+            </Column>
+            <Column>
+              <Caption color={colors.alterText} m="0 0 6px">
+                TVL
+              </Caption>
+              <Tvl vaultId={vaultId} typography={H1} margin="0 6px 0 0" />
+            </Column>
+          </Grid>
+        </Block>
+      </Card>
+      <SafetyScore isModalOpen={modalOpen} closeModal={toggleModalOpen} />
+    </Fragment>
   );
 });

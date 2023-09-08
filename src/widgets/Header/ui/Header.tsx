@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { Row } from '../../../shared/ui/Containers';
 import { Image } from '../../../shared/ui/Images';
 
-import logo from '../../../images/odysea-logos/odysea.png';
+import logo from '../../../images/odysea-logos/OdyseaMVPLogo.png';
 
 import { WalletConnection } from '../../../new-features/WalletConnection';
 

@@ -6,8 +6,7 @@ import { ILPToken } from '../../../features/data/apis/merlin/types/poolInfo';
 import { getMerlinReducer } from '../../../features/data/actions/merlin';
 
 import { icons } from '../../../shared/Icons';
-import { H2 } from '../../../shared/ui/Typography';
-import { Card, Column, Row } from '../../../shared/ui/Containers';
+import { Column } from '../../../shared/ui/Containers';
 import { NoInfo } from '../../../shared/ui/NoInfo';
 
 import { useAppDispatch, useAppSelector } from '../../../store';
@@ -117,11 +116,6 @@ const Rewards: FC = () => {
 
   return (
     <Column maxW="1180px" w="100%" m="0 auto">
-      <Card w="100%" h="70px" m="0 0 24px" p="20px 25px">
-        <Row w="100%" h="100%" align="center">
-          <H2>{`Wallet's Rewards`}</H2>
-        </Row>
-      </Card>
       {!isInitialLoaded ? (
         <DebtRewardSkeleton />
       ) : unclaimedRewards.length ? (

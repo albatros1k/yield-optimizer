@@ -34,7 +34,7 @@ export const DailyTag: FC<TagProps> = memo(({ vaultId }) => {
 
   return (
     <Card opacity={0.9} bg={textColor} w="fit-content" p="8px 10px">
-      <Row>
+      <Row align="center">
         <SubTitle color={alterText} m="0 6px 0 0">
           Daily:
         </SubTitle>

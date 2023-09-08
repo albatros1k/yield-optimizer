@@ -36,7 +36,7 @@ export const WidgetPage = () => {
           borderRadiusSecondary: 16,
         },
         typography: {
-          fontFamily: 'Space-Grotesk',
+          fontFamily: 'Space Grotesk',
         },
       },
     }),
