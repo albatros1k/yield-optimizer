@@ -63,7 +63,7 @@ export const Other = memo<OtherProps>(({ vaultId }) => {
 
   return (
     <Fragment>
-      <Card p="25px" w="100%">
+      <Card p="25px" w="100%" h="100%">
         <H3 color={colors.alterText} m="0 0 24px">
           Other Information
         </H3>

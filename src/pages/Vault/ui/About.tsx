@@ -85,7 +85,7 @@ export const About = memo<AboutProps>(({ vaultId }) => {
 
   return (
     <Fragment>
-      <Card w="100%">
+      <Card w="100%" h="100%">
         <Block p="25px">
           <Row align="center" justify="space-between" m="0 0 21px">
             <H3 color={colors.alterText}>About</H3>

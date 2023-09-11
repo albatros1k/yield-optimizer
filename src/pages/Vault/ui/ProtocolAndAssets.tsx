@@ -20,7 +20,7 @@ export const ProtocolAndAssets = memo<ProtocolAndAssetsProps>(({ vaultId }) => {
   const { colors } = useTheme();
 
   return (
-    <Card p="25px">
+    <Card p="25px" h="100%">
       <H3 m="0 0 24px" color={colors.alterText}>{`Vault's Protocol & Asset`}</H3>
       <Block>
         {vault.assetIds.map((tokenId, index, { length }) => (

@@ -22,12 +22,14 @@ import { MarketAsync as Market } from '../../../pages/Market';
 import { MarketPoolsAsync as MarketPools } from '../../../pages/MarketPools';
 import { MarketPoolAsync as MarketPool } from '../../../pages/MarketPool';
 import { MarketPoolProtocolAsync as MarketPoolProtocol } from '../../../pages/MarketPoolProtocol';
+import { useTheme } from 'styled-components';
 
 export const Content = () => {
   const walletAddress = useAppSelector(selectWalletAddressIfKnown);
+  const { colors } = useTheme();
 
   return (
-    <ContentWrapper>
+    <ContentWrapper style={{ background: walletAddress ? 'transparent' : colors.bgColor }}>
       <Column maxW="1180px" w="100%">
         <Suspense fallback={<Loader />}>
           <Routes>

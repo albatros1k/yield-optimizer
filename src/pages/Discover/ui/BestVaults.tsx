@@ -1,15 +1,11 @@
 import { Fragment, memo, useMemo } from 'react';
 
-import { icons } from '../../../shared/Icons';
-import { H2 } from '../../../shared/ui/Typography';
-import { Grid, Row } from '../../../shared/ui/Containers';
+import { Grid } from '../../../shared/ui/Containers';
 
 import { selectVaultsByTvl } from '../../../features/data/selectors/tvl';
 import { useAppSelector } from '../../../store';
 
 import { Vault } from './Vault';
-
-const { question } = icons;
 
 export const BestVaults = memo(() => {
   const vaultsByTvl = useAppSelector(selectVaultsByTvl);
@@ -32,10 +28,6 @@ export const BestVaults = memo(() => {
 
   return (
     <Fragment>
-      <Row align="center" m="0 0 32px">
-        <H2 m="0 12px 0 0">Best Vaults This Week</H2>
-        {question}
-      </Row>
       <Grid
         w="100%"
         rowGap="0"
