@@ -14,7 +14,7 @@ const MarketPoolProtocol = memo(() => {
 
   const poolName = (pair || '').replaceAll('-', ' / ');
 
-  const onBack = (): void => navigate(`/market/pool/${pair}`, { state });
+  const onBack = (): void => navigate(state ? `/market` : `/market/pool/${pair}`);
 
   if (!pair || !poolId) return <Navigate to={`/market`} />;
 

@@ -50,7 +50,7 @@ export const TrendingPools = memo(() => {
       setBestType(nextType);
 
   const onNavigateToPool = (poolName: string, poolId: string) => (): void =>
-    navigate(`/market/pool/${poolName}/${poolId}`);
+    navigate(`/market/pool/${poolName}/${poolId}`, { state: true });
 
   useEffect(() => {
     dispatch(getTrendingPools({ tvl: tvlFilter }));

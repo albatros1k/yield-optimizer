@@ -6,4 +6,7 @@ export interface Query {
   size: number;
   sort: keyof typeof OrderEnum;
   sortKey: kpiKey;
+  keyword: string;
+  networks: string;
+  protocols: string;
 }

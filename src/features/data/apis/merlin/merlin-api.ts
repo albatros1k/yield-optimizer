@@ -105,10 +105,15 @@ export class MerlinApi {
     return filtered;
   }
 
-  static async getPairDetails(pair: string) {
+  static async getPairDetails(pair: string, tvl: string | null = null) {
     const result = await merlinInstance
       .get<IPairDetailsResponse | string>(
-        `api/merlin/pool-analysis-v2/pools/data/daily/list/${pair}`
+        `api/merlin/pool-analysis-v2/pools/data/daily/list/${pair}`,
+        {
+          params: {
+            tvl,
+          },
+        }
       )
       .then(r => r.data)
       .catch((e: AxiosError) => e.message);

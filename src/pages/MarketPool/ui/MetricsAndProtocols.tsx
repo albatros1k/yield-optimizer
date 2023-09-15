@@ -1,5 +1,5 @@
 import { memo, Fragment, useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import { useTheme } from 'styled-components';
 
 import { IPairDetailsResponse } from '../../../features/data/entities/market';
@@ -11,6 +11,7 @@ import { GeneralMetrics } from './GeneralMetrics';
 import { ProtocolsInfo } from './ProtocolsInfo';
 
 import { MetricsAndProtocolsSkeleton } from './skeleton';
+import { TVL_PARAM } from './MarketPool';
 
 export const MetricsAndProtocols = memo(() => {
   const theme = useTheme();
@@ -30,15 +31,18 @@ export const MetricsAndProtocols = memo(() => {
       data: [],
     },
   });
+  const [searchParams] = useSearchParams();
+  const tvlFilter = Number(searchParams.get(TVL_PARAM)) > 0 ? searchParams.get(TVL_PARAM) : null;
+
   const pairName = (pair || '').replaceAll('-', ' / ');
 
   useEffect(() => {
-    MerlinApi.getPairDetails(pair as string).then(pairDetails => {
+    MerlinApi.getPairDetails(pair as string, tvlFilter).then(pairDetails => {
       if (typeof pairDetails === 'object') {
         setState(prev => ({ ...prev, loading: false, pairDetails }));
       } else setState(prev => ({ ...prev, loading: false, errorMessage: pairDetails }));
     });
-  }, [pair]);
+  }, [pair, tvlFilter]);
 
   if (errorMessage)
     return (

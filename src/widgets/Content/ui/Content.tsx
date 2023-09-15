@@ -1,5 +1,6 @@
 import { Suspense } from 'react';
 import { Route, Routes } from 'react-router';
+import { useTheme } from 'styled-components';
 
 import { ContentWrapper } from './styled';
 
@@ -19,10 +20,8 @@ import { WelcomeAsync as Welcome } from '../../../pages/Welcome';
 import { SwapAsync as Swap } from '../../../pages/Swap';
 import { NotFoundAsync as NotFound } from '../../../pages/NotFound';
 import { MarketAsync as Market } from '../../../pages/Market';
-import { MarketPoolsAsync as MarketPools } from '../../../pages/MarketPools';
 import { MarketPoolAsync as MarketPool } from '../../../pages/MarketPool';
 import { MarketPoolProtocolAsync as MarketPoolProtocol } from '../../../pages/MarketPoolProtocol';
-import { useTheme } from 'styled-components';
 
 export const Content = () => {
   const walletAddress = useAppSelector(selectWalletAddressIfKnown);
@@ -41,7 +40,6 @@ export const Content = () => {
             <Route path="/debts" element={walletAddress ? <Debts /> : <Welcome />} />
             <Route path="/swap" element={<Swap />} />
             <Route path="/market" element={<Market />} />
-            <Route path="/market/pools" element={<MarketPools />} />
             <Route path="/market/pool/:pair" element={<MarketPool />} />
             <Route path="/market/pool/:pair/:poolId" element={<MarketPoolProtocol />} />
             <Route path="*" element={<NotFound />} />

@@ -1,28 +1,49 @@
-import { FC, Fragment, memo, useEffect, useState } from 'react';
+import {
+  ChangeEvent,
+  FC,
+  Fragment,
+  KeyboardEvent,
+  memo,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { useTheme } from 'styled-components';
-import { useNavigate } from 'react-router';
+import ReactPaginate from 'react-paginate';
 
 import { OrderEnum } from '../../../shared/types';
-import { Button } from '../../../shared/ui/Buttons';
+
 import { InfoTooltip } from '../../../shared/ui/Tooltip';
 import { SortLabel } from '../../../shared/ui/SortLabel';
 import { H3, SubTitle } from '../../../shared/ui/Typography';
-import { Block, Card, Row } from '../../../shared/ui/Containers';
+import { Block, Card, Grid, Row } from '../../../shared/ui/Containers';
 
 import { kpiKey } from '../../../features/data/entities/market';
 import { MerlinApi } from '../../../features/data/apis/merlin/merlin-api';
-import { selectSupportedLoading } from '../../../features/data/selectors/market';
+import { selectMarket, selectSupportedLoading } from '../../../features/data/selectors/market';
 
-import { queryString } from '../lib/consts';
+import { allValuesKey } from '../lib/consts';
 import { PoolsPreviewState } from '../types/poolPreview';
 import { numberWithCommas } from '../../../helpers/merlinHelpers';
 
-import { PoolsPreviewSkellet } from './Skeleton';
+import { PoolsSkeleton } from './Skeleton';
 import { PoolsPreviewRow } from './PoolsPreviewRow';
-import { Table } from './styled';
+import { PaginatorRow, Table } from './styled';
 import { useAppSelector } from '../../../store';
+import { clearEmptyKeys } from '../lib/helpers';
+import { TextField } from '../../../shared/ui/TextField';
+import { ChainsProtocolsSelector } from '../../../shared/ui/DropDown';
+import { SkeletonContent } from '../../../shared/ui/Skeleton';
+import { NoInfo } from '../../../shared/ui/NoInfo';
+import { ISelectedItem } from '../types';
 
 export const PoolsPreview = memo(() => {
+  const contentBlockRef = useRef<HTMLDivElement>(null);
+  const {
+    supportedNetworks: { loaded: networksLoaded, nameMap: networksNamesMap },
+    supportedProtocols: { loaded: protocolsLoaded, nameMap: protocolsNamesMap },
+  } = useAppSelector(selectMarket);
   const loaded = useAppSelector(selectSupportedLoading);
   const [
     {
@@ -30,8 +51,9 @@ export const PoolsPreview = memo(() => {
       loading,
       errorMessage,
       query,
-      query: { sort, sortKey },
+      query: { sort, sortKey, networks, protocols, page },
       totalElements,
+      totalPages,
     },
     setState,
   ] = useState<PoolsPreviewState>({
@@ -39,45 +61,102 @@ export const PoolsPreview = memo(() => {
     errorMessage: '',
     data: [],
     totalElements: 0,
+    totalPages: 0,
     query: {
       page: 1,
       size: 10,
       sort: 'DESC',
       sortKey: 'tvl',
+      keyword: '',
+      networks: '',
+      protocols: '',
     },
   });
 
+  const [inputValue, setInputValue] = useState<string>('');
+
   const { colors } = useTheme();
 
-  const navigate = useNavigate();
+  const networksMap = useMemo(() => {
+    if (networksLoaded) {
+      const res: { [key: string]: string } = {
+        [allValuesKey]: 'All Chains',
+        ...networksNamesMap,
+      };
+      return res;
+    }
+    return {};
+  }, [networksNamesMap, networksLoaded]);
+
+  const protocolsMap = useMemo(() => {
+    if (protocolsLoaded) {
+      const res: { [key: string]: string } = {
+        [allValuesKey]: 'All Protocols',
+        ...protocolsNamesMap,
+      };
+      return res;
+    }
+    return {};
+  }, [protocolsNamesMap, protocolsLoaded]);
 
   const is_asc: boolean = query.sort === OrderEnum.DESC;
 
   const onSort = (val: kpiKey) => (): void => {
     const nextSort = sortKey === val ? (sort === 'ASC' ? 'DESC' : 'ASC') : sort;
-    setState(prev => ({ ...prev, query: { ...query, sort: nextSort, sortKey: val } }));
+    setState(prev => ({ ...prev, query: { ...query, sort: nextSort, sortKey: val, page: 1 } }));
+  };
+
+  const onInputValueChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    setInputValue(event.target.value);
+  };
+
+  const onSearchByKeywords = (event: KeyboardEvent<HTMLInputElement>): void => {
+    if (event.key === 'Enter') {
+      setState(prev => ({
+        ...prev,
+        query: { ...query, keyword: inputValue.replace('/', '-').trim(), page: 1 },
+      }));
+    }
+  };
+
+  const onNetworksChange = (nextVal: string[]) => {
+    setState(prev => ({ ...prev, query: { ...query, networks: nextVal.join(','), page: 1 } }));
+  };
+
+  const onProtocolsChange = (nextVal: string[]) => {
+    setState(prev => ({ ...prev, query: { ...query, protocols: nextVal.join(','), page: 1 } }));
   };
 
   const renderPools = (): JSX.Element[] =>
     data.map(pool => (
-      <PoolsPreviewRow
-        key={`${pool.tokenIds?.join('-')}-${pool.name}`}
-        {...{ pool, sourcePage: 'MAIN_PAGE' }}
-      />
+      <PoolsPreviewRow key={`${pool.tokenIds?.join('-')}-${pool.name}`} {...{ pool }} />
     ));
 
-  const onNavigateToPools = (): void =>
-    navigate({
-      pathname: `/market/pools`,
-      search: `?${queryString}`,
-    });
+  const onPageChange = ({ selected }: ISelectedItem) => {
+    setState(prev => ({ ...prev, query: { ...query, page: selected + 1 } }));
+
+    if (contentBlockRef && contentBlockRef.current) {
+      try {
+        contentBlockRef.current.scrollIntoView({ block: 'start', behavior: 'smooth' });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
 
   useEffect(() => {
     setState(prev => ({ ...prev, loading: true }));
-    MerlinApi.getPools(query).then(result => {
+    MerlinApi.getPools(clearEmptyKeys(query)).then(result => {
       if (typeof result === 'object') {
-        const { data, totalElements } = result;
-        setState(prev => ({ ...prev, data, totalElements, loading: false }));
+        const { data, totalElements, totalPages } = result;
+        setState(prev => ({
+          ...prev,
+          data,
+          totalElements,
+          totalPages,
+          loading: false,
+          errorMessage: '',
+        }));
       } else {
         setState(prev => ({ ...prev, loading: false, errorMessage: result }));
       }
@@ -89,27 +168,90 @@ export const PoolsPreview = memo(() => {
       <H3 m="40px 0 32px">
         All {totalElements ? numberWithCommas(totalElements) : null} Liquidity Pools
       </H3>
+      <Grid
+        w="100%"
+        h="50px"
+        m="0 0 20px"
+        colGap="20px"
+        rowGap="auto"
+        colTemplate="1fr repeat(2, 210px)"
+        rowTemplate="auto"
+        ref={contentBlockRef}
+      >
+        <TextField
+          disabled={loading}
+          iconSize={14}
+          pattern=".*"
+          w="100%"
+          placeholder="Search By Asset"
+          value={inputValue}
+          onChange={onInputValueChange}
+          onKeyDown={onSearchByKeywords}
+          inputHeight={50}
+        />
+        {networksLoaded ? (
+          <ChainsProtocolsSelector
+            disabled={loading}
+            label="Chains"
+            valuesMap={networksMap}
+            value={networks ? networks.split(',') : []}
+            onChange={onNetworksChange}
+            isProtocols={false}
+            allValuesSpecificKey="All Chains"
+          />
+        ) : (
+          <Card h="50px" p="15px 20px">
+            <SkeletonContent h="100%" />
+          </Card>
+        )}
+        {protocolsLoaded ? (
+          <ChainsProtocolsSelector
+            disabled={loading}
+            label="Protocols"
+            valuesMap={protocolsMap}
+            value={protocols ? protocols.split(',') : []}
+            onChange={onProtocolsChange}
+            isProtocols={true}
+            allValuesSpecificKey="All Protocols"
+          />
+        ) : (
+          <Card h="50px" p="15px 20px">
+            <SkeletonContent h="100%" />
+          </Card>
+        )}
+      </Grid>
       {errorMessage ? (
         <SubTitle color={colors.red}>{errorMessage}</SubTitle>
       ) : loading || !loaded ? (
-        <PoolsPreviewSkellet />
-      ) : (
+        <PoolsSkeleton />
+      ) : data.length ? (
         <Card w="100%">
           <Table>
             <TableHead {...{ sortKey, is_asc, onSort }} />
             <tbody>{renderPools()}</tbody>
           </Table>
-          <Button
-            m="30px auto"
-            onClick={onNavigateToPools}
-            w="200px"
-            h="36px"
-            bg="transparent"
-            borderColor={colors.alterHelp}
-          >
-            Show more
-          </Button>
+          {totalPages > 1 ? (
+            <PaginatorRow m="25px auto 40px" justify="center" w="100%" p="0 30px">
+              <ReactPaginate
+                {...{
+                  breakLabel: '...',
+                  nextLabel: '>',
+                  forcePage: +page - 1,
+                  onPageChange,
+                  pageRangeDisplayed: 1,
+                  pageCount: totalPages,
+                  previousLabel: '<',
+                  className: 'paginator',
+                }}
+              />
+            </PaginatorRow>
+          ) : null}
         </Card>
+      ) : (
+        <NoInfo
+          heading="No Pools Found"
+          description="There are no pools by selected filters. Please try other filters or clear them."
+        />
       )}
       <Block h="40px" />
     </Fragment>
