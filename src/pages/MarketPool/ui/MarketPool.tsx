@@ -1,4 +1,4 @@
-import { memo, Fragment } from 'react';
+import { memo, Fragment, useEffect } from 'react';
 import { useTheme } from 'styled-components';
 import { Navigate, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
@@ -9,7 +9,7 @@ import { icons } from '../../../shared/Icons';
 import { MetricsAndProtocols } from './MetricsAndProtocols';
 import { ComparePools } from './ComparePools';
 import { DropDown } from '../../../shared/ui/DropDown';
-import { tvlFilterMap } from '../../Market/ui/TrendingPools';
+import { tvlFilterMap, validTvlValues } from '../../Market/ui/TrendingPools';
 
 export const TVL_PARAM = 'tvl';
 
@@ -20,15 +20,21 @@ const MarketPool = memo(() => {
   const { colors } = useTheme();
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const tvlFilter = searchParams.get(TVL_PARAM) || '1000000';
+  const tvlFilter: validTvlValues = (searchParams.get(TVL_PARAM) as validTvlValues) || '0';
 
   const onChangeParams = (tvl: string) => {
-    setSearchParams({ [TVL_PARAM]: tvl });
+    setSearchParams(tvl === '0' ? {} : { [TVL_PARAM]: tvl });
   };
 
   const onBack = (): void => {
     navigate(`/market`);
   };
+
+  useEffect(() => {
+    if (!(tvlFilter in tvlFilterMap)) {
+      setSearchParams({});
+    }
+  }, [tvlFilter, setSearchParams]);
 
   if (!pair) return <Navigate to={`/market`} />;
 

@@ -36,13 +36,26 @@ export const MetricsAndProtocols = memo(() => {
 
   const pairName = (pair || '').replaceAll('-', ' / ');
 
-  useEffect(() => {
-    MerlinApi.getPairDetails(pair as string, tvlFilter).then(pairDetails => {
-      if (typeof pairDetails === 'object') {
-        setState(prev => ({ ...prev, loading: false, pairDetails }));
-      } else setState(prev => ({ ...prev, loading: false, errorMessage: pairDetails }));
+  const getData = (_pair: string, _tvlFilter: string | null, signal: AbortSignal) => {
+    setState(prev => ({ ...prev, loading: true }));
+    MerlinApi.getPairDetails(_pair, _tvlFilter, signal).then(res => {
+      if (typeof res === 'object') {
+        setState(prev => ({ ...prev, loading: false, errorMessage: '', pairDetails: res }));
+      } else {
+        if (res !== 'canceled') setState(prev => ({ ...prev, loading: false, errorMessage: res }));
+      }
     });
+  };
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    getData(pair as string, tvlFilter, controller.signal);
+
+    return (): void => controller.abort();
   }, [pair, tvlFilter]);
+
+  if (loading) return <MetricsAndProtocolsSkeleton />;
 
   if (errorMessage)
     return (
@@ -50,8 +63,6 @@ export const MetricsAndProtocols = memo(() => {
         {errorMessage}
       </SubTitle>
     );
-
-  if (loading) return <MetricsAndProtocolsSkeleton />;
 
   return (
     <Fragment>

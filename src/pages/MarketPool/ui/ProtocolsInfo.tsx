@@ -31,7 +31,7 @@ export const ProtocolsInfo: FC<ProtocolsInfoProps> = memo(({ data }) => {
   const defineColor = useColor();
   const navigate = useNavigate();
   const protocolsMap = useAppSelector(selectProtocolNameMap);
-  const [sortKey, setSortKey] = useState<kpiKey>('apy');
+  const [sortKey, setSortKey] = useState<kpiKey>('tvl');
   const [orderDirection, setOrderDirection] = useState<`${OrderEnum}`>(OrderEnum.DESC);
 
   const is_asc: boolean = orderDirection === OrderEnum.DESC;

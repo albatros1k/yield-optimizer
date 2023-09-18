@@ -23,16 +23,20 @@ import { definePlus, onImageError } from '../../../helpers/merlinHelpers';
 import { TypeButton } from './styled';
 import { TrendingSkeleton } from './Skeleton';
 
-export const tvlFilterMap: Record<string, string> = {
+type TvlFilterMap = { '0': string; '100000': string; '1000000': string; '10000000': string };
+
+export const tvlFilterMap: TvlFilterMap = {
   '0': 'All Pools',
   '100000': '> 100K',
   '1000000': '> 1M',
   '10000000': '> 10M',
 } as const;
 
+export type validTvlValues = keyof TvlFilterMap;
+
 export const TrendingPools = memo(() => {
   const [bestType, setBestType] = useState<trendType>('All');
-  const [tvlFilter, setTvlFilter] = useState<keyof typeof tvlFilterMap>('1000000');
+  const [tvlFilter, setTvlFilter] = useState<validTvlValues>('1000000');
 
   const { isLoaded, errorMessage, data, loading } = useAppSelector(selectTendingPools);
   const protocolsMap = useAppSelector(selectProtocolNameMap);
