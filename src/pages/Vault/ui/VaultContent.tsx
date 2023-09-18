@@ -44,8 +44,8 @@ export const VaultContent = memo<VaultContentProps>(({ vaultId }) => {
       <Management vaultId={vaultId} />
       <Spacer />
       <Grid w="100%" colTemplate="repeat(2, 1fr)" rowTemplate="none" colGap="20px" rowGap="0">
-        <Other vaultId={vaultId} />
         <AboutStrategy vaultId={vaultId} />
+        <Other vaultId={vaultId} />
       </Grid>
     </Fragment>
   );

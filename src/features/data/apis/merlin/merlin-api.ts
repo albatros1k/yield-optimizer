@@ -105,10 +105,20 @@ export class MerlinApi {
     return filtered;
   }
 
-  static async getPairDetails(pair: string) {
+  static async getPairDetails(
+    pair: string,
+    tvl: string | null = null,
+    signal: AbortSignal | undefined = undefined
+  ) {
     const result = await merlinInstance
       .get<IPairDetailsResponse | string>(
-        `api/merlin/pool-analysis-v2/pools/data/daily/list/${pair}`
+        `api/merlin/pool-analysis-v2/pools/data/daily/list/${pair}`,
+        {
+          params: {
+            tvl,
+          },
+          signal,
+        }
       )
       .then(r => r.data)
       .catch((e: AxiosError) => e.message);
@@ -170,7 +180,14 @@ export class MerlinApi {
     return result;
   }
 
-  static async getHistoricalData(pair: string, poolId: string, start: string, end: string) {
+  static async getHistoricalData(
+    pair: string,
+    poolId: string,
+    start: string,
+    end: string,
+    tvl: string | null = null,
+    signal?: AbortSignal | undefined
+  ) {
     const result = await merlinInstance
       .get<IHistoricalData[] | IHistoricalData | string>(
         `api/merlin/pool-analysis-v2/pools/data/historical/${pair}${poolId && `/${poolId}`}`,
@@ -178,7 +195,9 @@ export class MerlinApi {
           params: {
             start,
             end,
+            tvl,
           },
+          signal,
         }
       )
       .then(r => r.data)

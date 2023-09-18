@@ -6,6 +6,7 @@ export interface PoolsPreviewState {
   errorMessage: string;
   data: IPoolPreview[];
   totalElements: number;
+  totalPages: number;
   query: Query;
 }
 

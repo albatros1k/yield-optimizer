@@ -33,6 +33,19 @@ export const MainInput = styled(DefaultInput)`
   }
 `;
 
+export const WalletInput = styled(MainInput)<IBlock & { isValid: boolean }>`
+  border: 1px solid
+    ${({ isValid, theme: { colors } }) => (isValid ? colors.accentMain : colors.red)};
+  height: 36px;
+  border-radius: 6px;
+  width: ${({ w }) => w};
+  padding: 0 18px;
+  background: ${({ theme: { colors } }) => colors.alterBg};
+  &:placeholder-shown {
+    border: 1px solid ${({ theme: { colors } }) => colors.alterHelp};
+  }
+`;
+
 export const InputContainer = styled(Block)<IBlock & { hasBorder: boolean }>`
   display: flex;
   position: relative;

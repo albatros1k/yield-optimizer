@@ -1,7 +1,7 @@
 /* eslint-disable import/no-unresolved */
 import { Fragment, useState, useEffect, memo } from 'react';
 import { useTheme } from 'styled-components';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import moment from 'moment';
 
 import { H3, SubTitle } from '../../../shared/ui/Typography';
@@ -15,8 +15,11 @@ import { PeriodButton } from './styled';
 import { LineChart } from './LineChart';
 import { ProtocolSelector } from './ProtocolSelector';
 import { ComparePoolsSkeleton } from './skeleton';
+import { TVL_PARAM } from './MarketPool';
 
 export const ComparePools = memo(() => {
+  const [searchParams] = useSearchParams();
+  const tvlFilter = Number(searchParams.get(TVL_PARAM)) > 0 ? searchParams.get(TVL_PARAM) : null;
   const [period, setPeriod] = useState<periodsType>(defaultPeriod);
   const [protocolsToShow, setProtocolsToShow] = useState<protocolType[]>([]);
   const { pair } = useParams();
@@ -27,7 +30,13 @@ export const ComparePools = memo(() => {
     .format('X');
 
   const end = moment.utc().set({ hour: 0, minute: 0, second: 0, millisecond: 0 }).format('X');
-  const { loading, errorMessage, data } = useHistoricalData(pair as string, '', start, end);
+  const { loading, errorMessage, data } = useHistoricalData(
+    pair as string,
+    '',
+    start,
+    end,
+    tvlFilter
+  );
   const {
     colors: { red },
     chartColors: {

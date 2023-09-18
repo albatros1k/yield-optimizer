@@ -81,7 +81,7 @@ export const About = memo<AboutProps>(({ vaultId }) => {
     chainNativeToken,
   ]);
 
-  const { question } = icons;
+  const { question, maximize } = icons;
 
   return (
     <Fragment>
@@ -99,7 +99,7 @@ export const About = memo<AboutProps>(({ vaultId }) => {
                 <Row align="center">
                   <Main m="0 6px 0 0">Safety Score: {totalSafetyScore}</Main>
                   <SvgContainer stroke={colors.textColor} size={12}>
-                    {question}
+                    {maximize}
                   </SvgContainer>
                 </Row>
               </Button>

@@ -1,7 +1,7 @@
-import { FC, memo } from 'react';
+import { FC, memo, useState } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 
-import { IPoolProtocolPreview } from '../../../features/data/entities/market';
+import { IPoolProtocolPreview, kpiKey } from '../../../features/data/entities/market';
 import { selectProtocolNameMap } from '../../../features/data/selectors/market';
 
 import { useAppSelector } from '../../../store';
@@ -17,6 +17,8 @@ import { Card, Column, Row, SvgContainer } from '../../../shared/ui/Containers';
 
 import { TooltipCell } from '../../../widgets/TooltipCell';
 import { Table } from '../../Market/ui/styled';
+import { OrderEnum } from '../../../shared/types';
+import { SortLabel } from '../../../shared/ui/SortLabel';
 
 interface ProtocolsInfoProps {
   data: IPoolProtocolPreview[];
@@ -29,13 +31,30 @@ export const ProtocolsInfo: FC<ProtocolsInfoProps> = memo(({ data }) => {
   const defineColor = useColor();
   const navigate = useNavigate();
   const protocolsMap = useAppSelector(selectProtocolNameMap);
+  const [sortKey, setSortKey] = useState<kpiKey>('tvl');
+  const [orderDirection, setOrderDirection] = useState<`${OrderEnum}`>(OrderEnum.DESC);
+
+  const is_asc: boolean = orderDirection === OrderEnum.DESC;
+
+  const onSort = (nextKpiKey: kpiKey) => (): void => {
+    setOrderDirection(
+      nextKpiKey === sortKey
+        ? orderDirection === OrderEnum.ASC
+          ? OrderEnum.DESC
+          : OrderEnum.ASC
+        : orderDirection
+    );
+    setSortKey(nextKpiKey);
+  };
 
   const onNavigateToPool = (pair: string, poolId: string) => (): void =>
     navigate(`/market/pool/${pair}/${poolId}`, { state });
 
   const renderProtocols = (): JSX.Element[] => {
     return [...data]
-      .sort((a, b) => b.apy - a.apy)
+      .sort((a, b) =>
+        orderDirection === OrderEnum.DESC ? b[sortKey] - a[sortKey] : a[sortKey] - b[sortKey]
+      )
       .map(
         (
           {
@@ -129,91 +148,69 @@ export const ProtocolsInfo: FC<ProtocolsInfoProps> = memo(({ data }) => {
         <thead>
           <tr>
             <th>
-              <Row justify="flex-start" flexWrap="wrap" align="center">
+              <Row justify="flex-start" flexWrap="wrap">
                 <SubTitle dotted={true} maxW="calc(100% - 20px)">
                   Protocol
                 </SubTitle>
                 <InfoTooltip
-                  text={'Protocol considered in the analysis of a specific pool'}
+                  text="Protocol considered in the analysis of a specific pool"
                   id="Protocols"
                 />
               </Row>
             </th>
             <th>
-              <Row justify="flex-start" flexWrap="wrap" align="center">
-                <SubTitle dotted={true} maxW="calc(100% - 20px)">
-                  APY
-                </SubTitle>
-                <InfoTooltip
-                  text={
-                    'Base APY + Reward APY. For non-autocompounding pools, reinvesting is not accounted which means APY = APR.'
-                  }
-                  id="apy"
-                />
-              </Row>
+              <SortLabel
+                title="APY"
+                is_active={sortKey === 'apy'}
+                is_asc={is_asc}
+                cb={onSort('apy')}
+                info="Base APY + Reward APY. For non-autocompounding pools, reinvesting is not accounted which means APY = APR."
+              />
             </th>
             <th>
-              <Row justify="flex-start" flexWrap="wrap" align="center">
-                <SubTitle dotted={true} maxW="calc(100% - 20px)">
-                  Base APY
-                </SubTitle>
-                <InfoTooltip
-                  text={
-                    'Annualised percentage yield from trading fees (incentives are excluded). We are considering 24h fees and scaling to a year.'
-                  }
-                  id="apyBase"
-                />
-              </Row>
+              <SortLabel
+                title="Base APY"
+                is_active={sortKey === 'apyBase'}
+                is_asc={is_asc}
+                cb={onSort('apyBase')}
+                info="Annualised percentage yield from trading fees (incentives are excluded). We are considering 24h fees and scaling to a year."
+              />
             </th>
             <th>
-              <Row justify="flex-start" flexWrap="wrap" align="center">
-                <SubTitle dotted={true} maxW="calc(100% - 20px)">
-                  Reward APY
-                </SubTitle>
-                <InfoTooltip
-                  text={
-                    'Annualised percentage yield from incentives ( trading fees are excluded). We pick the top between supported protocols for a specific pair.'
-                  }
-                  id="apyFarm"
-                />
-              </Row>
+              <SortLabel
+                title="Reward APY"
+                is_active={sortKey === 'apyFarm'}
+                is_asc={is_asc}
+                cb={onSort('apyFarm')}
+                info="Annualised percentage yield from incentives ( trading fees are excluded). We pick the top between supported protocols for a specific pair."
+              />
             </th>
             <th>
-              <Row justify="flex-start" flexWrap="wrap" align="center">
-                <SubTitle dotted={true} maxW="calc(100% - 20px)">
-                  APY (30d)
-                </SubTitle>
-                <InfoTooltip
-                  text={
-                    'APY average considering the last 30 days. We pick the top between supported protocols for a specific pair.'
-                  }
-                  id="apyMean30"
-                />
-              </Row>
+              <SortLabel
+                title="APY (30d)"
+                is_active={sortKey === 'apyMean30'}
+                is_asc={is_asc}
+                cb={onSort('apyMean30')}
+                info="APY average considering the last 30 days. We pick the top between supported protocols for a specific pair."
+              />
             </th>
             <th>
-              <Row justify="flex-start" flexWrap="wrap" align="center">
-                <SubTitle dotted={true} maxW="calc(100% - 20px)">
-                  Daily Fees
-                </SubTitle>
-                <InfoTooltip
-                  text={
-                    'Trading fees + incentives (in USD) generated by the specific pair considering all supported protocols together in one day.'
-                  }
-                  id="Volume"
-                />
-              </Row>
+              <SortLabel
+                title="Daily Fees"
+                is_active={sortKey === 'rewards'}
+                is_asc={is_asc}
+                cb={onSort('rewards')}
+                info="Trading fees + incentives (in USD) generated by the specific pair considering all supported protocols together in one day."
+              />
             </th>
             <th colSpan={2}>
-              <Row justify="flex-start" flexWrap="wrap" align="center">
-                <SubTitle dotted={true} maxW="calc(100% - 20px)">
-                  TVL
-                </SubTitle>
-                <InfoTooltip
-                  text={'Total reserves (in USD) of a specific pair and protocol in one day.'}
-                  id="Liquidity"
-                />
-              </Row>
+              <SortLabel
+                title="TVL"
+                is_active={sortKey === 'tvl'}
+                is_asc={is_asc}
+                cb={onSort('tvl')}
+                info="Total reserves (in USD) of a specific pair and protocol in one day."
+              />
             </th>
           </tr>
         </thead>

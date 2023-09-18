@@ -14,13 +14,11 @@ import { useColor } from '../../../helpers/hooks';
 import { definePlus, onImageError } from '../../../helpers/merlinHelpers';
 
 import { useAppSelector } from '../../../store';
-import { sourcePage } from '../types/poolPreview';
 import { TooltipCell } from '../../../widgets/TooltipCell';
 import { awsLink } from '../../../shared/lib/aws';
 
 interface PoolsPreviewRowProps {
   pool: IPoolPreview;
-  sourcePage: sourcePage;
 }
 
 export const PoolsPreviewRow = memo<PoolsPreviewRowProps>(
@@ -38,7 +36,6 @@ export const PoolsPreviewRow = memo<PoolsPreviewRowProps>(
       rewardsIncrease24H,
       apyMean30,
     },
-    sourcePage,
   }) => {
     const {
       colors: { alterText, subAccentMain },
@@ -48,8 +45,7 @@ export const PoolsPreviewRow = memo<PoolsPreviewRowProps>(
     const defineColor = useColor();
     const protocolsNameMap = useAppSelector(selectProtocolNameMap);
 
-    const onNavigateToPool = (): void =>
-      navigate(`/market/pool/${name}`, { state: { sourcePage } });
+    const onNavigateToPool = (): void => navigate(`/market/pool/${name}`);
 
     const iconSize = 20;
 

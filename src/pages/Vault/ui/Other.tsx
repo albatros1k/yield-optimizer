@@ -12,12 +12,14 @@ import { VaultMechanics } from './Modals/VaultMechanics';
 import { ApyBreakdown } from './Modals/ApyBreakdown';
 import { Backers } from './Modals/Backers';
 import { Audits } from './Modals/Audits';
+import { SafetyScore } from './Modals/SafetyScore';
 
 interface Modals {
   mechanics: boolean;
   apy: boolean;
   backers: boolean;
   audits: boolean;
+  safety: boolean;
 }
 
 interface OtherProps {
@@ -30,6 +32,7 @@ export const Other = memo<OtherProps>(({ vaultId }) => {
     apy: false,
     backers: false,
     audits: false,
+    safety: false,
   });
   const { colors } = useTheme();
 
@@ -58,6 +61,10 @@ export const Other = memo<OtherProps>(({ vaultId }) => {
         name: 'Audits',
         onClick: () => toggleModal('audits'),
       },
+      {
+        name: 'Safety Score',
+        onClick: () => toggleModal('safety'),
+      },
     ];
   }, [toggleModal]);
 
@@ -67,20 +74,22 @@ export const Other = memo<OtherProps>(({ vaultId }) => {
         <H3 color={colors.alterText} m="0 0 24px">
           Other Information
         </H3>
-        <Grid colTemplate="1fr 1fr" colGap="10px" rowTemplate="auto" rowGap="10px">
-          {buttons.map(({ name, onClick }) => (
-            <Button
-              key={name}
-              w="100%"
-              h="32px"
-              m="0 20px 0 0"
-              bg={colors.alterHelp}
-              onClick={onClick}
-            >
-              <Main m="0 5px 0 0">{name}</Main>
-              {icons.question}
-            </Button>
-          ))}
+        <Grid colTemplate="repeat(3,1fr)" colGap="20px" rowTemplate="auto" rowGap="20px">
+          {buttons.map(({ name, onClick }) => {
+            return (
+              <Button
+                key={name}
+                w="100%"
+                h="32px"
+                m="0 20px 0 0"
+                bg={colors.alterHelp}
+                onClick={onClick}
+              >
+                <Main m="0 5px 0 0">{name}</Main>
+                {icons.question}
+              </Button>
+            );
+          })}
         </Grid>
       </Card>
       <VaultMechanics isModalOpen={modals.mechanics} closeModal={() => toggleModal('mechanics')} />
@@ -91,6 +100,7 @@ export const Other = memo<OtherProps>(({ vaultId }) => {
         isModalOpen={modals.apy}
         closeModal={() => toggleModal('apy')}
       />
+      <SafetyScore isModalOpen={modals.safety} closeModal={() => toggleModal('safety')} />
     </Fragment>
   );
 });

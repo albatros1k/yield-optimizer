@@ -24,11 +24,18 @@ interface InfoTooltipProps {
   iconSize?: number;
   m?: string;
   id: string;
-  text: string;
+  text?: string;
+  Component?: JSX.Element;
   place?: 'top' | 'right' | 'bottom' | 'left';
 }
 
-export const InfoTooltip: FC<InfoTooltipProps> = ({ m = '0', id, text, place = 'top' }) => {
+export const InfoTooltip: FC<InfoTooltipProps> = ({
+  m = '0',
+  id,
+  text,
+  place = 'top',
+  Component,
+}) => {
   const { colors } = useTheme();
 
   return (
@@ -53,9 +60,11 @@ export const InfoTooltip: FC<InfoTooltipProps> = ({ m = '0', id, text, place = '
         borderColor={colors.bgColor}
         arrowColor={colors.bgColor}
       >
-        <SubTitle maxW="250px" color={colors.textColor}>
-          {text}
-        </SubTitle>
+        {Component || (
+          <SubTitle maxW="250px" color={colors.textColor}>
+            {text}
+          </SubTitle>
+        )}
       </ReactTooltip>
     </TooltipRow>
   );

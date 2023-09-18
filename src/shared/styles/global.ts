@@ -5,7 +5,7 @@ html {
 	scroll-behavior: smooth;
 }
 body {
-  background: #0f1727;
+  background: ${({ theme: { colors } }) => colors.bgGradient};
 }
 * {
 	font-family: PT Sans;

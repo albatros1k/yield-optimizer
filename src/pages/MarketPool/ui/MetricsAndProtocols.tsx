@@ -1,5 +1,5 @@
 import { memo, Fragment, useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import { useTheme } from 'styled-components';
 
 import { IPairDetailsResponse } from '../../../features/data/entities/market';
@@ -11,6 +11,7 @@ import { GeneralMetrics } from './GeneralMetrics';
 import { ProtocolsInfo } from './ProtocolsInfo';
 
 import { MetricsAndProtocolsSkeleton } from './skeleton';
+import { TVL_PARAM } from './MarketPool';
 
 export const MetricsAndProtocols = memo(() => {
   const theme = useTheme();
@@ -30,15 +31,31 @@ export const MetricsAndProtocols = memo(() => {
       data: [],
     },
   });
+  const [searchParams] = useSearchParams();
+  const tvlFilter = Number(searchParams.get(TVL_PARAM)) > 0 ? searchParams.get(TVL_PARAM) : null;
+
   const pairName = (pair || '').replaceAll('-', ' / ');
 
-  useEffect(() => {
-    MerlinApi.getPairDetails(pair as string).then(pairDetails => {
-      if (typeof pairDetails === 'object') {
-        setState(prev => ({ ...prev, loading: false, pairDetails }));
-      } else setState(prev => ({ ...prev, loading: false, errorMessage: pairDetails }));
+  const getData = (_pair: string, _tvlFilter: string | null, signal: AbortSignal) => {
+    setState(prev => ({ ...prev, loading: true }));
+    MerlinApi.getPairDetails(_pair, _tvlFilter, signal).then(res => {
+      if (typeof res === 'object') {
+        setState(prev => ({ ...prev, loading: false, errorMessage: '', pairDetails: res }));
+      } else {
+        if (res !== 'canceled') setState(prev => ({ ...prev, loading: false, errorMessage: res }));
+      }
     });
-  }, [pair]);
+  };
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    getData(pair as string, tvlFilter, controller.signal);
+
+    return (): void => controller.abort();
+  }, [pair, tvlFilter]);
+
+  if (loading) return <MetricsAndProtocolsSkeleton />;
 
   if (errorMessage)
     return (
@@ -46,8 +63,6 @@ export const MetricsAndProtocols = memo(() => {
         {errorMessage}
       </SubTitle>
     );
-
-  if (loading) return <MetricsAndProtocolsSkeleton />;
 
   return (
     <Fragment>
