@@ -108,6 +108,7 @@ export const MenuContainer = styled(Card)<MenuProps>`
   left: ${({ left = -85 }) => `${left}px`};
   max-height: 257px;
   overflow-y: scroll;
+  background: ${({ theme: { colors } }) => colors.bgColor};
 `;
 
 interface DropDownProps {
