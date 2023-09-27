@@ -22,7 +22,7 @@ export const Daily = memo<DailyProps>(({ vaultId, typography, margin }) => {
 
   const value = useMemo<string>(
     () =>
-      '0.025%' ||
+      '0.03%' ||
       (!haveValues
         ? QUESTIONS
         : isPrestake

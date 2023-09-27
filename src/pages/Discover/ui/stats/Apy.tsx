@@ -25,7 +25,7 @@ export const Apy = memo<TvlProps>(({ vaultId, typography, margin }) => {
 
   const value = useMemo<string>(
     () =>
-      '9%' ||
+      '11%' ||
       (!haveValues
         ? QUESTIONS
         : isPrestake
