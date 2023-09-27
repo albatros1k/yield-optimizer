@@ -66,20 +66,11 @@ export const VaultFees = memo(() => {
             <Row w="100%" justify="space-between" align="center">
               <Row align="center">
                 <SubTitle m="0 3px 0 0" color={colors.alterText}>
-                  Minimum Deposit
-                </SubTitle>
-                <SvgContainer size={12}>{icons.question}</SvgContainer>
-              </Row>
-              <SubTitle>100 USDC</SubTitle>
-            </Row>
-            <Row w="100%" justify="space-between" align="center">
-              <Row align="center">
-                <SubTitle m="0 3px 0 0" color={colors.alterText}>
                   Maximum Deposit
                 </SubTitle>
                 <SvgContainer size={12}>{icons.question}</SvgContainer>
               </Row>
-              <SubTitle>50,000 USDC</SubTitle>
+              <SubTitle>100,000 USDC</SubTitle>
             </Row>
           </>
         ) : null}
