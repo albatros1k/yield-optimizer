@@ -39,13 +39,14 @@ export const VaultFees = memo(() => {
               <SvgContainer size={12}>{icons.question}</SvgContainer>
             </Row>
             <SubTitle>
-              {areFeesLoaded
-                ? fees
-                  ? fees.deposit !== undefined
-                    ? formatPercent(fees.deposit, 2, '0%')
-                    : deposit
-                  : '?'
-                : '-'}
+              {'0%' ||
+                (areFeesLoaded
+                  ? fees
+                    ? fees.deposit !== undefined
+                      ? formatPercent(fees.deposit, 2, '0%')
+                      : deposit
+                    : '?'
+                  : '-')}
             </SubTitle>
           </Row>
         ) : (
@@ -57,7 +58,7 @@ export const VaultFees = memo(() => {
               <SvgContainer size={12}>{icons.question}</SvgContainer>
             </Row>
             <SubTitle>
-              {areFeesLoaded ? (fees ? formatPercent(fees.withdraw, 2, '0%') : '?') : '-'}
+              {'0%' || (areFeesLoaded ? (fees ? formatPercent(fees.withdraw, 2, '0%') : '?') : '-')}
             </SubTitle>
           </Row>
         )}
