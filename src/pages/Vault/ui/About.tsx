@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Fragment, memo, useMemo } from 'react';
 import { capitalize } from 'lodash-es';
 import { useTheme } from 'styled-components';
@@ -106,7 +107,7 @@ export const About = memo<AboutProps>(({ vaultId }) => {
             </Row>
           </Row>
           <Row align="center" m="0 0 20px">
-            <AssetsImage assetIds={vault.assetIds} size={40} chainId={vault.chainId} />
+            <AssetsImage assetIds={[vault.assetIds[0]]} size={40} chainId={vault.chainId} />
             <H1 m="0 0 0 10px">
               {punctuationWrap(vault.name)} {!isGovVault(vault) ? t('Vault-vault') : ''}
             </H1>
@@ -114,7 +115,12 @@ export const About = memo<AboutProps>(({ vaultId }) => {
           <Caption color={colors.alterText} m="0 0 6px">
             Vault Description
           </Caption>
-          <SubTitle m="0 0 24px">{t(i18nKey, options)}</SubTitle>
+          <SubTitle m="0 0 24px">
+            {`The vault deposits the USDC in Aave, borrows WETH and BAL assets to add liquidity in
+            Balancer and farms in Aura for more USDC. The earned USDC is then deposited back into
+            the vault. The transaction cost required to do all this is socialized among the vault's
+            users.`}
+          </SubTitle>
           <Row>
             <Card bg={colors.alterHelp} w="fit-content" p="5px 8px" m="0 10px 0 0">
               <Row align="center">

@@ -22,13 +22,14 @@ export const Daily = memo<DailyProps>(({ vaultId, typography, margin }) => {
 
   const value = useMemo<string>(
     () =>
-      !haveValues
+      '0.025%' ||
+      (!haveValues
         ? QUESTIONS
         : isPrestake
         ? PRE_STAKE
         : isBoosted
         ? formatted.boostedTotalDaily
-        : formatted.totalDaily,
+        : formatted.totalDaily),
     [haveValues, formatted, isBoosted, isPrestake]
   );
 
