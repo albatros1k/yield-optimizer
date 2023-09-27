@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { memo, useMemo } from 'react';
 import { useTheme } from 'styled-components';
 import { useTranslation } from 'react-i18next';
@@ -70,7 +71,11 @@ export const AboutStrategy = memo<AboutStrategyProps>(({ vaultId }) => {
       <H3 color={colors.alterText} m="0 0 24px">
         About Strategy
       </H3>
-      <SubTitle>{t(i18nKey, options)}</SubTitle>
+      <SubTitle>
+        {`The vault deposits the USDC in Aave, borrows WETH and BAL assets to add liquidity in
+        Balancer and farms in Aura for more USDC. The earned USDC is then deposited back into the
+        vault. The transaction cost required to do all this is socialized among the vault's users.`}
+      </SubTitle>
     </Card>
   );
 });

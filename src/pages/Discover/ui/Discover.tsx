@@ -3,17 +3,17 @@ import { Fragment } from 'react';
 import { Spacer } from '../../../shared/ui/Spacer';
 
 import { DeFiJourney } from './DefiJourney';
-import { BestVaults } from './BestVaults';
-// import { AllVaults } from './AllVaults';
+// import { BestVaults } from './BestVaults';
+import { AllVaults } from './AllVaults';
 
 const Discover = () => {
   return (
     <Fragment>
       <DeFiJourney />
       <Spacer space={52} />
-      <BestVaults />
+      {/* <BestVaults /> */}
       <Spacer space={52} />
-      {/* <AllVaults /> */}
+      <AllVaults />
     </Fragment>
   );
 };

@@ -1,1 +1,24 @@
-[]
+[
+  {
+    "id": "80bal-20weth-aurabal",
+    "name": "Aura B-80BAL-20WETH/auraBAL",
+    "token": "USDC",
+    "tokenAddress": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+    "tokenDecimals": 6,
+    "tokenProviderId": "balancer",
+    "earnedToken": "vlkAuraB-80BAL-20WETH/auraBAL",
+    "earnedTokenAddress": "0x2529B0173f0A304B8c5fbbaB03dad288d5070d70",
+    "earnContractAddress": "0x2529B0173f0A304B8c5fbbaB03dad288d5070d70",
+    "oracle": "tokens",
+    "oracleId": "USDC",
+    "status": "active",
+    "platformId": "aura",
+    "assets": ["USDC", "BAL", "WETH", "BAL-WETH-80-20", "auraBAL"],
+    "risks": ["COMPLEXITY_LOW", "IL_NONE", "MCAP_SMALL", "AUDIT", "CONTRACTS_VERIFIED"],
+    "strategyTypeId": "single",
+    "addLiquidityUrl": "https://app.balancer.fi/#/ethereum/pool/0x3dd0843a028c86e0b760b1a76929d1c5ef93a2dd000200000000000000000249/invest",
+    "removeLiquidityUrl": "https://app.balancer.fi/#/ethereum/pool/0x3dd0843a028c86e0b760b1a76929d1c5ef93a2dd000200000000000000000249/withdraw",
+    "network": "ethereum",
+    "createdAt": 1687443962
+  }
+]

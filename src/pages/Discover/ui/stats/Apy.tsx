@@ -25,13 +25,14 @@ export const Apy = memo<TvlProps>(({ vaultId, typography, margin }) => {
 
   const value = useMemo<string>(
     () =>
-      !haveValues
+      '9%' ||
+      (!haveValues
         ? QUESTIONS
         : isPrestake
         ? PRE_STAKE
         : isBoosted
         ? formatted.boostedTotalApy
-        : formatted.totalApy,
+        : formatted.totalApy),
     [haveValues, formatted, isBoosted, isPrestake]
   );
 
