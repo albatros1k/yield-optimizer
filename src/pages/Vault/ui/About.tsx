@@ -53,6 +53,8 @@ export const About = memo<AboutProps>(({ vaultId }) => {
   const { t, i18n } = useTranslation();
   const { colors } = useTheme();
 
+  const usedProtocols: string[] = ['Aave', 'Balancer', 'Aura'];
+
   let i18nKey = `StrategyDescription-${vault.strategyTypeId}`;
   if (!i18n.exists(i18nKey, { ns: 'risks' })) {
     i18nKey = 'StrategyDescription-default';
@@ -134,9 +136,11 @@ export const About = memo<AboutProps>(({ vaultId }) => {
                 <SubTitle>{capitalize(vault.chainId)}</SubTitle>
               </Row>
             </Card>
-            <Card bg={colors.alterHelp} w="fit-content" p="5px 8px" m="0 10px 0 0">
-              <SubTitle>{vaultPlatform.name}</SubTitle>
-            </Card>
+            {usedProtocols.map(protocol => (
+              <Card key={protocol} bg={colors.alterHelp} w="fit-content" p="5px 8px" m="0 10px 0 0">
+                <SubTitle>{protocol}</SubTitle>
+              </Card>
+            ))}
           </Row>
         </Block>
 

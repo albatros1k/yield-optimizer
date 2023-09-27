@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { memo } from 'react';
 import { useTheme } from 'styled-components';
 
@@ -19,6 +20,33 @@ interface ApyBreakdownProps {
   vaultId: VaultEntity['id'];
 }
 
+const MOCK = [
+  {
+    name: 'Aave (Deposit USDC)',
+    value: '3.5%',
+  },
+  {
+    name: 'Aave (Borrow WETH)',
+    value: '-1.2%',
+  },
+  {
+    name: 'Aave (Borrow BAL)',
+    value: '-5.6%',
+  },
+  {
+    name: 'Balancer (B-80BAL-20ETH)',
+    value: '0.2%',
+  },
+  {
+    name: 'Balancer (B-80BAL-20ETH/auraBAL)',
+    value: '1.9%',
+  },
+  {
+    name: 'Aura (B-80BAL-20ETH/auraBAL)',
+    value: '12%',
+  },
+];
+
 const LABELS = {
   totalDaily: 'Total Daily',
   tradingDaily: 'Trading Daily',
@@ -34,10 +62,20 @@ export const ApyBreakdown = memo<ApyBreakdownProps>(({ isModalOpen, closeModal, 
 
   const formatted = formattedTotalApy(values, QUESTIONS);
 
+  const hardcoded = () =>
+    MOCK.map(({ name, value }, index) => (
+      <Row key={name} justify="space-between" w="100%" align="center" m="0 0 10px">
+        <Main color={length - index === 1 ? colors.textColor : colors.alterText}>{name}</Main>
+        <Main color={length - index === 1 ? colors.subAccentSecondary : colors.textColor}>
+          {isLoaded ? value : '...'}
+        </Main>
+      </Row>
+    ));
+
   return (
     <Modal heading="APY Breakdown" isOpen={isModalOpen} onClose={closeModal}>
       <RiskContainer w="100%" mb="10px">
-        {Object.entries(formatted)
+        {/* {Object.entries(formatted)
           .reverse()
           .map(([key, value], index, { length }) => (
             <Row key={key} justify="space-between" w="100%" align="center" m="0 0 10px">
@@ -48,7 +86,8 @@ export const ApyBreakdown = memo<ApyBreakdownProps>(({ isModalOpen, closeModal, 
                 {isLoaded ? value : '...'}
               </Main>
             </Row>
-          ))}
+          ))} */}
+        {hardcoded()}
       </RiskContainer>
     </Modal>
   );
