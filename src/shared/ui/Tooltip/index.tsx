@@ -6,13 +6,13 @@ import { Row } from '../Containers';
 import { icons } from '../../Icons';
 import { SubTitle } from '../Typography';
 
-export const TooltipRow = styled(Row)`
+export const TooltipRow = styled(Row)<{ size: number }>`
   * {
     word-break: normal;
   }
   > svg {
-    width: 9px;
-    height: 9px;
+    width: ${({ size }) => `${size}px`};
+    height: ${({ size }) => `${size}px`};
     path {
       stroke: ${({ theme: { colors } }) => colors.alterText};
     }
@@ -35,6 +35,7 @@ export const InfoTooltip: FC<InfoTooltipProps> = ({
   text,
   place = 'top',
   Component,
+  iconSize = 9,
 }) => {
   const { colors } = useTheme();
 
@@ -48,6 +49,7 @@ export const InfoTooltip: FC<InfoTooltipProps> = ({
       pointer={true}
       data-tip
       data-for={id}
+      size={iconSize}
     >
       {icons.info}
       <ReactTooltip

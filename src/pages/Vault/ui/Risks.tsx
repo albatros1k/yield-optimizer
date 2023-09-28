@@ -7,18 +7,19 @@ import { icons } from '../../../shared/Icons';
 
 import { RiskContainer } from './styled';
 
-interface RiskCardProps {
+export interface RiskCardProps {
   name: string;
   desc: string;
   icon: JSX.Element;
 }
 
-const RiskCard: FC<RiskCardProps> = ({ name, desc, icon }) => {
+export const RiskCard: FC<RiskCardProps> = ({ name, desc, icon }) => {
   const { colors } = useTheme();
   return (
     <Card p="20px 22px" bg={colors.alterBg} w="100%">
-      <Row>
+      <Row w="100%">
         <Circle
+          style={{ minWidth: 36 }}
           w="36px"
           h="36px"
           align="center"
@@ -28,7 +29,7 @@ const RiskCard: FC<RiskCardProps> = ({ name, desc, icon }) => {
         >
           {icon}
         </Circle>
-        <Column>
+        <Column w="fit-content">
           <Row m="0 0 5px" align="center">
             <Main m="0 4px 0 0">{name}</Main>
             <SvgContainer size={12}>{icons.question}</SvgContainer>
