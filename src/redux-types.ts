@@ -40,6 +40,7 @@ import type { MerlinState } from './features/data/reducers/merlin';
 import type { TrendingPoolState } from './features/data/reducers/trendingPools';
 import type { SupportedNetworksState } from './features/data/reducers/supportedNetworks';
 import type { SupportedProtocolsState } from './features/data/reducers/supportedProtocols';
+import type { TokenState } from './features/data/reducers/wallet/token';
 
 export interface BeefyState {
   entities: {
@@ -71,6 +72,7 @@ export interface BeefyState {
     wallet: WalletState;
     walletActions: WalletActionsState;
     migration: MigrationState;
+    token: TokenState;
   };
   ui: {
     dataLoader: DataLoaderState;
