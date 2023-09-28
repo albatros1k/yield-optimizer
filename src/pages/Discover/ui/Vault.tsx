@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { FC, memo, useMemo } from 'react';
 import { styled, useTheme } from 'styled-components';
 import { capitalize } from 'lodash-es';
@@ -41,16 +42,18 @@ interface VaultProps {
 export const Vault: FC<VaultProps> = memo(({ vaultId, color }) => {
   const vault = useAppSelector(state => selectVaultById(state, vaultId));
   const platform = useAppSelector(state => selectPlatformById(state, vault.platformId));
-  const breakdown = useAppSelector(state =>
-    selectLpBreakdownByAddress(state, vault.chainId, vault.depositTokenAddress)
-  );
+  // const breakdown = useAppSelector(state =>
+  //   selectLpBreakdownByAddress(state, vault.chainId, vault.depositTokenAddress)
+  // );
 
-  const calculatedBreakdown = useCalculatedBreakdown(vault, breakdown);
+  // const calculatedBreakdown = useCalculatedBreakdown(vault, breakdown);
 
-  const percentage = useMemo(
-    () => calculatedBreakdown.assets.map(({ percent }) => formatPercent(percent)).join(' / '),
-    [calculatedBreakdown]
-  );
+  // const percentage = useMemo(
+  //   () => calculatedBreakdown.assets.map(({ percent }) => formatPercent(percent)).join(' / '),
+  //   [calculatedBreakdown]
+  // );
+
+  const percentage = '100%';
 
   const {
     colors: { alterText, bgColor },
@@ -88,9 +91,9 @@ export const Vault: FC<VaultProps> = memo(({ vaultId, color }) => {
       </Block>
       <Block p="27px 19px 30px">
         <Row align="center">
-          <AssetsImage assetIds={vault.assetIds} chainId={vault.chainId} size={54} />
+          <AssetsImage assetIds={[vault.assetIds[0]]} chainId={vault.chainId} size={40} />
           <Column h="100%" justify="space-between" m="0 0 0 12px">
-            <H3>{punctuationWrap(vault.name)}</H3>
+            <H3>{'USDC booster - AuraBAL' || punctuationWrap(vault.name)}</H3>
             <SubTitle color={alterText}>{percentage}</SubTitle>
           </Column>
         </Row>

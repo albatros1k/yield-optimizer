@@ -17,12 +17,26 @@ import {
   ITrendingPool,
   TrendingPoolAttribute,
 } from '../../entities/market';
+import { store } from '../../../../store';
+import { tokenKey } from '../../reducers/wallet/token';
 
 export const merlinInstance = axios.create({
   baseURL: import.meta.env.VITE_API_URL || 'https://v-wallet-graph.cf',
 });
 
 export class MerlinApi {
+  static tokenHeaderKey = 'zkp';
+
+  static getHeaderToken = (): string => {
+    const headerToken = store.getState().user.token[tokenKey];
+    return headerToken;
+  };
+
+  static async getHeader() {
+    const result = await merlinInstance.get<string>(`/api/merlin/${this.tokenHeaderKey}`);
+    return result.headers[this.tokenHeaderKey];
+  }
+
   static async getOverviews(address: string) {
     const result = await merlinInstance.get<IOverviewResponse>(
       `/api/merlin/getUserTokenOverviewsGraphQLData/${address}`
@@ -39,14 +53,16 @@ export class MerlinApi {
 
   static async getPortfolio(address: string) {
     const result = await merlinInstance.get<IPortfolio[]>(
-      `/api/merlin/userDeFiPositions/${address}`
+      `/api/merlin/userDeFiPositions/${address}`,
+      { headers: { [this.tokenHeaderKey]: this.getHeaderToken() } }
     );
     return result.data;
   }
 
   static async getTokenBalances(address: string) {
     const result = await merlinInstance.get<Record<string, ITokenBalance[]>>(
-      `/api/merlin/getTokenBalancesAll/${address}`
+      `/api/merlin/getTokenBalancesAll/${address}`,
+      { headers: { [this.tokenHeaderKey]: this.getHeaderToken() } }
     );
     return result.data;
   }

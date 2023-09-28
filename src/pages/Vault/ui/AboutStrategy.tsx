@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { useAppSelector } from '../../../store';
 
-import { Card } from '../../../shared/ui/Containers';
+import { Card, Column, Grid } from '../../../shared/ui/Containers';
 import { H3, SubTitle } from '../../../shared/ui/Typography';
 
 import { selectVaultById } from '../../../features/data/selectors/vaults';
@@ -67,27 +67,48 @@ export const AboutStrategy = memo<AboutStrategyProps>(({ vaultId }) => {
   }
 
   return (
-    <Card p="25px" w="100%" h="100%">
+    <Card p="25px" w="100%">
       <H3 color={colors.alterText} m="0 0 24px">
         About Strategy
       </H3>
-      <SubTitle>
-        <p style={{ margin: '0 0 10px' }}>
-          The user will deposit / withdraw USDC and will receive rewards in form of USDC. The
-          investment opportunity pays return on capital provided to the Balancer
-          B-80BAL-20ETH/auraBAL pool and then staked in Aura Finance to get boosted return. <br />
-          Main rewards are provided both by Balancer protocol and Aura Finance in form of BAL and
-          AURA tokens. Also there is negligible rewards from trading fees.
-          <br /> There are 4 steps in the strategy: <br />
-        </p>
-        1) Deposit USDC into AAVE <br /> 2) Borrow ETH & BAL from AAVE <br /> 3) Deposit ETH & BAL
-        into the Balancer B-80BAL-20ETH pool <br /> 4) Deposit B-80BAL-20ETH into the auraBAL Stable
-        pool <br /> 5) Stake the B-80BAL-20ETH/auraBAL into Aura <br />
-        <p style={{ margin: '10px 0 0 0' }}>
-          There is an automated mechanim to monitor and rebalance the strategy under certain
-          conditions, making sure the strategy remains healthy over time.
-        </p>
-      </SubTitle>
+      <Grid
+        w="100%"
+        colTemplate="repeat(2,1fr)"
+        rowTemplate="auto"
+        colGap="60px"
+        rowGap="none"
+        minH="auto"
+      >
+        <Column h="100%">
+          <SubTitle>
+            The user will deposit / withdraw USDC and will receive rewards in form of USDC. The
+            investment opportunity pays return on capital provided to the Balancer
+            B-80BAL-20ETH/auraBAL pool and then staked in Aura Finance to get boosted return.
+          </SubTitle>
+          <SubTitle m="10px 0 ">
+            Main rewards are provided both by Balancer protocol and Aura Finance in form of BAL and
+            AURA tokens. Also there is negligible rewards from trading fees.
+          </SubTitle>
+          <SubTitle>
+            There is an automated mechanim to monitor and rebalance the strategy under certain
+            conditions, making sure the strategy remains healthy over time.
+          </SubTitle>
+        </Column>
+        <Column h="100%">
+          <SubTitle m="0 0 10px">There are 4 steps in the strategy:</SubTitle>
+          {[
+            'Deposit USDC into AAVE',
+            'Borrow ETH & BAL from AAVE',
+            'Deposit ETH & BAL into the Balancer B-80BAL-20ETH pool',
+            'Deposit B-80BAL-20ETH into the auraBAL Stable pool',
+            'Stake the B-80BAL-20ETH/auraBAL into Aura',
+          ].map((step, index) => (
+            <SubTitle key={step} m="0 0 7px">
+              {index + 1}. {step}
+            </SubTitle>
+          ))}
+        </Column>
+      </Grid>
     </Card>
   );
 });

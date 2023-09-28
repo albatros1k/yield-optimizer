@@ -42,7 +42,7 @@ export const Transact = memo<TransactProps>(({ vaultId }) => {
   }, [dispatch, vaultId]);
 
   return (
-    <Card p="25px" w="100%">
+    <Card p="25px" w="100%" h="100%">
       <StepComponent key={step} />
     </Card>
   );

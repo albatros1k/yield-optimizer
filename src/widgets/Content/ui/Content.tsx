@@ -35,7 +35,7 @@ export const Content = () => {
             <Route path="/" element={<Discover />} />
             <Route path="/:network/vault/:id" element={<Vault />} />
             <Route path="/vault/:id" element={<Vault />} />
-            <Route path="/dashboard" element={walletAddress ? <Dashboard /> : <Welcome />} />
+            <Route path="/my_portfolio" element={walletAddress ? <Dashboard /> : <Welcome />} />
             <Route path="/rewards" element={walletAddress ? <Rewards /> : <Welcome />} />
             <Route path="/debts" element={walletAddress ? <Debts /> : <Welcome />} />
             <Route path="/swap" element={<Swap />} />

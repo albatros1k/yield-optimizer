@@ -27,9 +27,7 @@ export const PastedWallet = memo(() => {
   const onChangePastedWallet = (e: ChangeEvent<HTMLInputElement>) => {
     setPasted(e.target.value);
     const isValid = validateWalletAddress(e.target.value);
-    if (isValid) {
-      setValid(isValid);
-    }
+    setValid(isValid);
   };
 
   const clearPastedWallet = () => {

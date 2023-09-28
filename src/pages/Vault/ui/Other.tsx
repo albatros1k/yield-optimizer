@@ -14,12 +14,15 @@ import { Backers } from './Modals/Backers';
 import { Audits } from './Modals/Audits';
 import { SafetyScore } from './Modals/SafetyScore';
 
+import { entrySteps, exitSteps } from '../lib/mechanics';
+
 interface Modals {
   mechanics: boolean;
   apy: boolean;
   backers: boolean;
   audits: boolean;
   safety: boolean;
+  exit: boolean;
 }
 
 interface OtherProps {
@@ -33,6 +36,7 @@ export const Other = memo<OtherProps>(({ vaultId }) => {
     backers: false,
     audits: false,
     safety: false,
+    exit: false,
   });
   const { colors } = useTheme();
 
@@ -49,6 +53,7 @@ export const Other = memo<OtherProps>(({ vaultId }) => {
         name: 'Vault Mechanics',
         onClick: () => toggleModal('mechanics'),
       },
+      { name: 'Exit Mechanics', onClick: () => toggleModal('exit') },
       {
         name: 'APY Breakdown',
         onClick: () => toggleModal('apy'),
@@ -70,11 +75,11 @@ export const Other = memo<OtherProps>(({ vaultId }) => {
 
   return (
     <Fragment>
-      <Card p="25px" w="100%" h="100%">
+      <Card p="25px" w="100%">
         <H3 color={colors.alterText} m="0 0 24px">
           Other Information
         </H3>
-        <Grid colTemplate="repeat(3,1fr)" colGap="20px" rowTemplate="auto" rowGap="20px">
+        <Grid colTemplate="repeat(6,1fr)" colGap="20px" rowTemplate="auto" rowGap="20px">
           {buttons.map(({ name, onClick }) => {
             return (
               <Button
@@ -92,7 +97,20 @@ export const Other = memo<OtherProps>(({ vaultId }) => {
           })}
         </Grid>
       </Card>
-      <VaultMechanics isModalOpen={modals.mechanics} closeModal={() => toggleModal('mechanics')} />
+      <VaultMechanics
+        key="entry"
+        heading="Vault Mechanics"
+        steps={entrySteps}
+        isModalOpen={modals.mechanics}
+        closeModal={() => toggleModal('mechanics')}
+      />
+      <VaultMechanics
+        key="exit"
+        heading="Exit Mechanics"
+        steps={exitSteps}
+        isModalOpen={modals.exit}
+        closeModal={() => toggleModal('exit')}
+      />
       <Backers isModalOpen={modals.backers} closeModal={() => toggleModal('backers')} />
       <Audits isModalOpen={modals.audits} closeModal={() => toggleModal('audits')} />
       <ApyBreakdown

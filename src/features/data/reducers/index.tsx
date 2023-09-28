@@ -38,6 +38,7 @@ import type { AnyAction } from '@reduxjs/toolkit';
 import { resolverReducer } from './wallet/resolver';
 import { bridgesSlice } from './bridges';
 import { migrationSlice } from './wallet/migration';
+import { tokenSlice } from './wallet/token';
 import { tooltipsSlice } from './tooltips';
 import { merlinReducer } from './merlin';
 import { supportedNetworksSlice } from './supportedNetworks';
@@ -76,6 +77,7 @@ const userReducer = combineReducers<BeefyState['user']>({
   walletActions: walletActionsReducer,
   resolver: resolverReducer,
   migration: migrationSlice.reducer,
+  token: tokenSlice.reducer,
 });
 const uiReducer = combineReducers<BeefyState['ui']>({
   filteredVaults: persistReducer(

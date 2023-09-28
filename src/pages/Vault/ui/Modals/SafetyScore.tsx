@@ -5,8 +5,9 @@ import { Modal } from '../../../../shared/ui/Modal';
 import { LinearChart } from '../../../../shared/ui/LinearChart';
 import { Column, Row, ScrollContainer } from '../../../../shared/ui/Containers';
 import { Main } from '../../../../shared/ui/Typography';
-import { icons } from '../../../../shared/Icons';
 import { Spacer } from '../../../../shared/ui/Spacer';
+import { InfoTooltip } from '../../../../shared/ui/Tooltip';
+
 import { MAX_SAFETY_SCORE, safetyScores, totalSafetyScore } from '../../lib/safety';
 
 interface SafetyScoreProps {
@@ -32,13 +33,13 @@ export const SafetyScore = memo<SafetyScoreProps>(({ isModalOpen, closeModal }) 
             <Main color={colors.alterText} m="0 0 24px">
               {title}
             </Main>
-            {subtitles.map(({ name, score }) => (
+            {subtitles.map(({ name, score, desc }) => (
               <Row key={name} w="100%" justify="space-between" align="center" m="0 0 25px">
                 <Row align="center">
                   <Main m="0 5px 0 0" color={score > 0 ? colors.textColor : colors.accentMain}>
                     {name}
                   </Main>
-                  {icons.question}
+                  <InfoTooltip id={name + score} text={desc} iconSize={12} />
                 </Row>
 
                 <Row

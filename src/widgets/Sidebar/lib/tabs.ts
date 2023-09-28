@@ -4,8 +4,8 @@ import { TabInfo } from '../types';
 const { house, market, swap, speed, star } = icons;
 
 export enum Tabs {
-  DISCOVER = 'Discover',
-  DASHBOARD = 'Dashboard',
+  VAULTS = 'Vaults',
+  MY_PORTFOLIO = 'My portfolio',
   REWARDS = 'Rewards',
   DEBT = 'Debt',
   SWAP = 'Swap',
@@ -13,8 +13,8 @@ export enum Tabs {
 }
 
 export enum LinksTo {
-  DISCOVER = '/',
-  DASHBOARD = '/dashboard',
+  VAULTS = '/',
+  MY_PORTFOLIO = '/my_portfolio',
   REWARDS = '/rewards',
   DEBT = '/debts',
   SWAP = '/swap',
@@ -22,8 +22,8 @@ export enum LinksTo {
 }
 
 export const tabs: TabInfo[] = [
-  { name: Tabs.DISCOVER, icon: star, to: LinksTo.DISCOVER },
-  { name: Tabs.DASHBOARD, icon: house, to: LinksTo.DASHBOARD },
+  { name: Tabs.VAULTS, icon: star, to: LinksTo.VAULTS },
+  { name: Tabs.MY_PORTFOLIO, icon: house, to: LinksTo.MY_PORTFOLIO },
   { name: Tabs.REWARDS, icon: star, to: LinksTo.REWARDS },
   { name: Tabs.DEBT, icon: speed, to: LinksTo.DEBT },
   { name: Tabs.SWAP, icon: swap, to: LinksTo.SWAP },

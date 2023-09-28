@@ -27,6 +27,7 @@ import { initiateBridgeForm } from './bridge';
 import { fetchPlatforms } from './platforms';
 import { selectAllChainIds } from '../selectors/chains';
 import { fetchBridges } from './bridges';
+import { fetchToken } from './token';
 
 type CapturedFulfilledActionGetter = Promise<() => Action>;
 
@@ -75,6 +76,9 @@ export async function initHomeDataV4(store: BeefyStore) {
     store.dispatch(fetchPlatforms());
 
     store.dispatch(fetchBridges());
+
+    // Token for merlin requests
+    store.dispatch(fetchToken());
   });
 
   // create the wallet instance as soon as we get the chain list

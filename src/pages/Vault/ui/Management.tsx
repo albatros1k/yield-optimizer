@@ -1,7 +1,4 @@
-import { Fragment, memo } from 'react';
-
-import { H3 } from '../../../shared/ui/Typography';
-import { Grid } from '../../../shared/ui/Containers';
+import { memo } from 'react';
 
 import { VaultEntity } from '../../../features/data/entities/vault';
 
@@ -12,13 +9,5 @@ interface ManagementProps {
 }
 
 export const Management = memo<ManagementProps>(({ vaultId }) => {
-  return (
-    <Fragment>
-      <H3 m="0 0 24px">Manage Position</H3>
-      <Grid w="100%" colTemplate="repeat(2, 1fr)" rowTemplate="none" colGap="20px" rowGap="0">
-        <Transact vaultId={vaultId} />
-        <div />
-      </Grid>
-    </Fragment>
-  );
+  return <Transact vaultId={vaultId} />;
 });

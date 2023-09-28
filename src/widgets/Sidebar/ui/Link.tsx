@@ -12,7 +12,7 @@ export const Link: FC<TabInfo & { margin: string }> = ({ icon, name, to, margin 
   } = useTheme();
 
   return (
-    <LinkContainer align="center" to={to} m={margin} ishouse={Number(Tabs.DASHBOARD === name)}>
+    <LinkContainer align="center" to={to} m={margin} ishouse={Number(Tabs.MY_PORTFOLIO === name)}>
       <IconContainer w="26px" h="26px" m="0 16px 0 0">
         {icon}
       </IconContainer>
