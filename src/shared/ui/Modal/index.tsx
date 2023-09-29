@@ -42,6 +42,7 @@ const ModalContent = styled.div`
   animation: ${fadeIn} 0.3s ease-in-out forwards;
   z-index: 1;
   min-width: 570px;
+  max-width: 600px;
 `;
 
 interface ModalProps {

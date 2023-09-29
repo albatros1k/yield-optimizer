@@ -17,6 +17,7 @@ import { Management } from './Management';
 import { Other } from './Other';
 import { AboutStrategy } from './AboutStrategy';
 import { Revenue } from './Revenue';
+import { Beta } from './Beta';
 
 type VaultContentProps = PropsWithChildren<{
   vaultId: VaultEntity['id'];
@@ -28,6 +29,8 @@ export const VaultContent = memo<VaultContentProps>(({ vaultId }) => {
   return (
     <Fragment>
       <BackBlock backText="Back to Vaults" />
+      <Spacer />
+      <Beta />
       <H3 m="42px 0 24px">Vault Details</H3>
       <Grid
         w="100%"

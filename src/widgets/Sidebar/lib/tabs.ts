@@ -5,7 +5,7 @@ const { house, market, swap, speed, star } = icons;
 
 export enum Tabs {
   VAULTS = 'Vaults',
-  MY_PORTFOLIO = 'My portfolio',
+  MY_PORTFOLIO = 'My Portfolio',
   REWARDS = 'Rewards',
   DEBT = 'Debt',
   SWAP = 'Swap',
