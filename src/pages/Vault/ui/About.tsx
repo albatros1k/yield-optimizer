@@ -84,7 +84,7 @@ export const About = memo<AboutProps>(({ vaultId }) => {
     chainNativeToken,
   ]);
 
-  const { question, maximize } = icons;
+  const { maximize } = icons;
 
   return (
     <Fragment>
@@ -150,7 +150,6 @@ export const About = memo<AboutProps>(({ vaultId }) => {
               </Caption>
               <Row align="center">
                 <Apy vaultId={vaultId} typography={H1} margin="0 6px 0 0" />
-                <SvgContainer size={16}>{question}</SvgContainer>
               </Row>
             </Column>
             <Column>

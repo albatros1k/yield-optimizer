@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { Route, Routes } from 'react-router';
+import { Route, Routes, useLocation } from 'react-router';
 import { useTheme } from 'styled-components';
 
 import { ContentWrapper } from './styled';
@@ -26,9 +26,14 @@ import { MarketPoolProtocolAsync as MarketPoolProtocol } from '../../../pages/Ma
 export const Content = () => {
   const walletAddress = useAppSelector(selectWalletAddressIfKnown);
   const { colors } = useTheme();
+  const { pathname } = useLocation();
+
+  const isVault = pathname === '/';
 
   return (
-    <ContentWrapper style={{ background: walletAddress ? 'transparent' : colors.bgColor }}>
+    <ContentWrapper
+      style={{ background: isVault || walletAddress ? 'transparent' : colors.bgColor }}
+    >
       <Column maxW="1180px" w="100%">
         <Suspense fallback={<Loader />}>
           <Routes>

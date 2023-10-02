@@ -377,6 +377,8 @@ const ActionDeposit = memo<ActionDepositProps>(({ quote }) => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const walletAddress = useAppSelector(selectWalletAddressIfKnown);
+  const provider = new ethers.BrowserProvider(window.ethereum);
+  const vaultAddress = '0x2529B0173f0A304B8c5fbbaB03dad288d5070d70';
 
   const [allowed, setAllowed] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
@@ -388,12 +390,11 @@ const ActionDeposit = memo<ActionDepositProps>(({ quote }) => {
   }, [dispatch, quote, t]);
 
   const onApprove = async () => {
+    const USDC_ADDRESS = '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48';
     try {
       setLoading(true);
-      const provider = new ethers.BrowserProvider(window.ethereum);
-      const vaultAddress = '0x2529B0173f0A304B8c5fbbaB03dad288d5070d70';
-      const vaultContract = new ethers.Contract(vaultAddress, abi, await provider.getSigner());
-      const allowanceReceipt = await vaultContract.approve(walletAddress, '1000000000000');
+      const vaultContract = new ethers.Contract(USDC_ADDRESS, abi, await provider.getSigner());
+      const allowanceReceipt = await vaultContract.approve(vaultAddress, '100000000');
       allowanceReceipt.wait();
       setAllowed(true);
     } catch (error) {
@@ -407,8 +408,6 @@ const ActionDeposit = memo<ActionDepositProps>(({ quote }) => {
   const onDeposit = async () => {
     try {
       setLoading(true);
-      const provider = new ethers.BrowserProvider(window.ethereum);
-      const vaultAddress = '0x2529B0173f0A304B8c5fbbaB03dad288d5070d70';
       const vaultContract = new ethers.Contract(vaultAddress, abi, await provider.getSigner());
       const txReceipt = await vaultContract.deposit(value.toString());
       txReceipt.wait();

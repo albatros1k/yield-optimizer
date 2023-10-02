@@ -3,9 +3,11 @@ import { FC } from 'react';
 
 import { icons } from '../../Icons';
 import { ButtonText } from '../Typography';
+import { lineAnimation } from '../../styles/animations';
 
 const LinkContainer = styled.a.attrs(() => ({ rel: 'noopener noreferrer', target: '_blank' }))`
   display: flex;
+  position: relative;
   align-items: center;
   > svg {
     width: 12px;
@@ -13,6 +15,16 @@ const LinkContainer = styled.a.attrs(() => ({ rel: 'noopener noreferrer', target
     path {
       stroke: ${({ theme: { colors } }) => colors.alterText};
     }
+  }
+  transition: color 0.3s ease;
+  &:hover::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    background: ${({ theme: { colors } }) => colors.textColor};
+    height: 1px;
+    animation: ${lineAnimation} 0.3s forwards;
   }
 `;
 

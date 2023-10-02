@@ -6,7 +6,7 @@ import { TokenEntity, isTokenErc20 } from '../../../features/data/entities/token
 import { AssetsImage } from '../../../components/AssetsImage';
 
 import { LinkBtn } from '../../../shared/ui/Link';
-import { Card, Row } from '../../../shared/ui/Containers';
+import { Card, Grid, Row } from '../../../shared/ui/Containers';
 import { Main, SubTitle } from '../../../shared/ui/Typography';
 
 import { useAppSelector } from '../../../store';
@@ -33,11 +33,13 @@ export const TokenCardDisplay = memo<TokenCardDisplayProps>(({ token, isLast }) 
           <Main m="0 0 0 12px">{token.symbol}</Main>
         </Row>
         <Row w="calc(50% - 5px)" align="center" justify={isMultiple ? 'space-between' : 'flex-end'}>
-          {token.website && <LinkBtn href={token.website} text="Website" />}
-          {isErc20 && (
-            <LinkBtn href={`${chain.explorerUrl}/token/${token.address}`} text="Contract" />
-          )}
-          {token.documentation && <LinkBtn href={token.documentation} text="Docs" />}
+          <Grid w="100%" colTemplate="repeat(3,1fr)" colGap="10px" rowGap="0" rowTemplate="none">
+            {token.website && <LinkBtn href={token.website} text="Website" />}
+            {isErc20 && (
+              <LinkBtn href={`${chain.explorerUrl}/token/${token.address}`} text="Contract" />
+            )}
+            {token.documentation && <LinkBtn href={token.documentation} text="Docs" />}
+          </Grid>
         </Row>
       </Row>
       <SubTitle color={colors.alterText}>
