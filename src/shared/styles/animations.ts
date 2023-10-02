@@ -12,6 +12,15 @@ export const growDown = keyframes`
     }
 `;
 
+export const lineAnimation = keyframes`
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+`;
+
 export const load = keyframes`
         0% {
             height: 5px;

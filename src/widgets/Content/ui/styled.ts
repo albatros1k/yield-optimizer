@@ -5,5 +5,4 @@ export const ContentWrapper = styled.main`
   display: flex;
   justify-content: center;
   padding: 20px 40px 20px 0;
-  background: transparent !important;
 `;

@@ -14,6 +14,14 @@ import { selectPlatformById } from '../../../features/data/selectors/platforms';
 import { selectTokenByAddress } from '../../../features/data/selectors/tokens';
 import { VaultEntity, VaultStandard } from '../../../features/data/entities/vault';
 
+const steps = [
+  'Deposit USDC into AAVE',
+  'Borrow ETH & BAL from AAVE',
+  'Deposit ETH & BAL into the Balancer B-80BAL-20ETH pool',
+  'Deposit B-80BAL-20ETH into the auraBAL Stable pool',
+  'Stake the B-80BAL-20ETH/auraBAL into Aura',
+];
+
 interface AboutStrategyProps {
   vaultId: VaultEntity['id'];
 }
@@ -95,14 +103,8 @@ export const AboutStrategy = memo<AboutStrategyProps>(({ vaultId }) => {
           </SubTitle>
         </Column>
         <Column h="100%">
-          <SubTitle m="0 0 10px">There are 4 steps in the strategy:</SubTitle>
-          {[
-            'Deposit USDC into AAVE',
-            'Borrow ETH & BAL from AAVE',
-            'Deposit ETH & BAL into the Balancer B-80BAL-20ETH pool',
-            'Deposit B-80BAL-20ETH into the auraBAL Stable pool',
-            'Stake the B-80BAL-20ETH/auraBAL into Aura',
-          ].map((step, index) => (
+          <SubTitle m="0 0 10px">There are {steps.length} steps in the strategy:</SubTitle>
+          {steps.map((step, index) => (
             <SubTitle key={step} m="0 0 7px">
               {index + 1}. {step}
             </SubTitle>

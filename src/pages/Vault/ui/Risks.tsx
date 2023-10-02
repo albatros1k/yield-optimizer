@@ -1,7 +1,7 @@
 import { FC, memo } from 'react';
 import { useTheme } from 'styled-components';
 
-import { Card, Circle, Column, Row, SvgContainer } from '../../../shared/ui/Containers';
+import { Card, Circle, Column, Row } from '../../../shared/ui/Containers';
 import { H3, Main, SubTitle } from '../../../shared/ui/Typography';
 import { icons } from '../../../shared/Icons';
 
@@ -32,7 +32,6 @@ export const RiskCard: FC<RiskCardProps> = ({ name, desc, icon }) => {
         <Column w="fit-content">
           <Row m="0 0 5px" align="center">
             <Main m="0 4px 0 0">{name}</Main>
-            <SvgContainer size={12}>{icons.question}</SvgContainer>
           </Row>
           <SubTitle color={colors.alterText}>{desc}</SubTitle>
         </Column>

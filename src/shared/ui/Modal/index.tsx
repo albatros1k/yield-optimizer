@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import styled, { keyframes, useTheme } from 'styled-components';
 
@@ -54,28 +54,48 @@ interface ModalProps {
 
 export const Modal: FC<ModalProps> = ({ isOpen, onClose, children, heading }) => {
   const { colors } = useTheme();
-  if (!isOpen) return null;
 
-  return ReactDOM.createPortal(
-    <ModalOverlay>
-      <ModalContent>
-        <Row m="0 0 20px" w="100%" justify="space-between" align="center">
-          <H3>{heading}</H3>
-          <Circle
-            w="32px"
-            h="32px"
-            bg={colors.alterBg}
-            justify="center"
-            align="center"
-            onClick={onClose}
-            pointer
-          >
-            {icons.x}
-          </Circle>
-        </Row>
-        {children}
-      </ModalContent>
-    </ModalOverlay>,
-    document.getElementById('modal-root')!
-  );
+  useEffect(() => {
+    const handleEscapeKeyPress = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      window.addEventListener('keydown', handleEscapeKeyPress);
+    } else {
+      window.removeEventListener('keydown', handleEscapeKeyPress);
+    }
+
+    return () => {
+      window.removeEventListener('keydown', handleEscapeKeyPress);
+    };
+  }, [isOpen, onClose]);
+
+  if (!isOpen) return null;
+  else {
+    return ReactDOM.createPortal(
+      <ModalOverlay onClick={onClose}>
+        <ModalContent onClick={e => e.stopPropagation()}>
+          <Row m="0 0 20px" w="100%" justify="space-between" align="center">
+            <H3>{heading}</H3>
+            <Circle
+              w="32px"
+              h="32px"
+              bg={colors.alterBg}
+              justify="center"
+              align="center"
+              onClick={onClose}
+              pointer
+            >
+              {icons.x}
+            </Circle>
+          </Row>
+          {children}
+        </ModalContent>
+      </ModalOverlay>,
+      document.getElementById('modal-root')!
+    );
+  }
 };

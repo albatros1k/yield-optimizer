@@ -16,6 +16,7 @@ import { BIG_ZERO } from '../../../../../helpers/big-number';
 import { useAppDispatch, useAppSelector } from '../../../../../store';
 
 import { DepositedInVault } from './DepositedInVault';
+import { MaxTitle } from '../DepositForm/styled';
 
 export const WithdrawHeading = memo(() => {
   const vaultId = useAppSelector(selectTransactVaultId);
@@ -51,9 +52,9 @@ export const WithdrawHeading = memo(() => {
           Balance:
         </SubTitle>
         <DepositedInVault />
-        <SubTitle color={colors.subAccentSecondary} pointer m="0 0 0 15px" onClick={handleMax}>
+        <MaxTitle m="0 0 0 15px" onClick={handleMax}>
           Set max
-        </SubTitle>
+        </MaxTitle>
       </Row>
     </Row>
   );

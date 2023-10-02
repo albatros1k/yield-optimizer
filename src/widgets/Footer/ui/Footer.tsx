@@ -36,8 +36,8 @@ export const Footer = () => {
       <div style={{ width: 220 }} />
       <Row justify="center" style={{ flex: 1 }}>
         <Column w="100%" maxW="1180px" justify="center" h="100%">
-          <Row w="100%" justify="space-between">
-            <H4 m="0 0 11px">Odysea. All rights reserved © 2023.</H4>
+          <Row w="100%" m="0 0 10px" justify="space-between">
+            <H4>Odysea. All rights reserved © 2023.</H4>
             <Row>
               {socials.map(({ href, src }) => (
                 <a
@@ -47,7 +47,7 @@ export const Footer = () => {
                   rel="noreferrer"
                   style={{ marginRight: 8 }}
                 >
-                  <CircleImage src={src} w="24px" h="24px" />
+                  <CircleImage src={src} w="18px" h="18px" />
                 </a>
               ))}
             </Row>

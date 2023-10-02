@@ -8,11 +8,11 @@ import { Content } from './widgets/Content';
 
 import { Main, Wrapper } from './shared/ui/Containers';
 import { GlobalStyles } from './shared/styles/global';
+import { Loader } from './shared/ui/Loaders';
 
 import { Router } from './components/Router';
 import { DefaultMeta } from './components/Meta';
 import { ScrollToTop } from './components/ScrollToTop';
-import { FullscreenTechLoader } from './components/TechLoader';
 
 import { initHomeDataV4 } from './features/data/actions/scenarios';
 
@@ -24,7 +24,7 @@ export const NewApp = () => {
   }, []);
 
   return (
-    <Suspense fallback={<FullscreenTechLoader />}>
+    <Suspense fallback={<Loader />}>
       <HelmetProvider>
         <Router>
           <ScrollToTop />

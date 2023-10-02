@@ -9,7 +9,7 @@ import type {
 } from './one-inch-types';
 import type { ChainEntity } from '../../entities/chain';
 import type { AxiosInstance } from 'axios';
-import axios from 'axios';
+import axios, { isAxiosError } from 'axios';
 import { errorToString } from '../transact/helpers/one-inch';
 import type Web3 from 'web3';
 import { MultiCall } from 'eth-multicall';
@@ -45,7 +45,7 @@ export class OneInchApi implements IOneInchApi {
 
       return response.data;
     } catch (error) {
-      if (axios.isAxiosError(error)) {
+      if (isAxiosError(error)) {
         throw new Error(errorToString(error));
       } else {
         throw error;

@@ -14,6 +14,7 @@ import { selectTransactSelectedTokens } from '../../../../../features/data/selec
 import { BIG_ZERO } from '../../../../../helpers/big-number';
 
 import { SelectedInWallet } from './SelectedInWallet';
+import { MaxTitle } from './styled';
 
 export const DepositHeading = memo(() => {
   const selectedTokens = useAppSelector(selectTransactSelectedTokens);
@@ -45,9 +46,9 @@ export const DepositHeading = memo(() => {
           Balance:
         </SubTitle>
         <SelectedInWallet />
-        <SubTitle color={colors.subAccentSecondary} pointer m="0 0 0 15px" onClick={handleMax}>
+        <MaxTitle m="0 0 0 15px" onClick={handleMax}>
           Set max
-        </SubTitle>
+        </MaxTitle>
       </Row>
     </Row>
   );
