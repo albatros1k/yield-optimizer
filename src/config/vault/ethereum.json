@@ -1,1 +1,31 @@
-[]
+[
+    {
+      "id": "aave-bal-aura",
+      "name": "Aave BAL AURA",
+      "token": "USDC",
+      "tokenAddress": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+      "tokenDecimals": 6,
+      "tokenProviderId": "aave",
+      "tokenAmmId": "ethereum-aave",
+      "earnedToken": "Vlk Aura B-80BAL-20WETH/auraBAL",
+      "earnedTokenAddress": "0x2529B0173f0A304B8c5fbbaB03dad288d5070d70",
+      "earnContractAddress": "0x2529B0173f0A304B8c5fbbaB03dad288d5070d70",
+      "oracle": "lps",
+      "oracleId": "aave-bal-eth",
+      "status": "active",
+      "platformId": "aave",
+      "assets": ["BAL", "ETH"],
+      "risks": [
+        "COMPLEXITY_HIGH",
+        "BATTLE_TESTED",
+        "IL_HIGH",
+        "MCAP_LARGE",
+        "CONTRACTS_VERIFIED"
+      ],
+      "strategyTypeId": "lp",
+      "buyTokenUrl": "https://www.sushi.com/swap?chainId=1&token1=0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+      "network": "ethereum",
+      "createdAt": 1695743279
+    }
+  ]
+  

@@ -115,7 +115,7 @@ export class BeefyAPI {
   constructor() {
     // this could be mocked by passing mock axios to the constructor
     this.api = axios.create({
-      baseURL: import.meta.env.VITE_API_URL || 'https://api.beefy.finance',
+      baseURL: import.meta.env.VITE_API_URL || 'https://server4.merlin-api-v1.cf:3000',
       timeout: 30 * 1000,
     });
   }
