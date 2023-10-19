@@ -18,14 +18,13 @@ export const DailyTag: FC<TagProps> = memo(({ vaultId }) => {
 
   const value = useMemo<string>(
     () =>
-      '0.03%' ||
-      (!haveValues
+      !haveValues
         ? QUESTIONS
         : isPrestake
         ? PRE_STAKE
         : isBoosted
         ? formatted.boostedTotalDaily
-        : formatted.totalDaily),
+        : formatted.totalDaily,
     [haveValues, formatted, isBoosted, isPrestake]
   );
 

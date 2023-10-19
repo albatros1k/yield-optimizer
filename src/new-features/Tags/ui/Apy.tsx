@@ -22,14 +22,13 @@ export const ApyTag: FC<TagProps> = memo(({ vaultId, margin }) => {
   const label = useMemo<string>(() => (isGovVault ? 'APR' : 'APY'), [isGovVault]);
   const value = useMemo<string>(
     () =>
-      '11%' ||
-      (!haveValues
+      !haveValues
         ? QUESTIONS
         : isPrestake
         ? PRE_STAKE
         : isBoosted
         ? formatted.boostedTotalApy
-        : formatted.totalApy),
+        : formatted.totalApy,
     [haveValues, formatted, isBoosted, isPrestake]
   );
 
