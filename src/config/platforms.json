@@ -1058,5 +1058,10 @@
     "id": "betswirl",
     "name": "BetSwirl",
     "filter": true
+  },
+  {
+    "id": "maker",
+    "name": "Maker DAO",
+    "filter": true
   }
 ]
