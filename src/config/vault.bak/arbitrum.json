@@ -106,14 +106,7 @@
     "status": "active",
     "platformId": "aura",
     "assets": ["bbaaUSDT", "bbaaUSDC", "bbaaDAI"],
-    "risks": [
-      "COMPLEXITY_LOW",
-      "BATTLE_TESTED",
-      "IL_NONE",
-      "MCAP_LARGE",
-      "AUDIT",
-      "CONTRACTS_VERIFIED"
-    ],
+    "risks": ["COMPLEXITY_LOW", "BATTLE_TESTED", "IL_NONE", "MCAP_LARGE", "CONTRACTS_VERIFIED"],
     "strategyTypeId": "lp",
     "addLiquidityUrl": "https://app.balancer.fi/#/arbitrum/pool/0xee02583596aee94cccb7e8ccd3921d955f17982a00000000000000000000040a/add-liquidity",
     "removeLiquidityUrl": "https://app.balancer.fi/#/arbitrum/pool/0xee02583596aee94cccb7e8ccd3921d955f17982a00000000000000000000040/awithdraw",
