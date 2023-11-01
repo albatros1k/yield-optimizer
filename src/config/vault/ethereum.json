@@ -44,7 +44,7 @@
     "oracleId": "sdai",
     "status": "active",
     "platformId": "maker",
-    "assets": ["USDC", "DAI", "sDAI"],
+    "assets": ["DAI", "USDC", "sDAI"],
     "risks": ["DAI_DEPEG", "USDC_DEPEG", "MAKER_HACK", "AAVE_HACK", "LIQUIDATION"],
     "revenue": [],
     "strategyTypeId": "single",

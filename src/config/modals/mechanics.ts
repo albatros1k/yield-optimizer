@@ -57,7 +57,7 @@ export const MECHANICS: Record<string, Mechanics> = {
       { name: 'Borrow USDC against sDAI at 76% LTV', protocolId: 'aave3', isDark: false },
       { name: 'Swap USDC to DAI via the MAKER PSM', protocolId: 'makerdao', isDark: false },
       { name: 'Deposit again resulting DAI to MAKER DSR', protocolId: 'makerdao', isDark: false },
-      { name: 'Loop Step 1 to 6, 5 times', protocolId: 'makerdao', isDark: false },
+      { name: 'Loop Step 1 to 6, 4 times', protocolId: 'makerdao', isDark: false },
       {
         name: 'Final LTV after last sDAI deposit should be ~68%',
         protocolId: 'makerdao',

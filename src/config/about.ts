@@ -24,14 +24,14 @@ export const ABOUT: Record<string, About> = {
   },
   'sdai-leverage': {
     steps: [
-      'Deposit USDC in vault',
-      'Sell USDC for DAI via PSM',
+      'Deposit DAI in Vault',
       'Deposit DAI in DSR',
       'Deposit sDAI received in Aave v3',
-      'Borrow USDC - LTV @ 73%',
+      'Borrow USDC - LTV 76%',
       'Sell USDC for DAI via PSM',
       'Deposit more in DSR',
-      'Loop 5x',
+      'Loop 4x',
+      'Deposit last DAI and get LTV 68%',
       'Monitor through Bot',
     ],
     description:
