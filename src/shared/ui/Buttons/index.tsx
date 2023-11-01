@@ -212,3 +212,19 @@ export const SquareButton: FC<SquareButtonProps> = ({
     </SquareContainer>
   );
 };
+
+export const IconButton = styled.button<ButtonInterface>`
+  ${block}
+  ${clickEffect}
+  ${center}
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  svg {
+    ${transition}
+    transform:${({ isIconRotate }) => (isIconRotate ? 'rotate(180deg)' : 'none')};
+  }
+`;

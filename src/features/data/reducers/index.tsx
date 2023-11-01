@@ -44,6 +44,7 @@ import { merlinReducer } from './merlin';
 import { supportedNetworksSlice } from './supportedNetworks';
 import { supportedProtocolsSlice } from './supportedProtocols';
 import { trendingPoolSlice } from './trendingPools';
+import { protocolSlice } from './protocols';
 
 const entitiesReducer = combineReducers<BeefyState['entities']>({
   chains: chainsSlice.reducer,
@@ -98,6 +99,7 @@ const uiReducer = combineReducers<BeefyState['ui']>({
   stepperState: stepperSlice.reducer as Reducer<BeefyState['ui']['stepperState'], AnyAction>,
   treasury: treasurySlice.reducer,
   tooltips: tooltipsSlice.reducer,
+  protocols: protocolSlice.reducer,
 });
 
 const marketReducer = combineReducers<BeefyState['market']>({

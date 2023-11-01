@@ -28,6 +28,7 @@ import { fetchPlatforms } from './platforms';
 import { selectAllChainIds } from '../selectors/chains';
 import { fetchBridges } from './bridges';
 import { fetchToken } from './token';
+import { getSupportedProtocols } from './protocols';
 
 type CapturedFulfilledActionGetter = Promise<() => Action>;
 
@@ -79,6 +80,9 @@ export async function initHomeDataV4(store: BeefyStore) {
 
     // Token for merlin requests
     store.dispatch(fetchToken());
+
+    // Get all supported protocols
+    store.dispatch(getSupportedProtocols());
   });
 
   // create the wallet instance as soon as we get the chain list

@@ -41,6 +41,7 @@ import type { TrendingPoolState } from './features/data/reducers/trendingPools';
 import type { SupportedNetworksState } from './features/data/reducers/supportedNetworks';
 import type { SupportedProtocolsState } from './features/data/reducers/supportedProtocols';
 import type { TokenState } from './features/data/reducers/wallet/token';
+import type { ProtocolState } from './features/data/reducers/protocols';
 
 export interface BeefyState {
   entities: {
@@ -86,6 +87,7 @@ export interface BeefyState {
     treasury: TreasuryState;
     savedVaults: SavedVaultsState;
     tooltips: TooltipsState;
+    protocols: ProtocolState;
   };
   market: {
     trendingPools: TrendingPoolState;

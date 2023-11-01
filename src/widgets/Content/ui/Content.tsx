@@ -22,6 +22,7 @@ import { NotFoundAsync as NotFound } from '../../../pages/NotFound';
 import { MarketAsync as Market } from '../../../pages/Market';
 import { MarketPoolAsync as MarketPool } from '../../../pages/MarketPool';
 import { MarketPoolProtocolAsync as MarketPoolProtocol } from '../../../pages/MarketPoolProtocol';
+import { SupportedProtocolsAsync as SupportedProtocols } from '../../../pages/SupportedProtocols';
 
 export const Content = () => {
   const walletAddress = useAppSelector(selectWalletAddressIfKnown);
@@ -47,6 +48,7 @@ export const Content = () => {
             <Route path="/market" element={<Market />} />
             <Route path="/market/pool/:pair" element={<MarketPool />} />
             <Route path="/market/pool/:pair/:poolId" element={<MarketPoolProtocol />} />
+            <Route path="/supported_protocols" element={<SupportedProtocols />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

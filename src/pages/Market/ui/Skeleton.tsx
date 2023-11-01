@@ -83,7 +83,7 @@ export const TrendingSkeleton: FC = () => {
 
   return (
     <Fragment>
-      <Row flexWrap="wrap" w="100%" m="0 0 20px">
+      <Row flexWrap="wrap" w="100%" justify="space-between" m="0 0 20px">
         <Card h="50px" w="calc(20% - 16px)" p="15px 20px">
           <SkeletonContent h="100%" />
         </Card>
@@ -100,10 +100,10 @@ export const TrendingSkeleton: FC = () => {
           <SkeletonContent h="100%" />
         </Card>
       </Row>
-      <Row flexWrap="wrap" w="100%" h="266px" m="0 0 20px">
+      <Row flexWrap="wrap" w="100%" h="266px" m="0 0 20px" justify="space-between">
         {renderBest2Pools()}
       </Row>
-      <Row flexWrap="wrap" w="100%" h="269px">
+      <Row flexWrap="wrap" w="100%" h="269px" justify="space-between">
         {renderBestPools()}
         <Block w="calc(20% - 16px)" />
         <Block w="calc(20% - 16px)" />

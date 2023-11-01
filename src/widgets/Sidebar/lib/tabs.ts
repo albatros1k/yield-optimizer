@@ -1,7 +1,7 @@
 import { icons } from '../../../shared/Icons';
 import { TabInfo } from '../types';
 
-const { house, market, swap, speed, star } = icons;
+const { house, market, swap, speed, star, list } = icons;
 
 export enum Tabs {
   VAULTS = 'Vaults',
@@ -10,6 +10,7 @@ export enum Tabs {
   DEBT = 'Debt',
   SWAP = 'Swap',
   MARKET = 'Market',
+  SUPPORTED_PROTOCOLS = 'Protocols',
 }
 
 export enum LinksTo {
@@ -19,6 +20,7 @@ export enum LinksTo {
   DEBT = '/debts',
   SWAP = '/swap',
   MARKET = '/market',
+  SUPPORTED_PROTOCOLS = '/supported_protocols',
 }
 
 export const tabs: TabInfo[] = [
@@ -28,4 +30,5 @@ export const tabs: TabInfo[] = [
   { name: Tabs.DEBT, icon: speed, to: LinksTo.DEBT },
   { name: Tabs.SWAP, icon: swap, to: LinksTo.SWAP },
   { name: Tabs.MARKET, icon: market, to: LinksTo.MARKET },
+  { name: Tabs.SUPPORTED_PROTOCOLS, icon: list, to: LinksTo.SUPPORTED_PROTOCOLS },
 ];

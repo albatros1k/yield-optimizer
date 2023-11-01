@@ -7,6 +7,8 @@ import { ITokenBalance } from './types/tokenBalance';
 import { CurrentRate } from './types/rate';
 import { MarketPairPayload, PairsResponse } from './types/pair';
 import { ITokenData } from './types/tokenData';
+import { ISupportedProtocolsResponse } from './types/protocols';
+
 import {
   IHistoricalData,
   IPairDetailsResponse,
@@ -231,5 +233,12 @@ export class MerlinApi {
       .catch((e: AxiosError) => e.message);
 
     return result;
+  }
+
+  static async getSupportedProtocols() {
+    const result = await merlinInstance.get<ISupportedProtocolsResponse>(
+      `/api/merlin/supportedProtocols`
+    );
+    return result.data;
   }
 }
