@@ -27,6 +27,7 @@ interface InfoTooltipProps {
   text?: string;
   Component?: JSX.Element;
   place?: 'top' | 'right' | 'bottom' | 'left';
+  icon?: JSX.Element;
 }
 
 export const InfoTooltip: FC<InfoTooltipProps> = ({
@@ -36,6 +37,7 @@ export const InfoTooltip: FC<InfoTooltipProps> = ({
   place = 'top',
   Component,
   iconSize = 9,
+  icon,
 }) => {
   const { colors } = useTheme();
 
@@ -51,7 +53,7 @@ export const InfoTooltip: FC<InfoTooltipProps> = ({
       data-for={id}
       size={iconSize}
     >
-      {icons.info}
+      {icon || icons.info}
       <ReactTooltip
         backgroundColor={colors.bgColor}
         id={id}

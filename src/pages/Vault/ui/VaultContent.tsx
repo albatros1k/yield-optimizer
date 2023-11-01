@@ -44,9 +44,9 @@ export const VaultContent = memo<VaultContentProps>(({ vaultId }) => {
         {!isGovVault(vault) ? <About vaultId={vaultId} /> : <div />}
         {!isGovVault(vault) ? <HistoricalRate vaultId={vaultId} /> : <div />}
         <Management vaultId={vaultId} />
-        <Risks />
+        <Risks vaultId={vaultId} />
         <ProtocolAndAssets vaultId={vaultId} />
-        <Revenue />
+        <Revenue vaultId={vaultId} />
       </Grid>
       <H3 m="0 0 24px">Strategy Details</H3>
       <AboutStrategy vaultId={vaultId} />

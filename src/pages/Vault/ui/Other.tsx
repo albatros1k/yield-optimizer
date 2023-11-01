@@ -14,8 +14,6 @@ import { Backers } from './Modals/Backers';
 import { Audits } from './Modals/Audits';
 import { SafetyScore } from './Modals/SafetyScore';
 
-import { entrySteps, exitSteps } from '../lib/mechanics';
-
 interface Modals {
   mechanics: boolean;
   apy: boolean;
@@ -99,26 +97,40 @@ export const Other = memo<OtherProps>(({ vaultId }) => {
       </Card>
       <VaultMechanics
         key="entry"
+        type="entry"
         heading="Vault Mechanics"
-        steps={entrySteps}
         isModalOpen={modals.mechanics}
         closeModal={() => toggleModal('mechanics')}
+        vaultId={vaultId}
       />
       <VaultMechanics
         key="exit"
+        type="exit"
         heading="Exit Mechanics"
-        steps={exitSteps}
         isModalOpen={modals.exit}
         closeModal={() => toggleModal('exit')}
+        vaultId={vaultId}
       />
-      <Backers isModalOpen={modals.backers} closeModal={() => toggleModal('backers')} />
-      <Audits isModalOpen={modals.audits} closeModal={() => toggleModal('audits')} />
+      <Backers
+        isModalOpen={modals.backers}
+        closeModal={() => toggleModal('backers')}
+        vaultId={vaultId}
+      />
+      <Audits
+        isModalOpen={modals.audits}
+        closeModal={() => toggleModal('audits')}
+        vaultId={vaultId}
+      />
       <ApyBreakdown
         vaultId={vaultId}
         isModalOpen={modals.apy}
         closeModal={() => toggleModal('apy')}
       />
-      <SafetyScore isModalOpen={modals.safety} closeModal={() => toggleModal('safety')} />
+      <SafetyScore
+        isModalOpen={modals.safety}
+        closeModal={() => toggleModal('safety')}
+        vaultId={vaultId}
+      />
     </Fragment>
   );
 });

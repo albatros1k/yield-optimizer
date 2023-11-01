@@ -17,10 +17,12 @@ import { ScrollToTop } from './components/ScrollToTop';
 import { initHomeDataV4 } from './features/data/actions/scenarios';
 
 import { store } from './store';
+import { checkVaults } from './config/cheker';
 
 export const NewApp = () => {
   useEffect(() => {
     initHomeDataV4(store);
+    checkVaults();
   }, []);
 
   return (

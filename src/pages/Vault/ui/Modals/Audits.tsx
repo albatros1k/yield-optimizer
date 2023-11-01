@@ -1,4 +1,4 @@
-import { memo, useMemo } from 'react';
+import { memo } from 'react';
 import { capitalize } from 'lodash-es';
 import { useTheme } from 'styled-components';
 
@@ -6,71 +6,19 @@ import { Modal } from '../../../../shared/ui/Modal';
 import { icons } from '../../../../shared/Icons';
 import { Main } from '../../../../shared/ui/Typography';
 import { Column, Row, ScrollContainer, SvgContainer } from '../../../../shared/ui/Containers';
+import { AUDITS } from '../../../../config/modals/audits';
+import { VaultEntity } from '../../../../features/data/entities/vault';
 
 interface AuditsProps {
   isModalOpen: boolean;
   closeModal: () => void;
+  vaultId: VaultEntity['id'];
 }
 
-export const Audits = memo<AuditsProps>(({ isModalOpen, closeModal }) => {
+export const Audits = memo<AuditsProps>(({ isModalOpen, closeModal, vaultId }) => {
   const { colors } = useTheme();
 
-  const audits = useMemo(() => {
-    return {
-      aave: [
-        {
-          name: 'Sigma prime',
-          report:
-            'https://github.com/aave/aave-v3-core/blob/master/audits/27-01-2022_SigmaPrime_AaveV3.pdf',
-        },
-        {
-          name: 'ADBK',
-          report:
-            'https://github.com/aave/aave-v3-core/blob/master/audits/27-01-2022_ABDK_AaveV3.pdf',
-        },
-        {
-          name: 'PeckShield',
-          report: 'https://peckshield.com/',
-        },
-        {
-          name: 'Trail of Bits',
-          report: 'https://www.trailofbits.com/',
-        },
-      ],
-      balancer: [
-        {
-          name: 'CertiK',
-          report: 'https://www.certora.com/',
-        },
-        {
-          name: 'Trail of Bits',
-          report: 'https://www.trailofbits.com/',
-        },
-        {
-          name: 'OpenZeppelin',
-          report: 'https://www.openzeppelin.com/',
-        },
-        {
-          name: 'Trail of Bits',
-          report: 'https://skynet.certik.com/projects/balancer',
-        },
-      ],
-      aurora: [
-        {
-          name: 'PeckShield',
-          report: 'https://peckshield.com/',
-        },
-        {
-          name: 'Halborn',
-          report: 'https://www.halborn.com/',
-        },
-        {
-          name: 'Code4rena',
-          report: 'https://code4rena.com/',
-        },
-      ],
-    };
-  }, []);
+  const audits = AUDITS[vaultId];
 
   return (
     <Modal heading="Audits" isOpen={isModalOpen} onClose={closeModal}>

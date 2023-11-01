@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 import { useTheme } from 'styled-components';
 
 import { Modal } from '../../../../shared/ui/Modal';
@@ -8,15 +8,27 @@ import { Main } from '../../../../shared/ui/Typography';
 import { Spacer } from '../../../../shared/ui/Spacer';
 import { InfoTooltip } from '../../../../shared/ui/Tooltip';
 
-import { MAX_SAFETY_SCORE, safetyScores, totalSafetyScore } from '../../lib/safety';
+import { VaultEntity } from '../../../../features/data/entities/vault';
+import { MAX_SAFETY_SCORE, SAFETY_SCORE } from '../../../../config/modals/safety-score';
 
 interface SafetyScoreProps {
   isModalOpen: boolean;
   closeModal: () => void;
+  vaultId: VaultEntity['id'];
 }
 
-export const SafetyScore = memo<SafetyScoreProps>(({ isModalOpen, closeModal }) => {
+export const SafetyScore = memo<SafetyScoreProps>(({ isModalOpen, closeModal, vaultId }) => {
   const { colors } = useTheme();
+
+  const safetyScore = useMemo(() => SAFETY_SCORE[vaultId] || {}, [vaultId]);
+
+  const totalSafetyScore = useMemo<number>(
+    () =>
+      Object.values(safetyScore)
+        .flat()
+        .reduce((acc, { score }) => (acc += score), 0),
+    [safetyScore]
+  );
 
   return (
     <Modal
@@ -28,7 +40,7 @@ export const SafetyScore = memo<SafetyScoreProps>(({ isModalOpen, closeModal }) 
       <Spacer />
 
       <ScrollContainer h="300px">
-        {Object.entries(safetyScores).map(([title, subtitles]) => (
+        {Object.entries(safetyScore).map(([title, subtitles]) => (
           <Column key={title} w="95%">
             <Main color={colors.alterText} m="0 0 24px">
               {title}

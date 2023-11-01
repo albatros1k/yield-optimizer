@@ -2,6 +2,7 @@ import type { ChainEntity } from './chain';
 import type { PlatformEntity } from './platform';
 import type { TokenEntity } from './token';
 import type { StrategyTypeEntity } from './strategy-type';
+import { VaultConfig } from '../apis/config-types';
 
 // maybe a RiskAnalysis type would be better
 
@@ -26,6 +27,12 @@ export interface VaultStandard {
   id: string;
   name: string;
   depositTokenAddress: string;
+  /**
+   * Additional info for our Odysea needs
+   **/
+  token: VaultConfig['token'];
+  protocols: VaultConfig['protocols'];
+  revenue: VaultConfig['revenue'];
 
   /**
    * ASSETS are basically the assets that are in that vault
@@ -77,6 +84,13 @@ export interface VaultGov {
   id: string;
   name: string;
   depositTokenAddress: string;
+
+  /**
+   * Additional info for our Odysea needs
+   */
+  token: VaultConfig['token'];
+  protocols: VaultConfig['protocols'];
+  revenue: VaultConfig['revenue'];
 
   /**
    * ASSETS are basically the assets that are in that vault

@@ -10,18 +10,22 @@ import { awsLink } from '../../../../shared/lib/aws';
 import { ScrollContainer } from '../Transact/DepositTokenList/styled';
 import { ProtocolSquare } from './styled';
 
-import { Step } from '../../lib/mechanics';
+import { VaultEntity } from '../../../../features/data/entities/vault';
+import { MECHANICS, Mechanics } from '../../../../config/modals/mechanics';
 
 interface VaultMechanicsProps {
+  type: keyof Mechanics;
   isModalOpen: boolean;
   closeModal: () => void;
   heading: string;
-  steps: Step[];
+  vaultId: VaultEntity['id'];
 }
 
 export const VaultMechanics = memo<VaultMechanicsProps>(
-  ({ isModalOpen, closeModal, heading, steps }) => {
+  ({ isModalOpen, closeModal, heading, vaultId, type }) => {
     const { colors } = useTheme();
+
+    const steps = MECHANICS[vaultId][type] || [];
 
     return (
       <Modal heading={heading} isOpen={isModalOpen} onClose={closeModal}>

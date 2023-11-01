@@ -10,6 +10,8 @@ export interface VaultConfig {
   id: string;
   name: string;
   token: string;
+  revenue: string[];
+  protocols: string[];
   tokenAddress?: string | null;
   tokenDecimals: number;
   tokenProviderId?: PlatformEntity['id'];

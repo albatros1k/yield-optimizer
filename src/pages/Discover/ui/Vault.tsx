@@ -91,7 +91,7 @@ export const Vault: FC<VaultProps> = memo(({ vaultId, color }) => {
       </Block>
       <Block p="27px 19px 30px">
         <Row align="center">
-          <AssetsImage assetIds={vault.assetIds} chainId={vault.chainId} size={40} />
+          <AssetsImage assetIds={[vault.token]} chainId={vault.chainId} size={40} />
           <Column h="100%" justify="space-between" m="0 0 0 12px">
             <H3>{punctuationWrap(vault.name)}</H3>
             <SubTitle color={alterText}>{percentage}</SubTitle>

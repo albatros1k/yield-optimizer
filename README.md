@@ -1,5 +1,32 @@
 # Odysea
 
+## Adding a Strategy
+
+To introduce a new strategy, you must provide the configuration. The configuration is located at `config/vault/{chain}` and should include the following fields:
+
+- **Protocols:** These are the protocols that play a role in the strategy. They are primarily for display purposes.
+
+- **Revenue:** These keys correspond to the types of risks and MUST align with the keys described in `config/revenue` `REVENUE`.
+
+- **Risks:** These keys correspond to the types of risks and MUST align with the keys described in `config/risks` `POTENTIAL_RISKS`.
+
+- **About:** This section should include a brief and comprehensive description of the strategy, along with the necessary steps to configure it. This information is located at `config/about` `ABOUT`.
+
+### `checkVaults` Function
+
+The `checkVaults` function is designed to check the completeness and integrity of data required for any strategy within the Odysea application. It validates various aspects of each strategy, ensuring that all necessary information is available. If any crucial data is missing or incomplete, the function will raise an error.
+
+The validation checks include:
+
+- Availability of key information such as "ABOUT," "MECHANICS," "AUDITS," "BACKERS," and "SAFETY_SCORE" for each strategy.
+- The presence and completeness of "RISKS" and "REVENUE" data based on predefined templates.
+
+## Modal Window Information
+
+For details pertaining to modal windows, navigate to `config/modals/{nameOfModal}`. It is imperative that you complete this information for all `vaultId`.
+
+Maintain consistency in the Odysea application by adhering to the prescribed structure and guidelines for adding strategies and configuring modal windows.
+
 
 ## Quickstart
 

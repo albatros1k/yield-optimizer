@@ -1,4 +1,4 @@
-import { memo, useMemo } from 'react';
+import { memo } from 'react';
 import { capitalize } from 'lodash-es';
 
 import { useTheme } from 'styled-components';
@@ -7,109 +7,19 @@ import { Modal } from '../../../../shared/ui/Modal';
 import { Main } from '../../../../shared/ui/Typography';
 import { icons } from '../../../../shared/Icons';
 import { Column, Row, ScrollContainer, SvgContainer } from '../../../../shared/ui/Containers';
+import { VaultEntity } from '../../../../features/data/entities/vault';
+import { BACKERS } from '../../../../config/modals/backers';
 
 interface BackersProps {
   isModalOpen: boolean;
   closeModal: () => void;
+  vaultId: VaultEntity['id'];
 }
 
-interface Backer {
-  backer: string;
-  partnership: string;
-  proof: string | null;
-}
-
-export const Backers = memo<BackersProps>(({ isModalOpen, closeModal }) => {
+export const Backers = memo<BackersProps>(({ isModalOpen, closeModal, vaultId }) => {
   const { colors } = useTheme();
 
-  const backers = useMemo<{ aave: Backer[]; balancer: Backer[] }>(() => {
-    return {
-      aave: [
-        {
-          backer: 'COIND',
-          partnership: 'Seed Round - Aave',
-          proof: 'https://www.crunchbase.com/organization/ethlend/company_financials',
-        },
-        {
-          backer: 'DTC Capital',
-          partnership: 'Initial Coin Offering - Aave',
-          proof: null,
-        },
-        {
-          backer: 'Framework Ventures',
-          partnership: 'Initial Coin Offering - Aave',
-          proof: null,
-        },
-        {
-          backer: 'James Sowers',
-          partnership: 'Secondary Market - Aave',
-          proof: null,
-        },
-        {
-          backer: 'Blockchain Capital',
-          partnership: 'Venture Round - Aave',
-          proof: null,
-        },
-        {
-          backer: 'Blockchain.com Ventures',
-          partnership: 'Venture Round - Aave',
-          proof: null,
-        },
-        {
-          backer: 'Standard Crypto',
-          partnership: 'Venture Round - Aave',
-          proof: null,
-        },
-        {
-          backer: 'ParaFi Capital',
-          partnership: 'Initial Coin Offering - Aave',
-          proof: null,
-        },
-        {
-          backer: 'Three Arrows Capital',
-          partnership: 'Initial Coin Offering - Aave',
-          proof: null,
-        },
-      ],
-      balancer: [
-        {
-          backer: ' Alameda Research',
-          partnership: 'Investor',
-          proof: 'https://messari.io/asset/balancer/profile/investors',
-        },
-        {
-          backer: ' Blockchain Capital',
-          partnership: 'Investor',
-          proof: 'https://messari.io/asset/balancer/profile/investors',
-        },
-        {
-          backer: ' Defiance Capital',
-          partnership: 'Investor',
-          proof: 'https://messari.io/asset/balancer/profile/investors',
-        },
-        {
-          backer: ' Pantera Capital',
-          partnership: 'Investor',
-          proof: 'https://messari.io/asset/balancer/profile/investors',
-        },
-        {
-          backer: ' Three Arrows Capital',
-          partnership: 'Investor',
-          proof: 'https://messari.io/asset/balancer/profile/investors',
-        },
-        {
-          backer: ' Accomplice',
-          partnership: 'Investor',
-          proof: 'https://messari.io/asset/balancer/profile/investors',
-        },
-        {
-          backer: ' Fenbushi Capital',
-          partnership: 'Investor',
-          proof: 'https://messari.io/asset/balancer/profile/investors',
-        },
-      ],
-    };
-  }, []);
+  const backers = BACKERS[vaultId] || [];
 
   return (
     <Modal heading="Backers" isOpen={isModalOpen} onClose={closeModal}>

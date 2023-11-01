@@ -5,16 +5,18 @@ import { Card, Circle, Column, Row } from '../../../shared/ui/Containers';
 import { H3, Main, SubTitle } from '../../../shared/ui/Typography';
 import { icons } from '../../../shared/Icons';
 
+import { VaultEntity } from '../../../features/data/entities/vault';
+import { selectVaultById } from '../../../features/data/selectors/vaults';
+
 import { RiskContainer } from './styled';
 
-export interface RiskCardProps {
-  name: string;
-  desc: string;
-  icon: JSX.Element;
-}
+import { useAppSelector } from '../../../store';
+import { POTENTIAL_RISKS, Risk } from '../../../config/risk';
 
-export const RiskCard: FC<RiskCardProps> = ({ name, desc, icon }) => {
+export const RiskCard: FC<Risk> = ({ title, explanation }) => {
   const { colors } = useTheme();
+  const { report } = icons;
+
   return (
     <Card p="20px 22px" bg={colors.alterBg} w="100%">
       <Row w="100%">
@@ -27,40 +29,28 @@ export const RiskCard: FC<RiskCardProps> = ({ name, desc, icon }) => {
           bg={colors.alterText}
           m="0 14px 0 0"
         >
-          {icon}
+          {report}
         </Circle>
         <Column w="fit-content">
           <Row m="0 0 5px" align="center">
-            <Main m="0 4px 0 0">{name}</Main>
+            <Main m="0 4px 0 0">{title}</Main>
           </Row>
-          <SubTitle color={colors.alterText}>{desc}</SubTitle>
+          <SubTitle color={colors.alterText}>{explanation}</SubTitle>
         </Column>
       </Row>
     </Card>
   );
 };
 
-export const Risks = memo(() => {
-  const { colors } = useTheme();
-  const { report, unpeg } = icons;
+interface RisksProps {
+  vaultId: VaultEntity['id'];
+}
 
-  const risks: RiskCardProps[] = [
-    {
-      name: 'Yield Token Volatility',
-      desc: 'The main revenue comes from BAL and AURA tokens',
-      icon: report,
-    },
-    {
-      name: 'Unpeg',
-      desc: 'auraBAL is not hard-pegged to B-80BAL-20WETH token.',
-      icon: unpeg,
-    },
-    {
-      name: 'Negative Funding Fee',
-      desc: 'Historical modelling shows small negative influence (-3% pa) of funding rates',
-      icon: report,
-    },
-  ];
+export const Risks = memo<RisksProps>(({ vaultId }) => {
+  const vault = useAppSelector(state => selectVaultById(state, vaultId));
+  const { colors } = useTheme();
+
+  const risks = vault.risks.map(key => POTENTIAL_RISKS[key]).filter(Boolean);
 
   return (
     <Card p="25px" h="100%">
@@ -69,7 +59,7 @@ export const Risks = memo(() => {
       </H3>
       <RiskContainer>
         {risks.map(risk => (
-          <RiskCard key={risk.name} {...risk} />
+          <RiskCard key={risk.title} {...risk} />
         ))}
       </RiskContainer>
     </Card>

@@ -178,6 +178,9 @@ function addVaultToState(
     const vault: VaultGov = {
       id: apiVault.id,
       name: apiVault.name,
+      token: apiVault.token,
+      protocols: apiVault.protocols,
+      revenue: apiVault.revenue,
       isGovVault: true,
       depositTokenAddress: apiVault.tokenAddress,
       earnedTokenAddress: apiVault.earnedTokenAddress,
@@ -232,6 +235,9 @@ function addVaultToState(
     const vault: VaultStandard = {
       id: apiVault.id,
       name: apiVault.name,
+      token: apiVault.token,
+      protocols: apiVault.protocols,
+      revenue: apiVault.revenue,
       isGovVault: false,
       depositTokenAddress: apiVault.tokenAddress ?? 'native',
       earnContractAddress: apiVault.earnContractAddress,

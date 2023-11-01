@@ -231,3 +231,43 @@ export const CATEGORIES = {
   'Categry-Asset': 0.3,
   'Categry-Platform': 0.5,
 };
+
+export interface Risk {
+  title: string;
+  explanation: string;
+}
+
+export const POTENTIAL_RISKS: Record<string, Risk> = {
+  YIELD_VOLATILITY: {
+    title: 'Yield Token Volatility',
+    explanation: 'The main revenue comes from BAL and AURA tokens',
+  },
+  UNPEG: {
+    title: 'Unpeg',
+    explanation: 'auraBAL is not hard-pegged to B-80BAL-20WETH token.',
+  },
+  FUNDING_FEE: {
+    title: 'Negative Funding Fee',
+    explanation: 'Historical modelling shows small negative influence (-3% pa) of funding rates',
+  },
+  DAI_DEPEG: {
+    title: 'Hack or Depeg',
+    explanation: 'USDC hack or depeg',
+  },
+  USDC_DEPEG: {
+    title: 'Hack or Depeg',
+    explanation: 'USDC hack or depeg',
+  },
+  MAKER_HACK: {
+    title: 'Hack or Debt',
+    explanation: 'MakerDAO hack or bad debt',
+  },
+  AAVE_HACK: {
+    title: 'Hack or Debt',
+    explanation: 'Aave hack or bad debt',
+  },
+  LIQUIDATION: {
+    title: 'Liquidation',
+    explanation: 'Liquidation risk',
+  },
+};
