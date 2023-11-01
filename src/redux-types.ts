@@ -42,6 +42,7 @@ import type { SupportedNetworksState } from './features/data/reducers/supportedN
 import type { SupportedProtocolsState } from './features/data/reducers/supportedProtocols';
 import type { TokenState } from './features/data/reducers/wallet/token';
 import type { ProtocolState } from './features/data/reducers/protocols';
+import type { PointsState } from './features/data/reducers/wallet/points';
 
 export interface BeefyState {
   entities: {
@@ -74,6 +75,7 @@ export interface BeefyState {
     walletActions: WalletActionsState;
     migration: MigrationState;
     token: TokenState;
+    points: PointsState;
   };
   ui: {
     dataLoader: DataLoaderState;

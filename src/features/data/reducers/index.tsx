@@ -45,6 +45,7 @@ import { supportedNetworksSlice } from './supportedNetworks';
 import { supportedProtocolsSlice } from './supportedProtocols';
 import { trendingPoolSlice } from './trendingPools';
 import { protocolSlice } from './protocols';
+import { pointsSlice } from './wallet/points';
 
 const entitiesReducer = combineReducers<BeefyState['entities']>({
   chains: chainsSlice.reducer,
@@ -79,6 +80,7 @@ const userReducer = combineReducers<BeefyState['user']>({
   resolver: resolverReducer,
   migration: migrationSlice.reducer,
   token: tokenSlice.reducer,
+  points: pointsSlice.reducer,
 });
 const uiReducer = combineReducers<BeefyState['ui']>({
   filteredVaults: persistReducer(

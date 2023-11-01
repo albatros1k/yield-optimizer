@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import type { BeefyState } from '../../../redux-types';
-import { getWalletConnectionApiInstance } from '../apis/instances';
+import { getBeefyApi, getWalletConnectionApiInstance } from '../apis/instances';
 import type { ChainEntity } from '../entities/chain';
 import {
   accountHasChanged,
@@ -77,8 +77,15 @@ export const askForWalletConnection = createAsyncThunk(
   'wallet/askForWalletConnection',
   async () => {
     try {
+      const api = getBeefyApi();
       const walletConnection = await getWalletConnectionApiInstance();
       await walletConnection.askUserToConnectIfNeeded();
+
+      const [account] = await (await walletConnection.getConnectedWeb3Instance()).eth.getAccounts();
+
+      await api
+        .collectGalaxyPoints(account)
+        .catch(() => console.log('Error: Galaxy points collection'));
     } catch (err) {
       console.error('askForWalletConnection', err);
       throw err;

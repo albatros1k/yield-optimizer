@@ -69,6 +69,19 @@ export interface BeefyAPIApyBreakdownResponse {
   [vaultId: VaultEntity['id']]: ApyData;
 }
 
+export interface GalaxyPointsResponse {
+  id: string;
+  points: number;
+  rank: number;
+  address: {
+    id: string;
+    twitterUserName: string;
+    address: string;
+    solanaAddress: string;
+    seiAddress: string;
+  };
+}
+
 export interface LpData {
   price: number;
   tokens: string[];
@@ -115,7 +128,7 @@ export class BeefyAPI {
   constructor() {
     // this could be mocked by passing mock axios to the constructor
     this.api = axios.create({
-      baseURL: import.meta.env.VITE_API_URL || 'http://server4.merlin-api-v1.cf:3001',
+      baseURL: import.meta.env.VITE_API_URL || 'https://server4.merlin-api-v1.cf/vaults-api',
       timeout: 30 * 1000,
     });
   }
@@ -128,6 +141,20 @@ export class BeefyAPI {
 
     const res = await this.api.get('/prices', { params: { _: this.getCacheBuster('short') } });
     return res.data;
+  }
+
+  // get Galaxy points
+  public async getGalaxyPoints(address: string): Promise<GalaxyPointsResponse> {
+    const res = await this.api.get(`/rewards/points/${address}`, {
+      params: { _: this.getCacheBuster('short') },
+    });
+    return res.data;
+  }
+
+  // collect Galaxy points
+
+  public async collectGalaxyPoints(address: string): Promise<void> {
+    await this.api.post(`/rewards/points/${address}`, {});
   }
 
   // i'm not 100% certain about the return type

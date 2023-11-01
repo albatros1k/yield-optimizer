@@ -18,7 +18,7 @@ import { OneInchPriceOracleAbi } from '../../../../config/abi';
 import BigNumber from 'bignumber.js';
 import { getWeb3Instance } from '../instances';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://server4.merlin-api-v1.cf:3001';
+const API_URL = import.meta.env.VITE_API_URL || 'https://server4.merlin-api-v1.cf/vaults-api';
 
 export class OneInchApi implements IOneInchApi {
   protected api: AxiosInstance;

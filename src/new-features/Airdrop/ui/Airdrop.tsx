@@ -9,9 +9,13 @@ import { icons } from '../../../shared/Icons';
 import { Caption, SubTitle } from '../../../shared/ui/Typography';
 import { InfoTooltip } from '../../../shared/ui/Tooltip';
 
+import { selectGalaxyPoints } from '../../../features/data/selectors/points';
+import { useAppSelector } from '../../../store';
+
 const { question, star } = icons;
 
 export const Airdrop: FC = () => {
+  const { points } = useAppSelector(selectGalaxyPoints);
   const { colors } = useTheme();
 
   return (
@@ -38,7 +42,7 @@ export const Airdrop: FC = () => {
           <SvgContainer stroke={colors.subAccentSecondary} size={14}>
             {star}
           </SvgContainer>
-          <SubTitle m="0 0 0 10px">1,329 STARDUST</SubTitle>
+          <SubTitle m="0 0 0 10px">{points} STARDUST</SubTitle>
         </Row>
 
         <InfoTooltip
