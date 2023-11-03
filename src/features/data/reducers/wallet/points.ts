@@ -30,10 +30,14 @@ const initialPointsState: PointsState = {
 export const pointsSlice = createSlice({
   name: 'points',
   initialState: initialPointsState,
-  reducers: {},
+  reducers: {
+    resetPoints: () => initialPointsState,
+  },
   extraReducers: builder => {
     builder.addCase(fetchGalaxyPoints.fulfilled, (sliceState, action) => {
-      sliceState = action.payload;
+      return (sliceState = action.payload);
     });
   },
 });
+
+export const pointsSliceActions = pointsSlice.actions;

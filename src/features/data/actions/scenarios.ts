@@ -29,7 +29,6 @@ import { selectAllChainIds } from '../selectors/chains';
 import { fetchBridges } from './bridges';
 import { fetchToken } from './token';
 import { getSupportedProtocols } from './protocols';
-import { fetchGalaxyPoints } from './points';
 
 type CapturedFulfilledActionGetter = Promise<() => Action>;
 
@@ -84,9 +83,6 @@ export async function initHomeDataV4(store: BeefyStore) {
 
     // Get all supported protocols
     store.dispatch(getSupportedProtocols());
-
-    // Get galaxy points
-    store.dispatch(fetchGalaxyPoints());
   });
 
   // create the wallet instance as soon as we get the chain list
