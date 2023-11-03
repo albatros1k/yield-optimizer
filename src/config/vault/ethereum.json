@@ -46,7 +46,7 @@
     "platformId": "maker",
     "assets": ["DAI", "USDC", "sDAI"],
     "risks": ["DAI_DEPEG", "USDC_DEPEG", "MAKER_HACK", "AAVE_HACK", "LIQUIDATION"],
-    "revenue": [],
+    "revenue": ["DSR_YIELDS", "ADDITIONAL_REVENUE_DAI"],
     "strategyTypeId": "single",
     "buyTokenUrl": "https://www.sushi.com/swap?chainId=1&token1=0x6B175474E89094C44Da98b954EedeAC495271d0F",
     "network": "ethereum",

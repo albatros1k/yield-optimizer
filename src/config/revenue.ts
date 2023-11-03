@@ -23,4 +23,14 @@ export const REVENUE: Record<string, Risk> = {
     title: 'Additional Revenue',
     explanation: 'Trading fees 2.62% APY',
   },
+  DSR_YIELDS: {
+    title: 'DSR yields',
+    explanation:
+      'The main revenue comes from yield on Tbills, USDC & RWA’s held by MakerDAO on the behalf of DAI stakers in the DSR',
+  },
+  ADDITIONAL_REVENUE_DAI: {
+    title: 'Additional Revenue',
+    explanation:
+      'Additional revenue is derived from leveraging up the exposure through borrowing more DAI & staking in the DSR',
+  },
 };
