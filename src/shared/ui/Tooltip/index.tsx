@@ -19,6 +19,12 @@ export const TooltipRow = styled(Row)<{ size: number }>`
   }
 `;
 
+const CustomTooltip = styled(ReactTooltip)<{ maxW: string; p: string }>`
+  max-width: ${({ maxW }) => maxW};
+  padding: ${({ p }) => p};
+  visibility: visible;
+`;
+
 interface InfoTooltipProps {
   iconColor?: string;
   iconSize?: number;
@@ -28,6 +34,8 @@ interface InfoTooltipProps {
   Component?: JSX.Element;
   place?: 'top' | 'right' | 'bottom' | 'left';
   icon?: JSX.Element;
+  maxW?: string;
+  p?: string;
 }
 
 export const InfoTooltip: FC<InfoTooltipProps> = ({
@@ -38,6 +46,8 @@ export const InfoTooltip: FC<InfoTooltipProps> = ({
   Component,
   iconSize = 9,
   icon,
+  maxW = '220px',
+  p = '8px 21px',
 }) => {
   const { colors } = useTheme();
 
@@ -54,22 +64,21 @@ export const InfoTooltip: FC<InfoTooltipProps> = ({
       size={iconSize}
     >
       {icon || icons.info}
-      <ReactTooltip
-        backgroundColor={colors.bgColor}
+      <CustomTooltip
+        maxW={maxW}
+        backgroundColor={colors.additionalBg}
         id={id}
         place={place}
-        type="light"
+        type="dark"
         effect="solid"
-        border={true}
-        borderColor={colors.bgColor}
-        arrowColor={colors.bgColor}
+        p={p}
       >
         {Component || (
           <SubTitle maxW="250px" color={colors.textColor}>
             {text}
           </SubTitle>
         )}
-      </ReactTooltip>
+      </CustomTooltip>
     </TooltipRow>
   );
 };

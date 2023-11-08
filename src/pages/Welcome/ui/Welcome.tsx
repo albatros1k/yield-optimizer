@@ -4,11 +4,10 @@ import { Column, Row } from '../../../shared/ui/Containers';
 import { Main, Title } from '../../../shared/ui/Typography';
 import { Spacer } from '../../../shared/ui/Spacer';
 import { Connector } from '../../../new-features/WalletConnection/ui/Connector';
-import { Image } from '../../../shared/ui/Images';
 
-import preview from '../../../images/preview.png';
 import { options } from '../constants';
 import { Option } from './Option';
+import { Preview } from './styled';
 
 const Welcome = () => {
   const {
@@ -18,8 +17,8 @@ const Welcome = () => {
   const renderOptions = (): JSX.Element[] => options.map(op => <Option key={op.title} {...op} />);
 
   return (
-    <Row w="100%" h="100%" p="0 0 60px" overflowHidden>
-      <Row w="50%" h="100%">
+    <Row w="100%" h="100%" overflowHidden>
+      <Row w="50%" h="100%" p="0 0 60px">
         <Column h="100%">
           <Title m="0 0 24px">Welcome to Odysea</Title>
           <Main color={alterText} m="0 0 12px" maxW="400px">
@@ -34,16 +33,7 @@ const Welcome = () => {
           <Connector isWelcome />
         </Column>
       </Row>
-      <Row pos="relative" w="50%" h="100%">
-        <Image
-          src={preview}
-          alt="preview"
-          w="100%"
-          h="100%"
-          pos="absolute"
-          style={{ top: 0, right: 0 }}
-        />
-      </Row>
+      <Preview />
     </Row>
   );
 };

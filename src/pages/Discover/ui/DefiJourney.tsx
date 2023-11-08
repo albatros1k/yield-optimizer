@@ -1,37 +1,65 @@
 import { FC } from 'react';
 import { useTheme } from 'styled-components';
 
-import { Card, Row } from '../../../shared/ui/Containers';
+import { Card, Column, Grid, Row } from '../../../shared/ui/Containers';
 import { ButtonText, H1, H3, Main, SubTitle } from '../../../shared/ui/Typography';
 import { Button } from '../../../shared/ui/Buttons';
 import { JourneyCardInfo } from '../types/journey';
 import { icons } from '../../../shared/Icons';
-import { Image } from '../../../shared/ui/Images';
 
-import cosmos from '../../../images/cosmos.png';
+import { useAppDispatch, useAppSelector } from '../../../store';
+import { selectWalletAddressIfKnown } from '../../../features/data/selectors/wallet';
+import { askForWalletConnection } from '../../../features/data/actions/wallet';
+
+import { StarDust } from './styled';
 
 export const DeFiJourney: FC = () => {
-  const {
-    colors: { alterText, bgColor },
-  } = useTheme();
+  const walletAddress = useAppSelector(selectWalletAddressIfKnown);
+  const dispatch = useAppDispatch();
+  const { colors } = useTheme();
+
+  const handleWalletConnect = () => {
+    dispatch(askForWalletConnection());
+  };
 
   return (
-    <Card w="100%" p="32px 40px 41px 40px" pos="relative" overflowHidden>
-      <H1 m="0 0 18px">Discover Your DeFi Journey</H1>
-      <Main color={alterText} m="0 0 32px">
-        With Odysea Vaults. Explore, invest, and grow your <br /> assets in the exciting world of
-        DeFi.
-      </Main>
-      <Button w="240px" h="42px" bg={bgColor} p="0 18px">
-        <Row w="100%" justify="space-between" align="center">
-          <ButtonText color={alterText}>More Vaults in Progress</ButtonText>
-          {icons.clock}
-        </Row>
-      </Button>
-      <Image
-        src={cosmos}
-        style={{ position: 'absolute', top: 0, right: 0, filter: 'brightness(40%)' }}
-      />
+    <Card w="100%" overflowHidden bg={colors.additionalBg}>
+      <Grid colTemplate="repeat(2,1fr)" colGap="10px" rowTemplate="none" rowGap="0">
+        <Column p="32px 40px 41px 40px">
+          <H1 m="0 0 18px">
+            {walletAddress ? 'Discover Your DeFi Journey' : 'Receive STARDUST Rewards!'}
+          </H1>
+          <Main color={colors.alterText} m="0 0 32px">
+            {walletAddress ? (
+              <>
+                With Odysea Vaults. Explore, invest, and grow your <br /> assets in the exciting
+                world of DeFi.
+              </>
+            ) : (
+              <>
+                Connect your wallet to the Odysea Dashboard and
+                <br />
+                explore your portfolio to claim your Stardust Rewards!
+              </>
+            )}
+          </Main>
+          <Button
+            w="240px"
+            h="42px"
+            bg={walletAddress ? colors.bgColor : colors.accentMain}
+            p="0 18px"
+            onClick={walletAddress ? undefined : handleWalletConnect}
+          >
+            <Row w="100%" justify="space-between" align="center">
+              <ButtonText color={walletAddress ? colors.alterText : colors.textColor}>
+                {walletAddress ? 'More Vaults in Progress' : 'Connect Wallet'}
+              </ButtonText>
+              {walletAddress ? icons.clock : icons.link}
+            </Row>
+          </Button>
+        </Column>
+        <StarDust />
+      </Grid>
     </Card>
   );
 };

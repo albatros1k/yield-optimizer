@@ -32,8 +32,8 @@ const ModalOverlay = styled.div`
   z-index: 1000;
 `;
 
-const ModalContent = styled.div`
-  padding: 20px 23px;
+const ModalContent = styled.div<{ minW?: string; p?: string }>`
+  padding: ${({ p = '20px 23px' }) => p};
   border-radius: 12px;
   background: ${({ theme: { colors } }) => colors.bgGradient};
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
@@ -41,18 +41,20 @@ const ModalContent = styled.div`
   transform: translateY(-20px);
   animation: ${fadeIn} 0.3s ease-in-out forwards;
   z-index: 1;
-  min-width: 570px;
+  min-width: ${({ minW = '570px' }) => minW};
   max-width: 600px;
 `;
 
 interface ModalProps {
   isOpen: boolean;
-  heading: string;
+  heading?: string;
   onClose: () => void;
   children: React.ReactNode;
+  minW?: string;
+  p?: string;
 }
 
-export const Modal: FC<ModalProps> = ({ isOpen, onClose, children, heading }) => {
+export const Modal: FC<ModalProps> = ({ isOpen, onClose, children, heading, minW, p }) => {
   const { colors } = useTheme();
 
   useEffect(() => {
@@ -77,9 +79,14 @@ export const Modal: FC<ModalProps> = ({ isOpen, onClose, children, heading }) =>
   else {
     return ReactDOM.createPortal(
       <ModalOverlay onClick={onClose}>
-        <ModalContent onClick={e => e.stopPropagation()}>
-          <Row m="0 0 20px" w="100%" justify="space-between" align="center">
-            <H3>{heading}</H3>
+        <ModalContent onClick={e => e.stopPropagation()} minW={minW} p={p}>
+          <Row
+            m="0 0 20px"
+            w="100%"
+            justify={heading ? 'space-between' : 'flex-end'}
+            align="center"
+          >
+            {heading ? <H3>{heading}</H3> : null}
             <Circle
               w="32px"
               h="32px"

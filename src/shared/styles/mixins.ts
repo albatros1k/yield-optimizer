@@ -98,6 +98,7 @@ export interface ScrollProps {
   trackColor?: string;
   barWidth?: number;
   barHeight?: number;
+  barColor?: string;
 }
 
 export const scroll = css<ScrollProps>`
@@ -112,7 +113,7 @@ export const scroll = css<ScrollProps>`
     background-color: ${({ theme: { colors } }) => colors.alterHelp};
   }
   &&::-webkit-scrollbar-thumb {
-    background-color: ${({ theme: { colors } }) => colors.subAccentMain};
+    background-color: ${({ theme: { colors }, barColor }) => barColor || colors.subAccentMain};
     border-radius: 14px;
   }
 `;

@@ -1,19 +1,52 @@
-import { Fragment } from 'react';
+import { Fragment, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { Spacer } from '../../../shared/ui/Spacer';
 
 import { DeFiJourney } from './DefiJourney';
 import { BestVaults } from './BestVaults';
+import { TermsAndConditionsModal } from './TermsAndConditionsModal';
 // import { AllVaults } from './AllVaults';
 
 const Discover = () => {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(true);
+  const [termsAccepted, setTermsAccepted] = useState<boolean>(
+    localStorage.getItem('termsAccepted') === 'true'
+  );
+  const navigate = useNavigate();
+
+  const handleAcceptTerms = () => {
+    localStorage.setItem('termsAccepted', 'true');
+    setTermsAccepted(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    navigate('/my_portfolio');
+  };
+
+  useEffect(() => {
+    if (termsAccepted) {
+      setIsModalOpen(false);
+    }
+  }, [termsAccepted]);
+
   return (
     <Fragment>
-      <DeFiJourney />
-      <Spacer space={52} />
-      <BestVaults />
-      <Spacer space={52} />
-      {/* <AllVaults /> */}
+      <TermsAndConditionsModal
+        isOpen={isModalOpen}
+        onAccept={handleAcceptTerms}
+        onClose={handleCloseModal}
+      />
+      {termsAccepted && (
+        <>
+          <DeFiJourney />
+          <Spacer space={52} />
+          <BestVaults />
+          <Spacer space={52} />
+          {/* <AllVaults /> */}
+        </>
+      )}
     </Fragment>
   );
 };

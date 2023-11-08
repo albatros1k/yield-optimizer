@@ -1,12 +1,11 @@
-/* eslint-disable react/no-unescaped-entities */
-import { FC, useEffect, useState } from 'react';
+import { FC, Fragment, useEffect, useState } from 'react';
 import { useTheme } from 'styled-components';
 import Confetti from 'react-confetti';
 
 import { Button } from '../../../shared/ui/Buttons';
 import { Column, Row, SvgContainer } from '../../../shared/ui/Containers';
 import { icons } from '../../../shared/Icons';
-import { Caption, SubTitle } from '../../../shared/ui/Typography';
+import { Input, SubTitle } from '../../../shared/ui/Typography';
 import { InfoTooltip } from '../../../shared/ui/Tooltip';
 
 import { selectGalaxyPoints } from '../../../features/data/selectors/points';
@@ -16,15 +15,19 @@ import { getBeefyApi } from '../../../features/data/apis/instances';
 import { fetchGalaxyPoints } from '../../../features/data/actions/points';
 import { useToggle } from '../../../helpers/hooks';
 import { SmallLoader } from '../../../shared/ui/Loaders';
+import { Line } from '../../../shared/ui/Spacer';
 
-const { question, star } = icons;
+import { DailyMissions } from './DailyMissions';
+
+const { question, star, user } = icons;
 
 export const Airdrop: FC = () => {
-  const { points } = useAppSelector(selectGalaxyPoints);
+  const { points, rank } = useAppSelector(selectGalaxyPoints);
   const walletAddress = useAppSelector(selectWalletAddressIfKnown);
-  const { colors } = useTheme();
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState<boolean>(false);
+  const [isModalOpen, toggleModal] = useToggle();
+  const { colors } = useTheme();
 
   const [isConfettiActive, toggleConfetti] = useToggle();
 
@@ -47,55 +50,91 @@ export const Airdrop: FC = () => {
     })();
   }, [walletAddress, dispatch, toggleConfetti]);
 
-  return (
-    <Button
-      bg="transparent"
-      borderColor={colors.subAccentSecondary}
-      w="180px"
-      h="46px"
-      p="0 16px"
-      m="0 20px 0 0"
-      pos="relative"
-      overflowHidden
-    >
-      {isConfettiActive && (
-        <Confetti width={180} height={46} numberOfPieces={25} gravity={0.04} friction={0.91} />
-      )}
-      <Row
-        w="100%"
-        h="100%"
-        align="center"
-        justify="space-between"
-        pos="relative"
-        style={{ zIndex: 1000 }}
-      >
-        <Row align="center">
-          {loading ? (
-            <SmallLoader size={14} />
-          ) : (
-            <SvgContainer stroke={colors.subAccentSecondary} size={14}>
-              {star}
-            </SvgContainer>
-          )}
-          <SubTitle m="0 0 0 10px">{loading ? `...` : `${points} STARDUST`} </SubTitle>
-        </Row>
+  useEffect(() => {
+    let timeoutId;
 
-        <InfoTooltip
-          id="airdrop"
-          icon={question}
-          place="left"
-          iconSize={12}
-          Component={
-            <Column>
-              <Caption color={colors.alterText}>
-                Stardusts are a unique system of loyalty points <br /> tailored to recognize and
-                reward platform users <br /> who actively engage and return consistently, <br />
-                providing them with a mix of social and gamified benefits.
-              </Caption>
-            </Column>
-          }
-        />
-      </Row>
-    </Button>
+    if (walletAddress) {
+      timeoutId = setTimeout(() => {
+        toggleModal();
+      }, 2000);
+    }
+
+    return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
+  }, [walletAddress, toggleModal]);
+
+  return (
+    <Fragment>
+      <Button
+        onClick={toggleModal}
+        bg="transparent"
+        borderColor={colors.subAccentSecondary}
+        w="180px"
+        h="46px"
+        p="0 16px"
+        m="0 20px 0 0"
+        pos="relative"
+      >
+        {isConfettiActive && (
+          <Confetti width={180} height={46} numberOfPieces={25} gravity={0.04} friction={0.91} />
+        )}
+        <Row
+          w="100%"
+          h="100%"
+          align="center"
+          justify="space-between"
+          pos="relative"
+          style={{ zIndex: 1000 }}
+        >
+          <Row align="center">
+            {loading ? (
+              <SmallLoader size={14} />
+            ) : (
+              <SvgContainer stroke={colors.subAccentSecondary} size={14}>
+                {star}
+              </SvgContainer>
+            )}
+            <SubTitle m="0 0 0 10px">{loading ? `...` : `${points} STARDUST`} </SubTitle>
+          </Row>
+          <InfoTooltip
+            id="airdrop"
+            icon={question}
+            place="bottom"
+            iconSize={12}
+            Component={
+              <Column>
+                <Row w="100%" justify="space-between" align="center">
+                  <Row align="center">
+                    <SvgContainer stroke={colors.subAccentSecondary} size={14}>
+                      {star}
+                    </SvgContainer>
+                    <Input m="0 0 0 6px">{points} STARDUST</Input>
+                  </Row>
+                  <Row>
+                    <SvgContainer size={14}>{user}</SvgContainer>
+                    <Row m="0 0 0 4px">
+                      <Input color={colors.alterText} m="0 3px 0 0">
+                        Rank:
+                      </Input>
+                      <Input>{rank}</Input>
+                    </Row>
+                  </Row>
+                </Row>
+                <Line m="10px 0" />
+                <Input color={colors.alterText}>
+                  Stardusts are a unique system of loyalty points tailored to recognize and reward
+                  platform users who actively engage and return consistently, providing them with a
+                  mix of social and gamified benefits.
+                </Input>
+              </Column>
+            }
+          />
+        </Row>
+      </Button>
+      <DailyMissions closeModal={toggleModal} isModalOpen={isModalOpen} />
+    </Fragment>
   );
 };

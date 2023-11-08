@@ -138,8 +138,9 @@ export const PositionGrid = styled(Grid)`
   }
 `;
 
-export const ScrollContainer = styled.div<ScrollProps & { h: string }>`
+export const ScrollContainer = styled.div<ScrollProps & { h: string; p?: string }>`
   ${scroll};
   overflow-y: scroll;
   max-height: ${({ h }) => h};
+  padding: ${({ p }) => p};
 `;

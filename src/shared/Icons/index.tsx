@@ -35,6 +35,9 @@ import { ReactComponent as Unpeg } from '../../images/nav-icons/unpeg.svg';
 import { ReactComponent as Maximize } from '../../images/nav-icons/maximize.svg';
 import { ReactComponent as List } from '../../images/nav-icons/list.svg';
 import { ReactComponent as Clock } from '../../images/nav-icons/clock.svg';
+import { ReactComponent as Link } from '../../images/nav-icons/link.svg';
+import { ReactComponent as FullStar } from '../../images/nav-icons/full-star.svg';
+import { ReactComponent as User } from '../../images/nav-icons/user.svg';
 
 type IconName =
   | 'grid'
@@ -73,7 +76,10 @@ type IconName =
   | 'unpeg'
   | 'maximize'
   | 'clock'
-  | 'list';
+  | 'list'
+  | 'link'
+  | 'fullStar'
+  | 'user';
 
 export const icons: Record<IconName, JSX.Element> = {
   grid: <Grid />,
@@ -113,4 +119,7 @@ export const icons: Record<IconName, JSX.Element> = {
   maximize: <Maximize />,
   clock: <Clock />,
   list: <List />,
+  link: <Link />,
+  fullStar: <FullStar />,
+  user: <User />,
 };
