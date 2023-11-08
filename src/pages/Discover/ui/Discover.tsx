@@ -6,18 +6,20 @@ import { Spacer } from '../../../shared/ui/Spacer';
 import { DeFiJourney } from './DefiJourney';
 import { BestVaults } from './BestVaults';
 import { TermsAndConditionsModal } from './TermsAndConditionsModal';
+import { useAppDispatch, useAppSelector } from '../../../store';
+import { selectVaultTerms } from '../../../features/data/selectors/agreement';
+import { agreementSliceActions } from '../../../features/data/reducers/agreement';
 // import { AllVaults } from './AllVaults';
 
 const Discover = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(true);
-  const [termsAccepted, setTermsAccepted] = useState<boolean>(
-    localStorage.getItem('termsAccepted') === 'true'
-  );
+  const termsAccepted = useAppSelector(selectVaultTerms);
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const handleAcceptTerms = () => {
     localStorage.setItem('termsAccepted', 'true');
-    setTermsAccepted(true);
+    dispatch(agreementSliceActions.setVaultTermsAccepted(true));
   };
 
   const handleCloseModal = () => {

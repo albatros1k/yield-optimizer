@@ -18,12 +18,14 @@ import { SmallLoader } from '../../../shared/ui/Loaders';
 import { Line } from '../../../shared/ui/Spacer';
 
 import { DailyMissions } from './DailyMissions';
+import { selectVaultTerms } from '../../../features/data/selectors/agreement';
 
 const { question, star, user } = icons;
 
 export const Airdrop: FC = () => {
   const { points, rank } = useAppSelector(selectGalaxyPoints);
   const walletAddress = useAppSelector(selectWalletAddressIfKnown);
+  const termsAccepted = useAppSelector(selectVaultTerms);
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState<boolean>(false);
   const [isModalOpen, toggleModal] = useToggle();
@@ -53,7 +55,7 @@ export const Airdrop: FC = () => {
   useEffect(() => {
     let timeoutId;
 
-    if (walletAddress && localStorage.getItem('termsAccepted') === 'true') {
+    if (walletAddress && termsAccepted) {
       timeoutId = setTimeout(() => {
         toggleModal();
       }, 2000);
@@ -64,7 +66,7 @@ export const Airdrop: FC = () => {
         clearTimeout(timeoutId);
       }
     };
-  }, [walletAddress, toggleModal]);
+  }, [walletAddress, toggleModal, termsAccepted]);
 
   return (
     <Fragment>
