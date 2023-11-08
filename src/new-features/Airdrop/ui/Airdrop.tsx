@@ -53,7 +53,7 @@ export const Airdrop: FC = () => {
   useEffect(() => {
     let timeoutId;
 
-    if (walletAddress) {
+    if (walletAddress && localStorage.getItem('termsAccepted') === 'true') {
       timeoutId = setTimeout(() => {
         toggleModal();
       }, 2000);
