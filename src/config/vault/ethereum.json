@@ -52,5 +52,29 @@
     "network": "ethereum",
     "protocols": [],
     "createdAt": 1697212283
+  },
+  {
+    "id": "sdai-gnosis",
+    "name": "sDAI Gnosis",
+    "token": "DAI",
+    "tokenAddress": "0x6B175474E89094C44Da98b954EedeAC495271d0F",
+    "tokenDecimals": 18,
+    "tokenProviderId": "maker",
+    "tokenAmmId": "ethereum-maker",
+    "earnedToken": "Vlk sDai Gnosis",
+    "earnedTokenAddress": "0x4F5AA80822819535D0d9E2Be3646E9515Ccec8f1",
+    "earnContractAddress": "0x4F5AA80822819535D0d9E2Be3646E9515Ccec8f1",
+    "oracle": "tokens",
+    "oracleId": "sdai",
+    "status": "active",
+    "platformId": "maker",
+    "assets": ["DAI", "wxDAI", "sDAI"],
+    "risks": ["DAI_DEPEG", "MAKER_HACK"],
+    "revenue": ["DSR_YIELDS"],
+    "strategyTypeId": "single",
+    "buyTokenUrl": "https://www.sushi.com/swap?chainId=1&token1=0x6B175474E89094C44Da98b954EedeAC495271d0F",
+    "network": "ethereum",
+    "protocols": [],
+    "createdAt": 1697212283
   }
 ]
