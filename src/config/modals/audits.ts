@@ -112,4 +112,5 @@ export const AUDITS: Record<string, Record<string, Audit[]>> = {
       },
     ],
   },
+  'sdai-gnosis': {},
 };

@@ -7,6 +7,7 @@ import vaultAbi from '../../../config/abi/vault.json';
 import minterAbi from '../../../config/abi/minter.json';
 import zapAbi from '../../../config/abi/zap.json';
 import bridgeAbi from '../../../config/abi/BridgeAbi.json';
+import gnosisSenderAbi from '../../../config/abi/BridgeGnosisSender.json';
 import type { BeefyState, BeefyThunk } from '../../../redux-types';
 import { getOneInchApi, getWalletConnectionApiInstance } from '../apis/instances';
 import type { BoostEntity } from '../entities/boost';
@@ -151,6 +152,13 @@ const migrateUnstake = (
   });
 };
 
+// TOdo
+// method is called `execute`
+// parameters vault - 0x780Af536572d96A8c8E3b3D7331d2E9eE0210ef7
+// amount - amount
+// actionType - 0 for deposit , 1 - for withdraw
+// value as parameter
+
 const deposit = (vault: VaultEntity, amount: BigNumber, max: boolean) => {
   return captureWalletErrors(async (dispatch, getState) => {
     dispatch({ type: WALLET_ACTION_RESET });
@@ -159,6 +167,9 @@ const deposit = (vault: VaultEntity, amount: BigNumber, max: boolean) => {
     if (!address) {
       return;
     }
+
+    const isGnosis = vault.id === 'sdai-gnosis';
+    const vaultAddress = '0x780Af536572d96A8c8E3b3D7331d2E9eE0210ef7';
 
     const walletApi = await getWalletConnectionApiInstance();
     const web3 = await walletApi.getConnectedWeb3Instance();
@@ -169,7 +180,10 @@ const deposit = (vault: VaultEntity, amount: BigNumber, max: boolean) => {
     const native = selectChainNativeToken(state, vault.chainId);
     const isNativeToken = depositToken.id === native.id;
     const contractAddr = mooToken.address;
-    const contract = new web3.eth.Contract(vaultAbi as AbiItem[], contractAddr);
+    const contract = new web3.eth.Contract(
+      isGnosis ? (gnosisSenderAbi as AbiItem[]) : (vaultAbi as AbiItem[]),
+      contractAddr
+    );
     const rawAmount = amount
       .shiftedBy(depositToken.decimals)
       .decimalPlaces(0, BigNumber.ROUND_FLOOR);
@@ -189,11 +203,15 @@ const deposit = (vault: VaultEntity, amount: BigNumber, max: boolean) => {
         }
       } else {
         if (max) {
-          return contract.methods.depositAll().send({ from: address, ...gasPrices });
+          return isGnosis
+            ? contract.methods.execute(vaultAddress, amount, 0).send({ value: 0 })
+            : contract.methods.depositAll().send({ from: address, ...gasPrices });
         } else {
-          return contract.methods
-            .deposit(rawAmount.toString(10))
-            .send({ from: address, ...gasPrices });
+          return isGnosis
+            ? contract.methods.execute(vaultAddress, amount, 0).send({ value: 0 })
+            : contract.methods
+                .deposit(rawAmount.toString(10))
+                .send({ from: address, ...gasPrices });
         }
       }
     })();
@@ -867,6 +885,9 @@ const withdraw = (vault: VaultEntity, oracleAmount: BigNumber, max: boolean) => 
       return;
     }
 
+    const isGnosis = vault.id === 'sdai-gnosis';
+    const vaultAddress = '0x780Af536572d96A8c8E3b3D7331d2E9eE0210ef7';
+
     const walletApi = await getWalletConnectionApiInstance();
     const web3 = await walletApi.getConnectedWeb3Instance();
 
@@ -877,7 +898,10 @@ const withdraw = (vault: VaultEntity, oracleAmount: BigNumber, max: boolean) => 
     const native = selectChainNativeToken(state, vault.chainId);
     const isNativeToken = depositToken.id === native.id;
     const contractAddr = mooToken.address;
-    const contract = new web3.eth.Contract(vaultAbi as AbiItem[], contractAddr);
+    const contract = new web3.eth.Contract(
+      isGnosis ? (gnosisSenderAbi as AbiItem[]) : (vaultAbi as AbiItem[]),
+      contractAddr
+    );
 
     const mooAmount = oracleAmountToMooAmount(mooToken, depositToken, ppfs, oracleAmount);
     const rawAmount = mooAmount
@@ -897,11 +921,15 @@ const withdraw = (vault: VaultEntity, oracleAmount: BigNumber, max: boolean) => 
         }
       } else {
         if (max) {
-          return contract.methods.withdrawAll().send({ from: address, ...gasPrices });
+          return isGnosis
+            ? contract.methods.execute(vaultAddress, oracleAmount, 1).send({ value: 0 })
+            : contract.methods.withdrawAll().send({ from: address, ...gasPrices });
         } else {
-          return contract.methods
-            .withdraw(rawAmount.toString(10))
-            .send({ from: address, ...gasPrices });
+          return isGnosis
+            ? contract.methods.execute(vaultAddress, oracleAmount, 1).send({ value: 0 })
+            : contract.methods
+                .withdraw(rawAmount.toString(10))
+                .send({ from: address, ...gasPrices });
         }
       }
     })();

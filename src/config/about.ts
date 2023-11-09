@@ -42,4 +42,9 @@ export const ABOUT: Record<string, About> = {
       'The vault then borrows USDC, converts it to DAI & deposits again to the DSR for several loops.',
     ],
   },
+  'sdai-gnosis': {
+    steps: [],
+    description: '',
+    explanation: [],
+  },
 };

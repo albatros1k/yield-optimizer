@@ -152,4 +152,5 @@ export const BACKERS: Record<string, Record<string, Backer[]>> = {
       },
     ],
   },
+  'sdai-gnosis': {},
 };

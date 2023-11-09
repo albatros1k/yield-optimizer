@@ -81,4 +81,8 @@ export const MECHANICS: Record<string, Mechanics> = {
       },
     ],
   },
+  'sdai-gnosis': {
+    entry: [],
+    exit: [],
+  },
 };
