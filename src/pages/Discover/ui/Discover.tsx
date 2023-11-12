@@ -9,7 +9,7 @@ import { TermsAndConditionsModal } from './TermsAndConditionsModal';
 import { useAppDispatch, useAppSelector } from '../../../store';
 import { selectVaultTerms } from '../../../features/data/selectors/agreement';
 import { agreementSliceActions } from '../../../features/data/reducers/agreement';
-// import { AllVaults } from './AllVaults';
+import { AllVaults } from './AllVaults';
 
 const Discover = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(true);
@@ -46,7 +46,7 @@ const Discover = () => {
           <Spacer space={52} />
           <BestVaults />
           <Spacer space={52} />
-          {/* <AllVaults /> */}
+          <AllVaults />
         </>
       )}
     </Fragment>

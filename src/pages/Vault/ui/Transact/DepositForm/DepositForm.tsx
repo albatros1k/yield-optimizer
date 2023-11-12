@@ -23,6 +23,8 @@ import { VaultFees } from '../VaultFees';
 import { ActionTable } from './styled';
 import { DepositActions } from '../DepositActions';
 
+import { TransactQuote } from '../../../../../features/vault/components/Actions/Transact/TransactQuote';
+
 export const DepositForm = memo(() => {
   return (
     <Fragment>
@@ -33,6 +35,8 @@ export const DepositForm = memo(() => {
           <TokenSelectButton />
         </Grid>
       </ActionTable>
+      <Spacer space={16} />
+      <TransactQuote title={'You Deposit'} />
       <Spacer space={16} />
       <VaultFees />
       <Spacer space={36} />

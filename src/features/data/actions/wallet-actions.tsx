@@ -8,6 +8,7 @@ import minterAbi from '../../../config/abi/minter.json';
 import zapAbi from '../../../config/abi/zap.json';
 import bridgeAbi from '../../../config/abi/BridgeAbi.json';
 import gnosisSenderAbi from '../../../config/abi/BridgeGnosisSender.json';
+import layerZeroEndpointAbi from '../../../config/abi/LayerZeroEndpoint.json';
 import type { BeefyState, BeefyThunk } from '../../../redux-types';
 import { getOneInchApi, getWalletConnectionApiInstance } from '../apis/instances';
 import type { BoostEntity } from '../entities/boost';
@@ -77,6 +78,7 @@ import type { PromiEvent } from 'web3-core';
 import type { ThunkDispatch } from 'redux-thunk';
 import { migratorUpdate } from './migrator';
 import type { MigrationConfig } from '../reducers/wallet/migration';
+import type Web3 from 'web3';
 
 export const WALLET_ACTION = 'WALLET_ACTION';
 export const WALLET_ACTION_RESET = 'WALLET_ACTION_RESET';
@@ -152,12 +154,45 @@ const migrateUnstake = (
   });
 };
 
-// TOdo
-// method is called `execute`
-// parameters vault - 0x780Af536572d96A8c8E3b3D7331d2E9eE0210ef7
-// amount - amount
-// actionType - 0 for deposit , 1 - for withdraw
-// value as parameter
+const BRIDGE_ACTION__DEPOSIT = '0';
+const BRIDGE_ACTION__WITHDRAW = '1';
+
+const computeFees = async (
+  vaultAddress: string,
+  amount: string,
+  fromAddress: string,
+  method: string,
+  gnosisSenderAddress: string,
+  web3: Web3
+) => {
+  const layerZeroEndpointAddress = '0x66A71Dcef29A0fFBDBE3c6a460a3B5BC225Cd675';
+  const layerZeroEndpointContract = new web3.eth.Contract(
+    layerZeroEndpointAbi as AbiItem[],
+    layerZeroEndpointAddress
+  );
+
+  const gnosisSenderContract = new web3.eth.Contract(
+    gnosisSenderAbi as AbiItem[],
+    gnosisSenderAddress
+  );
+  const messageId = await gnosisSenderContract.methods.nonce().call();
+
+  const layerZeroDstChainId = '101';
+  const fees = await layerZeroEndpointContract.methods
+    .estimateFees(
+      layerZeroDstChainId,
+      gnosisSenderAddress,
+      web3.eth.abi.encodeParameters(
+        ['uint256', 'address', 'uint256', 'uint256', 'address'],
+        [messageId, fromAddress, method, amount, vaultAddress]
+      ),
+      false,
+      []
+    )
+    .call();
+
+  return fees.nativeFee;
+};
 
 const deposit = (vault: VaultEntity, amount: BigNumber, max: boolean) => {
   return captureWalletErrors(async (dispatch, getState) => {
@@ -190,6 +225,17 @@ const deposit = (vault: VaultEntity, amount: BigNumber, max: boolean) => {
     const chain = selectChainById(state, vault.chainId);
     const gasPrices = await getGasPriceOptions(chain);
 
+    const nativeFee = isGnosis
+      ? await computeFees(
+          vaultAddress,
+          rawAmount.toString(10),
+          address,
+          BRIDGE_ACTION__DEPOSIT,
+          contractAddr,
+          web3
+        )
+      : '0';
+
     const transaction = (() => {
       if (isNativeToken) {
         if (max) {
@@ -204,11 +250,15 @@ const deposit = (vault: VaultEntity, amount: BigNumber, max: boolean) => {
       } else {
         if (max) {
           return isGnosis
-            ? contract.methods.execute(vaultAddress, amount, 0).send({ value: 0 })
+            ? contract.methods
+                .execute(vaultAddress, rawAmount.toString(10), BRIDGE_ACTION__DEPOSIT)
+                .send({ from: address, value: nativeFee, ...gasPrices })
             : contract.methods.depositAll().send({ from: address, ...gasPrices });
         } else {
           return isGnosis
-            ? contract.methods.execute(vaultAddress, amount, 0).send({ value: 0 })
+            ? contract.methods
+                .execute(vaultAddress, rawAmount.toString(10), BRIDGE_ACTION__DEPOSIT)
+                .send({ from: address, value: nativeFee, ...gasPrices })
             : contract.methods
                 .deposit(rawAmount.toString(10))
                 .send({ from: address, ...gasPrices });
@@ -910,6 +960,17 @@ const withdraw = (vault: VaultEntity, oracleAmount: BigNumber, max: boolean) => 
     const chain = selectChainById(state, vault.chainId);
     const gasPrices = await getGasPriceOptions(chain);
 
+    const nativeFee = isGnosis
+      ? await computeFees(
+          vaultAddress,
+          rawAmount.toString(10),
+          address,
+          BRIDGE_ACTION__WITHDRAW,
+          contractAddr,
+          web3
+        )
+      : '0';
+
     const transaction = (() => {
       if (isNativeToken) {
         if (max) {
@@ -922,11 +983,15 @@ const withdraw = (vault: VaultEntity, oracleAmount: BigNumber, max: boolean) => 
       } else {
         if (max) {
           return isGnosis
-            ? contract.methods.execute(vaultAddress, oracleAmount, 1).send({ value: 0 })
+            ? contract.methods
+                .execute(vaultAddress, rawAmount.toString(10), BRIDGE_ACTION__WITHDRAW)
+                .send({ from: address, value: nativeFee, ...gasPrices })
             : contract.methods.withdrawAll().send({ from: address, ...gasPrices });
         } else {
           return isGnosis
-            ? contract.methods.execute(vaultAddress, oracleAmount, 1).send({ value: 0 })
+            ? contract.methods
+                .execute(vaultAddress, rawAmount.toString(10), BRIDGE_ACTION__WITHDRAW)
+                .send({ from: address, value: nativeFee, ...gasPrices })
             : contract.methods
                 .withdraw(rawAmount.toString(10))
                 .send({ from: address, ...gasPrices });

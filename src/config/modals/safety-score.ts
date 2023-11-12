@@ -79,4 +79,5 @@ BAL price swing is 0.21 ETH price swing is 0.1`,
     ],
   },
   'sdai-leverage': {},
+  'sdai-gnosis': {},
 };
