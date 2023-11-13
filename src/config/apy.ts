@@ -7,7 +7,7 @@ export const APY: Record<string, number | null> = {
 export const DAILY = {
   'aave-bal-aura': 0.03,
   'sdai-leverage': 0.0192,
-  'sdai-gnosis': 0.019,
+  'sdai-gnosis': 0.0197,
 };
 
 export const TVL = {

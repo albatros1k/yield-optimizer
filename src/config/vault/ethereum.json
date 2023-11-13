@@ -69,7 +69,14 @@
     "status": "active",
     "platformId": "maker",
     "assets": ["DAI", "wxDAI", "xDAI"],
-    "risks": ["DAI_HACK", "GNOSIS_CHAIN_RISK", "GNOSIS_BRIDGE_RISK"],
+    "risks": [
+      "DAI_HACK",
+      "USDC_DEPEG",
+      "MAKER_HACK",
+      "AGAVE_RISK",
+      "GNOSIS_CHAIN_RISK",
+      "GNOSIS_BRIDGE_RISK"
+    ],
     "revenue": ["DSR_YIELDS_GNOSIS"],
     "strategyTypeId": "single",
     "buyTokenUrl": "https://www.sushi.com/swap?chainId=1&token1=0x6B175474E89094C44Da98b954EedeAC495271d0F",

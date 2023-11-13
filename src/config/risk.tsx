@@ -252,34 +252,45 @@ export const POTENTIAL_RISKS: Record<string, Risk> = {
   },
   DAI_DEPEG: {
     title: 'Hack or Depeg',
-    explanation: 'USDC hack or depeg',
+    explanation:
+      'DAI is a smart-contract that could be hacked. DAI as an asset could depeg from $1',
   },
   USDC_DEPEG: {
     title: 'Hack or Depeg',
-    explanation: 'USDC hack or depeg',
+    explanation:
+      'USDC is a smart-contract that could be hacked. USDC as an asset could depeg from $1',
   },
   MAKER_HACK: {
     title: 'Hack or Debt',
-    explanation: 'MakerDAO hack or bad debt',
+    explanation:
+      'MakerDAO is a complex protocol that could be hacked, or left with bad collateral in case of failure of liquidations.',
   },
   AAVE_HACK: {
     title: 'Hack or Debt',
-    explanation: 'Aave hack or bad debt',
+    explanation:
+      'Aave is a complex protocol that could be hacked, or left with bad collateral in case of failure of liquidations.',
   },
   LIQUIDATION: {
     title: 'Liquidation',
-    explanation: 'Liquidation risk',
+    explanation:
+      'The strategy borrows USDC on Aave & uses it to get additional exposure to DAI’s DSR. In case of price diversion between assets the position could be liquidated.',
   },
   DAI_HACK: {
     title: 'Hack or Depeg',
-    explanation: 'DAI hack or depeg',
+    explanation:
+      'DAI is a smart-contract that could be hacked. DAI as an asset could depeg from $1',
   },
   GNOSIS_CHAIN_RISK: {
     title: 'Gnosis Chain Risk',
-    explanation: 'Risk associated with Gnosis Chain',
+    explanation: 'Gnosis chain is a POS chain that is more recent & less established than Ethereum',
   },
   GNOSIS_BRIDGE_RISK: {
     title: 'Gnosis Bridge Risk',
-    explanation: 'Risk associated with Gnosis Bridge',
+    explanation: 'Bridges hold original users assets in custody, & could be hacked',
+  },
+  AGAVE_RISK: {
+    title: 'Agave (Aave fork) hack or bad debt',
+    explanation:
+      'Agave is a complex protocol that could be hacked, or left with bad collateral in case of failure of liquidations.',
   },
 };

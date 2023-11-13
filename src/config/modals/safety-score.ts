@@ -78,73 +78,140 @@ BAL price swing is 0.21 ETH price swing is 0.1`,
       },
     ],
   },
-  'sdai-leverage': {},
-  'sdai-gnosis': {
+  'sdai-leverage': {
     'Tech Design Risk': [
       {
         name: 'Is the project audited',
         score: 2,
-        desc: 'Multiple audits for all the protocols',
+        desc: 'Is the project audited +2',
       },
       {
         name: 'Product architecture complexity',
         score: 2,
-        desc: '3 protocols: Balancer, Aura Finance, AAVE',
+        desc: 'Product architecture complexity +2',
       },
       {
-        name: 'Time lock',
+        name: 'No Time lock',
         score: 2,
-        desc: 'No Time lock',
+        desc: 'No Time lock +2',
       },
       {
         name: 'Team & backers',
-        score: 0,
-        desc: 'Anonymous team without backers for Aura Finance',
+        score: 1,
+        desc: 'Team & backers +1',
       },
     ],
     'Economic Design': [
       {
         name: 'Economic model originality',
         score: 2,
-        desc: 'Successful model (copy of Convex for Balancer)',
+        desc: 'Economic model originality +2',
       },
       {
         name: 'How long the project survives with no hacks',
-        score: -1,
-        desc: 'There were not any hacks for a long time for Balancer (the last was 2 years ago) and Aura is a new project that lives for 5 months w/o hacks.',
+        score: 1,
+        desc: 'How long the project survives with no hacks +1',
       },
     ],
     'Market Risk': [
       {
         name: 'How significant is expected Impermanent Loss',
         score: 4,
-        desc: 'No IL, stablecoin pool',
+        desc: 'How significant is expected Impermanent Loss +4',
       },
       {
         name: 'Volatility',
         score: 4,
-        desc: `Voodoo uses 4h prices, so 8h window of 2 ticks was used.
-    BAL price swing is 0.21 ETH price swing is 0.1`,
+        desc: 'Volatility +4',
       },
       {
         name: 'Debt Position',
         score: 1,
-        desc: 'No debt used',
+        desc: 'Debt Position +1',
       },
       {
         name: 'Is the token instantly liquid',
         score: 2,
-        desc: 'Instant liquidity',
+        desc: 'Is the token instantly liquid +2',
       },
       {
         name: 'Is insurance available',
         score: 0,
-        desc: 'No insurance for Aura Finance',
+        desc: 'Is insurance available 0',
       },
       {
         name: 'Is unpeg possible?',
         score: 4,
-        desc: 'auraBAL has no cases of >5% unpeg from B-80BAL-20ETH, but has cases of 3% unpeg',
+        desc: 'Is unpeg possible +4',
+      },
+    ],
+  },
+
+  'sdai-gnosis': {
+    'Tech Design Risk': [
+      {
+        name: 'Is the project audited',
+        score: 2,
+        desc: 'Is the project audited',
+      },
+      {
+        name: 'Product architecture complexity',
+        score: 2,
+        desc: 'Product architecture complexity',
+      },
+      {
+        name: 'Time lock',
+        score: 2,
+        desc: 'Time lock',
+      },
+      {
+        name: 'Team & backers',
+        score: 0,
+        desc: 'Team & backers',
+      },
+    ],
+    'Economic Design': [
+      {
+        name: 'Economic model originality',
+        score: 2,
+        desc: 'Economic model originality',
+      },
+      {
+        name: 'How long the project survives with no hacks',
+        score: -1,
+        desc: 'How long the project survives with no hacks',
+      },
+    ],
+    'Market Risk': [
+      {
+        name: 'How significant is expected Impermanent Loss',
+        score: 4,
+        desc: 'How significant is expected Impermanent Loss',
+      },
+      {
+        name: 'Volatility',
+        score: 4,
+        desc: 'Volatility',
+      },
+      {
+        name: 'Debt Position',
+        score: 1,
+        desc: 'Debt Position',
+      },
+      {
+        name: 'Is the token instantly liquid',
+        score: 2,
+        desc: 'Is the token instantly liquid',
+      },
+      {
+        name: 'Is insurance available',
+        score: 0,
+        desc: 'Is insurance available',
+      },
+      {
+        name: 'Is unpeg possible?',
+        score: 4,
+        desc: 'Is unpeg possible',
       },
     ],
   },
