@@ -177,7 +177,7 @@ const computeFees = async (
   );
   const messageId = await gnosisSenderContract.methods.nonce().call();
 
-  const layerZeroDstChainId = '101';
+  const layerZeroDstChainId = '145'; // Gnosis
   const fees = await layerZeroEndpointContract.methods
     .estimateFees(
       layerZeroDstChainId,
