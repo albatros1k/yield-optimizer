@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { memo, useMemo } from 'react';
 import { useTheme } from 'styled-components';
 
@@ -7,6 +8,7 @@ import { formattedTotalApy } from '../../../../helpers/format';
 import { H1, Main } from '../../../../shared/ui/Typography';
 
 import { useAppSelector } from '../../../../store';
+import { DAILY } from '../../../../config/apy';
 
 interface DailyProps {
   vaultId: string;
@@ -22,14 +24,13 @@ export const Daily = memo<DailyProps>(({ vaultId, typography, margin }) => {
 
   const value = useMemo<string>(
     () =>
-      '0.03%' ||
-      (!haveValues
+      !haveValues
         ? QUESTIONS
         : isPrestake
         ? PRE_STAKE
         : isBoosted
         ? formatted.boostedTotalDaily
-        : formatted.totalDaily),
+        : formatted.totalDaily,
     [haveValues, formatted, isBoosted, isPrestake]
   );
 
@@ -42,7 +43,8 @@ export const Daily = memo<DailyProps>(({ vaultId, typography, margin }) => {
   return (
     <>
       <Typography m={margin} color={subAccentSecondary}>
-        {!isLoaded ? '...' : shouldShowInterest ? value : '-'}
+        {/* {!isLoaded ? '...' : shouldShowInterest ? value : '-'} */}
+        {DAILY[vaultId] ? `${DAILY[vaultId]}%` : '...'}
       </Typography>
     </>
   );

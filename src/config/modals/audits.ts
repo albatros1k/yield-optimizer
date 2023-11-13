@@ -112,5 +112,92 @@ export const AUDITS: Record<string, Record<string, Audit[]>> = {
       },
     ],
   },
-  'sdai-gnosis': {},
+  'sdai-gnosis': {
+    maker: [
+      {
+        name: 'Maker',
+        report: 'https://security.makerdao.com/audit-reports',
+      },
+      {
+        name: 'Trail of Bits',
+        report: 'https://security.makerdao.com/formal-verification',
+      },
+      {
+        name: 'PeckShield',
+        report: 'https://security.makerdao.com/formal-verification',
+      },
+      {
+        name: 'Runtime Verification',
+        report: 'https://security.makerdao.com/formal-verification',
+      },
+    ],
+    aave: [
+      {
+        name: 'Aave (Agave is an Aave fork)',
+        report: 'https://docs.aave.com/developers/deployed-contracts/security-and-audits',
+      },
+      {
+        name: 'V3.0.1 Audits - SigmaPrime',
+        report: 'https://docs.aave.com/developers/deployed-contracts/security-and-audits',
+      },
+      {
+        name: 'V3.0.1 Audits - Certora',
+        report: 'https://docs.aave.com/developers/deployed-contracts/security-and-audits',
+      },
+      {
+        name: 'V3.0.1 Audits - PeckShield',
+        report: 'https://docs.aave.com/developers/deployed-contracts/security-and-audits',
+      },
+      {
+        name: 'V3.0.1 Audits - ABDK',
+        report: 'https://docs.aave.com/developers/deployed-contracts/security-and-audits',
+      },
+      {
+        name: 'V3.0.1 Audits - Trail of Bits',
+        report: 'https://docs.aave.com/developers/deployed-contracts/security-and-audits',
+      },
+      {
+        name: 'V3.0.1 Audits - OpenZeppelin',
+        report: 'https://docs.aave.com/developers/deployed-contracts/security-and-audits',
+      },
+    ],
+    gnosis: [
+      {
+        name: 'Gnosis Bridge Audits',
+        report: 'https://docs.gnosischain.com/bridges/audits/',
+      },
+      {
+        name: 'Omega - ChainSafe',
+        report: 'https://docs.gnosischain.com/bridges/audits/',
+      },
+      {
+        name: 'ChainSafe',
+        report: 'https://docs.gnosischain.com/bridges/audits/',
+      },
+      {
+        name: 'ChainSecurity (OmniBridge v6.0 Smart Contracts)',
+        report: 'https://docs.gnosischain.com/bridges/audits/',
+      },
+      {
+        name: 'ChainSecurity (OmniBridge Smart Contracts)',
+        report: 'https://docs.gnosischain.com/bridges/audits/',
+      },
+      {
+        name: 'TokenBridge Audit by Quantstamp (covers OmniBridge)',
+        report: 'https://docs.gnosischain.com/bridges/audits/',
+      },
+      {
+        name: 'TokenBridge Audit by Quantstamp (covers AMB bridge)',
+        report: 'https://docs.gnosischain.com/bridges/audits/',
+      },
+      {
+        name: 'Smart Contracts Security Analysis by SmartDec',
+        report: 'https://docs.gnosischain.com/bridges/audits/',
+      },
+      {
+        name: 'Initial TokenBridge Audit by Peppersec',
+        report: 'https://docs.gnosischain.com/bridges/audits/',
+      },
+    ],
+  },
 };

@@ -21,7 +21,7 @@ export const VaultIdentity = memo<{ vaultId: string }>(({ vaultId }) => {
 
   return (
     <Row>
-      <AssetsImage assetIds={vault.assetIds} chainId={vault.chainId} size={48} />
+      <AssetsImage assetIds={[vault.token]} chainId={vault.chainId} size={48} />
       <Column h="100%" justify="space-between" m="0 0 0 14px">
         <Main m="0 0 8px">{punctuationWrap(vault.name)}</Main>
         <Row>

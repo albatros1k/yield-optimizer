@@ -248,7 +248,7 @@ export const POTENTIAL_RISKS: Record<string, Risk> = {
   },
   FUNDING_FEE: {
     title: 'Negative Funding Fee',
-    explanation: 'Historical modelling shows small negative influence (-3% pa) of funding rates',
+    explanation: 'Historical modeling shows a small negative influence (-3% pa) of funding rates',
   },
   DAI_DEPEG: {
     title: 'Hack or Depeg',
@@ -269,5 +269,17 @@ export const POTENTIAL_RISKS: Record<string, Risk> = {
   LIQUIDATION: {
     title: 'Liquidation',
     explanation: 'Liquidation risk',
+  },
+  DAI_HACK: {
+    title: 'Hack or Depeg',
+    explanation: 'DAI hack or depeg',
+  },
+  GNOSIS_CHAIN_RISK: {
+    title: 'Gnosis Chain Risk',
+    explanation: 'Risk associated with Gnosis Chain',
+  },
+  GNOSIS_BRIDGE_RISK: {
+    title: 'Gnosis Bridge Risk',
+    explanation: 'Risk associated with Gnosis Bridge',
   },
 };

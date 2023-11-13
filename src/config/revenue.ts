@@ -33,4 +33,9 @@ export const REVENUE: Record<string, Risk> = {
     explanation:
       'Additional revenue is derived from leveraging up the exposure through borrowing more DAI & staking in the DSR',
   },
+  DSR_YIELDS_GNOSIS: {
+    title: 'DSR yields',
+    explanation:
+      'The main revenue comes from yield on Tbills, managed by Maker on behalf of DAI stakers in the DSR. The additional yield (vs normal DSR) is due to the fact that all DAI in the Gnosis bridge is deposited in the DSR, and the yield generated will only be distributed to Agave DAI stakers.',
+  },
 };

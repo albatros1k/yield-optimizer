@@ -43,8 +43,17 @@ export const ABOUT: Record<string, About> = {
     ],
   },
   'sdai-gnosis': {
-    steps: [],
-    description: '',
-    explanation: [],
+    steps: [
+      'Deposit DAI in Vault',
+      'DAI bridged to Gnosis Chain',
+      'DAI deposited in sDAI on Agave',
+    ],
+    description:
+      "The Agave sDAI Gnosis Chain strategy is a DeFi investment strategy designed to achieve higher yields than DAI-DSR by utilizing Agave's sDAI distribution on DAI in the Gnosis Bridge. It emphasizes moderate risk, leveraging DAI's stability, Agave (an Aave fork), and the trusted Gnosis team to enhance DSR's base yield.",
+    explanation: [
+      'The Agave sDAI Gnosis Chain strategy is a DeFi investment strategy designed to provide a higher yield than normal DAI-DSR exposure by leveraging Agave’s sDAI distribution on the DAI held in the Gnosis Bridge.',
+      'This strategy focuses on a moderate risk profile, harnessing the stability of DAI, Agave (an Aave fork), and the trusted team behind Gnosis to improve on the base yield paid by the DSR.',
+      'It aims to achieve higher returns while still maintaining a reasonable level of risk, making it an attractive option for those seeking a balance between yield and security in their DeFi investments.',
+    ],
   },
 };

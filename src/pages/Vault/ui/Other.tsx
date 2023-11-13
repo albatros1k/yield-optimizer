@@ -9,7 +9,7 @@ import { icons } from '../../../shared/Icons';
 import { VaultEntity } from '../../../features/data/entities/vault';
 
 import { VaultMechanics } from './Modals/VaultMechanics';
-import { ApyBreakdown } from './Modals/ApyBreakdown';
+// import { ApyBreakdown } from './Modals/ApyBreakdown';
 import { Backers } from './Modals/Backers';
 import { Audits } from './Modals/Audits';
 import { SafetyScore } from './Modals/SafetyScore';
@@ -52,10 +52,10 @@ export const Other = memo<OtherProps>(({ vaultId }) => {
         onClick: () => toggleModal('mechanics'),
       },
       { name: 'Exit Mechanics', onClick: () => toggleModal('exit') },
-      {
-        name: 'APY Breakdown',
-        onClick: () => toggleModal('apy'),
-      },
+      // {
+      //   name: 'APY Breakdown',
+      //   onClick: () => toggleModal('apy'),
+      // },
       {
         name: 'Backers Info',
         onClick: () => toggleModal('backers'),
@@ -121,11 +121,11 @@ export const Other = memo<OtherProps>(({ vaultId }) => {
         closeModal={() => toggleModal('audits')}
         vaultId={vaultId}
       />
-      <ApyBreakdown
+      {/* <ApyBreakdown
         vaultId={vaultId}
         isModalOpen={modals.apy}
         closeModal={() => toggleModal('apy')}
-      />
+      /> */}
       <SafetyScore
         isModalOpen={modals.safety}
         closeModal={() => toggleModal('safety')}

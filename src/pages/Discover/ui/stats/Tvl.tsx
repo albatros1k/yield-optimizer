@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Fragment, memo, useMemo } from 'react';
 
 import { useAppSelector } from '../../../../store';
@@ -5,6 +6,7 @@ import { H1, Main } from '../../../../shared/ui/Typography';
 import { formatBigUsd } from '../../../../helpers/format';
 import { selectVaultTvl } from '../../../../features/data/selectors/tvl';
 import { selectVaultById } from '../../../../features/data/selectors/vaults';
+import { TVL } from '../../../../config/apy';
 
 interface TvlProps {
   vaultId: string;
@@ -29,7 +31,10 @@ export const Tvl = memo<TvlProps>(({ vaultId, typography, margin }) => {
 
   return (
     <Fragment>
-      <Typography m={margin}>{value}</Typography>
+      <Typography m={margin}>
+        {/* {value} */}
+        {TVL[vaultId] ? `$${TVL[vaultId]}` : '...'}
+      </Typography>
     </Fragment>
   );
 });

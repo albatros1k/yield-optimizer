@@ -79,5 +79,73 @@ BAL price swing is 0.21 ETH price swing is 0.1`,
     ],
   },
   'sdai-leverage': {},
-  'sdai-gnosis': {},
+  'sdai-gnosis': {
+    'Tech Design Risk': [
+      {
+        name: 'Is the project audited',
+        score: 2,
+        desc: 'Multiple audits for all the protocols',
+      },
+      {
+        name: 'Product architecture complexity',
+        score: 2,
+        desc: '3 protocols: Balancer, Aura Finance, AAVE',
+      },
+      {
+        name: 'Time lock',
+        score: 2,
+        desc: 'No Time lock',
+      },
+      {
+        name: 'Team & backers',
+        score: 0,
+        desc: 'Anonymous team without backers for Aura Finance',
+      },
+    ],
+    'Economic Design': [
+      {
+        name: 'Economic model originality',
+        score: 2,
+        desc: 'Successful model (copy of Convex for Balancer)',
+      },
+      {
+        name: 'How long the project survives with no hacks',
+        score: -1,
+        desc: 'There were not any hacks for a long time for Balancer (the last was 2 years ago) and Aura is a new project that lives for 5 months w/o hacks.',
+      },
+    ],
+    'Market Risk': [
+      {
+        name: 'How significant is expected Impermanent Loss',
+        score: 4,
+        desc: 'No IL, stablecoin pool',
+      },
+      {
+        name: 'Volatility',
+        score: 4,
+        desc: `Voodoo uses 4h prices, so 8h window of 2 ticks was used.
+    BAL price swing is 0.21 ETH price swing is 0.1`,
+      },
+      {
+        name: 'Debt Position',
+        score: 1,
+        desc: 'No debt used',
+      },
+      {
+        name: 'Is the token instantly liquid',
+        score: 2,
+        desc: 'Instant liquidity',
+      },
+      {
+        name: 'Is insurance available',
+        score: 0,
+        desc: 'No insurance for Aura Finance',
+      },
+      {
+        name: 'Is unpeg possible?',
+        score: 4,
+        desc: 'auraBAL has no cases of >5% unpeg from B-80BAL-20ETH, but has cases of 3% unpeg',
+      },
+    ],
+  },
 };

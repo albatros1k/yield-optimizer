@@ -67,6 +67,8 @@ export const TransactQuote = memo<TransactQuoteProps>(function TransactQuote({ t
     return null;
   }
 
+  // Hidden for now
+  return null;
   return (
     <div className={clsx(classes.container, className)}>
       <QuoteArrowDivider className={classes.divider} />
