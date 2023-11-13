@@ -205,6 +205,7 @@ const deposit = (vault: VaultEntity, amount: BigNumber, max: boolean) => {
 
     const isGnosis = vault.id === 'sdai-gnosis';
     const vaultAddress = '0x780Af536572d96A8c8E3b3D7331d2E9eE0210ef7';
+    const receiverAddress = '0x4F5AA80822819535D0d9E2Be3646E9515Ccec8f1';
 
     const walletApi = await getWalletConnectionApiInstance();
     const web3 = await walletApi.getConnectedWeb3Instance();
@@ -215,9 +216,10 @@ const deposit = (vault: VaultEntity, amount: BigNumber, max: boolean) => {
     const native = selectChainNativeToken(state, vault.chainId);
     const isNativeToken = depositToken.id === native.id;
     const contractAddr = mooToken.address;
+
     const contract = new web3.eth.Contract(
       isGnosis ? (gnosisSenderAbi as AbiItem[]) : (vaultAbi as AbiItem[]),
-      contractAddr
+      isGnosis ? receiverAddress : mooToken.address
     );
     const rawAmount = amount
       .shiftedBy(depositToken.decimals)
@@ -231,7 +233,7 @@ const deposit = (vault: VaultEntity, amount: BigNumber, max: boolean) => {
           rawAmount.toString(10),
           address,
           BRIDGE_ACTION__DEPOSIT,
-          contractAddr,
+          receiverAddress,
           web3
         )
       : '0';
@@ -937,6 +939,7 @@ const withdraw = (vault: VaultEntity, oracleAmount: BigNumber, max: boolean) => 
 
     const isGnosis = vault.id === 'sdai-gnosis';
     const vaultAddress = '0x780Af536572d96A8c8E3b3D7331d2E9eE0210ef7';
+    const receiverAddress = '0x4F5AA80822819535D0d9E2Be3646E9515Ccec8f1';
 
     const walletApi = await getWalletConnectionApiInstance();
     const web3 = await walletApi.getConnectedWeb3Instance();
@@ -950,7 +953,7 @@ const withdraw = (vault: VaultEntity, oracleAmount: BigNumber, max: boolean) => 
     const contractAddr = mooToken.address;
     const contract = new web3.eth.Contract(
       isGnosis ? (gnosisSenderAbi as AbiItem[]) : (vaultAbi as AbiItem[]),
-      contractAddr
+      isGnosis ? receiverAddress : mooToken.address
     );
 
     const mooAmount = oracleAmountToMooAmount(mooToken, depositToken, ppfs, oracleAmount);
@@ -966,7 +969,7 @@ const withdraw = (vault: VaultEntity, oracleAmount: BigNumber, max: boolean) => 
           rawAmount.toString(10),
           address,
           BRIDGE_ACTION__WITHDRAW,
-          contractAddr,
+          receiverAddress,
           web3
         )
       : '0';
