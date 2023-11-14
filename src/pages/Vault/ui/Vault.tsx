@@ -3,7 +3,7 @@ import { useParams } from 'react-router';
 import { VaultEntity } from '../../../features/data/entities/vault';
 import { selectVaultExistsById } from '../../../features/data/selectors/vaults';
 import { selectIsConfigAvailable } from '../../../features/data/selectors/data-loader';
-import { TechLoader } from '../../../components/TechLoader';
+import { Loader } from '../../../shared/ui/Loaders';
 
 import { useAppSelector } from '../../../store';
 
@@ -20,7 +20,7 @@ const VaultDetails = () => {
   const vaultExists = useAppSelector(state => selectVaultExistsById(state, id));
 
   if (!isLoaded) {
-    return <TechLoader text="Loading..." />;
+    return <Loader />;
   }
 
   if (!vaultExists) {

@@ -4,7 +4,7 @@ export type SafetyScore = {
   desc: string;
 };
 
-export const MAX_SAFETY_SCORE = 24;
+export const MAX_SAFETY_SCORE = 30;
 
 export const SAFETY_SCORE: Record<string, Record<string, SafetyScore[]>> = {
   'aave-bal-aura': {

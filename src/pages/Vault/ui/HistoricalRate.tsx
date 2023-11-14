@@ -15,7 +15,8 @@ import { useAppDispatch, useAppSelector } from '../../../store';
 import { HistoricalGraph } from './HistoricalGraph';
 import { Image } from '../../../shared/ui/Images';
 import { Card, Row } from '../../../shared/ui/Containers';
-import { H3 } from '../../../shared/ui/Typography';
+import { H1, H3, SubTitle } from '../../../shared/ui/Typography';
+import { BlurredOverlay } from './styled';
 
 interface HistoricalRateProps {
   vaultId: VaultEntity['id'];
@@ -35,7 +36,14 @@ export const HistoricalRate = memo<HistoricalRateProps>(({ vaultId }) => {
 
   if (!hasAnyChart) {
     return (
-      <Card p="25px" h="100%" overflowHidden>
+      <Card p="25px" h="100%" overflowHidden pos="relative">
+        <BlurredOverlay>
+          <H1 m="0 0 16px">Coming Soon</H1>
+          <SubTitle ta="center" maxW="270px">
+            The historical data on the changes in annual percentage yield (APY), total value locked
+            (TVL), and price will be available soon.
+          </SubTitle>
+        </BlurredOverlay>
         <Row w="100%" justify="space-between" align="center" m="0 0 28px">
           <H3 color={colors.alterText}>Historical Rate</H3>
         </Row>
