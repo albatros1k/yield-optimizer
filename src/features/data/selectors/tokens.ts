@@ -41,6 +41,26 @@ export const selectTokenById = (
   return byChainId[chainId].byAddress[address];
 };
 
+export const selectTokenFromAllChainsById = (state: BeefyState, tokenId: TokenEntity['id']) => {
+  const idMap: Record<string, string> = Object.values(state.entities.tokens.byChainId).reduce(
+    (map, { byId }) => ({ ...map, ...byId }),
+    {}
+  );
+
+  const tokenAddress = idMap[tokenId];
+
+  const selectedToken = Object.values(state.entities.tokens.byChainId).reduce(
+    (map, { byAddress }) => ({ ...map, ...byAddress }),
+    {} as Record<string, TokenEntity>
+  )[tokenAddress];
+
+  if (!selectedToken) {
+    throw new Error(`selectTokenFromAllChainsById: Unknown tokenId ${tokenId}`);
+  }
+
+  return selectedToken;
+};
+
 export const selectTokenByAddress = (
   state: BeefyState,
   chainId: ChainEntity['id'],
