@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
 import type { ReactNode } from 'react';
@@ -240,7 +241,7 @@ const SuccessContentDisplay = memo<SuccessContentDisplayProps>(function SuccessC
         </div>
       ) : null}
       <div className={classes.buttons}>
-        {shareVaultId ? <ShareButton vaultId={shareVaultId} placement="bottom-start" /> : null}
+        {/* {shareVaultId ? <ShareButton vaultId={shareVaultId} placement="bottom-start" /> : null} */}
         <CloseButton />
       </div>
     </>

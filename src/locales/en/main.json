@@ -270,7 +270,7 @@
   "Transactn-Confirmed": "{{currentStep}} / {{totalTxs}} Transaction confirmed",
   "Transactn-ViewTrnsactn": "View transaction",
   "Remember": "Remember: ",
-  "Remember-Msg": "mooTokens are the interest-bearing, tokenized proof of your deposit. You will need them to withdraw your funds. Losing ownership of your mooTokens will mean you lose ownership of your deposit",
+  "Remember-Msg": "vlkTokens are the interest-bearing, tokenized proof of your deposit. You will need them to withdraw your funds. Losing ownership of your mooTokens will mean you lose ownership of your deposit",
   "Remember-Msg-Bst": "Your mooTokens will continue generating interest, and you will earn extra tokens on top of them",
   "Graph-RateHist": "Historical rate",
   "Graph-price": "Price",
