@@ -69,7 +69,7 @@
     "oracleId": "sdai",
     "status": "active",
     "platformId": "maker",
-    "assets": ["DAI", "xDAI"],
+    "assets": ["DAI", "xDAI", "sDAI"],
     "risks": [
       "DAI_HACK",
       "USDC_DEPEG",
