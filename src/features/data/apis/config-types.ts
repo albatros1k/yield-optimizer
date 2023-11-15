@@ -43,6 +43,7 @@ export interface VaultConfig {
   showWarning?: boolean | null;
   warning?: string | null;
   migrationIds?: string[];
+  isPaused?: boolean;
 }
 
 export interface FeaturedVaultConfig {

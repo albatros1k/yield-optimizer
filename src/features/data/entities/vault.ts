@@ -78,6 +78,9 @@ export interface VaultStandard {
   retireReason?: string;
   pauseReason?: string;
   migrationIds?: string[];
+
+  //to show modal that strategy temporary paused
+  isPaused?: boolean;
 }
 
 export interface VaultGov {
@@ -143,6 +146,9 @@ export interface VaultGov {
   retireReason?: string;
   pauseReason?: string;
   migrationIds?: string[];
+
+  //to show modal that strategy temporary paused
+  isPaused?: boolean;
 }
 
 export function isGovVault(vault: VaultEntity): vault is VaultGov {
