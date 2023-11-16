@@ -17,6 +17,7 @@ import { AssetsImage } from '../../../components/AssetsImage';
 import { Daily } from '../../Discover/ui/stats/Daily';
 import { Apy } from '../../Discover/ui/stats/Apy';
 import { Tvl } from '../../Discover/ui/stats/Tvl';
+import { YourDeposit } from '../../Discover/ui/stats/YourDeposit';
 
 import { punctuationWrap } from '../../../helpers/string';
 import { getNetworkSrc } from '../../../helpers/networkSrc';
@@ -97,9 +98,15 @@ export const About = memo<AboutProps>(({ vaultId }) => {
             ))}
           </Row>
         </Block>
-
         <Block w="100%" p="25px" bg={colors.alterBg}>
-          <Grid w="100%" colTemplate="repeat(3,1fr)" rowTemplate="none" colGap="10px" rowGap="0px">
+          <Grid
+            w="100%"
+            colTemplate="repeat(4,1fr)"
+            rowTemplate="none"
+            colGap="10px"
+            rowGap="0px"
+            align="flex-start"
+          >
             <Column>
               <Caption color={colors.alterText} m="0 0 6px">
                 Current APY
@@ -119,6 +126,12 @@ export const About = memo<AboutProps>(({ vaultId }) => {
                 TVL
               </Caption>
               <Tvl vaultId={vaultId} typography={H1} margin="0 6px 0 0" />
+            </Column>
+            <Column>
+              <Caption color={colors.alterText} m="0 0 6px">
+                Your Deposit
+              </Caption>
+              <YourDeposit vaultId={vaultId} typography={H1} margin="0 6px 0 0" />
             </Column>
           </Grid>
         </Block>
