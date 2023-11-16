@@ -71,8 +71,7 @@
     "platformId": "maker",
     "assets": ["DAI", "xDAI", "sDAI"],
     "risks": [
-      "DAI_HACK",
-      "USDC_DEPEG",
+      "USDC_DAI_HACK",
       "MAKER_HACK",
       "AGAVE_RISK",
       "GNOSIS_CHAIN_RISK",

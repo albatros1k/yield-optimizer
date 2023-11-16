@@ -280,6 +280,11 @@ export const POTENTIAL_RISKS: Record<string, Risk> = {
     explanation:
       'DAI is a smart-contract that could be hacked. DAI as an asset could depeg from $1',
   },
+  USDC_DAI_HACK: {
+    title: 'Hack & Depeg',
+    explanation:
+      'DAI & USDC are smart-contracts that could be hacked. DAI & USDC as assets could depeg from $1',
+  },
   GNOSIS_CHAIN_RISK: {
     title: 'Gnosis Chain Risk',
     explanation: 'Gnosis chain is a POS chain that is more recent & less established than Ethereum',
