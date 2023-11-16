@@ -208,4 +208,60 @@ export const BACKERS: Record<string, Record<string, Backer[]>> = {
       },
     ],
   },
+  'sdai-gnosis-nat': {
+    gnosis: [
+      {
+        backer: 'Blockchain Capital',
+        partnership: 'Venture Capital',
+        proof: null,
+      },
+      {
+        backer: 'ConsenSys',
+        partnership: 'Blockchain Technology Company',
+        proof: null,
+      },
+      {
+        backer: 'Pantera Capital',
+        partnership: 'Cryptocurrency Investment Firm',
+        proof: null,
+      },
+      {
+        backer: 'Blockchain.com Ventures',
+        partnership: 'Venture Arm of Blockchain.com',
+        proof: null,
+      },
+    ],
+    makerdao: [
+      {
+        backer: 'Andreesen Horowitz',
+        partnership: 'Venture Capital Firm',
+        proof: 'https://a16z.com/',
+      },
+      {
+        backer: 'Polychain Capital',
+        partnership: 'Cryptocurrency Investment Fund',
+        proof: 'https://polychain.capital/',
+      },
+      {
+        backer: 'Founders Fund',
+        partnership: 'Venture Capital Firm',
+        proof: 'https://www.foundersfund.com/',
+      },
+      {
+        backer: 'Dragonfly Capital',
+        partnership: 'Cryptocurrency Investment Firm',
+        proof: 'https://www.dcp.capital/',
+      },
+      {
+        backer: 'Pantera Capital',
+        partnership: 'Cryptocurrency Investment Firm',
+        proof: 'https://panteracapital.com/',
+      },
+      {
+        backer: 'Coinbase Ventures',
+        partnership: 'Venture Arm of Coinbase',
+        proof: 'https://ventures.coinbase.com/',
+      },
+    ],
+  },
 };

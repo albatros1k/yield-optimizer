@@ -109,4 +109,32 @@ export const MECHANICS: Record<string, Mechanics> = {
       },
     ],
   },
+  'sdai-gnosis-nat': {
+    entry: [
+      {
+        name: 'Bridge DAI from Ethereum to Gnosis via Gnosis bridge',
+        protocolId: 'gnosis',
+        isDark: false,
+      },
+      { name: 'Wrap xDAI to wxDAI', protocolId: 'gnosis', isDark: false },
+      {
+        name: 'Deposit wxDAI to the sDAI contract on Gnosis',
+        protocolId: 'makerdao',
+        isDark: false,
+      },
+    ],
+    exit: [
+      {
+        name: 'Withdraw wxDAI from sDAI contract on Gnosis',
+        protocolId: 'makerdao',
+        isDark: false,
+      },
+      { name: 'Unwrap to xDAI', protocolId: 'gnosis', isDark: false },
+      {
+        name: 'Bridge from Gnosis to Ethereum and claim DAI',
+        protocolId: 'gnosis',
+        isDark: false,
+      },
+    ],
+  },
 };
