@@ -9,6 +9,12 @@ import {
   selectIsWalletKnown,
   selectWalletAddress,
 } from '../../../../features/data/selectors/wallet';
+import { selectVaultById } from '../../../../features/data/selectors/vaults';
+import {
+  selectHasUserBalanceInActiveBoost,
+  selectUserVaultDepositInUsd,
+} from '../../../../features/data/selectors/balance';
+import { VaultEntity } from '../../../../features/data/entities/vault';
 
 import { formatBigUsd } from '../../../../helpers/format';
 
