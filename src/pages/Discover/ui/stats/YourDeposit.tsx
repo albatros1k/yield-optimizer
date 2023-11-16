@@ -3,14 +3,7 @@ import { memo } from 'react';
 import { H1, Main } from '../../../../shared/ui/Typography';
 
 import { selectIsVaultBoosted } from '../../../../features/data/selectors/boosts';
-import {
-  selectGovVaultUserStakedBalanceInDepositToken,
-  selectHasUserBalanceInActiveBoost,
-  selectStandardVaultUserBalanceInDepositTokenIncludingBoosts,
-  selectUserVaultDepositInUsd,
-} from '../../../../features/data/selectors/balance';
-import { selectVaultById } from '../../../../features/data/selectors/vaults';
-import { VaultEntity, isGovVault } from '../../../../features/data/entities/vault';
+
 import {
   selectIsBalanceHidden,
   selectIsWalletKnown,
@@ -25,18 +18,6 @@ import { ContentLoading } from '../../../../components/ContentLoading';
 
 const BoostedVaultDepositedLarge = memo<{ vaultId: VaultEntity['id'] }>(({ vaultId }) => {
   const vault = useAppSelector(state => selectVaultById(state, vaultId));
-  const govVaultUserStakedBalanceInDepositToken = useAppSelector(state =>
-    selectGovVaultUserStakedBalanceInDepositToken(state, vault.id)
-  );
-  const standartVaultUserBalanceInDepositTokenIncludingBoosts = useAppSelector(state =>
-    selectStandardVaultUserBalanceInDepositTokenIncludingBoosts(state, vault.id)
-  );
-
-  const deposit = isGovVault(vault)
-    ? govVaultUserStakedBalanceInDepositToken
-    : standartVaultUserBalanceInDepositTokenIncludingBoosts;
-
-  const hasDeposit = deposit.gt(0);
   const depositUsd = formatBigUsd(
     useAppSelector(state => selectUserVaultDepositInUsd(state, vaultId))
   );
@@ -49,26 +30,12 @@ const BoostedVaultDepositedLarge = memo<{ vaultId: VaultEntity['id'] }>(({ vault
       : true
   );
 
-  return (
-    <>{isLoaded ? <>{blurred ? '...' : hasDeposit ? depositUsd : null}</> : <ContentLoading />}</>
-  );
+  return <>{isLoaded ? <>{blurred ? '...' : depositUsd}</> : <ContentLoading />}</>;
 });
 
 const NonBoostedVaultDeposited = memo<{ vaultId: VaultEntity['id'] }>(({ vaultId }) => {
   const vault = useAppSelector(state => selectVaultById(state, vaultId));
 
-  const govVaultUserStakedBalanceInDepositToken = useAppSelector(state =>
-    selectGovVaultUserStakedBalanceInDepositToken(state, vault.id)
-  );
-  const standartVaultUserBalanceInDepositTokenIncludingBoosts = useAppSelector(state =>
-    selectStandardVaultUserBalanceInDepositTokenIncludingBoosts(state, vault.id)
-  );
-
-  const deposit = isGovVault(vault)
-    ? govVaultUserStakedBalanceInDepositToken
-    : standartVaultUserBalanceInDepositTokenIncludingBoosts;
-
-  const hasDeposit = deposit.gt(0);
   const depositUsd = useAppSelector(state =>
     formatBigUsd(selectUserVaultDepositInUsd(state, vaultId))
   );
@@ -81,9 +48,7 @@ const NonBoostedVaultDeposited = memo<{ vaultId: VaultEntity['id'] }>(({ vaultId
       : true
   );
 
-  return (
-    <>{isLoaded ? <>{blurred ? '...' : hasDeposit ? depositUsd : null}</> : <ContentLoading />}</>
-  );
+  return <>{isLoaded ? <>{blurred ? '...' : depositUsd}</> : <ContentLoading />}</>;
 });
 
 interface YourDepositProps {

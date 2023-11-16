@@ -98,9 +98,15 @@ export const About = memo<AboutProps>(({ vaultId }) => {
             ))}
           </Row>
         </Block>
-
         <Block w="100%" p="25px" bg={colors.alterBg}>
-          <Grid w="100%" colTemplate="repeat(4,1fr)" rowTemplate="none" colGap="10px" rowGap="0px">
+          <Grid
+            w="100%"
+            colTemplate="repeat(4,1fr)"
+            rowTemplate="none"
+            colGap="10px"
+            rowGap="0px"
+            align="flex-start"
+          >
             <Column>
               <Caption color={colors.alterText} m="0 0 6px">
                 Current APY
