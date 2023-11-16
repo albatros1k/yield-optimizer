@@ -1,1 +1,32 @@
-[]
+[
+  {
+    "id": "sdai-gnosis-nat",
+    "name": "Agave sDAI on Gnosis Chain",
+    "token": "DAI",
+    "tokenAddress": "0x6B175474E89094C44Da98b954EedeAC495271d0F",
+    "tokenDecimals": 18,
+    "tokenProviderId": "maker",
+    "tokenAmmId": "ethereum-maker",
+    "earnedToken": "Vlk sDai Gnosis",
+    "earnedTokenAddress": "0x780Af536572d96A8c8E3b3D7331d2E9eE0210ef7",
+    "earnContractAddress": "0x780Af536572d96A8c8E3b3D7331d2E9eE0210ef7",
+    "oracle": "tokens",
+    "oracleId": "sdai",
+    "status": "active",
+    "platformId": "maker",
+    "assets": ["DAI", "xDAI", "sDAI"],
+    "risks": [
+      "USDC_DAI_HACK",
+      "MAKER_HACK",
+      "AGAVE_RISK",
+      "GNOSIS_CHAIN_RISK",
+      "GNOSIS_BRIDGE_RISK"
+    ],
+    "revenue": ["DSR_YIELDS_GNOSIS"],
+    "strategyTypeId": "single",
+    "buyTokenUrl": "https://www.sushi.com/swap?chainId=1&token1=0x6B175474E89094C44Da98b954EedeAC495271d0F",
+    "network": "ethereum",
+    "protocols": ["AAVE", "MAKER"],
+    "createdAt": 1697212283
+  }
+]
