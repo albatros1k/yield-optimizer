@@ -19,11 +19,11 @@ const socials = [
   },
   {
     src: telegram,
-    href: 'https://twitter.com/intent/user?screen_name=Odysea_protocol',
+    href: 'https://t.me/+GRMl7v5eGzY1ODVh',
   },
   {
     src: twitter,
-    href: 'https://t.me/+GRMl7v5eGzY1ODVh',
+    href: 'https://twitter.com/intent/user?screen_name=Odysea_protocol',
   },
 ];
 
