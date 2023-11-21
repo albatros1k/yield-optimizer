@@ -13,9 +13,9 @@ export const useToggle = (initialValue: boolean = false): [boolean, () => void] 
   return [value, toggleValue];
 };
 
-export const useBlockies = (): string => {
+export const useBlockies = (address?: string): string => {
   const walletAddress = useAppSelector(selectWalletAddressIfKnown);
-  const blockiesIcon: string = blockies.create({ seed: walletAddress }).toDataURL();
+  const blockiesIcon: string = blockies.create({ seed: address || walletAddress }).toDataURL();
   return blockiesIcon;
 };
 

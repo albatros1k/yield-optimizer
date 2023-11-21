@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { FC, memo, useMemo } from 'react';
+import { FC, ImgHTMLAttributes, memo, useEffect, useMemo, useState } from 'react';
 import { styled, useTheme } from 'styled-components';
 import { capitalize } from 'lodash-es';
 import { useNavigate } from 'react-router';
@@ -36,12 +36,16 @@ const { arrow } = icons;
 
 interface VaultProps {
   vaultId: string;
-  color: string;
 }
 
-export const Vault: FC<VaultProps> = memo(({ vaultId, color }) => {
+export const Vault: FC<VaultProps> = memo(({ vaultId }) => {
   const vault = useAppSelector(state => selectVaultById(state, vaultId));
   const platform = useAppSelector(state => selectPlatformById(state, vault.platformId));
+  const [icon, setIcon] = useState<FC<ImgHTMLAttributes<HTMLImageElement>> | null>(null);
+
+  const { colors } = useTheme();
+  const navigate = useNavigate();
+
   // const breakdown = useAppSelector(state =>
   //   selectLpBreakdownByAddress(state, vault.chainId, vault.depositTokenAddress)
   // );
@@ -55,19 +59,38 @@ export const Vault: FC<VaultProps> = memo(({ vaultId, color }) => {
 
   const percentage = '100%';
 
-  const {
-    colors: { alterText, bgColor },
-  } = useTheme();
-
-  const navigate = useNavigate();
-
   const goToDetails = (): void => navigate(`/vault/${vaultId}`);
+
+  useEffect(() => {
+    const loadIcon = async () => {
+      try {
+        const strategyIcons = await import.meta.glob<FC<ImgHTMLAttributes<HTMLImageElement>>>(
+          '../../../images/strategies-bg/*.png',
+          {
+            eager: true,
+            import: 'default',
+          }
+        );
+
+        const icon = strategyIcons[`../../../images/strategies-bg/${vaultId}.png`];
+        setIcon(icon);
+      } catch (error) {
+        console.error('Error loading strategy icon:', error);
+      }
+    };
+
+    loadIcon();
+  }, [vaultId]);
 
   return (
     <HoveredCard overflowHidden pointer onClick={goToDetails}>
-      <Block w="100%" p="20px" bg={color}>
+      <Block
+        w="100%"
+        p="20px"
+        style={{ backgroundImage: icon ? `url(${icon})` : 'none', backgroundSize: 'cover' }}
+      >
         <Row>
-          <Card bg={bgColor} w="fit-content" p="8px 10px" m="0 10px 0 0">
+          <Card bg={colors.bgColor} w="fit-content" p="8px 10px" m="0 10px 0 0">
             <Row align="center">
               <CircleImage
                 src={getNetworkSrc(vault.chainId)}
@@ -79,7 +102,7 @@ export const Vault: FC<VaultProps> = memo(({ vaultId, color }) => {
               <SubTitle>{capitalize(vault.chainId)}</SubTitle>
             </Row>
           </Card>
-          <Card bg={bgColor} w="fit-content" p="8px 10px">
+          <Card bg={colors.bgColor} w="fit-content" p="8px 10px">
             <SubTitle>{platform.name}</SubTitle>
           </Card>
         </Row>
@@ -94,14 +117,14 @@ export const Vault: FC<VaultProps> = memo(({ vaultId, color }) => {
           <AssetsImage assetIds={[vault.token]} chainId={vault.chainId} size={40} />
           <Column h="100%" justify="space-between" m="0 0 0 12px">
             <H3>{punctuationWrap(vault.name)}</H3>
-            <SubTitle color={alterText}>{percentage}</SubTitle>
+            <SubTitle color={colors.alterText}>{percentage}</SubTitle>
           </Column>
         </Row>
       </Block>
-      <Line color={bgColor} />
+      <Line color={colors.bgColor} />
       <AnimatedRow w="100%" p="14px 20px" justify="space-between">
-        <ButtonText color={alterText}>Vault Details</ButtonText>
-        <SvgContainer stroke={alterText} tf="rotate(-0.25turn)">
+        <ButtonText color={colors.alterText}>Vault Details</ButtonText>
+        <SvgContainer stroke={colors.alterText} tf="rotate(-0.25turn)">
           {arrow}
         </SvgContainer>
       </AnimatedRow>

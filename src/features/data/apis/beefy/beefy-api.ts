@@ -2,12 +2,14 @@ import type { AxiosInstance } from 'axios';
 import axios from 'axios';
 import BigNumber from 'bignumber.js';
 import { isString } from 'lodash-es';
+
 import type { ChainEntity } from '../../entities/chain';
 import type { TokenEntity } from '../../entities/token';
 import type { VaultEntity } from '../../entities/vault';
 import { mapValuesDeep } from '../../utils/array-utils';
 import { featureFlag_simulateBeefyApiError } from '../../utils/feature-flags';
 import type { TreasuryConfig } from '../config-types';
+import type { GalaxyPointsResponse, GalaxyRankingResponse } from './beefy-data-api-types';
 
 export type ApyPerformanceFeeData = {
   total: number;
@@ -67,19 +69,6 @@ export interface BeefyAPITokenPricesResponse {
 
 export interface BeefyAPIApyBreakdownResponse {
   [vaultId: VaultEntity['id']]: ApyData;
-}
-
-export interface GalaxyPointsResponse {
-  id: string;
-  points: number;
-  rank: number;
-  address: {
-    id: string;
-    twitterUserName: string;
-    address: string;
-    solanaAddress: string;
-    seiAddress: string;
-  };
 }
 
 export interface LpData {
@@ -155,6 +144,20 @@ export class BeefyAPI {
 
   public async collectGalaxyPoints(address: string): Promise<void> {
     await this.api.post(`/rewards/points/${address}`, {});
+  }
+
+  // get Galaxy user ranking
+  public async getUserRanking(
+    first: number = 8,
+    after: number = 0
+  ): Promise<GalaxyRankingResponse> {
+    const res = await this.api.get(`/rewards/leaderboard`, {
+      params: {
+        first,
+        after,
+      },
+    });
+    return res.data;
   }
 
   // i'm not 100% certain about the return type

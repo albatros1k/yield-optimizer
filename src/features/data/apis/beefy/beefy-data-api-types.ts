@@ -1,5 +1,6 @@
 import type { VaultEntity } from '../../entities/vault';
 import type { TokenEntity } from '../../entities/token';
+import { UserRanking } from '../../entities/ranking';
 
 export type ApiTimeBucket = '1h_1d' | '1h_1w' | '1d_1M' | '1d_1Y';
 
@@ -35,4 +36,28 @@ export interface IBeefyDataApi {
     oracleId: TokenEntity['oracleId'],
     bucket: ApiTimeBucket
   ): Promise<ApiChartData>;
+}
+
+export interface GalaxyRankingResponse {
+  list: UserRanking[];
+  pageInfo: {
+    startCursor: string;
+    endCursor: string;
+    hasNextPage: boolean;
+    hasPreviousPage: boolean;
+  };
+  totalCount: number;
+}
+
+export interface GalaxyPointsResponse {
+  id: string;
+  points: number;
+  rank: number;
+  address: {
+    id: string;
+    twitterUserName: string;
+    address: string;
+    solanaAddress: string;
+    seiAddress: string;
+  };
 }

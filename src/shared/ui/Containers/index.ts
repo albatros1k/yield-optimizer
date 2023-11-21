@@ -66,10 +66,10 @@ export const ContentWrapper = styled(Column)`
   align-items: center;
 `;
 
-export const Card = styled.div<IBlock & { border?: string | null }>`
+export const Card = styled.div<IBlock & { border?: string | null; br?: string }>`
   ${block}
   background: ${({ bg, theme: { colors } }) => bg || colors.alterBg};
-  border-radius: 6px;
+  border-radius: ${({ br = '6px' }) => br};
   border: ${({ border }) => (border ? `1px solid ${border}` : 'none')};
 `;
 
@@ -84,6 +84,7 @@ interface SvgContainerProps {
   size: number;
   tf: string;
   stroke: string;
+  fill: string;
   circle: string;
   strokeWidth?: number;
 }
@@ -99,6 +100,7 @@ export const SvgContainer = styled.div<Partial<SvgContainerProps>>`
   z-index: ${({ zIndex = 1 }) => zIndex};
   > svg {
     path {
+      fill: ${({ fill }) => fill};
       stroke: ${({ stroke }) => stroke};
       ${({ strokeWidth }) => (strokeWidth ? `stroke-width: ${strokeWidth};` : ``)}
     }
