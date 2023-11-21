@@ -197,8 +197,8 @@ export const config: Record<ChainConfig['id'], Omit<ChainConfig, 'id'>> = {
       chainId: `0x${parseInt('100', 10).toString(16)}`,
       chainName: 'Gnosis',
       nativeCurrency: {
-        name: 'XDAI',
-        symbol: 'XDAI',
+        name: 'xDAI',
+        symbol: 'xDAI',
         decimals: 18,
       },
       rpcUrls: ['https://gnosis.oat.farm'],

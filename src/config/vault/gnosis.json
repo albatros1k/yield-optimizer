@@ -2,8 +2,8 @@
   {
     "id": "sdai-gnosis-nat",
     "name": "Agave sDAI on Gnosis Chain",
-    "token": "DAI",
-    "tokenAddress": "0x6B175474E89094C44Da98b954EedeAC495271d0F",
+    "token": "wxDAI",
+    "tokenAddress": "0xe91D153E0b41518A2Ce8Dd3D7944Fa863463a97d",
     "tokenDecimals": 18,
     "tokenProviderId": "maker",
     "tokenAmmId": "ethereum-maker",
@@ -14,7 +14,7 @@
     "oracleId": "sdai",
     "status": "active",
     "platformId": "maker",
-    "assets": ["DAI", "xDAI", "sDAI"],
+    "assets": ["wxDAI", "xDAI"],
     "risks": [
       "USDC_DAI_HACK",
       "MAKER_HACK",
