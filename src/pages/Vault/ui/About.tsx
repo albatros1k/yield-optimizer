@@ -71,7 +71,7 @@ export const About = memo<AboutProps>(({ vaultId }) => {
             </Row>
           </Row>
           <Row align="center" m="0 0 20px">
-            <AssetsImage assetIds={[vault.assetIds[0]]} size={40} chainId={vault.chainId} />
+            <AssetsImage assetIds={[vault.token]} size={40} chainId={vault.chainId} />
             <H1 m="0 0 0 10px">{punctuationWrap(vault.name)}</H1>
           </Row>
           <Caption color={colors.alterText} m="0 0 6px">
