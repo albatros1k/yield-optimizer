@@ -23,6 +23,7 @@ import { MarketAsync as Market } from '../../../pages/Market';
 import { MarketPoolAsync as MarketPool } from '../../../pages/MarketPool';
 import { MarketPoolProtocolAsync as MarketPoolProtocol } from '../../../pages/MarketPoolProtocol';
 import { SupportedProtocolsAsync as SupportedProtocols } from '../../../pages/SupportedProtocols';
+import { LeaderBoardAsync as LeaderBoard } from '../../../pages/Leaderboard';
 
 export const Content = () => {
   const walletAddress = useAppSelector(selectWalletAddressIfKnown);
@@ -49,6 +50,7 @@ export const Content = () => {
             <Route path="/market/pool/:pair" element={<MarketPool />} />
             <Route path="/market/pool/:pair/:poolId" element={<MarketPoolProtocol />} />
             <Route path="/supported_protocols" element={<SupportedProtocols />} />
+            <Route path="/leaderboard" element={<LeaderBoard />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

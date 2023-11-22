@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import { useTheme } from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 import { icons } from '../../../shared/Icons';
 import { Modal } from '../../../shared/ui/Modal';
@@ -15,8 +16,15 @@ interface DailyMissionsProps {
 export const DailyMissions = memo<DailyMissionsProps>(({ isModalOpen, closeModal }) => {
   const { colors } = useTheme();
 
+  const navigate = useNavigate();
+
   const goToGalaxy = () =>
     window.open(`https://galxe.com/odysea/campaign/GC838Un2H8`, '_blank', 'noopener,noreferrer');
+
+  const goToLeaderBoard = () => {
+    navigate('/leaderboard');
+    closeModal();
+  };
 
   return (
     <Modal isOpen={isModalOpen} onClose={closeModal} minW="370px">
@@ -30,16 +38,16 @@ export const DailyMissions = memo<DailyMissionsProps>(({ isModalOpen, closeModal
         <Input color={colors.alterText} ta="center" m="0 auto 16px">
           Stardust is the fuel for our mission and collecting it will <br /> have many benefits.
         </Input>
-        <Row w="100%" justify="center">
+        <Row w="100%" justify="space-between">
           <Button w="calc(55% - 6px)" h="36px" p="0 10px 0 16px" onClick={goToGalaxy}>
             <Row w="100%" justify="space-between">
               <Input>Complete Daily Missions</Input>
               <SvgContainer>{icons.externalLink}</SvgContainer>
             </Row>
           </Button>
-          {/* <Button disabled bg={colors.alterBg} w="calc(45% - 6px)" h="36px">
+          <Button bg={colors.alterBg} w="calc(45% - 6px)" h="36px" onClick={goToLeaderBoard}>
             <Input>See Leaderboard</Input>
-          </Button> */}
+          </Button>
         </Row>
       </Column>
     </Modal>

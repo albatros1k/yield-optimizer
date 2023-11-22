@@ -1,17 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchGalaxyPoints } from '../../actions/points';
+import { UserRanking } from '../../entities/ranking';
 
-export type PointsState = {
-  id: string;
-  points: number;
-  rank: number;
-  address: {
-    id: string;
-    twitterUserName: string;
-    address: string;
-    solanaAddress: string;
-    seiAddress: string;
-  };
+export type PointsState = Omit<UserRanking, 'address'> & {
+  address: Omit<UserRanking['address'], 'username' | 'avatar' | 'aptosAddress' | 'discordUserName'>;
 };
 
 const initialPointsState: PointsState = {

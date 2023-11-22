@@ -18,6 +18,10 @@ export const SkeletonCircle = styled(Block)`
   border-radius: 50%;
 `;
 
+export const GraySkeletonCircle = styled(SkeletonCircle)`
+  background: ${({ theme: { colors } }) => colors.alterHelp};
+`;
+
 export const SkeletonContentVertical = styled(Block)`
   background: ${({ theme: { colors } }): string => colors.bgColor};
   border-radius: 6px;
