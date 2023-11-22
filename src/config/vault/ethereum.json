@@ -66,7 +66,7 @@
     "earnedTokenAddress": "0x6B175474E89094C44Da98b954EedeAC495271d0F",
     "earnContractAddress": "0x4F5AA80822819535D0d9E2Be3646E9515Ccec8f1",
     "oracle": "tokens",
-    "oracleId": "sdai",
+    "oracleId": "DAI",
     "status": "active",
     "platformId": "maker",
     "assets": ["DAI", "xDAI", "sDAI"],
