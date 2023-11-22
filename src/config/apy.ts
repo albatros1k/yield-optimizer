@@ -13,8 +13,8 @@ export const DAILY = {
 };
 
 export const TVL = {
-  'aave-bal-aura': 10000,
+  'aave-bal-aura': 10567,
   'sdai-leverage': 2,
-  'sdai-gnosis': 35000,
-  'sdai-gnosis-nat': 35000,
+  'sdai-gnosis': 35175,
+  'sdai-gnosis-nat': 35052,
 };

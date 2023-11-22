@@ -32,17 +32,7 @@ export const BestVaults = memo(() => {
   // );
 
   const bestVaults = useMemo(
-    () =>
-      vaultIds.map((vaultId, index) => {
-        const colors = [
-          'linear-gradient(191deg, #222446 0%, #272845 100%)',
-          'linear-gradient(191deg, #463322 0%, #452727 100%)',
-          'linear-gradient(191deg, #39393F 0%, #38383C 100%);',
-          'linear-gradient(191deg, #222446 0%, #272845 100%)',
-        ];
-        const color = colors[index];
-        return <Vault key={vaultId} vaultId={vaultId} color={color} />;
-      }),
+    () => vaultIds.map(vaultId => <Vault key={vaultId} vaultId={vaultId} />),
     [vaultIds]
   );
 
