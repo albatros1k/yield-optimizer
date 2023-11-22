@@ -6,7 +6,8 @@ import { icons } from '../../../shared/Icons';
 import { CircleImage } from '../../../shared/ui/Images';
 import { H2, Main, SubTitle } from '../../../shared/ui/Typography';
 import { PaginatorRow } from '../../../shared/ui/Pagination';
-import { Block, Card, Grid, Row, SvgContainer } from '../../../shared/ui/Containers';
+import { Spacer } from '../../../shared/ui/Spacer';
+import { Block, Card, Column, Grid, Row, SvgContainer } from '../../../shared/ui/Containers';
 
 import { getBeefyApi } from '../../../features/data/apis/instances';
 import { selectGalaxyPoints } from '../../../features/data/selectors/points';
@@ -70,6 +71,7 @@ export const UserList = memo(() => {
       return (
         <Fragment>
           <Card
+            w="100%"
             border={colors.subAccentSecondary}
             style={{ borderRadius: myUser.rank > 3 ? '6px 6px 0 0' : '6px' }}
           >
@@ -94,38 +96,51 @@ export const UserList = memo(() => {
   const renderLoadingSkeletons = () =>
     [...new Array(USERS_PER_PAGE).fill(null)].map((_, i) => <UserSkeleton key={i} />);
 
+  const renderHeading = () =>
+    ['User (Wallet Address)', 'Stardust', 'Rank'].map((title, index) => (
+      <SubTitle
+        key={title}
+        ta={!index ? 'left' : 'center'}
+        color={index === 1 ? colors.subAccentSecondary : colors.alterText}
+      >
+        {title}
+      </SubTitle>
+    ));
+
   if (!rankings || !rankings.list) return <Block h="100%">{renderLoadingSkeletons()}</Block>;
   if (error) return <H2>{error}</H2>;
 
   return (
     <Card w="100%" h="100%">
-      <Grid colTemplate="repeat(3,1fr)" colGap="10px" rowTemplate="none" rowGap="0" p="20px 24px">
-        {['User (Wallet Address)', 'Stardust', 'Rank'].map((title, index) => (
-          <SubTitle
-            key={title}
-            ta={!index ? 'left' : 'center'}
-            color={index === 1 ? colors.subAccentSecondary : colors.alterText}
-          >
-            {title}
-          </SubTitle>
-        ))}
-      </Grid>
-      {loading ? renderLoadingSkeletons() : page === 0 ? renderTopUsers : renderUsers}
-      <PaginatorRow m="25px auto" justify="center" w="100%" p="0 25px">
-        <ReactPaginate
-          {...{
-            breakLabel: '...',
-            nextLabel: '>',
-            forcePage: page,
-            onPageChange: onChangePage,
-            pageRangeDisplayed: 0,
-            marginPagesDisplayed: 2,
-            pageCount: PAGE_COUNT,
-            previousLabel: '<',
-            className: 'paginator',
-          }}
-        />
-      </PaginatorRow>
+      <Column w="100%" h="100%">
+        <Grid
+          colTemplate="repeat(3,1fr)"
+          colGap="10px"
+          rowTemplate="none"
+          rowGap="0"
+          p="20px 24px"
+          w="100%"
+        >
+          {renderHeading()}
+        </Grid>
+        {loading ? renderLoadingSkeletons() : page === 0 ? renderTopUsers : renderUsers}
+        <Spacer />
+        <PaginatorRow m="auto 0 25px" justify="center" w="100%" p="0 25px">
+          <ReactPaginate
+            {...{
+              breakLabel: '...',
+              nextLabel: '>',
+              forcePage: page,
+              onPageChange: onChangePage,
+              pageRangeDisplayed: 0,
+              marginPagesDisplayed: 2,
+              pageCount: PAGE_COUNT,
+              previousLabel: '<',
+              className: 'paginator',
+            }}
+          />
+        </PaginatorRow>
+      </Column>
     </Card>
   );
 });
@@ -143,6 +158,7 @@ export const UserRow = memo<UserRanking>(({ address, points, rank, id }) => {
 
   return (
     <Block
+      w="100%"
       p="25px"
       style={{
         border: isMyUser ? `1px solid ${colors.subAccentMain}` : 'none',
