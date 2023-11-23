@@ -97,15 +97,14 @@ export const UserList = memo(() => {
     [...new Array(USERS_PER_PAGE).fill(null)].map((_, i) => <UserSkeleton key={i} />);
 
   const renderHeading = () =>
-    ['User (Wallet Address)', 'Stardust', 'Rank'].map((title, index) => (
-      <SubTitle
-        key={title}
-        ta={!index ? 'left' : 'center'}
-        color={index === 1 ? colors.subAccentSecondary : colors.alterText}
-      >
-        {title}
-      </SubTitle>
-    ));
+    [`${rankings.totalCount} Odysea Explorers`, 'Stardust', 'Rank'].map((title, index) => {
+      const color = [colors.textColor, colors.subAccentSecondary, colors.alterText][index];
+      return (
+        <SubTitle key={title} ta={!index ? 'left' : 'center'} color={color}>
+          {title}
+        </SubTitle>
+      );
+    });
 
   if (!rankings || !rankings.list) return <Block h="100%">{renderLoadingSkeletons()}</Block>;
   if (error) return <H2>{error}</H2>;
