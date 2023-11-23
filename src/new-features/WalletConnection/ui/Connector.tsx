@@ -8,6 +8,8 @@ import { Button } from '../../../shared/ui/Buttons';
 import { SubTitle } from '../../../shared/ui/Typography';
 import { SmallLoader } from '../../../shared/ui/Loaders';
 import { Circle, Row } from '../../../shared/ui/Containers';
+import { useLoggerClick } from '../../../shared/lib/routerListener/hook';
+import { BUTTON_NAMES } from '../../../shared/lib/routerListener/interface';
 
 import { useResolveAddress } from '../../../features/data/hooks/resolver';
 import { askForWalletConnection } from '../../../features/data/actions/wallet';
@@ -31,6 +33,7 @@ export const Connector = memo<ConnectorProps>(({ isWelcome }) => {
   const resolverStatus = useResolveAddress(walletAddress);
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
+  const { onClickBy } = useLoggerClick();
 
   const {
     colors: { accentMain, alterBg },
@@ -38,6 +41,7 @@ export const Connector = memo<ConnectorProps>(({ isWelcome }) => {
 
   const handleWalletConnect = () => {
     dispatch(askForWalletConnection());
+    onClickBy(BUTTON_NAMES.CONNECT_YOUR_WALLET);
   };
 
   return (

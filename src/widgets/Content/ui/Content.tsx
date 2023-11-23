@@ -45,7 +45,7 @@ export const Content = () => {
             <Route path="/my_portfolio" element={walletAddress ? <Dashboard /> : <Welcome />} />
             <Route path="/rewards" element={walletAddress ? <Rewards /> : <Welcome />} />
             <Route path="/debts" element={walletAddress ? <Debts /> : <Welcome />} />
-            <Route path="/swap*" element={<Swap />} />
+            <Route path="/swap/*" element={<Swap />} />
             <Route path="/market" element={<Market />} />
             <Route path="/market/pool/:pair" element={<MarketPool />} />
             <Route path="/market/pool/:pair/:poolId" element={<MarketPoolProtocol />} />

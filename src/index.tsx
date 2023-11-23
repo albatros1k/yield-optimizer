@@ -12,6 +12,12 @@ import { mainTheme } from './shared/styles/theme';
 
 const theme = mainTheme;
 
+try {
+  localStorage.setItem('uri', window.location.href);
+} catch (e) {
+  console.log(e);
+}
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <Provider store={store}>
     <ThemeProvider {...{ theme }}>
