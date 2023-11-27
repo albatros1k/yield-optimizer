@@ -4,14 +4,7 @@ import { io, Socket } from 'socket.io-client';
 import FingerprintJS from '@fingerprintjs/fingerprintjs';
 
 import { BUTTON_NAMES, IRouterListener } from './interface';
-import {
-  APP_API_URL,
-  APP_VERSION,
-  PLATFORM,
-  PROVIDER_LOCAL_STORAGE_KEY,
-  theFirstUrl,
-  Timer,
-} from './const';
+import { APP_VERSION, PLATFORM, PROVIDER_LOCAL_STORAGE_KEY, theFirstUrl, Timer } from './const';
 import { gaPageTracker } from './ga';
 
 const RouterListenerLogic: FC<IRouterListener & { token: string }> = ({
@@ -28,7 +21,7 @@ const RouterListenerLogic: FC<IRouterListener & { token: string }> = ({
 
   useEffect(() => {
     if (!socket.current && token && !window.location.origin.includes('localhost')) {
-      socket.current = io(`${APP_API_URL}`, {
+      socket.current = io(`${import.meta.env.VITE_APP_API_URL}`, {
         path: '/merlin/statistics',
         query: {
           deviceId: JSON.stringify([token, navigator?.userAgent]),

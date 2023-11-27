@@ -2,6 +2,7 @@
 /.idea/
 .eslintcache
 .env
+.env.local
 .*.sw[m-p]
 .vscode
 .DS_Store
