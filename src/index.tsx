@@ -2,6 +2,7 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { ThemeProvider } from 'styled-components';
+import WoopraTracker from '@animalresearch/woopra-react';
 
 // import { App } from './App';
 import { persistor, store } from './store';
@@ -18,12 +19,21 @@ try {
   console.log(e);
 }
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <Provider store={store}>
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render([
+  <WoopraTracker
+    key="woopra"
+    config={{
+      domain: import.meta.env.VITE_APP_APP_DOMAIN,
+      outgoing_tracking: true,
+      download_tracking: true,
+      click_tracking: true,
+    }}
+  />,
+  <Provider key="redux-provider" store={store}>
     <ThemeProvider {...{ theme }}>
       <PersistGate loading={null} persistor={persistor}>
         <NewApp />
       </PersistGate>
     </ThemeProvider>
-  </Provider>
-);
+  </Provider>,
+]);

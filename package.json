@@ -8,6 +8,7 @@
     "node": "16.x"
   },
   "dependencies": {
+    "@animalresearch/woopra-react": "^1.0.0",
     "@deficonnect/web3-connector": "^2.0.3",
     "@ethersproject/address": "^5.4.0",
     "@ethersproject/providers": "^5.7.2",
