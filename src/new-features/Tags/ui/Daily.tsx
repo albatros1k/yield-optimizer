@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { FC, memo, useMemo } from 'react';
 import { useTheme } from 'styled-components';
 
@@ -9,6 +10,7 @@ import { useAppSelector } from '../../../store';
 import { selectVaultInfo } from '../selectors/selectVoteInfo';
 import { TagProps } from '../types/tag';
 import { PRE_STAKE, QUESTIONS } from '../lib/const';
+import { DAILY } from '../../../config/apy';
 
 export const DailyTag: FC<TagProps> = memo(({ vaultId }) => {
   const { isLoaded, haveValues, values, isBoosted, isPrestake, shouldShowInterest } =
@@ -39,7 +41,8 @@ export const DailyTag: FC<TagProps> = memo(({ vaultId }) => {
           Daily:
         </SubTitle>
         <DataTitle color={subAccentSecondary}>
-          {!isLoaded ? '...' : shouldShowInterest ? value : '-'}
+          {/* {!isLoaded ? '...' : shouldShowInterest ? value : '-'} */}
+          {DAILY[vaultId] ? `${DAILY[vaultId]}%` : '...'}
         </DataTitle>
       </Row>
     </Card>
