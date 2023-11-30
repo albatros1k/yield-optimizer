@@ -83,6 +83,13 @@ export const askForWalletConnection = createAsyncThunk(
     try {
       const walletConnection = await getWalletConnectionApiInstance();
       await walletConnection.askUserToConnectIfNeeded();
+
+      const web3instance = await walletConnection.getConnectedWeb3Instance();
+      const [walletAddress] = await web3instance.eth.getAccounts();
+      const woopra = window.woopra;
+      woopra.track('wallet-connection', {
+        walletAddress,
+      });
     } catch (err) {
       console.error('askForWalletConnection', err);
       throw err;
