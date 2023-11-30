@@ -3,6 +3,8 @@ import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
+import { getRouteName } from '../../widgets/Content/ui/routes';
+
 export const DefaultMeta = memo(function DefaultMeta() {
   const location = useLocation();
   const { t, i18n } = useTranslation();
@@ -10,11 +12,12 @@ export const DefaultMeta = memo(function DefaultMeta() {
     return `https://vault.v-wallet-graph.cf/${location.pathname}`;
   }, [location]);
 
-  // @dev defaults should also be added to index.html with data-rh="true"
+  const routeName = getRouteName(location.pathname);
+
   return (
     <Helmet>
       <html lang={i18n.language} />
-      <title>{t('Meta-Default-Title')}</title>
+      <title>{`${t('Meta-Default-Title')} ${routeName ? `| ${routeName}` : ''}`}</title>
       <link rel="canonical" href={canonical} />
       <meta name="description" content="The Strategy Builder" />
       <meta property="og:title" content={t('Meta-Default-Title')} />

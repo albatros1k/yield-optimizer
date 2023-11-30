@@ -49,6 +49,7 @@
     "millify": "^6.1.0",
     "moment": "^2.29.4",
     "p-queue": "^6.6.2",
+    "path-to-regexp": "^6.2.1",
     "re-reselect": "^4.0.0",
     "react": "18.2.0",
     "react-animate-height": "^2.0.23",
