@@ -1,4 +1,10 @@
-type AlignType = 'space-between' | 'center' | 'flex-start' | 'flex-end' | 'stretch';
+type AlignType =
+  | 'space-between'
+  | 'center'
+  | 'flex-start'
+  | 'flex-end'
+  | 'stretch'
+  | 'space-around';
 
 type PositionType = 'static' | 'relative' | 'absolute' | 'fixed' | 'sticky';
 

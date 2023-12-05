@@ -23,11 +23,12 @@ import { getNetworkSrc } from '../../../helpers/networkSrc';
 import { ACCOUNT_CENTER_WIDTH, AVATAR_SIZE } from '../lib/constants';
 
 import { AccountMenu } from './AccountMenu';
+import { selectGalaxyNft } from '../../../features/data/selectors/points';
 
 export const AccountCenter: FC = memo(() => {
   const walletAddress = useAppSelector(selectWalletAddressIfKnown);
   const currentChainId = useAppSelector(selectCurrentChainId);
-
+  const hasGalaxyNft = useAppSelector(selectGalaxyNft);
   const [open, toggleOpen] = useToggle();
   const blockiesIcon: string = useBlockies();
 
@@ -48,10 +49,11 @@ export const AccountCenter: FC = memo(() => {
         <Row w="100%" h="100%" align="center" justify="space-between">
           <Row align="center">
             <CircleImage
+              style={{ border: `1px solid ${subAccentMain}` }}
               m="0 12px 0 0"
               w={`${AVATAR_SIZE}px`}
               h={`${AVATAR_SIZE}px`}
-              src={blockiesIcon}
+              src={hasGalaxyNft ? hasGalaxyNft.image : blockiesIcon}
             />
             <H4>{formatAddressShort(walletAddress)}</H4>
           </Row>

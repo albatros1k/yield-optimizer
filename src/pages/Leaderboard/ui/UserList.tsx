@@ -10,7 +10,7 @@ import { Spacer } from '../../../shared/ui/Spacer';
 import { Block, Card, Column, Grid, Row, SvgContainer } from '../../../shared/ui/Containers';
 
 import { getBeefyApi } from '../../../features/data/apis/instances';
-import { selectGalaxyPoints } from '../../../features/data/selectors/points';
+import { selectGalaxyNft, selectGalaxyPoints } from '../../../features/data/selectors/points';
 import { GalaxyRankingResponse } from '../../../features/data/apis/beefy/beefy-data-api-types';
 import { UserRanking } from '../../../features/data/entities/ranking';
 
@@ -48,7 +48,7 @@ export const UserList = memo(() => {
     }
   };
 
-  const PAGE_COUNT = useMemo(() => rankings?.totalCount / USERS_PER_PAGE, [rankings]);
+  const PAGE_COUNT = useMemo(() => Math.ceil(rankings?.totalCount / USERS_PER_PAGE), [rankings]);
 
   useEffect(() => {
     (async () => {
@@ -79,7 +79,7 @@ export const UserList = memo(() => {
               <UserRow key={user.id} {...user} />
             ))}
           </Card>
-          {myUser.rank > 3 && <UserRow key={myUser.id} {...(myUser as UserRanking)} />}
+          {myUser.rank > 3 && <UserRow key={myUser.id} {...(myUser as unknown as UserRanking)} />}
           {remainingUsers?.map(user => (
             <UserRow key={user.id} {...user} />
           ))}
@@ -148,6 +148,7 @@ export const UserRow = memo<UserRanking>(({ address, points, rank, id }) => {
   const blockiesIcon: string = useBlockies(address.address);
   const isMyUser = useAppSelector(selectGalaxyPoints).id === id;
   const { colors } = useTheme();
+  const galaxyNft = useAppSelector(selectGalaxyNft);
 
   const palette = [colors.subAccentSecondary, colors.accentMain, colors.subAccentMain];
 
@@ -168,7 +169,12 @@ export const UserRow = memo<UserRanking>(({ address, points, rank, id }) => {
     >
       <Grid colTemplate="repeat(3,1fr)" colGap="10px" rowTemplate="none" rowGap="0">
         <Row align="center">
-          <CircleImage m="0 12px 0 0" w={`32px`} h={`32px`} src={blockiesIcon} />
+          <CircleImage
+            m="0 12px 0 0"
+            w={`32px`}
+            h={`32px`}
+            src={isMyUser && galaxyNft ? galaxyNft.image : blockiesIcon}
+          />
           <Main>{formatAddressShort(address.address)}</Main>
           {isMyUser && (
             <Main color={colors.subAccentMain} m="0 0 0 5px">

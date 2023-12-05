@@ -1,14 +1,10 @@
-import { memo } from 'react';
 import { styled } from 'styled-components';
 
-import { Row } from '../../../shared/ui/Containers';
+import { Card, Circle, Row } from '../../../shared/ui/Containers';
+import { center } from '../../../shared/styles/mixins';
 
 import cosmos from '../../../images/cosmos.png';
-import cards from '../../../images/cards.png';
-
-import { useAppSelector } from '../../../store';
-import { selectWalletAddressIfKnown } from '../../../features/data/selectors/wallet';
-import { Image } from '../../../shared/ui/Images';
+import rocket from '../../../images/rocket.png';
 
 export const SwitcherContainer = styled.div`
   display: grid;
@@ -47,22 +43,45 @@ export const AnimatedRow = styled(Row)`
   }
 `;
 
-export const CosmoBackground = styled(Row)`
-  flex: 1;
-  height: 100%;
+export const CosmoCard = styled(Card)`
   background-image: url(${cosmos});
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px 0 0;
+  background-size: 50% 100%;
+  background-repeat: no-repeat;
+  background-position: 140% 10%;
 `;
 
-export const StarDust = memo(() => {
-  const isConnected = Boolean(useAppSelector(selectWalletAddressIfKnown));
+export const RocketCard = styled(Card)`
+  position: relative;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: url(${rocket});
+    background-repeat: no-repeat;
+    background-position: 100% 10%;
+    opacity: 0.4;
+    z-index: -1;
+  }
+`;
 
-  return (
-    <CosmoBackground>{!isConnected && <Image w="70%" h="100%" src={cards} />}</CosmoBackground>
-  );
-});
+export const ClaimNFT = styled(Circle)<{ url }>`
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  ${center}
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: ${({ url }) => `url(${url})`};
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+  }
+`;

@@ -87,6 +87,7 @@ interface SvgContainerProps {
   fill: string;
   circle: string;
   strokeWidth?: number;
+  opacity?: number;
 }
 
 export const SvgContainer = styled.div<Partial<SvgContainerProps>>`
@@ -98,6 +99,7 @@ export const SvgContainer = styled.div<Partial<SvgContainerProps>>`
   right: ${({ r = 'auto' }) => r};
   left: ${({ l = 'auto' }) => l};
   z-index: ${({ zIndex = 1 }) => zIndex};
+  opacity: ${({ opacity }) => opacity || 1};
   > svg {
     path {
       fill: ${({ fill }) => fill};

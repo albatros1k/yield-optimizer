@@ -2,20 +2,25 @@ import { Fragment, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Spacer } from '../../../shared/ui/Spacer';
+import { Grid } from '../../../shared/ui/Containers';
 
 import { DeFiJourney } from './DefiJourney';
 import { BestVaults } from './BestVaults';
+import { NftBoost } from './NftBoost';
 import { TermsAndConditionsModal } from './TermsAndConditionsModal';
+
 import { useAppDispatch, useAppSelector } from '../../../store';
+
 import { selectVaultTerms } from '../../../features/data/selectors/agreement';
 import { agreementSliceActions } from '../../../features/data/reducers/agreement';
-// import { AllVaults } from './AllVaults';
+import { selectWalletAddressIfKnown } from '../../../features/data/selectors/wallet';
 
 const Discover = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(true);
   const termsAccepted = useAppSelector(selectVaultTerms);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const walletAddress = useAppSelector(selectWalletAddressIfKnown);
 
   const handleAcceptTerms = () => {
     localStorage.setItem('termsAccepted', 'true');
@@ -42,11 +47,19 @@ const Discover = () => {
       />
       {termsAccepted && (
         <>
-          <DeFiJourney />
+          <Grid
+            w="100%"
+            colTemplate={walletAddress ? '1fr 0.7fr' : '1fr'}
+            colGap="22px"
+            rowTemplate="none"
+            rowGap="0"
+          >
+            <DeFiJourney />
+            {walletAddress ? <NftBoost /> : null}
+          </Grid>
           <Spacer space={52} />
           <BestVaults />
           <Spacer space={52} />
-          {/* <AllVaults /> */}
         </>
       )}
     </Fragment>

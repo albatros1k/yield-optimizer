@@ -68,6 +68,32 @@ export const parseProtocol = <T extends string>(str: T): string => {
   return id.map(word => capitalize(word)).join(' ');
 };
 
+export const calcRound = (num: number, commas: boolean = false) => {
+  if (!num || typeof num !== 'number') return 0;
+  let fixed: string = String(num);
+  const number: string = num.toFixed(5);
+
+  const [start, rest] = `${number}`.split('.');
+  const all = rest.split('').every(n => n === '0');
+  const isExponential = new RegExp('e', 'i').test(rest);
+
+  const firstPositive = rest[0] !== '0' || rest[1] !== '0' || `${Math.abs(+start)}`.length > 1;
+  const twoPositive =
+    rest
+      .split('')
+      .slice(0, 2)
+      .every(n => n === '0') && rest[2] !== '0';
+
+  if (Number.isInteger(num)) return commas ? numberWithCommas(num) : num;
+  else if (isExponential) return 0;
+  else if (all) fixed = num.toFixed();
+  else if (firstPositive) fixed = num.toFixed(2);
+  else if (twoPositive) fixed = num.toFixed(3);
+  else fixed = number;
+
+  return commas && Number(fixed) > 100 ? numberWithCommas(+fixed) : fixed;
+};
+
 export function definePlus(
   value: number,
   hasPlus: boolean = true,

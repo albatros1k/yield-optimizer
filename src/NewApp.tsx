@@ -1,18 +1,24 @@
 // const consoleErr = console.error;
-// const SUPPRESSED_WARNINGS = ['Warning: React does not recognize', 'Warning: Received', 'has been externalized for browser compatibility', 'Encountered two children with the same key', 'styled-components:'];
+// const SUPPRESSED_WARNINGS = [
+//   'Warning: React does not recognize',
+//   'Warning: Received',
+//   'has been externalized for browser compatibility',
+//   'Encountered two children with the same key',
+//   'styled-components:',
+// ];
 
 // console.error = function filterWarnings(msg, ...args) {
-//    if (!SUPPRESSED_WARNINGS.some((entry) => msg && msg.includes && msg.includes(entry))) {
+//   if (!SUPPRESSED_WARNINGS.some(entry => msg && msg.includes && msg.includes(entry))) {
 //     consoleErr(msg, ...args);
-//    }
+//   }
 // };
 
 // const consoleWarn = console.warn;
 
 // console.warn = function filterWarnings(msg, ...args) {
-//    if (!SUPPRESSED_WARNINGS.some((entry) => msg && msg.includes && msg.includes(entry))) {
+//   if (!SUPPRESSED_WARNINGS.some(entry => msg && msg.includes && msg.includes(entry))) {
 //     consoleWarn(msg, ...args);
-//    }
+//   }
 // };
 
 import { Suspense, useEffect } from 'react';
@@ -37,6 +43,8 @@ import { Stepper } from './components/Stepper';
 import { initHomeDataV4 } from './features/data/actions/scenarios';
 import { selectWalletAddress } from './features/data/selectors/wallet';
 
+import { CHRISTMAS_END_DAY_STORAGE_KEY, FIXED_END_DATE } from './pages/Leaderboard/lib/period';
+
 import { store, useAppSelector } from './store';
 import { checkVaults } from './config/cheker';
 import { theme } from './theme';
@@ -47,6 +55,12 @@ export const NewApp = () => {
   useEffect(() => {
     initHomeDataV4(store);
     checkVaults();
+
+    // only for Christmas missions
+    const storedEndDate = localStorage.getItem(CHRISTMAS_END_DAY_STORAGE_KEY);
+    if (!storedEndDate) {
+      localStorage.setItem(CHRISTMAS_END_DAY_STORAGE_KEY, FIXED_END_DATE.toISOString());
+    }
   }, []);
 
   return (

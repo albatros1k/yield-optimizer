@@ -13,7 +13,7 @@ import { H3, Main } from '../../../../../../shared/ui/Typography';
 import { Grid, GridItem, PositionGrid, Row } from '../../../../../../shared/ui/Containers';
 
 import { LendingHeadings, gridColumnPattern } from '../../../../lib/const';
-import { definePlus } from '../../../../../../helpers/merlinHelpers';
+import { calcRound, definePlus } from '../../../../../../helpers/merlinHelpers';
 
 interface LendingProps {
   pos: IPortfolioItem;
@@ -108,7 +108,7 @@ export const Lending: FC<LendingProps> = ({ pos: { name, stats, detail } }) => {
                       <Main m="0 0 0 14px">{symbol}</Main>
                     </Row>
                     <GridItem colStart={2} colEnd={5}>
-                      <Main dotted>{definePlus(amount, false)}</Main>
+                      <Main dotted>{calcRound(amount, true)}</Main>
                     </GridItem>
                     <div />
                     <div />
