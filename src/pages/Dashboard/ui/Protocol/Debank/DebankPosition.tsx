@@ -6,7 +6,7 @@ import { MultipleTokenIcons, TokenIcon } from '../../../../../shared/ui/Images';
 import { Column, GridItem, PositionGrid, Row } from '../../../../../shared/ui/Containers';
 
 import { IPortfolioItem } from '../../../../../features/data/apis/merlin/types/portfolio';
-import { definePlus } from '../../../../../helpers/merlinHelpers';
+import { calcRound, definePlus } from '../../../../../helpers/merlinHelpers';
 import { gridColumnPattern } from '../../../lib/const';
 
 interface DeBankPositionProps {
@@ -33,10 +33,7 @@ export const DeBankPosition: FC<DeBankPositionProps> = memo(
     const renderBalances = (): JSX.Element[] | undefined => {
       if (supply_token_list) {
         return supply_token_list.map(({ id, symbol, amount }, index) => (
-          <Main w="100%" key={id + index} dotted={true}>{`${definePlus(
-            amount,
-            false
-          )} ${symbol}`}</Main>
+          <Main w="100%" key={id + index} dotted={true}>{`${calcRound(amount)} ${symbol}`}</Main>
         ));
       }
     };

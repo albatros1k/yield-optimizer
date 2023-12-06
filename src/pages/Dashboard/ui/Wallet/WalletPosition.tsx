@@ -9,7 +9,7 @@ import { WalletPositionIndicators } from '../../types';
 
 import { gridColumnPattern } from '../../lib/const';
 
-import { definePlus } from '../../../../helpers/merlinHelpers';
+import { calcRound, definePlus } from '../../../../helpers/merlinHelpers';
 import { useColor } from '../../../../helpers/hooks';
 
 interface WalletPositionProps {
@@ -41,7 +41,7 @@ export const WalletPosition = memo<WalletPositionProps>(({ position }) => {
         <TokenIcon w="24px" h="24px" address={token_address} m="0 14px 0 0" />
         <Main dotted>{symbol}</Main>
       </Row>
-      <Main dotted>{definePlus(tokenBalance, false)}</Main>
+      <Main dotted>{calcRound(tokenBalance)}</Main>
       <Main dotted>{definePlus(Number(current), false)}</Main>
       <Main dotted color={defineColor(Number(priceChange24h))}>
         {isNaN(priceChangePercent) || !priceChangePercent

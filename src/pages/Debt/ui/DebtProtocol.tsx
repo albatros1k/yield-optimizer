@@ -4,7 +4,7 @@ import { useTheme } from 'styled-components';
 import { Card, Grid, Row } from '../../../shared/ui/Containers';
 import { Image, TokenIcon } from '../../../shared/ui/Images';
 import { H3, Main, SubTitle } from '../../../shared/ui/Typography';
-import { definePlus, parseProtocol } from '../../../helpers/merlinHelpers';
+import { calcRound, definePlus, parseProtocol } from '../../../helpers/merlinHelpers';
 import { Button } from '../../../shared/ui/Buttons';
 import { Line } from '../../../shared/ui/Spacer';
 
@@ -34,7 +34,7 @@ export const DebtProtocol: FC<{ debtPosition: IBorrowPosition }> = ({
               <TokenIcon w="24px" h="24px" address={address} />
               <Main m="0 0 0 14px">{symbol}</Main>
             </Row>
-            <Main>{definePlus(value, false)}</Main>
+            <Main>{calcRound(value)}</Main>
             <Main>{definePlus(valueUSD, false)}</Main>
             {isSupported ? (
               <Button w="140px" h="28px">

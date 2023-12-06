@@ -15,7 +15,7 @@ import { MultipleTokenIcons, TokenIcon } from '../../../../../shared/ui/Images';
 import { Main, SubTitle } from '../../../../../shared/ui/Typography';
 import { Button } from '../../../../../shared/ui/Buttons';
 
-import { definePlus } from '../../../../../helpers/merlinHelpers';
+import { calcRound, definePlus } from '../../../../../helpers/merlinHelpers';
 import { useColor } from '../../../../../helpers/hooks';
 
 import { gridColumnPattern } from '../../../lib/const';
@@ -59,10 +59,7 @@ export const MerlinPosition: FC<MerlinPositionProps> = memo(
 
     const renderLPBalances = (): JSX.Element[] =>
       valuesByLPToken.map(({ symbol, value }, index) => (
-        <Main key={symbol + index} dotted={true} w="100%">{`${definePlus(
-          value,
-          false
-        )} ${symbol}`}</Main>
+        <Main key={symbol + index} dotted={true} w="100%">{`${calcRound(value)} ${symbol}`}</Main>
       ));
 
     const totalYield: number = calcActive('yieldUSD') + yieldUSD;
@@ -98,7 +95,7 @@ export const MerlinPosition: FC<MerlinPositionProps> = memo(
           </Column>
         </Row>
         <Column w="100%" overflowHidden>
-          {isLP ? renderLPBalances() : <Main dotted={true}>{definePlus(value, false)}</Main>}
+          {isLP ? renderLPBalances() : <Main dotted={true}>{`${calcRound(value)}`}</Main>}
         </Column>
         <div />
         <Main dotted color={defineColor(totalPNL)}>

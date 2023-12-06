@@ -11,7 +11,7 @@ import { H3, Main, SubTitle } from '../../../shared/ui/Typography';
 import { Button } from '../../../shared/ui/Buttons';
 import { Line } from '../../../shared/ui/Spacer';
 
-import { definePlus, parseProtocol } from '../../../helpers/merlinHelpers';
+import { calcRound, definePlus, parseProtocol } from '../../../helpers/merlinHelpers';
 
 export const RewardsProtocol: FC<{ rewardsPosition: IRewardPosition }> = ({
   rewardsPosition: { protocolName, totalRewards, chain, logo, reward, isSupported, isAbleToClaim },
@@ -35,7 +35,7 @@ export const RewardsProtocol: FC<{ rewardsPosition: IRewardPosition }> = ({
               <TokenIcon w="24px" h="24px" address={address} />
               <Main m="0 0 0 14px">{symbol}</Main>
             </Row>
-            <Main>{definePlus(value, false)}</Main>
+            <Main>{calcRound(value)}</Main>
             <Main>{definePlus(valueUSD, false)}</Main>
             {isSupported && isAbleToClaim ? (
               <Button w="140px" h="28px">

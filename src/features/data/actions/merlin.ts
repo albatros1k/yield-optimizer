@@ -195,7 +195,7 @@ export const getMerlinReducer = createAsyncThunk<any, string, { rejectValue: str
                 const { token_address } = balance;
                 return Object.assign(balance, pricesList[token_address]);
               })
-              .map(balance => ({ ...balance, current: balance.current || balance.price }))
+              .map(balance => ({ ...balance, current: balance.price || balance.current }))
               .filter(
                 ({ token_address, symbol, decimals, current, balance }) =>
                   !addressesToBeExcluded.has(token_address) &&
