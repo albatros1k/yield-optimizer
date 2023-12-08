@@ -3,6 +3,7 @@ export const APY: Record<string, number | null> = {
   'sdai-leverage': 7,
   'sdai-gnosis': 7.2,
   'sdai-gnosis-nat': 7.2,
+  'cNoteUsdc-canto': 6.6,
 };
 
 export const DAILY = {
@@ -10,6 +11,7 @@ export const DAILY = {
   'sdai-leverage': 0.0192,
   'sdai-gnosis': 0.0197,
   'sdai-gnosis-nat': 0.0197,
+  'cNoteUsdc-canto': 0.0234,
 };
 
 export const TVL = {
@@ -17,4 +19,5 @@ export const TVL = {
   'sdai-leverage': 2,
   'sdai-gnosis': 35175,
   'sdai-gnosis-nat': 35052,
+  'cNoteUsdc-canto': 5,
 };

@@ -13,8 +13,8 @@
     "oracle": "tokens",
     "oracleId": "USDC",
     "status": "active",
-    "platformId": "circle",
-    "assets": ["USDC", "NOTE", "CNOTE"],
+    "platformId": "cantoDex",
+    "assets": ["USDC", "NOTE"],
     "risks": [
       "CANTO_PROTOCOL_HACK",
       "GRAVITY_BRIDGE_HACK",
