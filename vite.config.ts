@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite';
+import { nodePolyfills } from 'vite-plugin-node-polyfills';
 import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill';
 import RollupNodePolyFillPlugin from 'rollup-plugin-polyfill-node';
 import react from '@vitejs/plugin-react';
@@ -32,6 +33,7 @@ export default defineConfig({
   },
   plugins: [
     react(),
+    nodePolyfills(),
     {
       ...svgrPlugin(),
       enforce: 'post',
