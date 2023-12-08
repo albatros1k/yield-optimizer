@@ -21,7 +21,7 @@ export const ChristmasMissions = memo(() => {
   const { colors } = useTheme();
 
   const goToGalaxy = () =>
-    window.open(`https://odysea.finance/snow-aliens-nft`, '_blank', 'noopener,noreferrer');
+    window.open(`https://odysea.finance/christmas-crew`, '_blank', 'noopener,noreferrer');
 
   useEffect(() => {
     const timerInterval = setInterval(() => {
