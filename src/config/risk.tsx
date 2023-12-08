@@ -298,4 +298,24 @@ export const POTENTIAL_RISKS: Record<string, Risk> = {
     explanation:
       'Agave is a complex protocol that could be hacked, or left with bad collateral in case of failure of liquidations.',
   },
+  CANTO_PROTOCOL_HACK: {
+    title: 'Canto Protocol Security',
+    explanation:
+      'Canto is a proof-of-stake (POS) blockchain that is relatively new and less established compared to Ethereum. A security breach in the Canto Protocol could lead to potential risks for users and stakeholders.',
+  },
+  GRAVITY_BRIDGE_HACK: {
+    title: 'Gravity Bridge Security',
+    explanation:
+      "The Gravity Bridge is a crucial component as it holds the original users' assets in custody during the bridging process. Any compromise or hack of the Gravity Bridge could result in the loss of assets, impacting users and the overall stability of the protocol.",
+  },
+  CANTO_LENDING_MARKET_HACK: {
+    title: 'Canto Lending Market Security',
+    explanation:
+      'The Canto lending market, being a Compound V2 fork, presents its own set of complexities. The protocol could be vulnerable to hacking attempts, and there is a risk of the market being left with bad collateral in the event of failures in liquidations or other protocol-related issues.',
+  },
+  HACK_OR_DEPEG: {
+    title: 'Stability and Security of Note and USDC',
+    explanation:
+      'Note and USDC are stablecoins with different underlying models. Under certain circumstances, there is a risk of these stablecoins depegging from their intended value of $1. Additionally, the smart-contract infrastructure supporting Note and USDC could be susceptible to hacking, posing a threat to the stability and security of these stablecoins.',
+  },
 };

@@ -38,4 +38,14 @@ export const REVENUE: Record<string, Risk> = {
     explanation:
       'The main revenue comes from yield on Tbills, managed by Maker on behalf of DAI stakers in the DSR. The additional yield (vs normal DSR) is due to the fact that all DAI in the Gnosis bridge is deposited in the DSR, and the yield generated will only be distributed to Agave DAI stakers.',
   },
+  CNOTE_YIELD: {
+    title: 'cNote Yield Risk',
+    explanation:
+      'cNote yield is an organic yield paid in kind by Note borrowers on the Canto Lending market.',
+  },
+  CANTO_INCENTIVES: {
+    title: 'Canto Incentives Risk',
+    explanation:
+      'Canto incentives are liquidity mining rewards that are paid by the Canto Blockchain to incentivize LPs that provide liquidity on public goods protocols on the chain.',
+  },
 };

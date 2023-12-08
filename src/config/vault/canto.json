@@ -1,1 +1,31 @@
-[]
+[
+  {
+    "id": "cNoteUsdc-canto",
+    "name": "cNote/USDC Canto",
+    "token": "USDC",
+    "tokenAddress": "0x80b5a32E4F032B2a058b4F29EC95EEfEEB87aDcd",
+    "tokenDecimals": 6,
+    "tokenProviderId": "circle",
+    "tokenAmmId": "ethereum-circle",
+    "earnedToken": "Vlk cNoteUsdc Canto",
+    "earnedTokenAddress": "0xC105133901cc4B6bBeBa86fDf78E03E6D695161A",
+    "earnContractAddress": "0xC105133901cc4B6bBeBa86fDf78E03E6D695161A",
+    "oracle": "tokens",
+    "oracleId": "USDC",
+    "status": "active",
+    "platformId": "circle",
+    "assets": ["USDC", "NOTE", "CNOTE"],
+    "risks": [
+      "CANTO_PROTOCOL_HACK",
+      "GRAVITY_BRIDGE_HACK",
+      "CANTO_LENDING_MARKET_HACK",
+      "HACK_OR_DEPEG"
+    ],
+    "revenue": ["CNOTE_YIELD", "CANTO_INCENTIVES"],
+    "strategyTypeId": "single",
+    "buyTokenUrl": "https://app.slingshot.finance/swap/Canto/CANTO",
+    "network": "canto",
+    "protocols": ["CANTO LENDING", "AMBIENT"],
+    "createdAt": 7197706
+  }
+]

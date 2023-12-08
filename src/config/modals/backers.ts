@@ -264,4 +264,40 @@ export const BACKERS: Record<string, Record<string, Backer[]>> = {
       },
     ],
   },
+  'cNoteUsdc-canto': {
+    canto: [
+      {
+        backer: 'Community launched & maintained EVM compatible blockchain',
+        partnership: 'No VC’s & no backers',
+        proof: '',
+      },
+    ],
+    ambient: [
+      {
+        backer: 'Blocktower Capital',
+        partnership: 'Pioneering force in cryptocurrency investment',
+        proof: null,
+      },
+      {
+        backer: 'Circle',
+        partnership: 'At the forefront of digital currency innovation. Issuer of USDC stablecoin.',
+        proof: null,
+      },
+      {
+        backer: 'Jane Street',
+        partnership: 'Renowned for expertise in quantitative trading',
+        proof: null,
+      },
+      {
+        backer: 'Tensar Capital',
+        partnership: 'Focus on financial acumen, strategic investor',
+        proof: null,
+      },
+      {
+        backer: 'Naval Ravikant',
+        partnership: 'Visionary in tech and investment space',
+        proof: null,
+      },
+    ],
+  },
 };

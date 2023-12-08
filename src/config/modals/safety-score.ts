@@ -283,4 +283,72 @@ BAL price swing is 0.21 ETH price swing is 0.1`,
       },
     ],
   },
+  'cNoteUsdc-canto': {
+    'Tech Design Risk': [
+      {
+        name: 'Is the project audited',
+        score: 2,
+        desc: 'Is the project audited',
+      },
+      {
+        name: 'Product architecture complexity',
+        score: 2,
+        desc: 'Product architecture complexity',
+      },
+      {
+        name: 'Time lock',
+        score: 2,
+        desc: 'Time lock',
+      },
+      {
+        name: 'Team & backers',
+        score: 0,
+        desc: 'Team & backers',
+      },
+    ],
+    'Economic Design': [
+      {
+        name: 'Economic model originality',
+        score: 2,
+        desc: 'Economic model originality',
+      },
+      {
+        name: 'How long the project survives with no hacks',
+        score: 2,
+        desc: 'How long the project survives with no hacks',
+      },
+    ],
+    'Market Risk': [
+      {
+        name: 'How significant is expected Impermanent Loss',
+        score: 4,
+        desc: 'How significant is expected Impermanent Loss',
+      },
+      {
+        name: 'Volatility',
+        score: 4,
+        desc: 'Volatility',
+      },
+      {
+        name: 'Debt Position',
+        score: 4,
+        desc: 'Debt Position',
+      },
+      {
+        name: 'Is the token instantly liquid',
+        score: 2,
+        desc: 'Is the token instantly liquid',
+      },
+      {
+        name: 'Is insurance available',
+        score: 0,
+        desc: 'Is insurance available',
+      },
+      {
+        name: 'Is unpeg possible?',
+        score: 1,
+        desc: 'Is unpeg possible',
+      },
+    ],
+  },
 };

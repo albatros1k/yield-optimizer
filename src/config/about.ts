@@ -70,4 +70,23 @@ export const ABOUT: Record<string, About> = {
       'It aims to achieve higher returns while still maintaining a reasonable level of risk, making it an attractive option for those seeking a balance between yield and security in their DeFi investments.',
     ],
   },
+  'cNoteUsdc-canto': {
+    steps: [
+      'Deposit USDC in Vault',
+      'Bridge USDC to Canto via Gravity Bridge',
+      'Sell 50% of USDC to Note',
+      'Stake Note on Canto Lending Market to cNote',
+      'Provide liquidity for cNote/USDC on Ambient DEX',
+      'Harvest Canto reward',
+      'Convert Canto to cNote/USDC and compound',
+    ],
+    description:
+      'The Canto cNote/USDC LP on Ambient DEX strategy is a DeFi investment strategy designed to provide a higher than usual yield on relatively stable assets (Note & USDC)',
+    explanation: [
+      'The user’s USDC & bridges them to Canto via the Gravity Bridge. Once on Canto, the strategy converts 50% of the USDC (more or less according to LP position requirements) to Note, which is staked on the Canto Lending Market to get cNote. ',
+      'Finally, the cNote & remaining USDC are staked on Ambient DEX’s cNote/USDC  liquidity pool to get Canto incentives.',
+      'Incentives are rebalanced periodically into more cNote/USDC & restaked.',
+      'It aims to achieve much higher returns while taking a medium level of risk, making it an attractive option for those seeking more yield through a higher risk tolerance in their DeFi investments',
+    ],
+  },
 };

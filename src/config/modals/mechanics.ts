@@ -137,4 +137,50 @@ export const MECHANICS: Record<string, Mechanics> = {
       },
     ],
   },
+  'cNoteUsdc-canto': {
+    entry: [
+      {
+        name: 'Bridge USDC from Ethereum to Canto via Gravity Bridge',
+        protocolId: 'canto',
+        isDark: false,
+      },
+      {
+        name: 'Sell 50% of USDC to Note',
+        protocolId: 'canto',
+        isDark: false,
+      },
+      {
+        name: 'Stake Note on Canto Lending Market to cNote',
+        protocolId: 'canto',
+        isDark: false,
+      },
+      {
+        name: 'Provide CNote/USDC liquidity on Ambient DEX',
+        protocolId: 'ambient',
+        isDark: false,
+      },
+    ],
+    exit: [
+      {
+        name: 'Withdraw liquidity from Ambient DEX',
+        protocolId: 'ambient',
+        isDark: false,
+      },
+      {
+        name: 'Unstake cNote to Note',
+        protocolId: 'ambient',
+        isDark: false,
+      },
+      {
+        name: 'Sell Note for USDC',
+        protocolId: 'ambient',
+        isDark: false,
+      },
+      {
+        name: 'Bridge USDC to Ethereum via Synapse',
+        protocolId: 'ambient',
+        isDark: false,
+      },
+    ],
+  },
 };

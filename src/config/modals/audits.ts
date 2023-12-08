@@ -288,4 +288,46 @@ export const AUDITS: Record<string, Record<string, Audit[]>> = {
       },
     ],
   },
+  'cNoteUsdc-canto': {
+    Canto: [
+      {
+        name: 'Canto',
+        report: 'https://docs.canto.io/technical-reference/audits',
+      },
+      {
+        name: 'Code4rena - Canto Contest',
+        report: 'https://code4rena.com/contests/2022-06-canto-contest',
+      },
+      {
+        name: 'Code4rena - Canto V2 Contest',
+        report: 'https://code4rena.com/contests/2022-06-canto-v2-contest',
+      },
+      {
+        name: 'Code4rena - Solo Audit by Ghoul.sol',
+        report: 'https://code4rena.com/reports/2022-07-canto',
+      },
+      {
+        name: 'Code4rena - Gravity Bridge',
+        report: 'https://code4rena.com/reports/2021-08-gravitybridge',
+      },
+    ],
+    Ambient: [
+      {
+        name: 'Ambient Audit',
+        report: 'https://github.com/CrocSwap/CrocSwap-protocol/tree/main/audits',
+      },
+      {
+        name: 'Quantstamp V1 Audit',
+        report: 'https://github.com/CrocSwap/CrocSwap-protocol/blob/main/audits/QuantstampV1.pdf',
+      },
+      {
+        name: 'Quantstamp V2 Audit',
+        report: 'https://github.com/CrocSwap/CrocSwap-protocol/blob/main/audits/QuantstampV2.pdf',
+      },
+      {
+        name: 'Zellic Audit',
+        report: 'https://github.com/CrocSwap/CrocSwap-protocol/blob/main/audits/Zellic.pdf',
+      },
+    ],
+  },
 };
