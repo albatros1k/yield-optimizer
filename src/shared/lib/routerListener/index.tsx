@@ -1,7 +1,7 @@
 import { FC, useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router';
 import { io, Socket } from 'socket.io-client';
-import FingerprintJS from '@fingerprintjs/fingerprintjs';
+import { load } from '@fingerprintjs/fingerprintjs';
 
 import { BUTTON_NAMES, IRouterListener } from './interface';
 import { APP_VERSION, PLATFORM, PROVIDER_LOCAL_STORAGE_KEY, theFirstUrl, Timer } from './const';
@@ -102,7 +102,7 @@ const RouterListenerLogic: FC<IRouterListener & { token: string }> = ({
 
     window.onblur = () => {
       if (socket.current) {
-        clearTimeout(debounceClose!);
+        clearTimeout(debounceClose);
         debounceClose = setTimeout(() => {
           socket.current?.emit('onTabClose');
           debounceClose = null;
@@ -114,7 +114,7 @@ const RouterListenerLogic: FC<IRouterListener & { token: string }> = ({
     const time = 1500;
 
     const onTopLvlClick = (e: MouseEvent) => {
-      clearTimeout(debounce!);
+      clearTimeout(debounce);
 
       debounce = setTimeout(() => {
         const event = { type: 'click', x: e.x, y: e.y };
@@ -127,7 +127,7 @@ const RouterListenerLogic: FC<IRouterListener & { token: string }> = ({
     return () => {
       window.removeEventListener('click', onTopLvlClick);
     };
-  }, [location, wallet, uri]);
+  }, [location, wallet, uri, token]);
 
   useEffect(() => {
     if (socket.current && typeof addition === 'object') {
@@ -143,7 +143,7 @@ export const RouterListener: FC<IRouterListener> = props => {
 
   useEffect(() => {
     (async function () {
-      const { visitorId } = await FingerprintJS.load().then(res => res.get());
+      const { visitorId } = await load().then(res => res.get());
       setToken(visitorId);
     })();
   }, []);

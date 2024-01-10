@@ -1,5 +1,5 @@
+import axios, { isAxiosError } from 'axios';
 import type { AxiosInstance } from 'axios';
-import axios from 'axios';
 import BigNumber from 'bignumber.js';
 import type {
   AnalyticsPriceResponse,
@@ -23,7 +23,7 @@ export class AnalyticsApi {
       const res = await this.api.get('/v1/beefy/timeline', { params: { address } });
       return res.data;
     } catch (err) {
-      if (axios.isAxiosError(err)) {
+      if (isAxiosError(err)) {
         if (err.response.status === 404) {
           return [];
         }

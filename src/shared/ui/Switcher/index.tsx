@@ -1,4 +1,4 @@
-import { memo, useCallback } from 'react';
+import { FC, SVGProps, memo, useCallback } from 'react';
 import { styled, useTheme } from 'styled-components';
 
 import { Circle, Grid, Row } from '../Containers';
@@ -29,9 +29,10 @@ type TabProps = {
   label: string;
   onChange: (selected: string) => void;
   selected: boolean;
+  icon?: Option['icon'];
 };
 
-const Tab = memo<TabProps>(({ value, label, onChange, selected }) => {
+const Tab = memo<TabProps>(({ value, label, onChange, selected, icon }) => {
   const { colors } = useTheme();
 
   const handleClick = useCallback(() => {
@@ -40,14 +41,19 @@ const Tab = memo<TabProps>(({ value, label, onChange, selected }) => {
 
   return (
     <Row onClick={handleClick} justify="center" style={{ zIndex: 1 }} pointer>
-      <Main color={selected ? colors.textColor : colors.alterText}>{label}</Main>
+      {icon ? icon : null}
+      <Main m={icon ? '0 0 0 8px' : '0'} color={selected ? colors.textColor : colors.alterText}>
+        {label}
+      </Main>
     </Row>
   );
 });
 
+type Option = { value: string; label: string; icon?: JSX.Element | FC<SVGProps<SVGSVGElement>> };
+
 type SwitcherProps = {
   selected: string;
-  options: { value: string; label: string }[];
+  options: Option[];
   onChange: (value: string) => void;
 };
 
@@ -62,9 +68,10 @@ export const TabSwitcher = memo<SwitcherProps>(({ selected, options, onChange })
       pos="relative"
     >
       <Slider isRotated={isRotated} />
-      {options.map(({ value, label }) => (
+      {options.map(({ value, label, icon }) => (
         <Tab
           key={value}
+          icon={icon}
           label={label}
           value={value}
           onChange={onChange}

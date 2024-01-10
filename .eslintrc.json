@@ -21,6 +21,7 @@
     }
   },
   "rules": {
+    "import/named": 0,
     "no-restricted-syntax": [
       "error",
       {

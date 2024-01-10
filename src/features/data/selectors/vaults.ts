@@ -26,6 +26,8 @@ export const selectVaultById = createCachedSelector(
   }
 )((state: BeefyState, vaultId: VaultEntity['id']) => vaultId);
 
+export const selectAllVaults = (state: BeefyState) => Object.values(state.entities.vaults.byId);
+
 export const selectIsVaultPausedOrRetired = createCachedSelector(
   (state: BeefyState, vaultId: VaultEntity['id']) => selectVaultById(state, vaultId),
   vault => isVaultPausedOrRetired(vault)
@@ -275,3 +277,7 @@ export const selectVaultSupportsOneInchZap = createCachedSelector(
     return zapSupport.oneInch;
   }
 )((state: BeefyState, vaultId: VaultEntity['id']) => vaultId);
+
+export const selectVaultsWithSameNames = (state: BeefyState, name: VaultEntity['name']) => {
+  return Object.values(state.entities.vaults.byId).filter(vault => vault.name === name);
+};

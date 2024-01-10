@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { MerlinApi } from '../apis/merlin/merlin-api';
 import { IPortfolio, IPortfolioItem } from '../apis/merlin/types/portfolio';
-import { IAddressMap } from '../reducers/merlin';
+import { DataPayload as MerlinPayload, IAddressMap } from '../reducers/merlin';
 import {
   IActivePosition,
   ILPToken,
@@ -14,7 +14,7 @@ import { CurrentRate } from '../apis/merlin/types/rate';
 import { IUserTokenProtocolOverview } from '../apis/merlin/types/overview';
 import { parseProtocolName, removeSpecialSymbol } from '../../../helpers/merlinHelpers';
 
-export const getMerlinReducer = createAsyncThunk<any, string, { rejectValue: string }>(
+export const getMerlinReducer = createAsyncThunk<MerlinPayload, string, { rejectValue: string }>(
   'data/getMerlinData',
   async (userWallet: string, thunkAPI) => {
     try {
@@ -67,8 +67,8 @@ export const getMerlinReducer = createAsyncThunk<any, string, { rejectValue: str
                       balances.forEach(
                         ({ tokenName, tokenSymbol, tokenDecimals, tokenAddress }) => {
                           addressMap[tokenAddress] = {
-                            symbol: tokenSymbol!,
-                            tokenName: removeSpecialSymbol(tokenName!),
+                            symbol: tokenSymbol ?? '',
+                            tokenName: removeSpecialSymbol(tokenName) ?? '',
                             tokenDecimals,
                           };
                         }

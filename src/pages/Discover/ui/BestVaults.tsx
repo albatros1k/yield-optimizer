@@ -2,18 +2,15 @@ import { Fragment, memo, useMemo } from 'react';
 
 import { Grid } from '../../../shared/ui/Containers';
 
-// import { selectVaultsByTvl } from '../../../features/data/selectors/tvl';
 import { useAppSelector } from '../../../store';
 
 import { Vault } from './Vault';
-import { selectFilteredVaults } from '../../../features/data/selectors/filtered-vaults';
+import { selectAllVaults } from '../../../features/data/selectors/vaults';
 
 //TODO there was a logic to show top 3 by TVL
 
 export const BestVaults = memo(() => {
-  // const vaultsByTvl = useAppSelector(selectVaultsByTvl);
-
-  const vaultIds = useAppSelector(selectFilteredVaults);
+  const allVaults = useAppSelector(selectAllVaults);
 
   // const bestVaults = useMemo<JSX.Element[]>(
   //   () =>
@@ -31,10 +28,23 @@ export const BestVaults = memo(() => {
   //   [vaultsByTvl]
   // );
 
-  const bestVaults = useMemo(
-    () => vaultIds.map(vaultId => <Vault key={vaultId} vaultId={vaultId} />),
-    [vaultIds]
-  );
+  // const bestVaults = useMemo(
+  //   () => vaultIds.map(vaultId => <Vault key={vaultId} vaultId={vaultId} />),
+  //   [vaultIds]
+  // );
+
+  const bestVaults = useMemo(() => {
+    const uniqueNamesSet = new Set();
+    return allVaults
+      .filter(vault => {
+        if (vault && !uniqueNamesSet.has(vault.name)) {
+          uniqueNamesSet.add(vault.name);
+          return true;
+        }
+        return false;
+      })
+      .map(vault => <Vault key={vault.id} vaultId={vault.id} />);
+  }, [allVaults]);
 
   return (
     <Fragment>
