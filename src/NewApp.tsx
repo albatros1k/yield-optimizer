@@ -20,7 +20,7 @@ import { Stepper } from './components/Stepper';
 import { initHomeDataV4 } from './features/data/actions/scenarios';
 import { selectWalletAddress } from './features/data/selectors/wallet';
 
-import { CHRISTMAS_END_DAY_STORAGE_KEY, FIXED_END_DATE } from './pages/Leaderboard/lib/period';
+import { FIXED_END_DATE, MISSION_END_DAY_STORAGE_KEY } from './pages/Leaderboard/lib/missions';
 
 import { store, useAppSelector } from './store';
 import { checkVaults } from './config/cheker';
@@ -33,10 +33,10 @@ export const NewApp = () => {
     initHomeDataV4(store);
     checkVaults();
 
-    // only for Christmas missions
-    const storedEndDate = localStorage.getItem(CHRISTMAS_END_DAY_STORAGE_KEY);
-    if (!storedEndDate) {
-      localStorage.setItem(CHRISTMAS_END_DAY_STORAGE_KEY, FIXED_END_DATE.toISOString());
+    // only for [NAME] of Mission
+    const storedEndDate = localStorage.getItem(MISSION_END_DAY_STORAGE_KEY);
+    if (!storedEndDate && FIXED_END_DATE) {
+      localStorage.setItem(MISSION_END_DAY_STORAGE_KEY, FIXED_END_DATE.toISOString());
     }
   }, []);
 

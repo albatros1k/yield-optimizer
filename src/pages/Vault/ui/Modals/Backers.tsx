@@ -31,9 +31,13 @@ export const Backers = memo<BackersProps>(({ isModalOpen, closeModal, vaultId })
             </Main>
             {data.map(({ backer, partnership, proof }) => (
               <Row key={backer} w="100%" justify="space-between" align="center" m="0 0 25px">
-                <Row align="center">
-                  <Main m="0 5px 0 0">{backer}</Main>
-                  <Main color={colors.alterText}>({partnership})</Main>
+                <Row w="100%" align="center" justify="space-between">
+                  <Main style={{ whiteSpace: 'nowrap' }} m="0 10px 0 0">
+                    {backer}
+                  </Main>
+                  <Main style={{ whiteSpace: 'nowrap' }} color={colors.alterText}>
+                    ({partnership})
+                  </Main>
                 </Row>
                 {proof ? (
                   <Row

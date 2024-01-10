@@ -6,8 +6,9 @@ import { icons } from '../../../shared/Icons';
 import { H3, Input } from '../../../shared/ui/Typography';
 import { Spacer } from '../../../shared/ui/Spacer';
 
-import { ChristmasMissions } from './Christmas';
+import { Missions } from './Missions';
 import { MoreMissions } from './MoreMissions';
+import { mission } from '../lib/missions';
 
 export const DailyMissions = memo(() => {
   const { colors } = useTheme();
@@ -24,7 +25,7 @@ export const DailyMissions = memo(() => {
         <Input color={colors.alterText} ta="center" m="0 auto 30px">
           Stardust is the fuel for our mission and collecting it will <br /> have many benefits.
         </Input>
-        <ChristmasMissions />
+        <Missions {...mission} />
         <Spacer />
         <MoreMissions />
       </Column>
