@@ -29,12 +29,13 @@ export interface IBlock {
   auto?: boolean;
   pos?: PositionType;
   minH?: string;
+  minW?: string;
   pointer?: boolean;
   maxW?: string;
   bg?: string;
   ta?: TextDirection;
   dotted?: boolean;
-  children?: any;
+  children?: React.ReactNode;
   opacity?: number;
   isHoverAble?: boolean;
   br?: number;

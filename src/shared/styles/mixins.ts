@@ -24,6 +24,7 @@ export const block = css<IBlock>`
   min-height: ${({ minH = '0' }) => minH};
   border-radius: ${({ br = 0 }) => `${br}px`};
   user-select: ${({ us = 'auto' }) => us};
+  min-width: ${({ minW = '0' }) => minW};
   ${({ pointer = false }) => pointer && `cursor:pointer;*{cursor:pointer}`}
 `;
 

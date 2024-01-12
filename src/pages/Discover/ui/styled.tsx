@@ -1,7 +1,6 @@
 import { styled } from 'styled-components';
 
 import { Card, Circle, Row } from '../../../shared/ui/Containers';
-import { center } from '../../../shared/styles/mixins';
 
 import cosmos from '../../../images/cosmos.png';
 import rocket from '../../../images/rocket.png';
@@ -67,21 +66,8 @@ export const RocketCard = styled(Card)`
   }
 `;
 
-export const ClaimNFT = styled(Circle)<{ url }>`
+export const MissionAvatar = styled(Circle)<{ borderColor?: string }>`
+  border: ${({ borderColor }) => (borderColor ? `1px solid ${borderColor}` : 'none')};
   position: relative;
-  cursor: pointer;
   overflow: hidden;
-  ${center}
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-image: ${({ url }) => `url(${url})`};
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 100%;
-  }
 `;

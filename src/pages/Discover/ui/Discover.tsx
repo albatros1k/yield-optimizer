@@ -6,7 +6,7 @@ import { Grid } from '../../../shared/ui/Containers';
 
 import { DeFiJourney } from './DefiJourney';
 import { BestVaults } from './BestVaults';
-import { NftBoost } from './NftBoost';
+import { AcademyMissions } from './NftBoost';
 import { TermsAndConditionsModal } from './TermsAndConditionsModal';
 
 import { useAppDispatch, useAppSelector } from '../../../store';
@@ -55,7 +55,7 @@ const Discover = () => {
             rowGap="0"
           >
             <DeFiJourney />
-            {walletAddress ? <NftBoost /> : null}
+            {walletAddress ? <AcademyMissions /> : null}
           </Grid>
           <Spacer space={52} />
           <BestVaults />

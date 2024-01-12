@@ -29,7 +29,7 @@ import { selectAllChainIds } from '../selectors/chains';
 import { fetchBridges } from './bridges';
 import { fetchToken } from './token';
 import { getSupportedProtocols } from './protocols';
-import { getNftData } from './points';
+import { getMissionLevel } from './points';
 
 type CapturedFulfilledActionGetter = Promise<() => Action>;
 
@@ -86,7 +86,7 @@ export async function initHomeDataV4(store: BeefyStore) {
     store.dispatch(getSupportedProtocols());
 
     // Get galaxy NFT data
-    store.dispatch(getNftData());
+    store.dispatch(getMissionLevel());
   });
 
   // create the wallet instance as soon as we get the chain list

@@ -38,6 +38,7 @@ import { ReactComponent as Clock } from '../../images/nav-icons/clock.svg';
 import { ReactComponent as Link } from '../../images/nav-icons/link.svg';
 import { ReactComponent as FullStar } from '../../images/nav-icons/full-star.svg';
 import { ReactComponent as User } from '../../images/nav-icons/user.svg';
+import { ReactComponent as Lock } from '../../images/nav-icons/lock.svg';
 
 type IconName =
   | 'grid'
@@ -79,7 +80,8 @@ type IconName =
   | 'list'
   | 'link'
   | 'fullStar'
-  | 'user';
+  | 'user'
+  | 'lock';
 
 export const icons: Record<IconName, JSX.Element> = {
   grid: <Grid />,
@@ -122,4 +124,5 @@ export const icons: Record<IconName, JSX.Element> = {
   link: <Link />,
   fullStar: <FullStar />,
   user: <User />,
+  lock: <Lock />,
 };
