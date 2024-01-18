@@ -26,6 +26,7 @@
     "buyTokenUrl": "https://app.slingshot.finance/swap/Canto/CANTO",
     "network": "canto",
     "protocols": ["CANTO LENDING", "AMBIENT"],
-    "createdAt": 7197706
+    "createdAt": 7197706,
+    "isPaused": true
   }
 ]
