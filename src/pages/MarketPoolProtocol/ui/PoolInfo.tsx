@@ -1,10 +1,8 @@
-import { memo, useEffect, useState } from 'react';
+import { memo } from 'react';
 import { useTheme } from 'styled-components';
 import { useParams } from 'react-router-dom';
 
-import { IPoolProtocolPreview } from '../../../features/data/entities/market';
 import { selectMarket } from '../../../features/data/selectors/market';
-import { MerlinApi } from '../../../features/data/apis/merlin/merlin-api';
 
 import { useAppSelector } from '../../../store';
 import { useColor } from '../../../helpers/hooks';
@@ -17,33 +15,18 @@ import { Card, Column, Row } from '../../../shared/ui/Containers';
 import { CircleImage, MultipleTokenIcons } from '../../../shared/ui/Images';
 
 import { PoolInfoSkeleton } from './skeleton';
+import { PoolData } from './MarketPoolProtocol';
 
-export const PoolInfo = memo(() => {
-  const { pair, poolId } = useParams();
+export const PoolInfo = memo<PoolData>(({ loading, data, errorMessage }) => {
+  const { pair } = useParams();
   const { colors } = useTheme();
   const defineColor = useColor();
-  const [{ loading, errorMessage, data }, setState] = useState<{
-    loading: boolean;
-    errorMessage: string;
-    data: IPoolProtocolPreview | null;
-  }>({
-    loading: true,
-    errorMessage: '',
-    data: null,
-  });
 
   const {
     supportedNetworks: { nameMap: networksMap },
     supportedProtocols: { nameMap: protocolsMap },
   } = useAppSelector(selectMarket);
   const poolName = (pair || '').replaceAll('-', ' / ');
-
-  useEffect(() => {
-    MerlinApi.getPairProtocolDetails(pair as string, poolId as string).then(data => {
-      if (typeof data === 'object') setState({ loading: false, errorMessage: '', data });
-      else setState({ loading: false, errorMessage: data, data: null });
-    });
-  }, [pair, poolId]);
 
   if (errorMessage) return <SubTitle color={colors.red}>{errorMessage}</SubTitle>;
 
@@ -120,7 +103,7 @@ export const PoolInfo = memo(() => {
                 APY (30d)
               </SubTitle>
               <Main color={defineColor(apyMean30)}>
-                {definePlus(apyMean30, false, 1, 'percent')}%
+                {definePlus(apyMean30, false, 1, 'percent')}
               </Main>
             </Column>
           </Row>

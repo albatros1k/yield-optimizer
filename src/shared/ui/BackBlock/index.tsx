@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { ReactNode, memo } from 'react';
 import { useNavigate } from 'react-router';
 import { useTheme } from 'styled-components';
 
@@ -9,9 +9,10 @@ import { icons } from '../../Icons';
 interface BackBlockProps {
   backText: string;
   onBack?: () => void;
+  childrenComponent?: ReactNode | ReactNode[];
 }
 
-export const BackBlock = memo<BackBlockProps>(({ backText, onBack }) => {
+export const BackBlock = memo<BackBlockProps>(({ backText, onBack, childrenComponent }) => {
   const {
     colors: { alterText },
   } = useTheme();
@@ -22,7 +23,7 @@ export const BackBlock = memo<BackBlockProps>(({ backText, onBack }) => {
 
   return (
     <Card p="20px 24px" w="100%">
-      <Row w="100%" align="center">
+      <Row w="100%" align="center" justify="space-between">
         <Button
           borderColor={alterText}
           bg="transparent"
@@ -37,6 +38,7 @@ export const BackBlock = memo<BackBlockProps>(({ backText, onBack }) => {
           </SvgContainer>
           {backText}
         </Button>
+        {childrenComponent ? <>{childrenComponent}</> : null}
       </Row>
     </Card>
   );
