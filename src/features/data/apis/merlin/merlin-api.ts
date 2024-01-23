@@ -23,7 +23,7 @@ import { store } from '../../../../store';
 import { tokenKey } from '../../reducers/wallet/token';
 
 export const merlinInstance = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'https://v-wallet-graph.cf',
+  baseURL: import.meta.env.VITE_API_URL || 'https://mymerlin.io/',
 });
 
 export class MerlinApi {
