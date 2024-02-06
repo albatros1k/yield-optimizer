@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { FC, memo, useMemo } from 'react';
 import { useTheme } from 'styled-components';
 
@@ -11,7 +10,6 @@ import { TagProps } from '../types/tag';
 import { selectVaultById } from '../../../features/data/selectors/vaults';
 import { selectVaultTvl } from '../../../features/data/selectors/tvl';
 import { formatBigUsd } from '../../../helpers/format';
-import { TVL } from '../../../config/apy';
 
 export const Tvl: FC<TagProps> = memo(({ vaultId }) => {
   const vault = useAppSelector(state => selectVaultById(state, vaultId));
@@ -35,10 +33,7 @@ export const Tvl: FC<TagProps> = memo(({ vaultId }) => {
         <SubTitle color={alterText} m="0 6px 0 0">
           TVL:
         </SubTitle>
-        <SubTitle>
-          {/* {value} */}
-          {TVL[vaultId] ? `$${TVL[vaultId]}` : '...'}
-        </SubTitle>
+        <SubTitle>{value}</SubTitle>
       </Row>
     </Card>
   );

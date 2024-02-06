@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { memo, useMemo } from 'react';
 import { useTheme } from 'styled-components';
 
@@ -7,7 +6,6 @@ import { selectVaultInfo } from '../../../../new-features/Tags/selectors/selectV
 import { PRE_STAKE, QUESTIONS } from '../../../../new-features/Tags/lib/const';
 import { formattedTotalApy } from '../../../../helpers/format';
 import { H1, Main } from '../../../../shared/ui/Typography';
-import { APY } from '../../../../config/apy';
 
 interface TvlProps {
   vaultId: string;
@@ -42,8 +40,7 @@ export const Apy = memo<TvlProps>(({ vaultId, typography, margin }) => {
   return (
     <>
       <Typography m={margin} color={subAccentSecondary}>
-        {/* {!isLoaded ? '...' : value} */}
-        {APY[vaultId] ? `${APY[vaultId]}%` : '...'}
+        {!isLoaded ? '...' : value}
       </Typography>
     </>
   );

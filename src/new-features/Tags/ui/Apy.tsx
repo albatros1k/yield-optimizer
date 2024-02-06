@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { FC, memo, useMemo } from 'react';
 import { useTheme } from 'styled-components';
 
@@ -10,7 +9,6 @@ import { formattedTotalApy } from '../../../helpers/format';
 import { PRE_STAKE, QUESTIONS } from '../lib/const';
 import { TagProps } from '../types/tag';
 import { selectVaultInfo } from '../selectors/selectVoteInfo';
-import { APY } from '../../../config/apy';
 
 export const ApyTag: FC<TagProps> = memo(({ vaultId, margin }) => {
   const { isGovVault, isLoaded, haveValues, values, isBoosted, isPrestake } = useAppSelector(
@@ -40,10 +38,7 @@ export const ApyTag: FC<TagProps> = memo(({ vaultId, margin }) => {
         <SubTitle color={alterText} m="0 6px 0 0">
           Est. {label}:
         </SubTitle>
-        <DataTitle color={subAccentSecondary}>
-          {/* {!isLoaded ? '...' : value} */}
-          {APY[vaultId] ? `${APY[vaultId]}%` : '...'}
-        </DataTitle>
+        <DataTitle color={subAccentSecondary}>{!isLoaded ? '...' : value}</DataTitle>
       </Row>
     </Card>
   );
