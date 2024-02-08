@@ -39,6 +39,7 @@ export const Airdrop: FC = () => {
   useEffect(() => {
     (async () => {
       const api = getBeefyApi();
+
       if (walletAddress) {
         setLoading(true);
         await api
